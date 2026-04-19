@@ -1,0 +1,9 @@
+name = "tacticus-api-proxy"
+main = "src/worker.ts"
+compatibility_date = "2026-04-01"
+
+# Comma-separated list of origins allowed to use this proxy. The worker will
+# 403 any other Origin. Include your GitHub Pages URL + http://localhost:5173
+# if you want to keep using the worker in dev instead of the Vite proxy.
+[vars]
+ALLOWED_ORIGINS = "https://fillslava.github.io,http://localhost:5173"

@@ -67,6 +67,22 @@ The output goes to `dist/`.
 
 ---
 
+## Using the API from a hosted build (CORS)
+
+The Tacticus API doesn't send CORS headers for third-party origins, so a
+static build hosted on GitHub Pages can't call it directly from the browser.
+Two ways around this:
+
+- **`npm run fetch:player`** — runs locally, saves `player.json` to disk,
+  upload it through the app's upload button. Works anywhere, no infra.
+- **Cloudflare Worker proxy** (free tier). Deploy the worker in
+  [cloudflare-worker/](cloudflare-worker/) to your own Cloudflare account,
+  then build with `VITE_API_BASE=https://...workers.dev`. See
+  [cloudflare-worker/README.md](cloudflare-worker/README.md) for a one-time
+  setup walkthrough.
+
+---
+
 ## Catalog data
 
 Character base stats, equipment mods, ability factor tables, and rank/star curves are bundled in `src/data/*.json`. They're regenerated from upstream sources via:

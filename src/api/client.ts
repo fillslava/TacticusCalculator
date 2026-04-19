@@ -1,12 +1,15 @@
-// In dev, use the Vite proxy so the browser request is same-origin.
-// In production (e.g. GitHub Pages), call the API host directly — this will
-// CORS-fail for most users; the UI falls back to manual player.json upload.
-export const DEFAULT_BASE =
-  typeof window === 'undefined'
-    ? 'https://api.tacticusgame.com'
-    : import.meta.env.DEV
-      ? '/tacticus-api'
-      : 'https://api.tacticusgame.com';
+// Resolution order:
+//   1. VITE_API_BASE — set this to your Cloudflare Worker URL to bypass CORS.
+//   2. Dev server — Vite proxies /tacticus-api → api.tacticusgame.com.
+//   3. Everything else — direct host call (will CORS-fail on GitHub Pages
+//      without step 1; UI falls back to manual player.json upload).
+export const DEFAULT_BASE = (() => {
+  const envBase = import.meta.env.VITE_API_BASE as string | undefined;
+  if (envBase) return envBase.replace(/\/$/, '');
+  if (typeof window === 'undefined') return 'https://api.tacticusgame.com';
+  if (import.meta.env.DEV) return '/tacticus-api';
+  return 'https://api.tacticusgame.com';
+})();
 
 export class ApiError extends Error {
   constructor(
@@ -42,7 +45,9 @@ export async function apiGet<T>(path: string, creds: ApiCredentials): Promise<T>
   } catch (e) {
     throw new Error(
       `Network error calling ${base}${path}: ${(e as Error).message}. ` +
-        `If this is a CORS block, make sure you started the app with \`npm run dev\` (which proxies /tacticus-api), not by opening index.html.`,
+        `If this is a CORS block, either (a) run the app with \`npm run dev\` which proxies /tacticus-api, ` +
+        `(b) deploy the Cloudflare Worker in cloudflare-worker/ and rebuild with VITE_API_BASE set to its URL, ` +
+        `or (c) run \`npm run fetch:player\` and upload the resulting JSON instead.`,
     );
   }
   if (!res.ok) {
