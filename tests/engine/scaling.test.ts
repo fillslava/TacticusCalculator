@@ -85,11 +85,11 @@ describe('applyEquipmentMods', () => {
 });
 
 describe('rarityAbilityMultiplier', () => {
-  it('is 1.0 at common and grows by 20% per tier', () => {
+  it('is 1.0 at common and grows by 10% per tier (mythic = 1.5)', () => {
     expect(rarityAbilityMultiplier('common')).toBeCloseTo(1.0);
-    expect(rarityAbilityMultiplier('uncommon')).toBeCloseTo(1.2);
-    expect(rarityAbilityMultiplier('legendary')).toBeCloseTo(1.8);
-    expect(rarityAbilityMultiplier('mythic')).toBeCloseTo(2.0);
+    expect(rarityAbilityMultiplier('uncommon')).toBeCloseTo(1.1);
+    expect(rarityAbilityMultiplier('legendary')).toBeCloseTo(1.4);
+    expect(rarityAbilityMultiplier('mythic')).toBeCloseTo(1.5);
   });
 });
 
@@ -97,7 +97,7 @@ describe('abilityLevelMultiplier', () => {
   it('returns table value * rarity multiplier', () => {
     const table = [1, 1.2, 1.4, 1.6];
     expect(abilityLevelMultiplier(1, 'common', table)).toBeCloseTo(1);
-    expect(abilityLevelMultiplier(3, 'legendary', table)).toBeCloseTo(1.4 * 1.8);
+    expect(abilityLevelMultiplier(3, 'legendary', table)).toBeCloseTo(1.4 * 1.4);
   });
   it('clamps to table bounds', () => {
     const table = [1, 2, 3];

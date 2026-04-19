@@ -144,7 +144,7 @@ describe('resolveEquipment API id mapping', () => {
     const hit = resolveEquipment('R_Crit_TalonOfHorus', 1, cat);
     expect(hit).not.toBeNull();
     expect(hit?.relic).toBe(true);
-    expect(hit?.id).toBe('R_Crit_TalonOfHorus');
+    expect(hit?.id).toBe('crit_20_legendary_crit-dmg_L11');
   });
 
   it('returns null for truly unrecognized ids', () => {

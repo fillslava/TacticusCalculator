@@ -142,6 +142,15 @@ function apiUnitToMemo(
     const catItem = resolveEquipment(it.id, it.level, catalog);
     if (catItem) {
       slotIds[slot] = catItem.id;
+      if (catItem.relic) {
+        relicSlots[slot] = {
+          id: it.id,
+          slotId: slot + 1,
+          rarity: it.rarity ?? catItem.rarity ?? 'Legendary',
+          level: it.level,
+          relic: true,
+        };
+      }
     } else {
       if (unknownItems) unknownItems.add(it.id);
       relicSlots[slot] = {
@@ -298,7 +307,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 8,
+      version: 9,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -367,6 +376,19 @@ export const useApp = create<AppState>()(
           persisted.ownedCatalogIds = [];
           persisted.unitBuilds = {};
           persisted.player = null;
+        }
+        if (fromVersion < 9) {
+          // v9 rewires buff presets to gameinfo damage tables and fixes the
+          // rarity ability multiplier step (0.2 → 0.1, so mythic = 1.5x not
+          // 2.0x). Old persisted buffs still hold pre-computed damageFlat
+          // values. Clear rotation buffs so re-adding presets pulls the
+          // corrected numbers.
+          if (Array.isArray(persisted.rotation)) {
+            persisted.rotation = persisted.rotation.map((t: any) => ({
+              ...t,
+              buffs: [],
+            }));
+          }
         }
         return persisted;
       },

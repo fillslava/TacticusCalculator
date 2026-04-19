@@ -68,6 +68,7 @@ export function BuildEditor() {
   const [factionFilter, setFactionFilter] = useState<string>('all');
   const [ownedOnly, setOwnedOnly] = useState(false);
   const [showExtra, setShowExtra] = useState(false);
+  const [search, setSearch] = useState('');
 
   const factions = useMemo(() => {
     const s = new Set<string>();
@@ -76,15 +77,22 @@ export function BuildEditor() {
   }, [characters]);
 
   const ownedSet = useMemo(() => new Set(ownedCatalogIds), [ownedCatalogIds]);
-  const filteredCharacters = useMemo(
-    () =>
-      characters.filter((c) => {
-        if (ownedOnly && !ownedSet.has(c.id)) return false;
-        if (factionFilter !== 'all' && c.faction !== factionFilter) return false;
-        return true;
-      }),
-    [characters, factionFilter, ownedOnly, ownedSet],
-  );
+  const filteredCharacters = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return characters.filter((c) => {
+      if (ownedOnly && !ownedSet.has(c.id)) return false;
+      if (factionFilter !== 'all' && c.faction !== factionFilter) return false;
+      if (
+        q &&
+        !c.displayName.toLowerCase().includes(q) &&
+        !c.id.toLowerCase().includes(q) &&
+        !c.faction.toLowerCase().includes(q)
+      ) {
+        return false;
+      }
+      return true;
+    });
+  }, [characters, factionFilter, ownedOnly, ownedSet, search]);
 
   const selected = build.characterId
     ? characters.find((c) => c.id === build.characterId)
@@ -136,7 +144,27 @@ export function BuildEditor() {
         </span>
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-2 text-xs">
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+        <label className="flex flex-1 min-w-[12rem] items-center gap-1">
+          <span className="uppercase text-slate-400">Search</span>
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Name, id, or faction…"
+            className="flex-1 rounded bg-bg-base px-2 py-1"
+          />
+          {search && (
+            <button
+              type="button"
+              onClick={() => setSearch('')}
+              className="rounded px-1 text-slate-500 hover:bg-bg-base hover:text-slate-300"
+              aria-label="Clear search"
+            >
+              ×
+            </button>
+          )}
+        </label>
         <label className="flex items-center gap-1">
           <span className="uppercase text-slate-400">Faction</span>
           <select
@@ -162,6 +190,9 @@ export function BuildEditor() {
           <span className="uppercase text-slate-400">Owned only</span>
           <span className="text-slate-600">({ownedCount})</span>
         </label>
+        <span className="text-slate-500">
+          {filteredCharacters.length}/{characters.length}
+        </span>
       </div>
 
       <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -246,6 +277,11 @@ export function BuildEditor() {
           <div className="mt-1 grid grid-cols-1 gap-2 md:grid-cols-3">
             {equipmentSlots.map((slotItems, slotIdx) => {
               const relic = build.relicSlots?.[slotIdx] ?? null;
+              const equippedId = build.equipmentIds[slotIdx] ?? '';
+              const hasCanonical = Boolean(
+                equippedId && slotItems.some((it) => it.id === equippedId),
+              );
+              const unknownRelic = relic && !hasCanonical;
               return (
                 <label key={slotIdx} className="flex flex-col gap-1 text-xs">
                   <span className="flex items-center justify-between text-[10px] uppercase text-slate-500">
@@ -256,35 +292,42 @@ export function BuildEditor() {
                       </span>
                     )}
                   </span>
-                  {relic ? (
+                  {unknownRelic ? (
                     <div className="rounded bg-bg-base px-2 py-1 font-mono text-[11px] text-slate-300">
-                      {relic.id}
+                      {relic!.id}
                       <div className="text-[10px] text-slate-500">
-                        L{relic.level} · {relic.rarity} · mods unknown — add via
+                        L{relic!.level} · {relic!.rarity} · mods unknown — add via
                         manual stat bonuses
                       </div>
                     </div>
                   ) : (
-                    <select
-                      value={build.equipmentIds[slotIdx] ?? ''}
-                      onChange={(e) => {
-                        const next = [...build.equipmentIds];
-                        next[slotIdx] = e.target.value || null;
-                        setBuild({ equipmentIds: next });
-                      }}
-                      className="rounded bg-bg-base px-2 py-1 text-xs"
-                    >
-                      <option value="">— empty —</option>
-                      {groupByRarity(slotItems).map(([rarityKey, items]) => (
-                        <optgroup key={rarityKey} label={rarityKey}>
-                          {items.map((it) => (
-                            <option key={it.id} value={it.id}>
-                              L{it.level} — {formatMods(it.mods)}
-                            </option>
-                          ))}
-                        </optgroup>
-                      ))}
-                    </select>
+                    <>
+                      <select
+                        value={equippedId}
+                        onChange={(e) => {
+                          const next = [...build.equipmentIds];
+                          next[slotIdx] = e.target.value || null;
+                          setBuild({ equipmentIds: next });
+                        }}
+                        className="rounded bg-bg-base px-2 py-1 text-xs"
+                      >
+                        <option value="">— empty —</option>
+                        {groupByRarity(slotItems).map(([rarityKey, items]) => (
+                          <optgroup key={rarityKey} label={rarityKey}>
+                            {items.map((it) => (
+                              <option key={it.id} value={it.id}>
+                                L{it.level} — {formatMods(it.mods)}
+                              </option>
+                            ))}
+                          </optgroup>
+                        ))}
+                      </select>
+                      {relic && (
+                        <span className="text-[10px] italic text-amber-300/80">
+                          {relic.id} (legendary-approx stats)
+                        </span>
+                      )}
+                    </>
                   )}
                 </label>
               );

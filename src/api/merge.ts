@@ -261,7 +261,7 @@ export function resolveEquipment(
           if (hit) break;
         }
       }
-      if (hit) return { ...hit, id: apiId, relic: true };
+      if (hit) return { ...hit, relic: true };
     }
   }
   return null;

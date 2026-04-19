@@ -5,6 +5,7 @@ import {
   computeBuffDamage,
   findPresetByName,
   presetToBuff,
+  recomputeBuffFromTables,
 } from '../../engine/buffPresets';
 import { progressionToRarity } from '../../engine/progression';
 import { RARITY_ORDER } from '../../engine/types';
@@ -44,16 +45,28 @@ export function RotationEditor() {
     const turn = rotation[turnIdx];
     const buffs = [...turn.buffs];
     const merged = { ...buffs[buffIdx], ...patch };
-    if (
-      merged.baseDamageCoef &&
-      (patch.level !== undefined || patch.rarity !== undefined) &&
-      patch.damageFlat === undefined
-    ) {
-      merged.damageFlat = computeBuffDamage(
-        merged.baseDamageCoef,
-        merged.level ?? 50,
-        merged.rarity ?? 'legendary',
-      );
+    if (patch.level !== undefined || patch.rarity !== undefined) {
+      const userEditedDamage = patch.damageFlat !== undefined;
+      const userEditedCrit =
+        patch.critChance !== undefined || patch.critDamage !== undefined;
+      const recomputed = recomputeBuffFromTables(merged);
+      if (recomputed) {
+        if (recomputed.damageFlat !== undefined && !userEditedDamage) {
+          merged.damageFlat = recomputed.damageFlat;
+        }
+        if (recomputed.critChance !== undefined && !userEditedCrit) {
+          merged.critChance = recomputed.critChance;
+        }
+        if (recomputed.critDamage !== undefined && !userEditedCrit) {
+          merged.critDamage = recomputed.critDamage;
+        }
+      } else if (merged.baseDamageCoef && !userEditedDamage) {
+        merged.damageFlat = computeBuffDamage(
+          merged.baseDamageCoef,
+          merged.level ?? 50,
+          merged.rarity ?? 'legendary',
+        );
+      }
     }
     buffs[buffIdx] = merged;
     updateTurn(turnIdx, { buffs });

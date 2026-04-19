@@ -70,7 +70,7 @@ export function rarityIndex(r: Rarity): number {
 
 export function rarityAbilityMultiplier(r: Rarity): number {
   const idx = rarityIndex(r);
-  return 1 + 0.2 * Math.max(0, idx);
+  return 1 + 0.1 * Math.max(0, idx);
 }
 
 export function abilityLevelMultiplier(

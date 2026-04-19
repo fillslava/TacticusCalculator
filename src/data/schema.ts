@@ -139,7 +139,7 @@ export const EquipmentSchema = z.object({
 export const CurvesSchema = z.object({
   abilityFactor: z.array(z.number()),
   starMultiplierPerStar: z.number().default(0.1),
-  rarityAbilityStep: z.number().default(0.2),
+  rarityAbilityStep: z.number().default(0.1),
   gearRanks: z.array(z.tuple([z.string(), z.number()])),
 });
 

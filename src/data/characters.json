@@ -6,8 +6,8 @@
     "alliance": "Chaos",
     "baseStats": {
       "damage": 15,
-      "armor": 16,
-      "hp": 88,
+      "armor": 25,
+      "hp": 100,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -103,8 +103,8 @@
     ],
     "traits": [
       "let the galaxy burn",
-      "terminator armour",
-      "resilient"
+      "resilient",
+      "terminator armour"
     ],
     "maxRarity": "legendary"
   },
@@ -197,8 +197,8 @@
       }
     ],
     "traits": [
-      "psyker",
-      "weaver of fates"
+      "weaver of fate",
+      "psyker"
     ],
     "maxRarity": "legendary"
   },
@@ -249,8 +249,8 @@
       }
     ],
     "traits": [
-      "mechanic",
       "mechanical",
+      "mechanic",
       "flying"
     ],
     "maxRarity": "legendary"
@@ -261,20 +261,21 @@
     "faction": "Emperor's Children",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 17,
+      "armor": 23,
+      "hp": 100,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
-      "hits": 1,
+      "damageType": "eviscerating",
+      "hits": 3,
+      "pierceOverride": 0.5,
       "kind": "melee"
     },
     "ranged": {
@@ -284,7 +285,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "thrill seekers"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -293,24 +296,29 @@
     "faction": "Adeptus Custodes",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 15,
-      "armor": 18,
-      "hp": 90,
-      "meleeHits": 2,
-      "rangedHits": 1,
+      "damage": 58,
+      "armor": 28,
+      "hp": 110,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
-      "hits": 2,
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "martial katah",
+      "big target",
+      "resilient"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -354,7 +362,7 @@
     ],
     "traits": [
       "flying",
-      "deep strike"
+      "teleport strike"
     ],
     "maxRarity": "legendary"
   },
@@ -419,7 +427,7 @@
       }
     ],
     "traits": [
-      "weaver of fates",
+      "weaver of fate",
       "flying",
       "psyker"
     ],
@@ -433,7 +441,7 @@
     "baseStats": {
       "damage": 12,
       "armor": 22,
-      "hp": 75,
+      "hp": 90,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -481,6 +489,7 @@
     "traits": [
       "living metal",
       "explodes",
+      "mechanical",
       "flying",
       "mechanic"
     ],
@@ -492,20 +501,21 @@
     "faction": "Leagues of Votann",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 25,
+      "armor": 22,
+      "hp": 90,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
+      "damageType": "physical",
       "hits": 1,
+      "pierceOverride": 0.01,
       "kind": "melee"
     },
     "ranged": {
@@ -515,7 +525,10 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "prioritised efficiency",
+      "mechanical"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -524,7 +537,7 @@
     "faction": "Black Legion",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 12,
+      "damage": 19,
       "armor": 30,
       "hp": 110,
       "critChance": 0,
@@ -573,7 +586,7 @@
     ],
     "traits": [
       "let the galaxy burn",
-      "deep strike",
+      "teleport strike",
       "terminator armour"
     ],
     "maxRarity": "legendary"
@@ -585,7 +598,7 @@
     "alliance": "Xenos",
     "baseStats": {
       "damage": 17,
-      "armor": 29,
+      "armor": 19,
       "hp": 85,
       "critChance": 0,
       "critDamage": 0,
@@ -653,7 +666,8 @@
       }
     ],
     "traits": [
-      "living metal"
+      "living metal",
+      "mechanical"
     ],
     "maxRarity": "legendary"
   },
@@ -663,9 +677,9 @@
     "faction": "Black Legion",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 15,
-      "armor": 14,
-      "hp": 70,
+      "damage": 16,
+      "armor": 18,
+      "hp": 80,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -805,9 +819,9 @@
       }
     ],
     "traits": [
-      "terminator armour",
-      "deep strike",
       "resilient",
+      "teleport strike",
+      "terminator armour",
       "unstoppable"
     ],
     "maxRarity": "legendary"
@@ -890,24 +904,28 @@
     "faction": "Adeptus Custodes",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 30,
+      "armor": 19,
+      "hp": 80,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
       "hits": 3,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "parry",
+      "terrifying"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -916,9 +934,9 @@
     "faction": "T'au Empire",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 11.8,
-      "armor": 14.5,
-      "hp": 77.3,
+      "damage": 13,
+      "armor": 16,
+      "hp": 85,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -1023,8 +1041,8 @@
       "blessings of khorne",
       "daemon",
       "resilient",
-      "unstoppable",
-      "terrifying"
+      "terrifying",
+      "unstoppable"
     ],
     "maxRarity": "legendary"
   },
@@ -1117,7 +1135,7 @@
       }
     ],
     "traits": [
-      "final vengeance",
+      "final justice",
       "overwatch"
     ],
     "maxRarity": "legendary"
@@ -1128,24 +1146,29 @@
     "faction": "Space Wolves",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 15,
-      "armor": 18,
+      "damage": 25,
+      "armor": 21,
       "hp": 90,
-      "meleeHits": 2,
-      "rangedHits": 1,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 2,
+      "hits": 3,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "healer",
+      "final justice",
+      "terrifying"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -1202,7 +1225,7 @@
       }
     ],
     "traits": [
-      "deep strike",
+      "teleport strike",
       "crushing strike",
       "heavy weapon",
       "terminator armour"
@@ -1288,15 +1311,15 @@
     "faction": "Tyranids",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
@@ -1311,7 +1334,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -1375,9 +1400,9 @@
       }
     ],
     "traits": [
+      "crushing strike",
       "mk x gravis",
-      "suppressive fire",
-      "crushing strike"
+      "suppressive fire"
     ],
     "maxRarity": "legendary"
   },
@@ -1388,7 +1413,7 @@
     "alliance": "Xenos",
     "baseStats": {
       "damage": 45,
-      "armor": 18.04,
+      "armor": 18,
       "hp": 70,
       "critChance": 0,
       "critDamage": 0,
@@ -1439,7 +1464,7 @@
     "faction": "Ultramarines",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 20,
+      "damage": 28,
       "armor": 20,
       "hp": 95,
       "critChance": 0,
@@ -1487,8 +1512,9 @@
       }
     ],
     "traits": [
-      "mk x gravis",
-      "final vengeance"
+      "crushing strike",
+      "final justice",
+      "mk x gravis"
     ],
     "maxRarity": "legendary"
   },
@@ -1767,24 +1793,31 @@
     "faction": "Blood Angels",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 11,
+      "armor": 23,
+      "hp": 90,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
-      "hits": 3,
+      "damageType": "piercing",
+      "hits": 4,
+      "pierceOverride": 0.8,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "teleport strike",
+      "final justice",
+      "flying",
+      "rapid assault",
+      "terrifying"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -1793,15 +1826,15 @@
     "faction": "T'au Empire",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 31.8,
-      "armor": 15.45,
-      "hp": 73,
+      "damage": 25,
+      "armor": 17,
+      "hp": 75,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
       "blockDamage": 0,
       "meleeHits": 3,
-      "rangedHits": 2
+      "rangedHits": 4
     },
     "melee": {
       "label": "Melee",
@@ -1813,7 +1846,7 @@
     "ranged": {
       "label": "Ranged",
       "damageType": "pulse",
-      "hits": 2,
+      "hits": 4,
       "pierceOverride": 0.2,
       "kind": "ranged"
     },
@@ -1834,8 +1867,8 @@
       }
     ],
     "traits": [
-      "close combat weakness",
       "infiltrate",
+      "ranged specialist",
       "suppressive fire"
     ],
     "maxRarity": "legendary"
@@ -1895,7 +1928,7 @@
     ],
     "traits": [
       "camouflage",
-      "deep strike",
+      "teleport strike",
       "infiltrate",
       "terrifying"
     ],
@@ -1907,20 +1940,21 @@
     "faction": "Astra militarum",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 28,
+      "armor": 17,
+      "hp": 100,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 1,
+      "hits": 3,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "ranged": {
@@ -1930,7 +1964,10 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "resilient",
+      "unstoppable"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -2080,10 +2117,10 @@
       }
     ],
     "traits": [
-      "unstoppable",
-      "infiltrate",
+      "mechanical",
       "camouflage",
-      "mechanical"
+      "infiltrate",
+      "unstoppable"
     ],
     "maxRarity": "legendary"
   },
@@ -2093,15 +2130,15 @@
     "faction": "Adepta Sororitas",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
@@ -2116,7 +2153,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -2128,21 +2167,34 @@
       "damage": 20,
       "armor": 20,
       "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 2
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 3,
+      "hits": 4,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "plasma",
+      "hits": 2,
+      "pierceOverride": 0.65,
+      "kind": "ranged"
+    },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "beast snagga",
+      "big target",
+      "flying",
+      "mechanical"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -2151,24 +2203,28 @@
     "faction": "Dark Angels",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 12,
+      "armor": 21,
+      "hp": 90,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 3,
+      "hits": 6,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "camouflage",
+      "parry"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -2177,15 +2233,15 @@
     "faction": "Black Legion",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 25,
-      "armor": 30,
-      "hp": 150,
-      "meleeHits": 2,
-      "rangedHits": 2,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
     },
     "melee": {
       "label": "Melee",
@@ -2200,7 +2256,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -2209,15 +2267,15 @@
     "faction": "Ultramarines",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 25,
-      "armor": 30,
-      "hp": 150,
-      "meleeHits": 2,
-      "rangedHits": 2,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
     },
     "melee": {
       "label": "Melee",
@@ -2232,7 +2290,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -2317,8 +2377,8 @@
       }
     ],
     "traits": [
-      "mechanic",
-      "get stuck in"
+      "get stuck in",
+      "mechanic"
     ],
     "maxRarity": "legendary"
   },
@@ -2377,7 +2437,7 @@
     ],
     "traits": [
       "parry",
-      "raid assault"
+      "rapid assault"
     ],
     "maxRarity": "legendary"
   },
@@ -2470,11 +2530,11 @@
       }
     ],
     "traits": [
-      "mechanical",
-      "big target",
-      "final vengeance",
       "get stuck in",
-      "crushing strike"
+      "big target",
+      "crushing strike",
+      "final justice",
+      "mechanical"
     ],
     "maxRarity": "legendary"
   },
@@ -2486,7 +2546,7 @@
     "baseStats": {
       "damage": 11,
       "armor": 20,
-      "hp": 88,
+      "hp": 95,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -2547,7 +2607,8 @@
     ],
     "traits": [
       "let the galaxy burn",
-      "flying"
+      "flying",
+      "terrifying"
     ],
     "maxRarity": "legendary"
   },
@@ -2557,24 +2618,28 @@
     "faction": "Emperor's Children",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 15,
+      "armor": 19,
+      "hp": 95,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
+      "damageType": "piercing",
       "hits": 3,
+      "pierceOverride": 0.8,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "thrill seekers",
+      "parry"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -2638,6 +2703,7 @@
       }
     ],
     "traits": [
+      "final justice",
       "parry"
     ],
     "maxRarity": "legendary"
@@ -2710,8 +2776,8 @@
       }
     ],
     "traits": [
-      "healer",
-      "ambush"
+      "ambush",
+      "healer"
     ],
     "maxRarity": "legendary"
   },
@@ -2721,9 +2787,9 @@
     "faction": "Necrons",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 8,
-      "armor": 15,
-      "hp": 72,
+      "damage": 9,
+      "armor": 20,
+      "hp": 80,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -2733,14 +2799,14 @@
     },
     "melee": {
       "label": "Melee",
-      "damageType": "molecular",
+      "damageType": "gauss",
       "hits": 6,
       "pierceOverride": 0.6,
       "kind": "melee"
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "molecular",
+      "damageType": "gauss",
       "hits": 6,
       "pierceOverride": 0.6,
       "kind": "ranged"
@@ -2776,8 +2842,9 @@
       }
     ],
     "traits": [
+      "overwatch",
       "living metal",
-      "overwatch"
+      "mechanical"
     ],
     "maxRarity": "legendary"
   },
@@ -2787,9 +2854,9 @@
     "faction": "Ultramarines",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 35,
-      "armor": 17,
-      "hp": 75,
+      "damage": 46,
+      "armor": 22,
+      "hp": 100,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -2924,8 +2991,8 @@
     "faction": "Adepta Sororitas",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 18,
-      "armor": 20,
+      "damage": 20,
+      "armor": 18,
       "hp": 85,
       "critChance": 0,
       "critDamage": 0,
@@ -3031,9 +3098,9 @@
       }
     ],
     "traits": [
-      "final vengeance",
+      "final justice",
       "parry",
-      "raid assault"
+      "rapid assault"
     ],
     "maxRarity": "legendary"
   },
@@ -3101,30 +3168,35 @@
     "faction": "Genestealer Cults",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 25,
+      "armor": 13,
+      "hp": 60,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
-      "hits": 1,
+      "damageType": "projectile",
+      "hits": 3,
+      "pierceOverride": 0.15,
       "kind": "melee"
     },
     "ranged": {
       "label": "Ranged",
       "damageType": "projectile",
       "hits": 3,
+      "pierceOverride": 0.15,
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "ambush",
+      "beast snagga"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -3133,24 +3205,31 @@
     "faction": "Adeptus Custodes",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 21,
+      "armor": 24,
+      "hp": 95,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
       "hits": 3,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "martial katah",
+      "beast snagga",
+      "rapid assault",
+      "parry",
+      "resilient"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -3250,8 +3329,8 @@
     ],
     "traits": [
       "blessings of khorne",
-      "final vengeance",
-      "rapid assault"
+      "rapid assault",
+      "final justice"
     ],
     "maxRarity": "legendary"
   },
@@ -3319,24 +3398,28 @@
     "faction": "Emperor's Children",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 40,
+      "armor": 21,
+      "hp": 90,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 3,
+      "hits": 1,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "thrill seekers",
+      "crushing strike"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -3353,7 +3436,7 @@
       "blockChance": 0,
       "blockDamage": 0,
       "meleeHits": 4,
-      "rangedHits": 2
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
@@ -3365,7 +3448,7 @@
     "ranged": {
       "label": "Ranged",
       "damageType": "blast",
-      "hits": 2,
+      "hits": 3,
       "pierceOverride": 0.15,
       "kind": "ranged"
     },
@@ -3400,9 +3483,9 @@
       }
     ],
     "traits": [
-      "unstoppable",
+      "rapid assault",
       "resilient",
-      "rapid assault"
+      "unstoppable"
     ],
     "maxRarity": "legendary"
   },
@@ -3412,24 +3495,28 @@
     "faction": "Emperor's Children",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 20,
+      "damage": 13,
       "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "hp": 90,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 3,
+      "hits": 6,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "thrill seekers",
+      "parry"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -3497,9 +3584,9 @@
     "faction": "Necrons",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 19,
+      "damage": 18,
       "armor": 20,
-      "hp": 80,
+      "hp": 85,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -3552,7 +3639,8 @@
       }
     ],
     "traits": [
-      "living metal"
+      "living metal",
+      "mechanical"
     ],
     "maxRarity": "legendary"
   },
@@ -3563,7 +3651,7 @@
     "alliance": "Chaos",
     "baseStats": {
       "damage": 26,
-      "armor": 27,
+      "armor": 33,
       "hp": 120,
       "critChance": 0,
       "critDamage": 0,
@@ -3622,15 +3710,15 @@
     "faction": "Astra militarum",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
     },
     "melee": {
       "label": "Melee",
@@ -3645,7 +3733,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -3702,9 +3792,9 @@
       }
     ],
     "traits": [
-      "rapid assault",
+      "teleport strike",
       "flying",
-      "deep strike"
+      "rapid assault"
     ],
     "maxRarity": "legendary"
   },
@@ -3715,8 +3805,8 @@
     "alliance": "Xenos",
     "baseStats": {
       "damage": 9,
-      "armor": 12,
-      "hp": 55,
+      "armor": 22,
+      "hp": 70,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -3850,8 +3940,9 @@
       }
     ],
     "traits": [
-      "terrifying",
-      "psyker"
+      "psyker",
+      "rapid assault",
+      "terrifying"
     ],
     "maxRarity": "legendary"
   },
@@ -3863,7 +3954,7 @@
     "baseStats": {
       "damage": 24,
       "armor": 24,
-      "hp": 94.95,
+      "hp": 95,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -3917,9 +4008,9 @@
     ],
     "traits": [
       "act of faith",
-      "mechanical",
+      "big target",
       "explodes",
-      "big target"
+      "mechanical"
     ],
     "maxRarity": "legendary"
   },
@@ -3929,7 +4020,7 @@
     "faction": "Tyranids",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 25,
+      "damage": 20,
       "armor": 17,
       "hp": 85,
       "critChance": 0,
@@ -3998,7 +4089,7 @@
       }
     ],
     "traits": [
-      "close combat weakness",
+      "ranged specialist",
       "flying",
       "psyker",
       "shadow in the warp",
@@ -4046,8 +4137,8 @@
       }
     ],
     "traits": [
-      "rapid assault",
-      "healer"
+      "healer",
+      "rapid assault"
     ],
     "maxRarity": "legendary"
   },
@@ -4233,7 +4324,7 @@
     "traits": [
       "contagions of nurgle",
       "resilient",
-      "explodes"
+      "putrid explosion"
     ],
     "maxRarity": "legendary"
   },
@@ -4243,15 +4334,15 @@
     "faction": "Death Guard",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 25,
-      "armor": 30,
-      "hp": 150,
-      "meleeHits": 2,
-      "rangedHits": 2,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
     },
     "melee": {
       "label": "Melee",
@@ -4266,7 +4357,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -4323,8 +4416,8 @@
       }
     ],
     "traits": [
-      "beast slayer",
-      "final vengeance",
+      "beast snagga",
+      "final justice",
       "rapid assault"
     ],
     "maxRarity": "legendary"
@@ -4335,7 +4428,7 @@
     "faction": "T'au Empire",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 10,
+      "damage": 7,
       "armor": 25,
       "hp": 105,
       "critChance": 0,
@@ -4418,10 +4511,10 @@
       }
     ],
     "traits": [
-      "close combat weakness",
       "big target",
       "flying",
-      "mechanical"
+      "mechanical",
+      "ranged specialist"
     ],
     "maxRarity": "legendary"
   },
@@ -4556,15 +4649,15 @@
     "faction": "Orks",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 25,
-      "armor": 30,
-      "hp": 150,
-      "meleeHits": 2,
-      "rangedHits": 2,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
     },
     "melee": {
       "label": "Melee",
@@ -4579,7 +4672,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -4685,7 +4780,7 @@
       }
     ],
     "traits": [
-      "final vengeance",
+      "final justice",
       "overwatch",
       "heavy weapon"
     ],
@@ -4697,7 +4792,7 @@
     "faction": "T'au Empire",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 27,
+      "damage": 25,
       "armor": 18,
       "hp": 80,
       "critChance": 0,
@@ -4738,10 +4833,10 @@
       }
     ],
     "traits": [
-      "close combat weakness",
       "camouflage",
       "flying",
-      "infiltrate"
+      "infiltrate",
+      "ranged specialist"
     ],
     "maxRarity": "legendary"
   },
@@ -4751,30 +4846,36 @@
     "faction": "Emperor's Children",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 6,
+      "armor": 20,
+      "hp": 85,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 6
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
-      "hits": 1,
+      "damageType": "eviscerating",
+      "hits": 3,
+      "pierceOverride": 0.5,
       "kind": "melee"
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "projectile",
-      "hits": 3,
+      "damageType": "eviscerating",
+      "hits": 6,
+      "pierceOverride": 0.5,
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "thrill seekers",
+      "heavy weapon",
+      "suppressive fire"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -4783,7 +4884,7 @@
     "faction": "T'au Empire",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 53,
+      "damage": 40,
       "armor": 16,
       "hp": 65,
       "critChance": 0,
@@ -4839,7 +4940,7 @@
     ],
     "traits": [
       "camouflage",
-      "close combat weakness"
+      "ranged specialist"
     ],
     "maxRarity": "legendary"
   },
@@ -4969,10 +5070,10 @@
       }
     ],
     "traits": [
-      "mechanical",
+      "get stuck in",
       "big target",
       "explodes",
-      "get stuck in"
+      "mechanical"
     ],
     "maxRarity": "legendary"
   },
@@ -5030,8 +5131,8 @@
       }
     ],
     "traits": [
-      "beast slayer",
-      "get stuck in"
+      "get stuck in",
+      "beast snagga"
     ],
     "maxRarity": "legendary"
   },
@@ -5042,29 +5143,36 @@
     "alliance": "Imperial",
     "baseStats": {
       "damage": 25,
-      "armor": 30,
-      "hp": 150,
-      "meleeHits": 2,
-      "rangedHits": 2,
+      "armor": 17,
+      "hp": 95,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 4
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
-      "hits": 2,
+      "damageType": "flame",
+      "hits": 4,
+      "pierceOverride": 0.25,
       "kind": "melee"
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "projectile",
-      "hits": 2,
+      "damageType": "physical",
+      "hits": 4,
+      "pierceOverride": 0.01,
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "mechanical",
+      "heavy weapon",
+      "overwatch",
+      "vehicle"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -5074,7 +5182,7 @@
     "alliance": "Imperial",
     "baseStats": {
       "damage": 35,
-      "armor": 17,
+      "armor": 16,
       "hp": 85,
       "critChance": 0,
       "critDamage": 0,
@@ -5187,8 +5295,8 @@
     ],
     "traits": [
       "get stuck in",
-      "unstoppable",
-      "beast slayer"
+      "beast snagga",
+      "unstoppable"
     ],
     "maxRarity": "legendary"
   },
@@ -5198,24 +5306,28 @@
     "faction": "World Eaters",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 48,
+      "armor": 24,
+      "hp": 95,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
-      "hits": 3,
+      "damageType": "piercing",
+      "hits": 1,
+      "pierceOverride": 0.8,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "blessings of khorne",
+      "rapid assault"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -5225,8 +5337,8 @@
     "alliance": "Imperial",
     "baseStats": {
       "damage": 38,
-      "armor": 18,
-      "hp": 50,
+      "armor": 15,
+      "hp": 65,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -5345,7 +5457,7 @@
       }
     ],
     "traits": [
-      "weaver of fates",
+      "weaver of fate",
       "flying",
       "psyker"
     ],
@@ -5358,7 +5470,7 @@
     "alliance": "Xenos",
     "baseStats": {
       "damage": 14,
-      "armor": 16,
+      "armor": 17,
       "hp": 100,
       "critChance": 0,
       "critDamage": 0,
@@ -5508,7 +5620,7 @@
       }
     ],
     "traits": [
-      "final vengeance",
+      "final justice",
       "parry"
     ],
     "maxRarity": "legendary"
@@ -5519,8 +5631,8 @@
     "faction": "Necrons",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 30,
-      "armor": 16,
+      "damage": 36,
+      "armor": 18,
       "hp": 75,
       "critChance": 0,
       "critDamage": 0,
@@ -5574,7 +5686,9 @@
       }
     ],
     "traits": [
-      "living metal"
+      "living metal",
+      "mechanical",
+      "flying"
     ],
     "maxRarity": "legendary"
   },
@@ -5663,7 +5777,7 @@
     "faction": "Ultramarines",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 25,
+      "damage": 26,
       "armor": 23,
       "hp": 95,
       "critChance": 0,
@@ -5753,7 +5867,8 @@
       }
     ],
     "traits": [
-      "final vengeance"
+      "beast snagga",
+      "final justice"
     ],
     "maxRarity": "legendary"
   },
@@ -5877,9 +5992,9 @@
       }
     ],
     "traits": [
-      "terminator armour",
+      "weaver of fate",
       "suppressive fire",
-      "weaver of fates"
+      "terminator armour"
     ],
     "maxRarity": "legendary"
   },
@@ -5889,24 +6004,29 @@
     "faction": "Adeptus Custodes",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
+      "damage": 11,
+      "armor": 25,
       "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
+      "damageType": "piercing",
       "hits": 3,
+      "pierceOverride": 0.8,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "martial katah",
+      "crushing strike",
+      "resilient"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -5915,15 +6035,15 @@
     "faction": "T'au Empire",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 25,
-      "armor": 30,
-      "hp": 150,
-      "meleeHits": 2,
-      "rangedHits": 2,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
     },
     "melee": {
       "label": "Melee",
@@ -5938,7 +6058,9 @@
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -5948,7 +6070,7 @@
     "alliance": "Chaos",
     "baseStats": {
       "damage": 18,
-      "armor": 25.08,
+      "armor": 25,
       "hp": 120,
       "critChance": 0,
       "critDamage": 0,
@@ -6074,30 +6196,35 @@
     "faction": "Adeptus Custodes",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 18,
-      "armor": 15,
-      "hp": 80,
-      "meleeHits": 1,
-      "rangedHits": 3,
+      "damage": 25,
+      "armor": 22,
+      "hp": 95,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 2
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 1,
+      "hits": 3,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "projectile",
-      "hits": 3,
+      "damageType": "bolter",
+      "hits": 2,
+      "pierceOverride": 0.2,
       "kind": "ranged"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "martial katah",
+      "resilient"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -6106,8 +6233,8 @@
     "faction": "Space Wolves",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 33.1,
-      "armor": 19.9,
+      "damage": 33,
+      "armor": 20,
       "hp": 90,
       "critChance": 0,
       "critDamage": 0,
@@ -6154,7 +6281,7 @@
       }
     ],
     "traits": [
-      "final vengeance",
+      "final justice",
       "unstoppable"
     ],
     "maxRarity": "legendary"
@@ -6165,24 +6292,35 @@
     "faction": "Leagues of Votann",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 19,
+      "armor": 23,
+      "hp": 90,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 4
     },
     "melee": {
       "label": "Melee",
-      "damageType": "power",
+      "damageType": "plasma",
       "hits": 3,
+      "pierceOverride": 0.65,
       "kind": "melee"
     },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "energy",
+      "hits": 4,
+      "pierceOverride": 0.3,
+      "kind": "ranged"
+    },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "prioritised efficiency",
+      "resilient"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -6257,7 +6395,7 @@
     "faction": "Adeptus Mechanicus",
     "alliance": "Imperial",
     "baseStats": {
-      "damage": 59,
+      "damage": 50,
       "armor": 18,
       "hp": 90,
       "critChance": 0,
@@ -6276,7 +6414,7 @@
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "molecular",
+      "damageType": "gauss",
       "hits": 1,
       "pierceOverride": 0.6,
       "kind": "ranged"
@@ -6312,8 +6450,8 @@
       }
     ],
     "traits": [
-      "mechanic",
-      "mechanical"
+      "mechanical",
+      "mechanic"
     ],
     "maxRarity": "legendary"
   },
@@ -6324,8 +6462,8 @@
     "alliance": "Chaos",
     "baseStats": {
       "damage": 9,
-      "armor": 10,
-      "hp": 65,
+      "armor": 12,
+      "hp": 125,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
@@ -6379,9 +6517,10 @@
     ],
     "traits": [
       "let the galaxy burn",
-      "suppressive fire",
+      "big target",
       "daemon",
-      "big target"
+      "heavy weapon",
+      "suppressive fire"
     ],
     "maxRarity": "legendary"
   },
@@ -6391,24 +6530,28 @@
     "faction": "Leagues of Votann",
     "alliance": "Xenos",
     "baseStats": {
-      "damage": 15,
-      "armor": 18,
-      "hp": 90,
-      "meleeHits": 2,
-      "rangedHits": 1,
+      "damage": 25,
+      "armor": 16,
+      "hp": 80,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
       "damageType": "power",
-      "hits": 2,
+      "hits": 3,
+      "pierceOverride": 0.4,
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "prioritised efficiency",
+      "mechanic"
+    ],
     "maxRarity": "mythic"
   },
   {
@@ -6481,7 +6624,7 @@
     "traits": [
       "synapse",
       "flying",
-      "final vengeance"
+      "final justice"
     ],
     "maxRarity": "legendary"
   },
@@ -6540,7 +6683,7 @@
     ],
     "traits": [
       "blessings of khorne",
-      "deep strike",
+      "teleport strike",
       "rapid assault",
       "terminator armour",
       "unstoppable"
@@ -6739,8 +6882,8 @@
       }
     ],
     "traits": [
-      "flying",
-      "weaver of fates"
+      "weaver of fate",
+      "flying"
     ],
     "maxRarity": "legendary"
   },
@@ -6750,15 +6893,15 @@
     "faction": "Thousand Sons",
     "alliance": "Chaos",
     "baseStats": {
-      "damage": 20,
-      "armor": 20,
-      "hp": 100,
-      "meleeHits": 3,
-      "rangedHits": 1,
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
       "critChance": 0,
       "critDamage": 0,
       "blockChance": 0,
-      "blockDamage": 0
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
     },
     "melee": {
       "label": "Melee",
@@ -6767,7 +6910,9 @@
       "kind": "melee"
     },
     "abilities": [],
-    "traits": [],
+    "traits": [
+      "machine of war"
+    ],
     "maxRarity": "mythic"
   }
 ]

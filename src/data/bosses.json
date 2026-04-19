@@ -5,6 +5,50 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 4165000,
+        "armor": 779,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 6250000,
+        "armor": 1029,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 8330000,
+        "armor": 1288,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 10400000,
+        "armor": 1697,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 12500000,
         "armor": 2231,
         "traits": [
@@ -15,7 +59,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 25000000,
         "armor": 2593,
         "traits": [
@@ -26,20 +70,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 37500000,
-        "armor": 3189,
-        "traits": [
-          "boss",
-          "immune",
-          "big",
-          "daemon"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 50000000,
-        "armor": 4064,
+        "name": "M2",
+        "hp": 31250000,
+        "armor": 2935,
         "traits": [
           "boss",
           "immune",
@@ -55,6 +88,50 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 666,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 880,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 1102,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1452,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1909,
         "traits": [
@@ -65,7 +142,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 2219,
         "traits": [
@@ -76,20 +153,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 2730,
-        "traits": [
-          "boss",
-          "immune",
-          "big",
-          "mech"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 3479,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2512,
         "traits": [
           "boss",
           "immune",
@@ -105,6 +171,54 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 4165000,
+        "armor": 352,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 6250000,
+        "armor": 465,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 8330000,
+        "armor": 582,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 10400000,
+        "armor": 767,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 12500000,
         "armor": 1008,
         "traits": [
@@ -116,7 +230,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 25000000,
         "armor": 1172,
         "traits": [
@@ -128,21 +242,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 37500000,
-        "armor": 1442,
-        "traits": [
-          "big",
-          "dakka",
-          "immune",
-          "boss",
-          "mech"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 50000000,
-        "armor": 1838,
+        "name": "M2",
+        "hp": 31250000,
+        "armor": 1327,
         "traits": [
           "big",
           "dakka",
@@ -159,6 +261,62 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 545,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 720,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 901,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1187,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1560,
         "traits": [
@@ -172,7 +330,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1813,
         "traits": [
@@ -186,23 +344,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 2230,
-        "traits": [
-          "synapse",
-          "shadow in the warp",
-          "psyker",
-          "boss",
-          "big",
-          "immune",
-          "flying"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 2842,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2052,
         "traits": [
           "synapse",
           "shadow in the warp",
@@ -221,6 +365,62 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 458,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 605,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 757,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 998,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1312,
         "traits": [
@@ -234,7 +434,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1525,
         "traits": [
@@ -248,23 +448,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 1876,
-        "traits": [
-          "synapse",
-          "shadow in the warp",
-          "psyker",
-          "boss",
-          "big",
-          "immune",
-          "flying"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 2390,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1726,
         "traits": [
           "synapse",
           "shadow in the warp",
@@ -283,6 +469,62 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 352,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 465,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 582,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 767,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1008,
         "traits": [
@@ -296,7 +538,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1172,
         "traits": [
@@ -310,23 +552,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 1442,
-        "traits": [
-          "synapse",
-          "shadow in the warp",
-          "psyker",
-          "boss",
-          "big",
-          "immune",
-          "flying"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 1838,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1327,
         "traits": [
           "synapse",
           "shadow in the warp",
@@ -345,6 +573,62 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 598,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 790,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 989,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1303,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1713,
         "traits": [
@@ -358,7 +642,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1991,
         "traits": [
@@ -372,23 +656,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 2449,
-        "traits": [
-          "boss",
-          "immune",
-          "weaver of fate",
-          "big",
-          "daemon",
-          "flying",
-          "psyker"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 3121,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2254,
         "traits": [
           "boss",
           "immune",
@@ -407,6 +677,62 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 2337,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 3088,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 3866,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 5095,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 6698,
         "traits": [
@@ -420,7 +746,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 7786,
         "traits": [
@@ -434,23 +760,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 9577,
-        "traits": [
-          "boss",
-          "immune",
-          "contagions of nurgle",
-          "daemon",
-          "flying",
-          "psyker",
-          "big"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 12206,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 8813,
         "traits": [
           "boss",
           "immune",
@@ -469,6 +781,54 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 1327,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 1754,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 2196,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 2894,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 3804,
         "traits": [
@@ -480,7 +840,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 4422,
         "traits": [
@@ -492,21 +852,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 5439,
-        "traits": [
-          "boss",
-          "immune",
-          "big",
-          "mech",
-          "vehicle"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 6932,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 5005,
         "traits": [
           "boss",
           "immune",
@@ -523,6 +871,54 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 998,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 1319,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 1651,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 2176,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 2861,
         "traits": [
@@ -534,7 +930,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 3326,
         "traits": [
@@ -546,21 +942,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 4091,
-        "traits": [
-          "boss",
-          "immune",
-          "big",
-          "instinctive behaviour",
-          "suppressive fire"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 5213,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 3765,
         "traits": [
           "boss",
           "immune",
@@ -577,6 +961,50 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 367,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 485,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 607,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 800,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1052,
         "traits": [
@@ -587,7 +1015,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1223,
         "traits": [
@@ -598,20 +1026,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 1504,
-        "traits": [
-          "big",
-          "immune",
-          "mech",
-          "boss"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 1916,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1384,
         "traits": [
           "big",
           "immune",
@@ -627,6 +1044,58 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 545,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 720,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 901,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1187,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1560,
         "traits": [
@@ -639,7 +1108,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1813,
         "traits": [
@@ -652,22 +1121,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 2230,
-        "traits": [
-          "synapse",
-          "shadow in the warp",
-          "psyker",
-          "boss",
-          "big",
-          "immune"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 2842,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2052,
         "traits": [
           "synapse",
           "shadow in the warp",
@@ -685,6 +1141,58 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 458,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 605,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 757,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 998,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1312,
         "traits": [
@@ -697,7 +1205,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1525,
         "traits": [
@@ -710,22 +1218,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 1876,
-        "traits": [
-          "synapse",
-          "shadow in the warp",
-          "psyker",
-          "boss",
-          "big",
-          "immune"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 2390,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1726,
         "traits": [
           "synapse",
           "shadow in the warp",
@@ -743,6 +1238,58 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 352,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 465,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 582,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 767,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 1008,
         "traits": [
@@ -755,7 +1302,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 1172,
         "traits": [
@@ -768,22 +1315,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 1442,
-        "traits": [
-          "synapse",
-          "shadow in the warp",
-          "psyker",
-          "boss",
-          "big",
-          "immune"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 1838,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1327,
         "traits": [
           "synapse",
           "shadow in the warp",
@@ -801,6 +1335,62 @@
     "stages": [
       {
         "name": "L1",
+        "hp": 5000000,
+        "armor": 998,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 1319,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 1651,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 2176,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L5",
         "hp": 15000000,
         "armor": 2861,
         "traits": [
@@ -814,7 +1404,7 @@
         ]
       },
       {
-        "name": "L2",
+        "name": "M1",
         "hp": 30000000,
         "armor": 3326,
         "traits": [
@@ -828,23 +1418,9 @@
         ]
       },
       {
-        "name": "L3",
-        "hp": 45000000,
-        "armor": 4091,
-        "traits": [
-          "boss",
-          "immune",
-          "big",
-          "flying",
-          "indirect fire",
-          "vehicle",
-          "mech"
-        ]
-      },
-      {
-        "name": "L4",
-        "hp": 65000000,
-        "armor": 5213,
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 3765,
         "traits": [
           "boss",
           "immune",
