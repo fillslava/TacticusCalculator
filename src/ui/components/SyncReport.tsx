@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useApp } from '../../state/store';
+import { useT } from '../../lib/i18n';
 
 export function SyncReport() {
   const { syncReport } = useApp();
+  const t = useT();
   const [expanded, setExpanded] = useState(false);
 
   if (!syncReport) return null;
@@ -19,18 +21,18 @@ export function SyncReport() {
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-3 text-sm">
       <div className="flex flex-wrap items-center gap-3">
-        <h3 className="text-sm font-semibold">Sync Report</h3>
+        <h3 className="text-sm font-semibold">{t('sync.title')}</h3>
         <span className={tone}>
-          {matched}/{total} units matched ({pct}%)
+          {matched}/{total} {t('sync.unitsMatched')} ({pct}%)
         </span>
         {unknownItems > 0 && (
-          <span className="text-amber-300">{unknownItems} unknown items (likely relics)</span>
+          <span className="text-amber-300">{unknownItems} {t('sync.unknownItems')}</span>
         )}
         <button
           onClick={() => setExpanded((v) => !v)}
           className="ml-auto rounded bg-bg-subtle px-2 py-0.5 text-xs"
         >
-          {expanded ? 'hide details' : 'details'}
+          {expanded ? t('button.hideDetails') : t('button.details')}
         </button>
       </div>
 

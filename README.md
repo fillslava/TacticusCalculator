@@ -73,7 +73,7 @@ Character base stats, equipment mods, ability factor tables, and rank/star curve
 
 ```bash
 npm run scrape            # pulls from tacticus.wiki.gg
-npm run import:halmmar    # cross-check against the older halmmar dump
+npm run import:halmmar    # cross-check against the older dump
 ```
 
 Scraper output is committed — you don't need to run it to use the app.
@@ -104,3 +104,83 @@ Early / hobby project. Expect rough edges. Patches and calibration fixtures welc
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+## 🇷🇺 Установка локально (русский)
+
+Полностью локальный калькулятор — ничего не загружается в интернет, ваш API-ключ хранится только у вас в браузере (`localStorage`).
+
+### Что нужно поставить заранее
+
+| Инструмент | Минимальная версия | Зачем нужен | Где взять |
+|---|---|---|---|
+| **Node.js** | 18 или новее | Запускает сборку Vite и тесты | https://nodejs.org/ (LTS-версия) |
+| **npm** | ставится вместе с Node.js | Установка зависимостей, запуск команд `npm run …` | — |
+| **git** | 2.30+ | Клонирование репозитория | https://git-scm.com/ |
+| **API-ключ Tacticus** | действующий uuid | Загрузка ваших войск через `/api/v1/player` | Официальный портал Tacticus API |
+
+Проверить, что всё стоит:
+
+```bash
+node --version      # должно быть ≥ v18
+npm --version
+git --version
+```
+
+Если `node` или `npm` не находятся — установите Node.js LTS и **перезапустите терминал** (или перелогиньтесь), чтобы `PATH` подхватил новые бинарники.
+
+### Установка
+
+```bash
+git clone https://github.com/fillslava/TacticusCalculator.git
+cd TacticusCalculator
+npm install
+```
+
+`npm install` поставит React, Vite, Tailwind, Zustand, Zod, vitest и т.п. (~200 МБ в `node_modules/`). Занимает 1–3 минуты при первом запуске.
+
+### Указать API-ключ
+
+Скопируйте шаблон:
+
+```bash
+cp .env.example .env.local
+```
+
+Откройте `.env.local` и впишите свой ключ:
+
+```
+VITE_TACTICUS_API_KEY=ваш-api-uuid
+```
+
+`.env.local` в `.gitignore` — он не попадёт в git. Можно и не создавать файл: при первом запуске в UI появится поле «API Key», значение сохранится в `localStorage`.
+
+### Запуск
+
+```bash
+npm run dev
+```
+
+Откройте адрес, который напечатал Vite (обычно http://localhost:5173). В dev-режиме запросы к API идут через встроенный прокси Vite — CORS не мешает.
+
+### Если что-то сломалось
+
+- **`command not found: npm`** — Node.js не стоит или терминал старый. Переустановите и откройте новый терминал.
+- **`EACCES` / ошибки прав при `npm install`** — Windows: запустите PowerShell от имени администратора. macOS/Linux: не ставьте npm через `sudo`, используйте [nvm](https://github.com/nvm-sh/nvm).
+- **Ошибка порта `5173 in use`** — `npm run dev -- --port 3000`, либо закройте программу, которая занимает порт.
+- **`API 404` или CORS-ошибка** — в продакшн-сборке (GitHub Pages) браузер не может ходить в `api.tacticusgame.com` напрямую. Запустите локально через `npm run dev` либо используйте `npm run fetch:player`, чтобы сохранить `player.json` на диск, и загрузите его через кнопку **«или загрузить player.json»**.
+- **Тесты падают** — `npm run typecheck` покажет, что не компилируется; `npm test` запустит vitest. Скопируйте вывод в issue.
+
+### Сборка под GitHub Pages / свой хостинг
+
+```bash
+npm run build        # кладёт статику в dist/
+npm run preview      # локальный просмотр собранной версии
+```
+
+По умолчанию сборка настроена на префикс `/TacticusCalculator/`. Для своего домена или корневого пути:
+
+```bash
+VITE_BASE=/ npm run build
+```

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import type { Lang } from '../lib/i18n';
 import type {
   AbilityLevel,
   Attacker,
@@ -106,6 +107,9 @@ export interface AppState {
 
   importError: string | null;
   setImportError: (e: string | null) => void;
+
+  language: Lang;
+  setLanguage: (lang: Lang) => void;
 }
 
 const initialBuild: BuildOverrides = {
@@ -115,6 +119,16 @@ const initialBuild: BuildOverrides = {
   xpLevel: 20,
   equipmentIds: [null, null, null],
 };
+
+function detectDefaultLang(): Lang {
+  if (typeof navigator === 'undefined') return 'en';
+  const raw = (navigator.language || 'en').toLowerCase();
+  if (raw.startsWith('ru')) return 'ru';
+  if (raw.startsWith('de')) return 'de';
+  if (raw.startsWith('fr')) return 'fr';
+  if (raw.startsWith('nl')) return 'nl';
+  return 'en';
+}
 
 const initialTarget: TargetState = {
   bossId: null,
@@ -311,10 +325,13 @@ export const useApp = create<AppState>()(
 
       importError: null,
       setImportError: (e) => set({ importError: e }),
+
+      language: detectDefaultLang(),
+      setLanguage: (lang) => set({ language: lang }),
     }),
     {
       name: 'tacticus-calc-state',
-      version: 10,
+      version: 11,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -324,6 +341,7 @@ export const useApp = create<AppState>()(
         unitBuilds: s.unitBuilds,
         ownedCatalogIds: s.ownedCatalogIds,
         syncReport: s.syncReport,
+        language: s.language,
       }),
       migrate: (persisted: any, fromVersion: number) => {
         if (!persisted) return persisted;
@@ -407,6 +425,10 @@ export const useApp = create<AppState>()(
           persisted.ownedCatalogIds = [];
           persisted.unitBuilds = {};
           persisted.player = null;
+        }
+        if (fromVersion < 11) {
+          // v11 adds `language` — initialize from browser if absent.
+          if (!persisted.language) persisted.language = detectDefaultLang();
         }
         return persisted;
       },

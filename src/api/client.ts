@@ -1,5 +1,12 @@
+// In dev, use the Vite proxy so the browser request is same-origin.
+// In production (e.g. GitHub Pages), call the API host directly — this will
+// CORS-fail for most users; the UI falls back to manual player.json upload.
 export const DEFAULT_BASE =
-  typeof window !== 'undefined' ? '/tacticus-api' : 'https://api.tacticusgame.com';
+  typeof window === 'undefined'
+    ? 'https://api.tacticusgame.com'
+    : import.meta.env.DEV
+      ? '/tacticus-api'
+      : 'https://api.tacticusgame.com';
 
 export class ApiError extends Error {
   constructor(

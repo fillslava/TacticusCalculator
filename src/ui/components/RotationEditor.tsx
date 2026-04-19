@@ -1,4 +1,5 @@
 import { useApp } from '../../state/store';
+import { useT } from '../../lib/i18n';
 import { getCharacter } from '../../data/catalog';
 import {
   BUFF_PRESETS,
@@ -17,10 +18,11 @@ const MAX_BUFFS_PER_TURN = 4;
 export function RotationEditor() {
   const { build, rotation, setRotation, addTurn, removeTurn, unitBuilds } =
     useApp();
+  const t = useT();
   const char = build.characterId ? getCharacter(build.characterId) : undefined;
 
-  const options: { key: string; label: string }[] = [{ key: 'melee', label: 'Melee' }];
-  if (char?.ranged) options.push({ key: 'ranged', label: 'Ranged' });
+  const options: { key: string; label: string }[] = [{ key: 'melee', label: t('label.melee') }];
+  if (char?.ranged) options.push({ key: 'ranged', label: t('label.ranged') });
   for (const ab of char?.abilities ?? []) {
     options.push({ key: `ability:${ab.id}`, label: ab.name });
   }
@@ -100,7 +102,7 @@ export function RotationEditor() {
 
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
-      <h2 className="text-lg font-semibold">Rotation</h2>
+      <h2 className="text-lg font-semibold">{t('section.rotation')}</h2>
       <p className="mt-1 text-xs text-slate-400">
         Each turn fires one attack. Add up to {MAX_BUFFS_PER_TURN} buffs per turn.
         Buffs take the buffer's level &amp; rarity (for reference), a damage/crit
@@ -159,7 +161,7 @@ export function RotationEditor() {
                   }}
                   className="rounded bg-bg-elevated px-2 py-0.5 text-xs text-slate-300"
                 >
-                  <option value="">+ add buff…</option>
+                  <option value="">{t('button.addBuff')}</option>
                   {BUFF_PRESETS.map((p, idx) => (
                     <option key={p.name} value={idx}>
                       {p.name}
@@ -176,7 +178,7 @@ export function RotationEditor() {
         onClick={() => addTurn(options[0].key)}
         className="mt-3 rounded bg-bg-subtle px-3 py-1.5 text-sm"
       >
-        + add turn
+        {t('button.addTurn')}
       </button>
     </section>
   );

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useApp } from '../../state/store';
+import { useT } from '../../lib/i18n';
 import { getBoss, listCharacters } from '../../data/catalog';
 import { resolveRotation } from '../../engine/rotation';
 import { applyPrimeDebuffs } from '../../engine/bossDebuffs';
@@ -36,6 +37,7 @@ function customBoss(armor: number, hp: number, shield: number, traits: string[])
 
 export function CharacterComparison() {
   const { build, target, rotation } = useApp();
+  const t = useT();
   const [attack, setAttack] = useState<Attack>('melee');
   const [factionFilter, setFactionFilter] = useState<string>('all');
   const [limit, setLimit] = useState(25);
@@ -144,29 +146,29 @@ export function CharacterComparison() {
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Character comparison</h2>
+        <h2 className="text-lg font-semibold">{t('section.comparison')}</h2>
         <span className="text-xs text-slate-500">
-          {progressionLabel(build.progression)} · rank {build.rank} · xp {build.xpLevel} · T1 buffs: {buffSummary}
+          {progressionLabel(build.progression)} · rank {build.rank} · xp {build.xpLevel} · {t('comparison.t1Buffs')}: {buffSummary}
         </span>
       </div>
 
       <div className="mt-3 flex flex-wrap gap-3 text-sm">
         <label className="flex items-center gap-2">
-          <span className="text-xs uppercase text-slate-400">Attack</span>
+          <span className="text-xs uppercase text-slate-400">{t('label.attack')}</span>
           <select
             value={attack}
             onChange={(e) => setAttack(e.target.value as Attack)}
             className="rounded bg-bg-base px-2 py-1"
           >
-            <option value="melee">Melee</option>
-            <option value="ranged">Ranged</option>
+            <option value="melee">{t('label.melee')}</option>
+            <option value="ranged">{t('label.ranged')}</option>
             <option value="ability1">Ability 1</option>
             <option value="ability2">Ability 2</option>
             <option value="ability3">Ability 3</option>
           </select>
         </label>
         <label className="flex items-center gap-2">
-          <span className="text-xs uppercase text-slate-400">Faction</span>
+          <span className="text-xs uppercase text-slate-400">{t('label.faction')}</span>
           <select
             value={factionFilter}
             onChange={(e) => setFactionFilter(e.target.value)}
@@ -181,7 +183,7 @@ export function CharacterComparison() {
           </select>
         </label>
         <label className="flex items-center gap-2">
-          <span className="text-xs uppercase text-slate-400">Show top</span>
+          <span className="text-xs uppercase text-slate-400">{t('label.showTop')}</span>
           <select
             value={limit}
             onChange={(e) => setLimit(Number(e.target.value))}
@@ -200,11 +202,11 @@ export function CharacterComparison() {
           <thead>
             <tr className="border-b border-bg-subtle text-left text-xs uppercase text-slate-400">
               <th className="py-1 pr-2">#</th>
-              <th className="py-1 pr-2">Character</th>
-              <th className="py-1 pr-2">Faction</th>
-              <th className="py-1 pr-2 text-right">Turn 1</th>
-              <th className="py-1 pr-2 text-right">Per hit</th>
-              <th className="py-1 pr-2 text-right">Crit %</th>
+              <th className="py-1 pr-2">{t('label.character')}</th>
+              <th className="py-1 pr-2">{t('label.faction')}</th>
+              <th className="py-1 pr-2 text-right">{t('comparison.turn1')}</th>
+              <th className="py-1 pr-2 text-right">{t('label.perHit')}</th>
+              <th className="py-1 pr-2 text-right">{t('label.critPct')}</th>
             </tr>
           </thead>
           <tbody className="font-mono">

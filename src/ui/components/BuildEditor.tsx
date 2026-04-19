@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useApp } from '../../state/store';
+import { useT } from '../../lib/i18n';
 import { listCharacters, getEquipment, loadCatalog } from '../../data/catalog';
 import { applyStarAndRank, applyEquipmentMods } from '../../engine/scaling';
 import {
@@ -57,6 +58,7 @@ export function BuildEditor() {
     ownedCatalogIds,
     player,
   } = useApp();
+  const t = useT();
   const characters = useMemo(() => listCharacters(), []);
   const allEquipment = useMemo(
     () => Array.from(loadCatalog().equipment.values()),
@@ -136,7 +138,7 @@ export function BuildEditor() {
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Build</h2>
+        <h2 className="text-lg font-semibold">{t('section.build')}</h2>
         <span className="text-xs text-slate-400">
           {player
             ? `${player.details.name} · ${ownedCount} owned`
@@ -146,12 +148,12 @@ export function BuildEditor() {
 
       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
         <label className="flex flex-1 min-w-[12rem] items-center gap-1">
-          <span className="uppercase text-slate-400">Search</span>
+          <span className="uppercase text-slate-400">{t('label.search')}</span>
           <input
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Name, id, or faction…"
+            placeholder={t('placeholder.search')}
             className="flex-1 rounded bg-bg-base px-2 py-1"
           />
           {search && (
@@ -166,7 +168,7 @@ export function BuildEditor() {
           )}
         </label>
         <label className="flex items-center gap-1">
-          <span className="uppercase text-slate-400">Faction</span>
+          <span className="uppercase text-slate-400">{t('label.faction')}</span>
           <select
             value={factionFilter}
             onChange={(e) => setFactionFilter(e.target.value)}
@@ -187,7 +189,7 @@ export function BuildEditor() {
             onChange={(e) => setOwnedOnly(e.target.checked)}
             disabled={ownedCount === 0}
           />
-          <span className="uppercase text-slate-400">Owned only</span>
+          <span className="uppercase text-slate-400">{t('label.ownedOnly')}</span>
           <span className="text-slate-600">({ownedCount})</span>
         </label>
         <span className="text-slate-500">
@@ -198,14 +200,14 @@ export function BuildEditor() {
       <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
         <label className="flex flex-col gap-1 md:col-span-2">
           <span className="text-xs uppercase tracking-wide text-slate-400">
-            Character
+            {t('label.character')}
           </span>
           <select
             value={build.characterId ?? ''}
             onChange={(e) => selectCharacter(e.target.value || null)}
             className="rounded bg-bg-base px-2 py-1 text-sm"
           >
-            <option value="">— pick —</option>
+            <option value="">{t('placeholder.pick')}</option>
             {filteredCharacters.map((c) => (
               <option key={c.id} value={c.id}>
                 {ownedSet.has(c.id) ? '★ ' : '  '}
@@ -216,28 +218,28 @@ export function BuildEditor() {
         </label>
 
         <Slider
-          label={`Rarity / Stars: ${progressionLabel(progression)}`}
+          label={`${t('label.rarityStars')}: ${progressionLabel(progression)}`}
           min={0}
           max={MAX_PROGRESSION}
           value={progression}
           onChange={(v) => setBuild({ progression: v })}
         />
         <Slider
-          label={`Rank: ${rankLabel}`}
+          label={`${t('label.rank')}: ${rankLabel}`}
           min={0}
           max={maxRank}
           value={Math.min(build.rank, maxRank)}
           onChange={(v) => setBuild({ rank: v })}
         />
         <Slider
-          label={`XP / Ability Level: ${build.xpLevel}`}
+          label={`${t('label.xpLevel')}: ${build.xpLevel}`}
           min={1}
           max={MAX_XP_LEVEL}
           value={Math.min(build.xpLevel, MAX_XP_LEVEL)}
           onChange={(v) => setBuild({ xpLevel: v })}
         />
         <div className="flex flex-col gap-1 text-xs text-slate-500">
-          <span className="uppercase tracking-wide text-slate-400">Derived</span>
+          <span className="uppercase tracking-wide text-slate-400">{t('label.derived')}</span>
           <span>
             rarity <span className="text-slate-200">{rarity}</span> · starLevel{' '}
             <span className="text-slate-200">{stars}</span>
@@ -273,7 +275,7 @@ export function BuildEditor() {
 
       {selected && (
         <div className="mt-3">
-          <div className="text-xs uppercase text-slate-400">Equipment</div>
+          <div className="text-xs uppercase text-slate-400">{t('label.equipment')}</div>
           <div className="mt-1 grid grid-cols-1 gap-2 md:grid-cols-3">
             {equipmentSlots.map((slotItems, slotIdx) => {
               const relic = build.relicSlots?.[slotIdx] ?? null;
@@ -357,14 +359,14 @@ export function BuildEditor() {
 
       {derived && (
         <div className="mt-3 grid grid-cols-2 gap-2 text-sm md:grid-cols-4">
-          <Stat label="Damage" value={derived.damage.toFixed(0)} />
-          <Stat label="Armor" value={derived.armor.toFixed(0)} />
-          <Stat label="HP" value={derived.hp.toFixed(0)} />
-          <Stat label="Crit %" value={`${(derived.critChance * 100).toFixed(0)}%`} />
-          <Stat label="Crit Dmg" value={derived.critDamage.toFixed(0)} />
-          <Stat label="Block %" value={`${(derived.blockChance * 100).toFixed(0)}%`} />
-          <Stat label="Block Dmg" value={derived.blockDamage.toFixed(0)} />
-          <Stat label="Melee Hits" value={String(derived.meleeHits)} />
+          <Stat label={t('label.damage')} value={derived.damage.toFixed(0)} />
+          <Stat label={t('label.armor')} value={derived.armor.toFixed(0)} />
+          <Stat label={t('label.hp')} value={derived.hp.toFixed(0)} />
+          <Stat label={t('label.critPct')} value={`${(derived.critChance * 100).toFixed(0)}%`} />
+          <Stat label={t('label.critDmg')} value={derived.critDamage.toFixed(0)} />
+          <Stat label={t('label.blockPct')} value={`${(derived.blockChance * 100).toFixed(0)}%`} />
+          <Stat label={t('label.blockDmg')} value={derived.blockDamage.toFixed(0)} />
+          <Stat label={t('label.meleeHits')} value={String(derived.meleeHits)} />
         </div>
       )}
 
@@ -560,6 +562,7 @@ function AbilityLevels({
   defaultLevel: number;
   onChange: (next: AbilityLevel[]) => void;
 }) {
+  const t = useT();
   function levelFor(id: string): number {
     return levels.find((l) => l.id === id)?.level ?? defaultLevel;
   }
@@ -569,7 +572,7 @@ function AbilityLevels({
   }
   return (
     <div className="mt-3">
-      <div className="text-xs uppercase text-slate-400">Ability Levels</div>
+      <div className="text-xs uppercase text-slate-400">{t('label.abilityLevels')}</div>
       <div className="mt-1 grid grid-cols-1 gap-1 md:grid-cols-2">
         {abilities.map((ab) => (
           <label

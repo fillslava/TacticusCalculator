@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useDamage } from '../hooks/useDamage';
+import { useT } from '../../lib/i18n';
 
 export function DamageResult() {
   const data = useDamage();
+  const t = useT();
   const [showTrace, setShowTrace] = useState(false);
 
   if (!data) {
     return (
       <section className="rounded border border-bg-subtle bg-bg-elevated p-4 text-slate-400">
-        Pick a character and target to see damage.
+        {t('result.pickToSee')}
       </section>
     );
   }
@@ -19,28 +21,28 @@ export function DamageResult() {
 
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
-      <h2 className="text-lg font-semibold">Damage</h2>
+      <h2 className="text-lg font-semibold">{t('section.damage')}</h2>
 
       <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <h3 className="text-sm font-medium text-slate-400">First turn</h3>
+          <h3 className="text-sm font-medium text-slate-400">{t('result.firstTurn')}</h3>
           <div className="mt-1 text-4xl font-semibold text-accent">
             {Math.round(first.expected).toLocaleString()}
           </div>
           <div className="mt-1 text-xs text-slate-400">
-            range {Math.round(first.min).toLocaleString()} –{' '}
-            {Math.round(first.max).toLocaleString()} · crit{' '}
+            {t('result.range')} {Math.round(first.min).toLocaleString()} –{' '}
+            {Math.round(first.max).toLocaleString()} · {t('result.crit')}{' '}
             {(first.critProbability * 100).toFixed(0)}%
           </div>
         </div>
 
         <div>
-          <h3 className="text-sm font-medium text-slate-400">Rotation total</h3>
+          <h3 className="text-sm font-medium text-slate-400">{t('result.rotationTotal')}</h3>
           <div className="mt-1 text-4xl font-semibold">
             {Math.round(totalExpected).toLocaleString()}
           </div>
           <div className="mt-1 text-xs text-slate-400">
-            turns to kill:{' '}
+            {t('result.turnsToKill')}:{' '}
             <span className="font-semibold text-slate-200">
               {result.turnsToKill === 'unreachable' ? '∞' : result.turnsToKill}
             </span>
@@ -49,7 +51,7 @@ export function DamageResult() {
       </div>
 
       <div className="mt-4">
-        <h3 className="text-sm font-medium text-slate-400">Per turn</h3>
+        <h3 className="text-sm font-medium text-slate-400">{t('result.perTurn')}</h3>
         <ol className="mt-1 grid grid-cols-1 gap-1 text-sm md:grid-cols-2">
           {result.perTurn.map((t, i) => (
             <li
@@ -71,7 +73,7 @@ export function DamageResult() {
         onClick={() => setShowTrace((s) => !s)}
         className="mt-3 text-xs text-slate-400 underline decoration-dotted"
       >
-        {showTrace ? 'hide trace' : 'show trace'}
+        {showTrace ? t('button.hideTrace') : t('button.showTrace')}
       </button>
       {showTrace && (
         <pre className="mt-2 max-h-64 overflow-auto rounded bg-bg-base p-2 text-xs text-slate-300">

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useApp } from '../../state/store';
+import { useT } from '../../lib/i18n';
 import { getPlayer } from '../../api/endpoints';
 import { ApiPlayerResponseSchema } from '../../api/types';
 
 export function ImportBar() {
   const { credentials, setCredentials, setPlayer, player, importError, setImportError } = useApp();
+  const t = useT();
   const [busy, setBusy] = useState(false);
 
   async function loadFromApi() {
@@ -36,16 +38,16 @@ export function ImportBar() {
 
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
-      <h2 className="text-lg font-semibold">Import</h2>
+      <h2 className="text-lg font-semibold">{t('section.import')}</h2>
       <div className="mt-3">
         <label className="flex flex-col gap-1">
-          <span className="text-xs uppercase tracking-wide text-slate-400">API Key</span>
+          <span className="text-xs uppercase tracking-wide text-slate-400">{t('label.apiKey')}</span>
           <input
             type="password"
             value={credentials.apiKey}
             onChange={(e) => setCredentials({ apiKey: e.target.value })}
             className="rounded bg-bg-base px-2 py-1 font-mono text-sm"
-            placeholder="your X-API-KEY uuid"
+            placeholder={t('placeholder.apiKey')}
           />
         </label>
       </div>
@@ -56,10 +58,10 @@ export function ImportBar() {
           disabled={busy || !credentials.apiKey}
           className="rounded bg-accent px-3 py-1.5 text-sm font-medium text-white disabled:opacity-40"
         >
-          {busy ? 'Loading…' : 'Load from API'}
+          {busy ? t('button.loading') : t('button.loadApi')}
         </button>
         <label className="cursor-pointer text-sm text-slate-300 underline decoration-dotted">
-          or upload player.json
+          {t('button.uploadJson')}
           <input
             type="file"
             accept="application/json"
