@@ -1,0 +1,465 @@
+[
+  {
+    "id": "avatar",
+    "displayName": "Avatar",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 1029,
+        "traits": [
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 25000000,
+        "armor": 1288,
+        "traits": [
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 1697,
+        "traits": [
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 2231,
+        "traits": [
+          "big",
+          "daemon"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cawl",
+    "displayName": "Cawl",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 880,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 25000000,
+        "armor": 1102,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ghazghkull",
+    "displayName": "Ghazghkull",
+    "stages": [
+      {
+        "name": "L0",
+        "hp": 25000000,
+        "armor": 352,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 465,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 25000000,
+        "armor": 582,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 660,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 1008,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiveTyrant",
+    "displayName": "Hive Tyrant",
+    "stages": [
+      {
+        "name": "L0",
+        "hp": 25000000,
+        "armor": 666,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 720,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 25000000,
+        "armor": 1559,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 1559,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 1559,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "magnus",
+    "displayName": "Magnus",
+    "stages": [
+      {
+        "name": "L2",
+        "hp": 25000000,
+        "armor": 989,
+        "traits": [
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 1303,
+        "traits": [
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 1713,
+        "traits": [
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mortarion",
+    "displayName": "Mortarion",
+    "stages": [
+      {
+        "name": "L0",
+        "hp": 25000000,
+        "armor": 2337,
+        "traits": [
+          "big",
+          "daemon",
+          "psyker",
+          "revoltingly resilient",
+          "punishes melee"
+        ]
+      },
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 4385,
+        "traits": [
+          "big",
+          "daemon",
+          "psyker",
+          "revoltingly resilient",
+          "punishes melee"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 5095,
+        "traits": [
+          "big",
+          "daemon",
+          "psyker",
+          "revoltingly resilient",
+          "punishes melee"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 6698,
+        "traits": [
+          "big",
+          "daemon",
+          "psyker",
+          "revoltingly resilient",
+          "punishes melee"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rogalDorn",
+    "displayName": "Rogal Dorn",
+    "stages": [
+      {
+        "name": "L0",
+        "hp": 25000000,
+        "armor": 998,
+        "traits": [
+          "big",
+          "mech",
+          "ablative plating",
+          "weaker rear"
+        ]
+      },
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 1319,
+        "traits": [
+          "big",
+          "mech",
+          "ablative plating",
+          "weaker rear"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 25000000,
+        "armor": 2861,
+        "traits": [
+          "big",
+          "mech",
+          "ablative plating",
+          "weaker rear"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 2861,
+        "traits": [
+          "big",
+          "mech",
+          "ablative plating",
+          "weaker rear"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 2861,
+        "traits": [
+          "big",
+          "mech",
+          "ablative plating",
+          "weaker rear"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "screamerKiller",
+    "displayName": "Screamer-Killer",
+    "stages": [
+      {
+        "name": "L0",
+        "hp": 25000000,
+        "armor": 830,
+        "traits": [
+          "big"
+        ]
+      },
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 1323,
+        "traits": [
+          "big"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 1809,
+        "traits": [
+          "big"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 2379,
+        "traits": [
+          "big"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "szarekh",
+    "displayName": "Szarekh",
+    "stages": [
+      {
+        "name": "L0",
+        "hp": 25000000,
+        "armor": 367,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 485,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 800,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 1052,
+        "traits": [
+          "big",
+          "mech"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tervigon",
+    "displayName": "Tervigon",
+    "stages": [
+      {
+        "name": "L0",
+        "hp": 25000000,
+        "armor": 666,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L1",
+        "hp": 25000000,
+        "armor": 1020,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 25000000,
+        "armor": 1559,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 25000000,
+        "armor": 1559,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 25000000,
+        "armor": 1559,
+        "traits": [
+          "big",
+          "psyker",
+          "flying"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "player": {
+    "details": {
+      "name": "SampleCommander",
+      "powerLevel": 12345
+    },
+    "units": [
+      {
+        "id": "calgar",
+        "name": "Calgar",
+        "faction": "Ultramarines",
+        "grandAlliance": "Imperial",
+        "progressionIndex": 11,
+        "xp": 99999,
+        "xpLevel": 50,
+        "rank": 15,
+        "rarity": "Legendary",
+        "items": [
+          { "slotId": "Slot1", "level": 9, "id": "crit_15_legendary_crit_L1", "rarity": "Legendary" },
+          { "slotId": "Slot2", "level": 9, "id": "block_20_legendary_block_L1", "rarity": "Legendary" }
+        ],
+        "upgrades": [[0, 1, 2], [3, 4, 5]],
+        "shards": 500,
+        "abilities": []
+      },
+      {
+        "id": "abaddon",
+        "name": "Abaddon",
+        "faction": "Black Legion",
+        "grandAlliance": "Chaos",
+        "progressionIndex": 10,
+        "xp": 88000,
+        "xpLevel": 45,
+        "rank": 13,
+        "rarity": "Legendary",
+        "items": [],
+        "upgrades": [],
+        "shards": 320,
+        "abilities": []
+      }
+    ],
+    "inventory": {},
+    "progress": {}
+  }
+}
