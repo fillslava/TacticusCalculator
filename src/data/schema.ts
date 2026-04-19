@@ -99,10 +99,38 @@ export const BossStageSchema = z.object({
     .optional(),
 });
 
+/**
+ * A single debuff step applied to the boss when a prime is killed.
+ *
+ * - `stat` is one of the boss's own stats; only stat-affecting debuffs are
+ *   modelled here (ability-specific debuffs like `ArchContaminator_hits`
+ *   don't change the damage calc).
+ * - `mode='pct'` means a percent reduction of the base stat (value is 0..1);
+ *   `mode='flat'` means a flat numeric subtraction.
+ */
+export const BossDebuffStepSchema = z.object({
+  stat: z.enum(['armor', 'damage', 'hp', 'critDamage']),
+  mode: z.enum(['pct', 'flat']),
+  value: z.number(),
+  rawId: z.string().optional(),
+});
+
+export const BossPrimeSchema = z.object({
+  name: z.string(),
+  /**
+   * Ordered debuff chain. After killing the prime N times, the first N steps
+   * are applied cumulatively. `stat` null entries (ability-specific debuffs)
+   * count as an "inert" step — still consumes a kill tier but doesn't change
+   * stats.
+   */
+  steps: z.array(BossDebuffStepSchema.or(z.object({ stat: z.null(), rawId: z.string() }))),
+});
+
 export const BossSchema = z.object({
   id: z.string(),
   displayName: z.string(),
   stages: z.array(BossStageSchema),
+  primes: z.array(BossPrimeSchema).optional(),
 });
 
 export const ItemStatModsSchema = z.object({

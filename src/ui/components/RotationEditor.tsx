@@ -2,6 +2,7 @@ import { useApp } from '../../state/store';
 import { getCharacter } from '../../data/catalog';
 import {
   BUFF_PRESETS,
+  type BuffPreset,
   computeBuffDamage,
   findPresetByName,
   presetToBuff,
@@ -14,7 +15,8 @@ import type { BonusHitTrigger, Rarity, TurnBuff } from '../../engine/types';
 const MAX_BUFFS_PER_TURN = 4;
 
 export function RotationEditor() {
-  const { build, rotation, setRotation, addTurn, removeTurn } = useApp();
+  const { build, rotation, setRotation, addTurn, removeTurn, unitBuilds } =
+    useApp();
   const char = build.characterId ? getCharacter(build.characterId) : undefined;
 
   const options: { key: string; label: string }[] = [{ key: 'melee', label: 'Melee' }];
@@ -29,13 +31,32 @@ export function RotationEditor() {
     setRotation(next);
   }
 
-  function addBuff(turnIdx: number, preset: Omit<TurnBuff, 'id'>) {
-    const turn = rotation[turnIdx];
-    if (turn.buffs.length >= MAX_BUFFS_PER_TURN) return;
-    const overrides = {
+  /**
+   * Pick the buffer's own xpLevel & rarity when known. Falls back to the
+   * attacker's build (what the player last viewed) when the buffer is unowned
+   * or no charId is attached.
+   */
+  function resolveBuffOverrides(preset: BuffPreset): {
+    level: number;
+    rarity: Rarity;
+  } {
+    const memo = preset.charId ? unitBuilds[preset.charId] : undefined;
+    if (memo) {
+      return {
+        level: memo.xpLevel,
+        rarity: progressionToRarity(memo.progression),
+      };
+    }
+    return {
       level: build.xpLevel,
       rarity: progressionToRarity(build.progression),
     };
+  }
+
+  function addBuff(turnIdx: number, preset: BuffPreset) {
+    const turn = rotation[turnIdx];
+    if (turn.buffs.length >= MAX_BUFFS_PER_TURN) return;
+    const overrides = resolveBuffOverrides(preset);
     updateTurn(turnIdx, {
       buffs: [...turn.buffs, presetToBuff(preset, overrides)],
     });
@@ -171,6 +192,8 @@ function BuffRow({
   onRemove: () => void;
 }) {
   const preset = findPresetByName(buff.name);
+  const charId = buff.charId ?? preset?.charId;
+  const buffer = charId ? getCharacter(charId) : undefined;
   return (
     <li className="flex flex-col gap-1 rounded border border-bg-subtle/50 bg-bg-elevated p-2 text-xs">
       <div className="flex flex-wrap items-center gap-2">
@@ -179,6 +202,14 @@ function BuffRow({
           onChange={(e) => onChange({ name: e.target.value })}
           className="w-44 rounded bg-bg-base px-1.5 py-0.5"
         />
+        {buffer && (
+          <span
+            title={`Buff scales with ${buffer.displayName}'s own level & rarity`}
+            className="rounded bg-bg-base px-1.5 py-0.5 text-[10px] text-slate-400"
+          >
+            from {buffer.displayName}
+          </span>
+        )}
         <NumField
           label="lvl"
           value={buff.level ?? 50}

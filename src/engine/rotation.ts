@@ -105,6 +105,7 @@ export function resolveRotation(
 }
 
 function resolveBaseHp(target: Target): number {
+  if (target.statOverrides?.hp !== undefined) return target.statOverrides.hp;
   if ('stages' in target.source) {
     const idx = target.stageIndex ?? 0;
     return target.source.stages[Math.min(idx, target.source.stages.length - 1)].hp;

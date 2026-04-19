@@ -54,8 +54,8 @@ function resolveTargetStats(target: Target): TargetResolvedStats {
     const stage: BossStage =
       target.source.stages[Math.min(idx, target.source.stages.length - 1)];
     return {
-      armor: stage.armor,
-      hp: target.currentHp ?? stage.hp,
+      armor: target.statOverrides?.armor ?? stage.armor,
+      hp: target.currentHp ?? target.statOverrides?.hp ?? stage.hp,
       shield: target.currentShield ?? stage.shield ?? 0,
       traits: [...stage.traits, ...(target.activeDebuffs?.traits ?? [])],
       damageCaps: stage.damageCapsByStage,
@@ -63,8 +63,8 @@ function resolveTargetStats(target: Target): TargetResolvedStats {
   }
   const cs = target.source;
   return {
-    armor: cs.baseStats.armor,
-    hp: target.currentHp ?? cs.baseStats.hp,
+    armor: target.statOverrides?.armor ?? cs.baseStats.armor,
+    hp: target.currentHp ?? target.statOverrides?.hp ?? cs.baseStats.hp,
     shield: target.currentShield ?? 0,
     traits: [...cs.traits, ...(target.activeDebuffs?.traits ?? [])],
   };

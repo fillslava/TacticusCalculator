@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useApp } from '../../state/store';
 import { getBoss, listCharacters } from '../../data/catalog';
 import { resolveRotation } from '../../engine/rotation';
+import { applyPrimeDebuffs } from '../../engine/bossDebuffs';
 import {
   progressionLabel,
   progressionToRarity,
@@ -56,7 +57,27 @@ export function CharacterComparison() {
           target.customTraits ?? [],
         );
     if (!boss) return [];
-    const t: Target = { source: boss, stageIndex: target.stageIndex };
+    const stageIdx = Math.min(
+      target.stageIndex,
+      Math.max(0, boss.stages.length - 1),
+    );
+    const stage = boss.stages[stageIdx];
+    const primeLevels = [target.prime1Level ?? 0, target.prime2Level ?? 0];
+    const hasAnyPrime = primeLevels.some((l) => l > 0);
+    const debuffed = hasAnyPrime
+      ? applyPrimeDebuffs(
+          { armor: stage.armor, hp: stage.hp },
+          boss.primes,
+          primeLevels,
+        )
+      : null;
+    const t: Target = {
+      source: boss,
+      stageIndex: target.stageIndex,
+      ...(debuffed
+        ? { statOverrides: { armor: debuffed.armor, hp: debuffed.hp } }
+        : {}),
+    };
     const turnBuffs = rotation[0]?.buffs ?? [];
 
     const out: Array<{

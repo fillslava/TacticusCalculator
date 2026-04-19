@@ -70,10 +70,20 @@ interface GameInfoAbility {
 }
 
 interface GameInfo {
-  guildRaidUnits: Record<string, GameInfoUnit>;
+  guildRaidUnits: Record<string, GameInfoUnitWithPrimes>;
   heroes: Record<string, GameInfoUnit>;
   machinesOfWar?: Record<string, GameInfoUnit>;
   abilities?: Record<string, GameInfoAbility>;
+  bossDebuffs?: Record<string, string[]>;
+}
+
+interface GameInfoUnitWithPrimes extends GameInfoUnit {
+  isBoss?: boolean;
+  isPrime?: boolean;
+  prime1?: string;
+  prime2?: string;
+  prime1Name?: string;
+  prime2Name?: string;
 }
 
 const BOSS_ID_MAP: Record<string, string> = {
@@ -277,6 +287,62 @@ function findHeroUnit(
   return best?.unit;
 }
 
+/**
+ * Parse a `boss_debuff_*` string into a structured stat change. Ability-
+ * specific debuffs (e.g. `boss_debuff_ArchContaminator_hits_2`) return null
+ * because they don't affect the damage calc — we still record them as inert
+ * steps so kill-count dropdowns line up with the in-game tier numbering.
+ */
+function parseBossDebuff(raw: string): NonNullable<BossData['primes']>[number]['steps'][number] {
+  const m = /^boss_debuff_(fixedArmor|dmg|hp|critDmg)_(\d+)$/.exec(raw);
+  if (m) {
+    const statMap: Record<string, 'armor' | 'damage' | 'hp' | 'critDamage'> = {
+      fixedArmor: 'armor',
+      dmg: 'damage',
+      hp: 'hp',
+      critDmg: 'critDamage',
+    };
+    const stat = statMap[m[1]];
+    if (stat) {
+      return { stat, mode: 'pct', value: Number(m[2]) / 100, rawId: raw };
+    }
+  }
+  return { stat: null, rawId: raw };
+}
+
+function buildPrimesFor(
+  unit: GameInfoUnitWithPrimes,
+  raw: GameInfo,
+): BossData['primes'] {
+  const primes: BossData['primes'] = [];
+  const defs: [string | undefined, string | undefined][] = [
+    [unit.prime1, unit.prime1Name],
+    [unit.prime2, unit.prime2Name],
+  ];
+  for (const [debuffKey, rawName] of defs) {
+    if (!debuffKey) continue;
+    const arr = raw.bossDebuffs?.[debuffKey];
+    if (!arr || arr.length === 0) continue;
+    const name = primeDisplayName(rawName ?? debuffKey);
+    primes.push({
+      name,
+      steps: arr.map(parseBossDebuff),
+    });
+  }
+  return primes.length > 0 ? primes : undefined;
+}
+
+/**
+ * Strip gameinfo prefixes (GuildBoss\d+MiniBoss\d+FactionName) down to a
+ * readable prime name (e.g. "Rotbone", "Blightbringer").
+ */
+function primeDisplayName(raw: string): string {
+  return (
+    raw.replace(/^GuildBoss\d+MiniBoss\d+(?:[A-Z][a-z]+)?/, '').replace(/^_/, '') ||
+    raw
+  );
+}
+
 function buildBosses(raw: GameInfo): BossData[] {
   const bosses: BossData[] = [];
   for (const [gameId, shortId] of Object.entries(BOSS_ID_MAP)) {
@@ -294,10 +360,12 @@ function buildBosses(raw: GameInfo): BossData[] {
     for (let i = 0; i < MYTHIC_LABELS.length && i < mythic.length; i++) {
       stages.push(toBossStage(MYTHIC_LABELS[i], mythic[i], unit.traits));
     }
+    const primes = buildPrimesFor(unit, raw);
     bosses.push({
       id: shortId,
       displayName: BOSS_DISPLAY_MAP[shortId] ?? unit.longName ?? unit.name ?? shortId,
       stages,
+      ...(primes ? { primes } : {}),
     });
   }
   bosses.sort((a, b) => a.displayName.localeCompare(b.displayName));
@@ -461,8 +529,31 @@ function buildAbilityFactor(raw: GameInfo): number[] {
   return bestArr.map((v) => +(v / bestArr![0]).toFixed(4));
 }
 
+function buildGearRanks(raw: GameInfo): [string, number][] {
+  // Any hero has the same 20-entry rank list (STONE I → MYTHIC II).
+  const heroes = Object.values(raw.heroes ?? {});
+  for (const h of heroes) {
+    if (!h.ranks || h.ranks.length === 0) continue;
+    return h.ranks.map((r, i) => [toTitleCase(r.level), i] as [string, number]);
+  }
+  throw new Error('buildGearRanks: no hero with ranks[] found');
+}
+
+function toTitleCase(s: string): string {
+  // Preserve roman numerals (I, II, III). Capitalise only the tier word.
+  return s
+    .split(/\s+/)
+    .map((w) =>
+      /^[IVX]+$/i.test(w)
+        ? w.toUpperCase()
+        : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(),
+    )
+    .join(' ');
+}
+
 function writeCurves(raw: GameInfo): void {
   const abilityFactor = buildAbilityFactor(raw);
+  const gearRanks = buildGearRanks(raw);
   const current = JSON.parse(readFileSync(CURVES_OUT, 'utf8'));
   const merged = {
     abilityFactor,
@@ -470,11 +561,11 @@ function writeCurves(raw: GameInfo): void {
     // Game uses 0.1 step (common=1.0, mythic=1.5). Scraped wiki claimed 0.2
     // but in-game tooltip calibration (Eldryon L55 mythic = 1072) matches 0.1.
     rarityAbilityStep: 0.1,
-    gearRanks: current.gearRanks,
+    gearRanks,
   };
   writeFileSync(CURVES_OUT, JSON.stringify(merged, null, 2) + '\n');
   console.log(
-    `Wrote curves: abilityFactor L1=${abilityFactor[0]} L55=${abilityFactor[54]} L65=${abilityFactor[64]}`,
+    `Wrote curves: abilityFactor L1=${abilityFactor[0]} L55=${abilityFactor[54]} L65=${abilityFactor[64]} · ${gearRanks.length} gear ranks ending at ${gearRanks[gearRanks.length - 1][0]}`,
   );
 }
 

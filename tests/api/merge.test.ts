@@ -69,8 +69,8 @@ describe('mergePlayerUnitWithCatalog', () => {
     expect(attacker).toBeDefined();
     expect(attacker!.source.id).toBe('calgar');
     expect(attacker!.progression.stars).toBe(11);
-    // API rank is 1-indexed; merge converts to 0-indexed for statFactor.
-    expect(attacker!.progression.rank).toBe(14);
+    // API rank is already 0-indexed (0..19). We pass it through unchanged.
+    expect(attacker!.progression.rank).toBe(15);
     expect(attacker!.progression.rarity).toBe('legendary');
     expect(attacker!.equipment).toHaveLength(2);
     expect(attacker!.equipment[0].mods.critChance).toBe(0.15);

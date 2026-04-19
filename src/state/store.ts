@@ -58,6 +58,13 @@ export interface TargetState {
   customHp?: number;
   customShield?: number;
   customTraits?: string[];
+  /**
+   * Cumulative kill counts of each of the boss's two primes. After killing
+   * prime-N `k` times, the first `k` debuff steps from that prime's chain
+   * are applied to the boss's stats. 0 = no debuffs.
+   */
+  prime1Level?: number;
+  prime2Level?: number;
 }
 
 export interface RotationTurn {
@@ -164,7 +171,7 @@ function apiUnitToMemo(
   }
   return {
     progression,
-    rank: Math.max(0, (unit.rank ?? 1) - 1),
+    rank: Math.max(0, unit.rank ?? 0),
     xpLevel: Math.max(1, unit.xpLevel ?? 1),
     equipmentIds: slotIds,
     abilityLevels: parseUnitAbilities(unit),
@@ -307,7 +314,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 9,
+      version: 10,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -389,6 +396,17 @@ export const useApp = create<AppState>()(
               buffs: [],
             }));
           }
+        }
+        if (fromVersion < 10) {
+          // v10 removes the (apiRank - 1) offset (API rank is 0-indexed
+          // directly: rank 18 = Mythic I, rank 19 = Mythic II) and derives
+          // rarity from progressionIndex since /player doesn't return a
+          // rarity field. Clear unit caches so they re-merge with the fixed
+          // conversion.
+          persisted.syncReport = null;
+          persisted.ownedCatalogIds = [];
+          persisted.unitBuilds = {};
+          persisted.player = null;
         }
         return persisted;
       },

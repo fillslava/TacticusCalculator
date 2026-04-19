@@ -6,6 +6,13 @@ import abilityTables from '../data/abilityTables.json';
 export interface BuffPreset extends Omit<TurnBuff, 'id'> {
   description?: string;
   /**
+   * Catalog character id of the buffer (e.g. "calgar", "eldryon"). When the
+   * buff is added and the player owns this hero, the rotation editor uses
+   * that hero's synced xpLevel & progression-derived rarity as the default —
+   * buffs scale by the *buffer's* own stats, not the attacker's.
+   */
+  charId?: string;
+  /**
    * Ability-scaling coefficient. When set, `damageFlat` is computed as
    * `baseDamageCoef * abilityFactor[level-1] * rarityAbilityMultiplier(rarity)`.
    * Calibrated from known in-game tooltip values.
@@ -102,6 +109,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Eldryon — Aeldari damage',
     description:
       'Passive Doom. Aeldari allies deal +extraDmg_2 damage to marked enemies. Other allies deal +extraDmg. This preset is the Aeldari (higher) variant.',
+    charId: 'eldryon',
     damageTable: DMG_DOOM_AELDARI,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -110,6 +118,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Eldryon — Non-Aeldari damage',
     description:
       'Passive Doom. Non-Aeldari allies deal +extraDmg damage to marked enemies. Use this when your attacker is not Aeldari.',
+    charId: 'eldryon',
     damageTable: DMG_DOOM_OTHER,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -118,6 +127,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Calgar — Imperial damage',
     description:
       'Passive Rites of Battle. Adjacent Imperial allies gain +extraDmg_2 damage (higher than the general adjacency buff).',
+    charId: 'calgar',
     damageTable: DMG_CALGAR_IMPERIAL,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -126,6 +136,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Abaddon — Chaos damage (base)',
     description:
       'Passive First Among Traitors. Chaos allies within 2 hexes gain +extraDmg damage. Stacks per Abaddon attack (13 attacks for max).',
+    charId: 'abaddon',
     damageTable: DMG_ABADDON_CHAOS_BASE,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -134,6 +145,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Abaddon — Chaos damage (max stacks)',
     description:
       'Passive First Among Traitors at 13 stacks. Chaos allies gain +maxDmg damage. Use for rotation turns after Abaddon has attacked 13+ times.',
+    charId: 'abaddon',
     damageTable: DMG_ABADDON_CHAOS_MAX,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -142,6 +154,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Trajann — Legendary Commander',
     description:
       'Passive. Enemies adjacent to friendly units that used active abilities this turn take +extraDmg damage. Applies as a target debuff.',
+    charId: 'trajann',
     damageTable: DMG_TRAJANN,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -150,6 +163,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Aethana — Path of Command',
     description:
       'Passive. Allies within 2 hexes gain +extraDmg damage and +extraCritChance crit chance. Aeldari allies gain additional +extraDmg_2 damage (both tables applied).',
+    charId: 'aethana',
     damageTable: DMG_AETHANA,
     critChanceTable: CC_AETHANA,
     level: DEFAULT_BUFF_LEVEL,
@@ -159,6 +173,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Aethana — Aeldari bonus (stack on top)',
     description:
       'Passive Path of Command. Aeldari-only additional +extraDmg_2 damage on top of the base buff.',
+    charId: 'aethana',
     damageTable: DMG_AETHANA_AELDARI_BONUS,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -167,6 +182,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: "Gulgortz — Waaagh! (Ork damage)",
     description:
       'Active Waaagh. Adjacent Orks & adjacent friendlies gain +extraDmg melee damage and +1 hit on their normal melee attack this turn.',
+    charId: 'gulgortz',
     damageTable: DMG_GULGORTZ,
     bonusHits: 1,
     bonusHitsOn: 'normal',
@@ -177,6 +193,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Helbrecht — Vs Psykers',
     description:
       'Passive Destroy the Witch. This unit and adjacent friendlies deal +extraDmg melee damage against Psykers.',
+    charId: 'helbrecht',
     damageTable: DMG_HELBRECHT_VS_PSYKER,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -185,6 +202,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Darkstrider — Markerlight',
     description:
       'Passive Structural Analyser. Allies adjacent to Darkstrider (and Tau within 2 hexes) deal +extraDmg ranged damage to markerlit targets.',
+    charId: 'darkstrider',
     damageTable: DMG_DARKSTRIDER,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -193,6 +211,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Thaddeus — Spotter (Heavy Weapon)',
     description:
       'Passive Spotter. Allies within 2 hexes with Heavy Weapon deal +extraDmg_2 ranged damage (non-heavy allies get the lower extraDmg bonus).',
+    charId: 'thaddeus',
     damageTable: DMG_THADDEUS,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -201,6 +220,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Shadowsun — Tau ranged',
     description:
       'Passive Defender of the Greater Good. Adjacent allies (+Tau within 2 hexes) gain +extraDmg on ranged non-psychic attacks.',
+    charId: 'shadowsun',
     damageTable: DMG_SHADOWSUN,
     level: DEFAULT_BUFF_LEVEL,
     rarity: DEFAULT_BUFF_RARITY,
@@ -209,6 +229,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Ragnar — Saga of the Warrior Born (crit dmg)',
     description:
       'Passive. Charging attacks: +extraHits hits and +extraCritDmg crit damage. Applied here as +critDamage (flat) + bonusHits on charge.',
+    charId: 'ragnar',
     critDamageTable: CRITDMG_RAGNAR,
     bonusHits: 1,
     bonusHitsOn: 'normal',
@@ -219,6 +240,7 @@ export const BUFF_PRESETS: BuffPreset[] = [
     name: 'Thaddeus — Extra hit first turn',
     description:
       'First-turn ability grants Thaddeus and key allies an extra hit on their next attack. Modeled as +1 hit on turn 1. Damage bonus is separate.',
+    charId: 'thaddeus',
     damageFlat: 0,
     level: DEFAULT_BUFF_LEVEL,
     rarity: 'legendary',
@@ -286,6 +308,7 @@ export function presetToBuff(
   if (critChance) out.critChance = critChance;
   if (critDamage) out.critDamage = critDamage;
   if (baseDamageCoef) out.baseDamageCoef = baseDamageCoef;
+  if (preset.charId) out.charId = preset.charId;
   return out;
 }
 

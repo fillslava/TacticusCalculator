@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useApp } from '../../state/store';
 import { getCharacter, getBoss, getEquipment } from '../../data/catalog';
 import { resolveRotation } from '../../engine/rotation';
+import { applyPrimeDebuffs } from '../../engine/bossDebuffs';
 import {
   progressionToRarity,
   progressionToStarLevel,
@@ -93,9 +94,26 @@ export function useDamage() {
           target.customTraits ?? [],
         );
     if (!boss) return null;
+    const stageIdx = Math.min(
+      target.stageIndex,
+      Math.max(0, boss.stages.length - 1),
+    );
+    const stage = boss.stages[stageIdx];
+    const primeLevels = [target.prime1Level ?? 0, target.prime2Level ?? 0];
+    const hasAnyPrime = primeLevels.some((l) => l > 0);
+    const debuffed = hasAnyPrime
+      ? applyPrimeDebuffs(
+          { armor: stage.armor, hp: stage.hp },
+          boss.primes,
+          primeLevels,
+        )
+      : null;
     const targetResolved: Target = {
       source: boss,
       stageIndex: target.stageIndex,
+      ...(debuffed
+        ? { statOverrides: { armor: debuffed.armor, hp: debuffed.hp } }
+        : {}),
     };
 
     const turns = rotation

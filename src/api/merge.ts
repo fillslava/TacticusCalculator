@@ -268,7 +268,31 @@ export function resolveEquipment(
 }
 
 export function apiUnitRarity(unit: ApiUnit): Rarity {
-  return unit.rarity ? API_RARITY[unit.rarity] ?? 'common' : 'common';
+  // The /player endpoint doesn't expose a `rarity` string — it returns
+  // `progressionIndex` instead. Derive rarity from that so heroes that have
+  // ascended past legendary are treated as mythic in buff/ability scaling.
+  if (unit.rarity) return API_RARITY[unit.rarity] ?? 'common';
+  return progressionIndexToRarity(unit.progressionIndex);
+}
+
+// Mirrors STEPS_PER_RARITY / CUMULATIVE_START in engine/progression.ts.
+// Keep this inlined — merge.ts is imported from the store during migration
+// where the engine module hasn't been initialised yet.
+const RARITY_RANGES: [Rarity, number, number][] = [
+  ['common', 0, 2],
+  ['uncommon', 3, 5],
+  ['rare', 6, 8],
+  ['epic', 9, 11],
+  ['legendary', 12, 15],
+  ['mythic', 16, 19],
+];
+
+function progressionIndexToRarity(idx: number | undefined): Rarity {
+  const p = typeof idx === 'number' ? idx : 0;
+  for (const [r, lo, hi] of RARITY_RANGES) {
+    if (p >= lo && p <= hi) return r;
+  }
+  return p > 19 ? 'mythic' : 'common';
 }
 
 export function mergePlayerUnitWithCatalog(
@@ -306,7 +330,7 @@ export function mergePlayerUnitWithCatalog(
     source,
     progression: {
       stars: unit.progressionIndex,
-      rank: Math.max(0, (unit.rank ?? 1) - 1),
+      rank: Math.max(0, unit.rank ?? 0),
       xpLevel: unit.xpLevel,
       rarity,
     },

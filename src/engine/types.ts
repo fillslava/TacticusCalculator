@@ -122,10 +122,25 @@ export interface BossStage {
   damageCapsByStage?: { base?: number; preArmor?: number; finalHit?: number };
 }
 
+export type BossDebuffStep =
+  | {
+      stat: 'armor' | 'damage' | 'hp' | 'critDamage';
+      mode: 'pct' | 'flat';
+      value: number;
+      rawId?: string;
+    }
+  | { stat: null; rawId: string };
+
+export interface BossPrime {
+  name: string;
+  steps: BossDebuffStep[];
+}
+
 export interface CatalogBoss {
   id: string;
   displayName: string;
   stages: BossStage[];
+  primes?: BossPrime[];
 }
 
 export interface ModifierStack {
@@ -155,6 +170,12 @@ export interface TurnBuff {
    * auto-recomputes `damageFlat` whenever level or rarity changes.
    */
   baseDamageCoef?: number;
+  /**
+   * Catalog character id of the buffer (from the source preset). When the
+   * player owns the buffer, the rotation editor seeds `level` and `rarity`
+   * from that hero's synced values instead of the attacker's.
+   */
+  charId?: string;
 }
 
 export interface AbilityLevel {
@@ -178,6 +199,17 @@ export interface Target {
   currentShield?: number;
   currentHp?: number;
   activeDebuffs?: ModifierStack;
+  /**
+   * Stat overrides applied on top of the base stage stats — used for prime-
+   * kill debuffs (e.g. after killing Rotbone the boss's armor is -20%).
+   * Values are the *final* effective stats, not deltas.
+   */
+  statOverrides?: {
+    armor?: number;
+    hp?: number;
+    damage?: number;
+    critDamage?: number;
+  };
 }
 
 export type RngMode = 'expected' | 'minmax' | 'distribution';
