@@ -104,9 +104,7 @@ export function RotationEditor() {
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
       <h2 className="text-lg font-semibold">{t('section.rotation')}</h2>
       <p className="mt-1 text-xs text-slate-400">
-        Each turn fires one attack. Add up to {MAX_BUFFS_PER_TURN} buffs per turn.
-        Buffs take the buffer's level &amp; rarity (for reference), a damage/crit
-        bonus, and optional bonus hits (first turn / normal / ability).
+        {t('rotation.description', { n: MAX_BUFFS_PER_TURN })}
       </p>
 
       <ul className="mt-3 flex flex-col gap-3">

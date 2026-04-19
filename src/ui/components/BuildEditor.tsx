@@ -138,7 +138,7 @@ export function BuildEditor() {
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">{t('section.build')}</h2>
+        <h2 className="text-lg font-semibold">{t('section.character')}</h2>
         <span className="text-xs text-slate-400">
           {player
             ? `${player.details.name} · ${ownedCount} owned`

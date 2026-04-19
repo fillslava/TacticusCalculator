@@ -28,12 +28,15 @@ const en: Dict = {
   'lang.label': 'Language',
 
   'section.import': 'Import',
-  'section.build': 'Build',
+  'section.character': 'Character',
   'section.target': 'Target',
   'section.rotation': 'Rotation',
   'section.damage': 'Damage',
   'section.comparison': 'Character comparison',
   'section.sync': 'Sync Report',
+
+  'rotation.description':
+    "Each turn fires one attack. Add up to {n} buffs per turn. Buffs take the buffer's level & rarity (for reference), a damage/crit bonus, and optional bonus hits (first turn / normal / ability).",
 
   'label.apiKey': 'API Key',
   'label.character': 'Character',
@@ -110,12 +113,15 @@ const ru: Dict = {
   'lang.label': 'Язык',
 
   'section.import': 'Импорт',
-  'section.build': 'Сборка',
+  'section.character': 'Персонаж',
   'section.target': 'Цель',
   'section.rotation': 'Ротация',
   'section.damage': 'Урон',
   'section.comparison': 'Сравнение персонажей',
   'section.sync': 'Отчёт синхронизации',
+
+  'rotation.description':
+    'Каждый ход — одна атака. До {n} бафов на ход. Баф берёт уровень и редкость источника (для справки), даёт бонус к урону/криту и, по желанию, дополнительные удары (первый ход / обычные / способности).',
 
   'label.apiKey': 'API-ключ',
   'label.character': 'Персонаж',
@@ -192,12 +198,15 @@ const de: Dict = {
   'lang.label': 'Sprache',
 
   'section.import': 'Import',
-  'section.build': 'Ausrüstung',
+  'section.character': 'Charakter',
   'section.target': 'Ziel',
   'section.rotation': 'Rotation',
   'section.damage': 'Schaden',
   'section.comparison': 'Charaktervergleich',
   'section.sync': 'Sync-Bericht',
+
+  'rotation.description':
+    'Jeder Zug feuert einen Angriff ab. Bis zu {n} Buffs pro Zug. Buffs übernehmen Stufe & Seltenheit des Buffers (als Referenz), geben einen Schaden-/Krit-Bonus und optional Bonus-Treffer (erster Zug / normal / Fähigkeit).',
 
   'label.apiKey': 'API-Schlüssel',
   'label.character': 'Charakter',
@@ -274,12 +283,15 @@ const fr: Dict = {
   'lang.label': 'Langue',
 
   'section.import': 'Importer',
-  'section.build': 'Construction',
+  'section.character': 'Personnage',
   'section.target': 'Cible',
   'section.rotation': 'Rotation',
   'section.damage': 'Dégâts',
   'section.comparison': 'Comparaison de personnages',
   'section.sync': 'Rapport de sync',
+
+  'rotation.description':
+    "Chaque tour déclenche une attaque. Jusqu'à {n} bonus par tour. Un bonus reprend le niveau et la rareté du buffeur (pour référence), donne un bonus de dégâts/crit et éventuellement des coups bonus (premier tour / normal / compétence).",
 
   'label.apiKey': 'Clé API',
   'label.character': 'Personnage',
@@ -356,12 +368,15 @@ const nl: Dict = {
   'lang.label': 'Taal',
 
   'section.import': 'Importeren',
-  'section.build': 'Opbouw',
+  'section.character': 'Personage',
   'section.target': 'Doel',
   'section.rotation': 'Rotatie',
   'section.damage': 'Schade',
   'section.comparison': 'Personagevergelijking',
   'section.sync': 'Sync-rapport',
+
+  'rotation.description':
+    'Elke beurt vuurt één aanval af. Tot {n} buffs per beurt. Buffs nemen het level en de zeldzaamheid van de buffer over (ter referentie), geven een schade-/critbonus en optioneel extra treffers (eerste beurt / normaal / vaardigheid).',
 
   'label.apiKey': 'API-sleutel',
   'label.character': 'Personage',
@@ -433,15 +448,25 @@ const nl: Dict = {
 
 const dicts: Record<Lang, Dict> = { en, ru, de, fr, nl };
 
-export function translate(lang: Lang, key: string): string {
-  return dicts[lang]?.[key] ?? en[key] ?? key;
+export function translate(
+  lang: Lang,
+  key: string,
+  vars?: Record<string, string | number>,
+): string {
+  const raw = dicts[lang]?.[key] ?? en[key] ?? key;
+  if (!vars) return raw;
+  return raw.replace(/\{(\w+)\}/g, (_, k) =>
+    vars[k] !== undefined ? String(vars[k]) : `{${k}}`,
+  );
 }
 
 /**
  * React hook — subscribes to the language in the Zustand store and returns a
  * translator bound to it. Usage: `const t = useT(); <span>{t('label.hp')}</span>`.
+ * Pass a vars object to interpolate `{name}` placeholders: `t('x.y', { n: 4 })`.
  */
 export function useT() {
   const lang = useApp((s) => s.language);
-  return (key: string) => translate(lang, key);
+  return (key: string, vars?: Record<string, string | number>) =>
+    translate(lang, key, vars);
 }
