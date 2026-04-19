@@ -161,11 +161,65 @@ function inferKindFromId(id: string): 'active' | 'passive' | undefined {
 }
 
 /**
- * Resolve an API equipment reference into a catalog entry. The API may send
- * the item id either fully-qualified ("crit_20_legendary_crit-dmg_L9") or as
- * a base-tier variant ("crit_20_legendary_crit-dmg_L1") with the real upgrade
- * level in a separate `level` field. Try both.
+ * Resolve an API equipment reference into a catalog entry.
+ *
+ * The API uses its own item id scheme that doesn't match our scraped catalog:
+ *   - `I_Crit_L008`           → legendary crit weapon (slot 1)
+ *   - `I_Crit_M006`           → mythic crit weapon (slot 1)
+ *   - `I_Block_L003`          → legendary shield (slot 2)
+ *   - `I_Block_M003`          → mythic shield (slot 2)
+ *   - `I_Booster_Crit_L002`   → legendary crit booster (slot 1/3)
+ *   - `I_Booster_Crit_M003`   → mythic crit booster (slot 1/3)
+ *   - `I_Booster_Block_L002`  → legendary block booster (slot 3)
+ *   - `R_Crit_TalonOfHorus`   → relic (unique catalog entry — treat as relic stub)
+ *
+ * The numeric tail (008, 003, 002) is an item-family identifier, not a crit/block
+ * percentage. We map to the canonical 20% variant at the given upgrade level;
+ * this covers the standard-tier weapon/shield every character can use. Mythic
+ * entries fall back to legendary until we have mythic catalog data — they get
+ * flagged as relic so stats are skipped but the slot is still accounted for.
  */
+const API_ITEM_PATTERN =
+  /^I_(Booster_Crit|Booster_Block|Crit|Block|Defensive)_([CURELM])(\d+)$/i;
+
+/**
+ * Relics (`R_*`) are unique named items with bespoke stats. Until we have
+ * relic-specific catalog entries, approximate each one with the strongest
+ * legendary variant of the matching family so it contributes stats instead
+ * of being skipped entirely.
+ */
+const API_RELIC_PATTERN =
+  /^R_(Booster_Crit|Booster_Block|Crit|Block|Defensive)_[A-Za-z0-9]+$/i;
+const RELIC_APPROX_LEVEL = 11;
+
+const API_RARITY_LETTER: Record<string, Rarity> = {
+  C: 'common',
+  U: 'uncommon',
+  R: 'rare',
+  E: 'epic',
+  L: 'legendary',
+  M: 'mythic',
+};
+
+function canonicalCatalogId(
+  family: string,
+  rarity: Rarity,
+  level: number,
+): string | null {
+  const f = family.toLowerCase();
+  // Mythic has no catalog equivalent yet — fall back to legendary stats.
+  const effectiveRarity: Rarity = rarity === 'mythic' ? 'legendary' : rarity;
+  if (f === 'crit') return `crit_20_${effectiveRarity}_crit-dmg_L${level}`;
+  if (f === 'block') return `block_20_${effectiveRarity}_block_L${level}`;
+  if (f === 'booster_crit')
+    return `crit_booster_1_${effectiveRarity}_crit-dmg_L${level}`;
+  if (f === 'booster_block')
+    return `block_booster_1_${effectiveRarity}_block_L${level}`;
+  if (f === 'defensive')
+    return `defense_0_${effectiveRarity}_armour_L${level}`;
+  return null;
+}
+
 export function resolveEquipment(
   apiId: string,
   apiLevel: number,
@@ -177,6 +231,38 @@ export function resolveEquipment(
   if (rewrite !== apiId) {
     const byLevel = catalog.equipment.get(rewrite);
     if (byLevel) return byLevel;
+  }
+  const m = API_ITEM_PATTERN.exec(apiId);
+  if (m) {
+    const family = m[1];
+    const rarity = API_RARITY_LETTER[m[2].toUpperCase()] ?? 'legendary';
+    const canonicalId = canonicalCatalogId(family, rarity, apiLevel);
+    if (canonicalId) {
+      const hit = catalog.equipment.get(canonicalId);
+      if (hit) return hit;
+      const fallback = catalog.equipment.get(
+        canonicalId.replace(/_L\d+$/, '_L1'),
+      );
+      if (fallback) return fallback;
+    }
+  }
+  const relicMatch = API_RELIC_PATTERN.exec(apiId);
+  if (relicMatch) {
+    const canonicalId = canonicalCatalogId(
+      relicMatch[1],
+      'legendary',
+      RELIC_APPROX_LEVEL,
+    );
+    if (canonicalId) {
+      let hit = catalog.equipment.get(canonicalId);
+      if (!hit) {
+        for (let lvl = RELIC_APPROX_LEVEL; lvl >= 1; lvl--) {
+          hit = catalog.equipment.get(canonicalId.replace(/_L\d+$/, `_L${lvl}`));
+          if (hit) break;
+        }
+      }
+      if (hit) return { ...hit, id: apiId, relic: true };
+    }
   }
   return null;
 }
@@ -220,7 +306,7 @@ export function mergePlayerUnitWithCatalog(
     source,
     progression: {
       stars: unit.progressionIndex,
-      rank: unit.rank,
+      rank: Math.max(0, (unit.rank ?? 1) - 1),
       xpLevel: unit.xpLevel,
       rarity,
     },

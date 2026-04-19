@@ -2,9 +2,11 @@ import { useApp } from '../../state/store';
 import { getCharacter } from '../../data/catalog';
 import {
   BUFF_PRESETS,
+  computeBuffDamage,
   findPresetByName,
   presetToBuff,
 } from '../../engine/buffPresets';
+import { progressionToRarity } from '../../engine/progression';
 import { RARITY_ORDER } from '../../engine/types';
 import type { BonusHitTrigger, Rarity, TurnBuff } from '../../engine/types';
 
@@ -29,13 +31,31 @@ export function RotationEditor() {
   function addBuff(turnIdx: number, preset: Omit<TurnBuff, 'id'>) {
     const turn = rotation[turnIdx];
     if (turn.buffs.length >= MAX_BUFFS_PER_TURN) return;
-    updateTurn(turnIdx, { buffs: [...turn.buffs, presetToBuff(preset)] });
+    const overrides = {
+      level: build.xpLevel,
+      rarity: progressionToRarity(build.progression),
+    };
+    updateTurn(turnIdx, {
+      buffs: [...turn.buffs, presetToBuff(preset, overrides)],
+    });
   }
 
   function updateBuff(turnIdx: number, buffIdx: number, patch: Partial<TurnBuff>) {
     const turn = rotation[turnIdx];
     const buffs = [...turn.buffs];
-    buffs[buffIdx] = { ...buffs[buffIdx], ...patch };
+    const merged = { ...buffs[buffIdx], ...patch };
+    if (
+      merged.baseDamageCoef &&
+      (patch.level !== undefined || patch.rarity !== undefined) &&
+      patch.damageFlat === undefined
+    ) {
+      merged.damageFlat = computeBuffDamage(
+        merged.baseDamageCoef,
+        merged.level ?? 50,
+        merged.rarity ?? 'legendary',
+      );
+    }
+    buffs[buffIdx] = merged;
     updateTurn(turnIdx, { buffs });
   }
 

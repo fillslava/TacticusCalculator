@@ -256,6 +256,64 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "adamatar",
+    "displayName": "Adamatar",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "aesoth",
+    "displayName": "Aesoth",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 15,
+      "armor": 18,
+      "hp": 90,
+      "meleeHits": 2,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "aethana",
     "displayName": "Aethana",
     "faction": "Aeldari",
@@ -427,6 +485,38 @@
       "mechanic"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "ammuk",
+    "displayName": "Ammuk",
+    "faction": "Leagues of Votann",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "angrax",
@@ -795,6 +885,32 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "atlacoya",
+    "displayName": "Atlacoya",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "aunShi",
     "displayName": "Aun'Shi",
     "faction": "T'au Empire",
@@ -1007,6 +1123,32 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "baldr",
+    "displayName": "Baldr",
+    "faction": "Space Wolves",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 15,
+      "armor": 18,
+      "hp": 90,
+      "meleeHits": 2,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "baraqiel",
     "displayName": "Baraqiel",
     "faction": "Dark Angels",
@@ -1139,6 +1281,38 @@
       "mk x gravis"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "biovore",
+    "displayName": "Biovore",
+    "faction": "Tyranids",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "burchard",
@@ -1588,6 +1762,32 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "dante",
+    "displayName": "Dante",
+    "faction": "Blood Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "darkstrider",
     "displayName": "Darkstrider",
     "faction": "T'au Empire",
@@ -1700,6 +1900,38 @@
       "terrifying"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "dreir",
+    "displayName": "Dreir",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "eldryon",
@@ -1854,6 +2086,154 @@
       "mechanical"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "exorcist",
+    "displayName": "Exorcist",
+    "faction": "Adepta Sororitas",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "farsight",
+    "displayName": "Farsight",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "forcas",
+    "displayName": "Forcas",
+    "faction": "Dark Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "forgefiend",
+    "displayName": "Forgefiend",
+    "faction": "Black Legion",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 30,
+      "hp": 150,
+      "meleeHits": 2,
+      "rangedHits": 2,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "galatian",
+    "displayName": "Galatian",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 30,
+      "hp": 150,
+      "meleeHits": 2,
+      "rangedHits": 2,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "gibbascrapz",
@@ -2170,6 +2550,32 @@
       "flying"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "hascule",
+    "displayName": "Hascule",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "helbrecht",
@@ -2690,6 +3096,64 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "judh",
+    "displayName": "Judh",
+    "faction": "Genestealer Cults",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "kariyan",
+    "displayName": "Kariyan",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "kharn",
     "displayName": "Kharn",
     "faction": "World Eaters",
@@ -2850,6 +3314,32 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "laviscus",
+    "displayName": "Laviscus",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "lucien",
     "displayName": "Lucien",
     "faction": "Blood Angels",
@@ -2915,6 +3405,32 @@
       "rapid assault"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "lucius",
+    "displayName": "Lucius",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "macer",
@@ -3099,6 +3615,38 @@
       "terminator armour"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "malleus",
+    "displayName": "Malleus Rocket Launcher",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "mataneo",
@@ -3690,6 +4238,38 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "plaguecrawler",
+    "displayName": "Plagueburst Crawler",
+    "faction": "Death Guard",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 30,
+      "hp": 150,
+      "meleeHits": 2,
+      "rangedHits": 2,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "ragnar",
     "displayName": "Ragnar",
     "faction": "Space Wolves",
@@ -3971,6 +4551,38 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "rukkatrukk",
+    "displayName": "Rukkatrukk",
+    "faction": "Orks",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 30,
+      "hp": 150,
+      "meleeHits": 2,
+      "rangedHits": 2,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "sarquael",
     "displayName": "Sarquael",
     "faction": "Dark Angels",
@@ -4132,6 +4744,38 @@
       "infiltrate"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "shiron",
+    "displayName": "Shiron",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "shoSyl",
@@ -4392,6 +5036,38 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "sygex",
+    "displayName": "Sy-gex",
+    "faction": "Adeptus Mechanicus",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 30,
+      "hp": 150,
+      "meleeHits": 2,
+      "rangedHits": 2,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "tanGiDa",
     "displayName": "Tan Gi'da",
     "faction": "Adeptus Mechanicus",
@@ -4515,6 +5191,32 @@
       "beast slayer"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "tarvakh",
+    "displayName": "Tarvakh",
+    "faction": "World Eaters",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "thaddeus",
@@ -5182,6 +5884,64 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "trajann",
+    "displayName": "Trajann",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "tsonji",
+    "displayName": "Tson'ji",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 30,
+      "hp": 150,
+      "meleeHits": 2,
+      "rangedHits": 2,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "typhus",
     "displayName": "Typhus",
     "faction": "Death Guard",
@@ -5309,6 +6069,38 @@
     "maxRarity": "legendary"
   },
   {
+    "id": "tyrith",
+    "displayName": "Tyrith",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 18,
+      "armor": 15,
+      "hp": 80,
+      "meleeHits": 1,
+      "rangedHits": 3,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
+  },
+  {
     "id": "ulf",
     "displayName": "Ulf",
     "faction": "Space Wolves",
@@ -5366,6 +6158,32 @@
       "unstoppable"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "uthar",
+    "displayName": "Uthar",
+    "faction": "Leagues of Votann",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "vindicta",
@@ -5566,6 +6384,32 @@
       "big target"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "vynn",
+    "displayName": "Vynn",
+    "faction": "Leagues of Votann",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 15,
+      "armor": 18,
+      "hp": 90,
+      "meleeHits": 2,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   },
   {
     "id": "wingedPrime",
@@ -5899,5 +6743,31 @@
       "weaver of fates"
     ],
     "maxRarity": "legendary"
+  },
+  {
+    "id": "zkar",
+    "displayName": "Z'Kar",
+    "faction": "Thousand Sons",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "meleeHits": 3,
+      "rangedHits": 1,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [],
+    "maxRarity": "mythic"
   }
 ]

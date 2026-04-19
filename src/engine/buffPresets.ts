@@ -1,10 +1,34 @@
-import type { TurnBuff } from './types';
+import type { Rarity, TurnBuff } from './types';
+import { loadCatalog } from '../data/catalog';
+import { rarityAbilityMultiplier } from './scaling';
 
 export interface BuffPreset extends Omit<TurnBuff, 'id'> {
   description?: string;
+  /**
+   * Ability-scaling coefficient. When set, `damageFlat` is computed as
+   * `baseDamageCoef * abilityFactor[level-1] * rarityAbilityMultiplier(rarity)`.
+   * Calibrated from known in-game tooltip values.
+   */
+  baseDamageCoef?: number;
 }
 
 const DEFAULT_BUFF_LEVEL = 50;
+const DEFAULT_BUFF_RARITY: Rarity = 'legendary';
+
+/**
+ * Compute flat ability damage from a calibration coefficient. Mirrors the
+ * ability scaling used for a unit's own abilities.
+ */
+export function computeBuffDamage(
+  baseDamageCoef: number,
+  level: number,
+  rarity: Rarity,
+): number {
+  const table = loadCatalog().curves.abilityFactor;
+  const idx = Math.max(0, Math.min(level - 1, table.length - 1));
+  const factor = table[idx] ?? 1;
+  return Math.round(baseDamageCoef * factor * rarityAbilityMultiplier(rarity));
+}
 
 /**
  * Preset placeholders for buffer abilities. The `+dmg` numbers here are
@@ -19,10 +43,11 @@ export const BUFF_PRESETS: BuffPreset[] = [
   {
     name: 'Eldryon — Aeldari damage',
     description:
-      'Aeldari allies gain flat bonus damage. Amplified vs Aeldari targets. Enter Eldryon\'s listed ability damage bonus (tooltip) for your level/rarity.',
+      'Aeldari allies gain flat bonus damage. Calibrated from L55 mythic = 1072. Adjust if your Eldryon differs.',
     damageFlat: 0,
+    baseDamageCoef: 7.06,
     level: DEFAULT_BUFF_LEVEL,
-    rarity: 'legendary',
+    rarity: DEFAULT_BUFF_RARITY,
   },
   {
     name: 'Calgar — Imperial damage',
@@ -116,11 +141,23 @@ export const BUFF_PRESETS: BuffPreset[] = [
   },
 ];
 
-export function presetToBuff(preset: BuffPreset): TurnBuff {
-  const { description: _description, ...rest } = preset;
+export function presetToBuff(
+  preset: BuffPreset,
+  overrides?: { level?: number; rarity?: Rarity },
+): TurnBuff {
+  const { description: _description, baseDamageCoef, ...rest } = preset;
+  const level = overrides?.level ?? rest.level ?? DEFAULT_BUFF_LEVEL;
+  const rarity = overrides?.rarity ?? rest.rarity ?? DEFAULT_BUFF_RARITY;
+  const damageFlat = baseDamageCoef
+    ? computeBuffDamage(baseDamageCoef, level, rarity)
+    : rest.damageFlat ?? 0;
   return {
     id: `buff_${Math.random().toString(36).slice(2, 9)}`,
     ...rest,
+    level,
+    rarity,
+    damageFlat,
+    ...(baseDamageCoef ? { baseDamageCoef } : {}),
   };
 }
 

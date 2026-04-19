@@ -155,7 +155,7 @@ function apiUnitToMemo(
   }
   return {
     progression,
-    rank: Math.max(0, unit.rank ?? 0),
+    rank: Math.max(0, (unit.rank ?? 1) - 1),
     xpLevel: Math.max(1, unit.xpLevel ?? 1),
     equipmentIds: slotIds,
     abilityLevels: parseUnitAbilities(unit),
@@ -298,7 +298,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 6,
+      version: 8,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -351,6 +351,22 @@ export const useApp = create<AppState>()(
           if (persisted.build) {
             persisted.build.progression = rarityToMinProgression('legendary') + 2;
           }
+        }
+        if (fromVersion < 7) {
+          // v7 subtracts 1 from API rank (was 1-indexed, treated as 0-indexed).
+          // Clear cached unitBuilds so resync applies the offset.
+          persisted.syncReport = null;
+          persisted.ownedCatalogIds = [];
+          persisted.unitBuilds = {};
+          persisted.player = null;
+        }
+        if (fromVersion < 8) {
+          // v8 adds API item id mapping (I_Crit_Lxxx → canonical catalog id).
+          // Force resync so equipment resolves to real stat-contributing items.
+          persisted.syncReport = null;
+          persisted.ownedCatalogIds = [];
+          persisted.unitBuilds = {};
+          persisted.player = null;
         }
         return persisted;
       },

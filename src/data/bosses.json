@@ -1,13 +1,15 @@
 [
   {
     "id": "avatar",
-    "displayName": "Avatar",
+    "displayName": "Avatar of Khaine",
     "stages": [
       {
         "name": "L1",
-        "hp": 25000000,
-        "armor": 1029,
+        "hp": 12500000,
+        "armor": 2231,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "daemon"
         ]
@@ -15,26 +17,32 @@
       {
         "name": "L2",
         "hp": 25000000,
-        "armor": 1288,
+        "armor": 2593,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "daemon"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 1697,
+        "hp": 37500000,
+        "armor": 3189,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "daemon"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 2231,
+        "hp": 50000000,
+        "armor": 4064,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "daemon"
         ]
@@ -43,22 +51,48 @@
   },
   {
     "id": "cawl",
-    "displayName": "Cawl",
+    "displayName": "Belisarius Cawl",
     "stages": [
       {
         "name": "L1",
-        "hp": 25000000,
-        "armor": 880,
+        "hp": 15000000,
+        "armor": 1909,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "mech"
         ]
       },
       {
         "name": "L2",
-        "hp": 25000000,
-        "armor": 1102,
+        "hp": 30000000,
+        "armor": 2219,
         "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 45000000,
+        "armor": 2730,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 65000000,
+        "armor": 3479,
+        "traits": [
+          "boss",
+          "immune",
           "big",
           "mech"
         ]
@@ -67,106 +101,239 @@
   },
   {
     "id": "ghazghkull",
-    "displayName": "Ghazghkull",
+    "displayName": "Ghazghkull Mag Uruk Thraka",
     "stages": [
       {
-        "name": "L0",
-        "hp": 25000000,
-        "armor": 352,
-        "traits": [
-          "big",
-          "mech"
-        ]
-      },
-      {
         "name": "L1",
-        "hp": 25000000,
-        "armor": 465,
+        "hp": 12500000,
+        "armor": 1008,
         "traits": [
           "big",
+          "dakka",
+          "immune",
+          "boss",
           "mech"
         ]
       },
       {
         "name": "L2",
         "hp": 25000000,
-        "armor": 582,
+        "armor": 1172,
         "traits": [
           "big",
+          "dakka",
+          "immune",
+          "boss",
           "mech"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 660,
+        "hp": 37500000,
+        "armor": 1442,
         "traits": [
           "big",
+          "dakka",
+          "immune",
+          "boss",
           "mech"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 1008,
+        "hp": 50000000,
+        "armor": 1838,
         "traits": [
           "big",
+          "dakka",
+          "immune",
+          "boss",
           "mech"
         ]
       }
     ]
   },
   {
-    "id": "hiveTyrant",
-    "displayName": "Hive Tyrant",
+    "id": "hiveTyrantGorgon",
+    "displayName": "Hive Tyrant (Gorgon)",
     "stages": [
       {
-        "name": "L0",
-        "hp": 25000000,
-        "armor": 666,
-        "traits": [
-          "big",
-          "psyker",
-          "flying"
-        ]
-      },
-      {
         "name": "L1",
-        "hp": 25000000,
-        "armor": 720,
+        "hp": 15000000,
+        "armor": 1560,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
+          "boss",
+          "big",
+          "immune",
           "flying"
         ]
       },
       {
         "name": "L2",
-        "hp": 25000000,
-        "armor": 1559,
+        "hp": 30000000,
+        "armor": 1813,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
+          "boss",
+          "big",
+          "immune",
           "flying"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 1559,
+        "hp": 45000000,
+        "armor": 2230,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
+          "boss",
+          "big",
+          "immune",
           "flying"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 1559,
+        "hp": 65000000,
+        "armor": 2842,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiveTyrantKronos",
+    "displayName": "Hive Tyrant (Kronos)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 1312,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 1525,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 45000000,
+        "armor": 1876,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 65000000,
+        "armor": 2390,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiveTyrantLeviathan",
+    "displayName": "Hive Tyrant (Leviathan)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 1008,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 1172,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 45000000,
+        "armor": 1442,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 65000000,
+        "armor": 1838,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
           "flying"
         ]
       }
@@ -174,13 +341,30 @@
   },
   {
     "id": "magnus",
-    "displayName": "Magnus",
+    "displayName": "Magnus the Red",
     "stages": [
       {
-        "name": "L2",
-        "hp": 25000000,
-        "armor": 989,
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 1713,
         "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 1991,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
           "big",
           "daemon",
           "flying",
@@ -189,9 +373,12 @@
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 1303,
+        "hp": 45000000,
+        "armor": 2449,
         "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
           "big",
           "daemon",
           "flying",
@@ -200,9 +387,12 @@
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 1713,
+        "hp": 65000000,
+        "armor": 3121,
         "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
           "big",
           "daemon",
           "flying",
@@ -213,115 +403,116 @@
   },
   {
     "id": "mortarion",
-    "displayName": "Mortarion",
+    "displayName": "Mortarion, the Death Lord",
     "stages": [
       {
-        "name": "L0",
-        "hp": 25000000,
-        "armor": 2337,
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 6698,
         "traits": [
-          "big",
+          "boss",
+          "immune",
+          "contagions of nurgle",
           "daemon",
+          "flying",
           "psyker",
-          "revoltingly resilient",
-          "punishes melee"
+          "big"
         ]
       },
       {
-        "name": "L1",
-        "hp": 25000000,
-        "armor": 4385,
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 7786,
         "traits": [
-          "big",
+          "boss",
+          "immune",
+          "contagions of nurgle",
           "daemon",
+          "flying",
           "psyker",
-          "revoltingly resilient",
-          "punishes melee"
+          "big"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 5095,
+        "hp": 45000000,
+        "armor": 9577,
         "traits": [
-          "big",
+          "boss",
+          "immune",
+          "contagions of nurgle",
           "daemon",
+          "flying",
           "psyker",
-          "revoltingly resilient",
-          "punishes melee"
+          "big"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 6698,
+        "hp": 65000000,
+        "armor": 12206,
         "traits": [
-          "big",
+          "boss",
+          "immune",
+          "contagions of nurgle",
           "daemon",
+          "flying",
           "psyker",
-          "revoltingly resilient",
-          "punishes melee"
+          "big"
         ]
       }
     ]
   },
   {
     "id": "rogalDorn",
-    "displayName": "Rogal Dorn",
+    "displayName": "Rogal Dorn Battle Tank",
     "stages": [
       {
-        "name": "L0",
-        "hp": 25000000,
-        "armor": 998,
-        "traits": [
-          "big",
-          "mech",
-          "ablative plating",
-          "weaker rear"
-        ]
-      },
-      {
         "name": "L1",
-        "hp": 25000000,
-        "armor": 1319,
+        "hp": 15000000,
+        "armor": 3804,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "mech",
-          "ablative plating",
-          "weaker rear"
+          "vehicle"
         ]
       },
       {
         "name": "L2",
-        "hp": 25000000,
-        "armor": 2861,
+        "hp": 30000000,
+        "armor": 4422,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "mech",
-          "ablative plating",
-          "weaker rear"
+          "vehicle"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 2861,
+        "hp": 45000000,
+        "armor": 5439,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "mech",
-          "ablative plating",
-          "weaker rear"
+          "vehicle"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 2861,
+        "hp": 65000000,
+        "armor": 6932,
         "traits": [
+          "boss",
+          "immune",
           "big",
           "mech",
-          "ablative plating",
-          "weaker rear"
+          "vehicle"
         ]
       }
     ]
@@ -331,133 +522,337 @@
     "displayName": "Screamer-Killer",
     "stages": [
       {
-        "name": "L0",
-        "hp": 25000000,
-        "armor": 830,
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 2861,
         "traits": [
-          "big"
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
         ]
       },
       {
-        "name": "L1",
-        "hp": 25000000,
-        "armor": 1323,
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 3326,
         "traits": [
-          "big"
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 1809,
+        "hp": 45000000,
+        "armor": 4091,
         "traits": [
-          "big"
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 2379,
+        "hp": 65000000,
+        "armor": 5213,
         "traits": [
-          "big"
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
         ]
       }
     ]
   },
   {
     "id": "szarekh",
-    "displayName": "Szarekh",
+    "displayName": "Szarekh, the Silent King",
     "stages": [
       {
-        "name": "L0",
-        "hp": 25000000,
-        "armor": 367,
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 1052,
         "traits": [
           "big",
-          "mech"
+          "immune",
+          "mech",
+          "boss"
         ]
       },
       {
-        "name": "L1",
-        "hp": 25000000,
-        "armor": 485,
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 1223,
         "traits": [
           "big",
-          "mech"
+          "immune",
+          "mech",
+          "boss"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 800,
+        "hp": 45000000,
+        "armor": 1504,
         "traits": [
           "big",
-          "mech"
+          "immune",
+          "mech",
+          "boss"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 1052,
+        "hp": 65000000,
+        "armor": 1916,
         "traits": [
           "big",
-          "mech"
+          "immune",
+          "mech",
+          "boss"
         ]
       }
     ]
   },
   {
-    "id": "tervigon",
-    "displayName": "Tervigon",
+    "id": "tervigonGorgon",
+    "displayName": "Tervigon (Gorgon)",
     "stages": [
       {
-        "name": "L0",
-        "hp": 25000000,
-        "armor": 666,
-        "traits": [
-          "big",
-          "psyker",
-          "flying"
-        ]
-      },
-      {
         "name": "L1",
-        "hp": 25000000,
-        "armor": 1020,
+        "hp": 15000000,
+        "armor": 1560,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
-          "flying"
+          "boss",
+          "big",
+          "immune"
         ]
       },
       {
         "name": "L2",
-        "hp": 25000000,
-        "armor": 1559,
+        "hp": 30000000,
+        "armor": 1813,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
-          "flying"
+          "boss",
+          "big",
+          "immune"
         ]
       },
       {
         "name": "L3",
-        "hp": 25000000,
-        "armor": 1559,
+        "hp": 45000000,
+        "armor": 2230,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
-          "flying"
+          "boss",
+          "big",
+          "immune"
         ]
       },
       {
         "name": "L4",
-        "hp": 25000000,
-        "armor": 1559,
+        "hp": 65000000,
+        "armor": 2842,
         "traits": [
-          "big",
+          "synapse",
+          "shadow in the warp",
           "psyker",
-          "flying"
+          "boss",
+          "big",
+          "immune"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tervigonKronos",
+    "displayName": "Tervigon (Kronos)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 1312,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 1525,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 45000000,
+        "armor": 1876,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 65000000,
+        "armor": 2390,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tervigonLeviathan",
+    "displayName": "Tervigon (Leviathan)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 1008,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 1172,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 45000000,
+        "armor": 1442,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 65000000,
+        "armor": 1838,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riptide",
+    "displayName": "XV104 Riptide Battlesuit",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 15000000,
+        "armor": 2861,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 30000000,
+        "armor": 3326,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 45000000,
+        "armor": 4091,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 65000000,
+        "armor": 5213,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
         ]
       }
     ]

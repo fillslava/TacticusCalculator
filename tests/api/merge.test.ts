@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   matchCatalogCharacter,
   mergePlayerUnitWithCatalog,
+  resolveEquipment,
 } from '../../src/api/merge';
 import { ApiPlayerResponseSchema } from '../../src/api/types';
 import type { Catalog } from '../../src/data/catalog';
@@ -68,7 +69,8 @@ describe('mergePlayerUnitWithCatalog', () => {
     expect(attacker).toBeDefined();
     expect(attacker!.source.id).toBe('calgar');
     expect(attacker!.progression.stars).toBe(11);
-    expect(attacker!.progression.rank).toBe(15);
+    // API rank is 1-indexed; merge converts to 0-indexed for statFactor.
+    expect(attacker!.progression.rank).toBe(14);
     expect(attacker!.progression.rarity).toBe('legendary');
     expect(attacker!.equipment).toHaveLength(2);
     expect(attacker!.equipment[0].mods.critChance).toBe(0.15);
@@ -95,6 +97,59 @@ describe('mergePlayerUnitWithCatalog', () => {
     );
     expect(attacker).toBeUndefined();
     expect(warning).toMatch(/Unknown unit id/);
+  });
+});
+
+describe('resolveEquipment API id mapping', () => {
+  function catalogWithItems(ids: string[]): Catalog {
+    const c = makeMinimalCatalog();
+    for (const id of ids) {
+      c.equipment.set(id, {
+        slotId: 1,
+        id,
+        rarity: 'legendary',
+        level: 1,
+        mods: {},
+      });
+    }
+    return c;
+  }
+
+  it('maps I_Crit_Lxxx to canonical legendary crit entry at given level', () => {
+    const cat = catalogWithItems(['crit_20_legendary_crit-dmg_L6']);
+    const hit = resolveEquipment('I_Crit_L008', 6, cat);
+    expect(hit?.id).toBe('crit_20_legendary_crit-dmg_L6');
+  });
+
+  it('maps I_Block_Lxxx to canonical legendary block entry', () => {
+    const cat = catalogWithItems(['block_20_legendary_block_L1']);
+    const hit = resolveEquipment('I_Block_L003', 1, cat);
+    expect(hit?.id).toBe('block_20_legendary_block_L1');
+  });
+
+  it('maps I_Booster_Block_Lxxx to canonical block booster', () => {
+    const cat = catalogWithItems(['block_booster_1_legendary_block_L2']);
+    const hit = resolveEquipment('I_Booster_Block_L002', 2, cat);
+    expect(hit?.id).toBe('block_booster_1_legendary_block_L2');
+  });
+
+  it('falls back to legendary variant for mythic api ids', () => {
+    const cat = catalogWithItems(['crit_20_legendary_crit-dmg_L2']);
+    const hit = resolveEquipment('I_Crit_M006', 2, cat);
+    expect(hit?.id).toBe('crit_20_legendary_crit-dmg_L2');
+  });
+
+  it('maps R_<family>_<name> relics to approximate legendary equivalents', () => {
+    const cat = catalogWithItems(['crit_20_legendary_crit-dmg_L11']);
+    const hit = resolveEquipment('R_Crit_TalonOfHorus', 1, cat);
+    expect(hit).not.toBeNull();
+    expect(hit?.relic).toBe(true);
+    expect(hit?.id).toBe('R_Crit_TalonOfHorus');
+  });
+
+  it('returns null for truly unrecognized ids', () => {
+    const cat = catalogWithItems([]);
+    expect(resolveEquipment('Z_Unknown_Foobar', 1, cat)).toBeNull();
   });
 });
 

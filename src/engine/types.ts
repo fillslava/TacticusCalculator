@@ -150,6 +150,11 @@ export interface TurnBuff {
   traits?: TraitId[];
   bonusHits?: number;
   bonusHitsOn?: BonusHitTrigger;
+  /**
+   * Calibration coefficient from the source preset. When present, the UI
+   * auto-recomputes `damageFlat` whenever level or rarity changes.
+   */
+  baseDamageCoef?: number;
 }
 
 export interface AbilityLevel {
