@@ -5,7 +5,10 @@
 //      without step 1; UI falls back to manual player.json upload).
 export const DEFAULT_BASE = (() => {
   const envBase = import.meta.env.VITE_API_BASE as string | undefined;
-  if (envBase) return envBase.replace(/\/$/, '');
+  if (envBase) {
+    const clean = envBase.trim().replace(/\/$/, '');
+    return /^https?:\/\//.test(clean) ? clean : `https://${clean}`;
+  }
   if (typeof window === 'undefined') return 'https://api.tacticusgame.com';
   if (import.meta.env.DEV) return '/tacticus-api';
   return 'https://api.tacticusgame.com';
