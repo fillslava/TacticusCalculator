@@ -171,7 +171,7 @@ function memoFromStateForCharacter(
   if (memo) return memo;
   const catalog = loadCatalog();
   const apiUnit = s.player?.units.find((u) => {
-    const match = matchCatalogCharacter(u.id, catalog);
+    const match = matchCatalogCharacter(u.id, catalog, u.name);
     return match?.id === charId;
   });
   if (apiUnit) return apiUnitToMemo(apiUnit);
@@ -199,7 +199,7 @@ function syncUnitBuildsFromPlayer(
   const unmatched: SyncReport['unmatched'] = [];
   const unknownItemSet = new Set<string>();
   for (const u of player.units) {
-    const match = matchCatalogCharacter(u.id, catalog);
+    const match = matchCatalogCharacter(u.id, catalog, u.name);
     if (!match) {
       unmatched.push({ apiId: u.id, apiName: u.name, faction: u.faction });
       continue;
@@ -298,7 +298,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 5,
+      version: 6,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -340,6 +340,17 @@ export const useApp = create<AppState>()(
           persisted.ownedCatalogIds = [];
           persisted.unitBuilds = {};
           persisted.player = null;
+        }
+        if (fromVersion < 6) {
+          // v6 changes STEPS_PER_RARITY.common from 2 to 3, shifting
+          // progression indices. Safest to resync from API.
+          persisted.syncReport = null;
+          persisted.ownedCatalogIds = [];
+          persisted.unitBuilds = {};
+          persisted.player = null;
+          if (persisted.build) {
+            persisted.build.progression = rarityToMinProgression('legendary') + 2;
+          }
         }
         return persisted;
       },

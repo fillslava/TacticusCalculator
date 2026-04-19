@@ -36,6 +36,7 @@ function slotNumber(slotId: string): 1 | 2 | 3 {
 export function matchCatalogCharacter(
   apiId: string,
   catalog: Catalog,
+  apiName?: string,
 ): CatalogCharacter | undefined {
   const direct = catalog.characters.get(apiId);
   if (direct) return direct;
@@ -44,6 +45,11 @@ export function matchCatalogCharacter(
   if (aliasId) {
     const aliased = catalog.characters.get(aliasId);
     if (aliased) return aliased;
+  }
+
+  if (apiName) {
+    const byName = matchByName(apiName, catalog);
+    if (byName) return byName;
   }
 
   const target = normalizeId(apiId);
@@ -55,6 +61,26 @@ export function matchCatalogCharacter(
     const cname = normalizeId(c.displayName);
     const score = matchScore(target, cid, cname);
     if (score > 0 && (!best || score > best.score)) best = { c, score };
+  }
+  return best?.c;
+}
+
+function matchByName(
+  apiName: string,
+  catalog: Catalog,
+): CatalogCharacter | undefined {
+  const target = normalizeId(apiName);
+  if (target.length < 3) return undefined;
+  let best: { c: CatalogCharacter; score: number } | null = null;
+  for (const c of catalog.characters.values()) {
+    const cname = normalizeId(c.displayName);
+    if (cname === target) return c;
+    const cid = normalizeId(c.id);
+    if (cid === target) return c;
+    if (cname.startsWith(target) || target.startsWith(cname)) {
+      const score = 900 + Math.min(cname.length, target.length);
+      if (!best || score > best.score) best = { c, score };
+    }
   }
   return best?.c;
 }
@@ -163,7 +189,7 @@ export function mergePlayerUnitWithCatalog(
   unit: ApiUnit,
   catalog: Catalog,
 ): MergeResult {
-  const source = matchCatalogCharacter(unit.id, catalog);
+  const source = matchCatalogCharacter(unit.id, catalog, unit.name);
   if (!source) {
     return {
       unit,

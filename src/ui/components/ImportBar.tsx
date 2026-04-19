@@ -37,7 +37,7 @@ export function ImportBar() {
   return (
     <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
       <h2 className="text-lg font-semibold">Import</h2>
-      <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div className="mt-3">
         <label className="flex flex-col gap-1">
           <span className="text-xs uppercase tracking-wide text-slate-400">API Key</span>
           <input
@@ -46,33 +46,6 @@ export function ImportBar() {
             onChange={(e) => setCredentials({ apiKey: e.target.value })}
             className="rounded bg-bg-base px-2 py-1 font-mono text-sm"
             placeholder="your X-API-KEY uuid"
-          />
-        </label>
-        <label className="flex flex-col gap-1">
-          <span className="text-xs uppercase tracking-wide text-slate-400">Principal (email)</span>
-          <input
-            type="text"
-            value={credentials.principal}
-            onChange={(e) => setCredentials({ principal: e.target.value })}
-            className="rounded bg-bg-base px-2 py-1 text-sm"
-          />
-        </label>
-        <label className="flex flex-col gap-1">
-          <span className="text-xs uppercase tracking-wide text-slate-400">Snowprint ID</span>
-          <input
-            type="text"
-            value={credentials.snowprintId}
-            onChange={(e) => setCredentials({ snowprintId: e.target.value })}
-            className="rounded bg-bg-base px-2 py-1 font-mono text-xs"
-          />
-        </label>
-        <label className="flex flex-col gap-1">
-          <span className="text-xs uppercase tracking-wide text-slate-400">User ID</span>
-          <input
-            type="text"
-            value={credentials.userId}
-            onChange={(e) => setCredentials({ userId: e.target.value })}
-            className="rounded bg-bg-base px-2 py-1 font-mono text-xs"
           />
         </label>
       </div>

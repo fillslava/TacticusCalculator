@@ -2,7 +2,7 @@ import type { Rarity } from './types';
 import { RARITY_ORDER } from './types';
 
 export const STEPS_PER_RARITY: Record<Rarity, number> = {
-  common: 2,
+  common: 3,
   uncommon: 3,
   rare: 3,
   epic: 3,
