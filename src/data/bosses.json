@@ -1,0 +1,2588 @@
+[
+  {
+    "id": "avatar",
+    "displayName": "Avatar of Khaine",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 4165000,
+        "armor": 779,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 6250000,
+        "armor": 1029,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 8330000,
+        "armor": 1288,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 10400000,
+        "armor": 1697,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 12500000,
+        "armor": 2231,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 25000000,
+        "armor": 2593,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 31250000,
+        "armor": 2935,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "daemon"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "Autarch",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_BloodRunsAngerRisesWarCalls_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_GuardianUnitReduction"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_BloodRunsAngerRisesWarCalls_15"
+          }
+        ]
+      },
+      {
+        "name": "Farseer",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MoltenForm"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_WarlockUnitReduction"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MoltenForm"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cawl",
+    "displayName": "Belisarius Cawl",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 666,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 880,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 1102,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1452,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1909,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 2219,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2512,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "Marshall",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_InvocationOfMachineVengeance"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_InvocationOfMachineVengeance"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SelfRepairMechanismReworked"
+          }
+        ]
+      },
+      {
+        "name": "Manipulus",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ElectropriestUnitReduction"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ArcScourge"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ElectropriestUnitReduction"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_blockChance_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SelfRepairMechanismReworked"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ghazghkull",
+    "displayName": "Ghazghkull Mag Uruk Thraka",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 4165000,
+        "armor": 352,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 6250000,
+        "armor": 465,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 8330000,
+        "armor": 582,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 10400000,
+        "armor": 767,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 12500000,
+        "armor": 1008,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 25000000,
+        "armor": 1172,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 31250000,
+        "armor": 1327,
+        "traits": [
+          "big",
+          "dakka",
+          "immune",
+          "boss",
+          "mech"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "BigMek",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.1,
+            "rawId": "boss_debuff_fixedArmor_10"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_NeedsMoreDakka_hits_1"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_NeedsMoreDakka_hits_1"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ProphetOfGorkAndMork_nrOfAttacks_1"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_fixedArmor_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_NeedsMoreDakka_hits_2"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ProphetOfGorkAndMork_nrOfAttacks_2"
+          }
+        ]
+      },
+      {
+        "name": "Nob",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_DaGreatWaaagh_nrOfSummons_1"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.1,
+            "rawId": "boss_debuff_dmg_10"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_DaGreatWaaagh_nrOfSummons_1"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_DaGreatWaaagh_nrOfSummons_1"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_dmg_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_DaGreatWaaagh_nrOfSummons_2"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ProperKilly_disable"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiveTyrantGorgon",
+    "displayName": "Hive Tyrant (Gorgon)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 545,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 720,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 901,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1187,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1560,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1813,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2052,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "WarriorGorgon",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_StranglethornCannon_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_CallRipperSwarms3_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_StranglethornCannon_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      },
+      {
+        "name": "WarriorGorgon",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_PrehensilePincerTail_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_CallRipperSwarms3_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_PrehensilePincerTail_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiveTyrantKronos",
+    "displayName": "Hive Tyrant (Kronos)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 458,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 605,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 757,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 998,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1312,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1525,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1726,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "WarriorKronos",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_StranglethornCannon_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_CallRipperSwarms2_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_StranglethornCannon_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      },
+      {
+        "name": "WarriorKronos",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_PrehensilePincerTail_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_CallRipperSwarms2_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_PrehensilePincerTail_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiveTyrantLeviathan",
+    "displayName": "Hive Tyrant (Leviathan)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 352,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 465,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 582,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 767,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1008,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1172,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1327,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune",
+          "flying"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "WarriorLeviathan",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_StranglethornCannon_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_CallRipperSwarms_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_StranglethornCannon_25"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      },
+      {
+        "name": "WarriorLeviathan",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_PrehensilePincerTail_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_CallRipperSwarms_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_PrehensilePincerTail_25"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "magnus",
+    "displayName": "Magnus the Red",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 598,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 790,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 989,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1303,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1713,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1991,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2254,
+        "traits": [
+          "boss",
+          "immune",
+          "weaver of fate",
+          "big",
+          "daemon",
+          "flying",
+          "psyker"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "Sorcerer",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_TreasonOfTzeentch"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_TerminatorUnitReduction"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_GazeOfMagnus"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_TreasonOfTzeentch"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_RubricMarineUnitReduction"
+          }
+        ]
+      },
+      {
+        "name": "InfernalMaster",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_BladeOfMagnus"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_TerminatorUnitReduction"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_GazeOfMagnus"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_BladeOfMagnus"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_RubricMarineUnitReduction"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mortarion",
+    "displayName": "Mortarion, the Death Lord",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 2337,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 3088,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 3866,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 5095,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 6698,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 7786,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 8813,
+        "traits": [
+          "boss",
+          "immune",
+          "contagions of nurgle",
+          "daemon",
+          "flying",
+          "psyker",
+          "big"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "Rotbone",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ArchContaminator_hits_2"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.2,
+            "rawId": "boss_debuff_fixedArmor_20"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ArchContaminator_hits_2"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_RevoltinglyResilient_hits_1"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ArchContaminator_hits_2"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_dmg_25"
+          }
+        ]
+      },
+      {
+        "name": "Blightbringer",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_summonChance_30"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.2,
+            "rawId": "boss_debuff_fixedArmor_20"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_summonChance_30"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_RevoltinglyResilient_hits_1"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_summonChance_30"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rogalDorn",
+    "displayName": "Rogal Dorn Battle Tank",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 1327,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 1754,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 2196,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 2894,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 3804,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 4422,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 5005,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "mech",
+          "vehicle"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "PrimarisPsy",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_WeakerRearArmour_extraCritChance_10"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_CadianGuardsmenUnitReduction"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_WeakerRearArmour_extraCritChance_10"
+          }
+        ]
+      },
+      {
+        "name": "Ordnance",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.2,
+            "rawId": "boss_debuff_dmg_20"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_GunnersKillOnSite_nrOfCrits_1"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.2,
+            "rawId": "boss_debuff_dmg_20"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MortarUnitReduction"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.2,
+            "rawId": "boss_debuff_dmg_20"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "screamerKiller",
+    "displayName": "Screamer-Killer",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 998,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 1319,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 1651,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 2176,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 2861,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 3326,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 3765,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "instinctive behaviour",
+          "suppressive fire"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "Neurothrope",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_BarbgauntUnitReduction"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_DeathScream_disable"
+          },
+          {
+            "stat": "critDamage",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_critDmg_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_BarbgauntUnitReduction"
+          }
+        ]
+      },
+      {
+        "name": "WingedPrime",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_HormagauntUnitReduction"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_LivingBatteringRam_disable"
+          },
+          {
+            "stat": "critDamage",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_critDmg_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_HormagauntUnitReduction"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "szarekh",
+    "displayName": "Szarekh, the Silent King",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 367,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 485,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 607,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 800,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1052,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1223,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1384,
+        "traits": [
+          "big",
+          "immune",
+          "mech",
+          "boss"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "GuildBoss3Minion3NecroMenhir",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_Hapthatra_hp_50"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_fixedArmor_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_AnnihilatorBeam_2"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_hits_1"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_fixedArmor_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_Hapthatra_hp_50"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_AnnihilatorBeam_2"
+          }
+        ]
+      },
+      {
+        "name": "GuildBoss3Minion3NecroMenhir",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_Mesophet_hp_50"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_dmg_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_AnnihilatorBeam_2"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_hits_1"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.25,
+            "rawId": "boss_debuff_dmg_25"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_Mesophet_hp_50"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_AnnihilatorBeam_2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tervigonGorgon",
+    "displayName": "Tervigon (Gorgon)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 545,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 720,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 901,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 1187,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1560,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1813,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 2052,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "WarriorGorgon",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_20"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      },
+      {
+        "name": "WarriorGorgon",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants3_15"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants3_15"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants3_20"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tervigonKronos",
+    "displayName": "Tervigon (Kronos)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 458,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 605,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 757,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 998,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1312,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1525,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1726,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "WarriorKronos",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_20"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      },
+      {
+        "name": "WarriorKronos",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants2_15"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants2_15"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants2_20"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tervigonLeviathan",
+    "displayName": "Tervigon (Leviathan)",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 352,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 465,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 582,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 767,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 1008,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 1172,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 1327,
+        "traits": [
+          "synapse",
+          "shadow in the warp",
+          "psyker",
+          "boss",
+          "big",
+          "immune"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "WarriorLeviathan",
+        "steps": [
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_15"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_MassiveScythingTalons_20"
+          },
+          {
+            "stat": "damage",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_dmg_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      },
+      {
+        "name": "WarriorLeviathan",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants_15"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants_15"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_SpawnTermagants_20"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riptide",
+    "displayName": "XV104 Riptide Battlesuit",
+    "stages": [
+      {
+        "name": "L1",
+        "hp": 5000000,
+        "armor": 998,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L2",
+        "hp": 7500000,
+        "armor": 1319,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L3",
+        "hp": 10000000,
+        "armor": 1651,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L4",
+        "hp": 12500000,
+        "armor": 2176,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "L5",
+        "hp": 15000000,
+        "armor": 2861,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "M1",
+        "hp": 30000000,
+        "armor": 3326,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      },
+      {
+        "name": "M2",
+        "hp": 37500000,
+        "armor": 3765,
+        "traits": [
+          "boss",
+          "immune",
+          "big",
+          "flying",
+          "indirect fire",
+          "vehicle",
+          "mech"
+        ]
+      }
+    ],
+    "primes": [
+      {
+        "name": "Marksman",
+        "steps": [
+          {
+            "stat": null,
+            "rawId": "boss_debuff_TargetLock"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ShieldDroneUnitReduction"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_TargetLock"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_NovaCharge"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_movement_1"
+          }
+        ]
+      },
+      {
+        "name": "Crisis",
+        "steps": [
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_ShieldDroneUnitReduction"
+          },
+          {
+            "stat": "armor",
+            "mode": "pct",
+            "value": 0.15,
+            "rawId": "boss_debuff_fixedArmor_15"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_NovaCharge"
+          },
+          {
+            "stat": null,
+            "rawId": "boss_debuff_blockChance_15"
+          }
+        ]
+      }
+    ]
+  }
+]

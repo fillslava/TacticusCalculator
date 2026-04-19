@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Compiled Vite config (keep only .ts source)
+vite.config.js
+vite.config.d.ts
+
+# Local env / secrets
+.env
+.env.local
+.env.*.local
+settings.local.json
+
+# Personal API data — never commit
+player-data.json
+player.json
+
+# Upstream data dumps (users generate via `npm run scrape`)
+tacticustable-gameinfo.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

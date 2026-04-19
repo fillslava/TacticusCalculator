@@ -1,0 +1,6918 @@
+[
+  {
+    "id": "abaddon",
+    "displayName": "Abaddon",
+    "faction": "Black Legion",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 15,
+      "armor": 25,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 5,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 5,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "abaddon_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "abaddon_active_1"
+        }
+      },
+      {
+        "id": "abaddon_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 11,
+          "kind": "ability",
+          "abilityId": "abaddon_active_2"
+        }
+      },
+      {
+        "id": "abaddon_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "abaddon_active_3"
+        }
+      },
+      {
+        "id": "abaddon_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 24,
+          "kind": "ability",
+          "abilityId": "abaddon_active_4"
+        }
+      },
+      {
+        "id": "abaddon_active_5",
+        "name": "Active 5",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 5",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "abaddon_active_5"
+        }
+      }
+    ],
+    "traits": [
+      "let the galaxy burn",
+      "resilient",
+      "terminator armour"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "abraxas",
+    "displayName": "Abraxas",
+    "faction": "Thousand Sons",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 20,
+      "hp": 70,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "flame",
+      "hits": 2,
+      "pierceOverride": 0.25,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "abraxas_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "abraxas_active_1"
+        }
+      },
+      {
+        "id": "abraxas_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 9,
+          "kind": "ability",
+          "abilityId": "abraxas_active_2"
+        }
+      },
+      {
+        "id": "abraxas_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "abraxas_active_3"
+        }
+      },
+      {
+        "id": "abraxas_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 18,
+          "kind": "ability",
+          "abilityId": "abraxas_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "weaver of fate",
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "actus",
+    "displayName": "Actus",
+    "faction": "Adeptus Mechanicus",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 19,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "energy",
+      "hits": 2,
+      "pierceOverride": 0.3,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "energy",
+      "hits": 2,
+      "pierceOverride": 0.3,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "actus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 60,
+          "kind": "ability",
+          "abilityId": "actus_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "mechanical",
+      "mechanic",
+      "flying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "adamatar",
+    "displayName": "Adamatar",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 17,
+      "armor": 23,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "eviscerating",
+      "hits": 3,
+      "pierceOverride": 0.5,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "thrill seekers"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "aesoth",
+    "displayName": "Aesoth",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 58,
+      "armor": 28,
+      "hp": 110,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "martial katah",
+      "big target",
+      "resilient"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "aethana",
+    "displayName": "Aethana",
+    "faction": "Aeldari",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 14,
+      "armor": 17,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 3,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "aethana_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "aethana_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "flying",
+      "teleport strike"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "ahriman",
+    "displayName": "Ahriman",
+    "faction": "Thousand Sons",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 30,
+      "armor": 18,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "flame",
+      "hits": 1,
+      "pierceOverride": 0.25,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "ahriman_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "ahriman_active_1"
+        }
+      },
+      {
+        "id": "ahriman_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 16,
+          "kind": "ability",
+          "abilityId": "ahriman_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "weaver of fate",
+      "flying",
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "alephNull",
+    "displayName": "Aleph-Null",
+    "faction": "Necrons",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 12,
+      "armor": 22,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 5,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "particle",
+      "hits": 5,
+      "pierceOverride": 0.35,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "alephNull_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "particle",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "alephNull_active_1"
+        }
+      },
+      {
+        "id": "alephNull_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "particle",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "alephNull_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "living metal",
+      "explodes",
+      "mechanical",
+      "flying",
+      "mechanic"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "ammuk",
+    "displayName": "Ammuk",
+    "faction": "Leagues of Votann",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 22,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "prioritised efficiency",
+      "mechanical"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "angrax",
+    "displayName": "Angrax",
+    "faction": "Black Legion",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 19,
+      "armor": 30,
+      "hp": 110,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 4,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "angrax_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "angrax_active_1"
+        }
+      },
+      {
+        "id": "angrax_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 21,
+          "kind": "ability",
+          "abilityId": "angrax_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "let the galaxy burn",
+      "teleport strike",
+      "terminator armour"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "anuphet",
+    "displayName": "Anuphet",
+    "faction": "Necrons",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 17,
+      "armor": 19,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "energy",
+      "hits": 4,
+      "pierceOverride": 0.3,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "energy",
+      "hits": 3,
+      "pierceOverride": 0.3,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "anuphet_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 60,
+          "kind": "ability",
+          "abilityId": "anuphet_active_1"
+        }
+      },
+      {
+        "id": "anuphet_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "anuphet_active_2"
+        }
+      },
+      {
+        "id": "anuphet_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "anuphet_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "living metal",
+      "mechanical"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "archimatos",
+    "displayName": "Archimatos",
+    "faction": "Black Legion",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 16,
+      "armor": 18,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "psychic",
+      "hits": 2,
+      "pierceOverride": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "archimatos_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 39,
+          "kind": "ability",
+          "abilityId": "archimatos_active_1"
+        }
+      },
+      {
+        "id": "archimatos_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "archimatos_active_2"
+        }
+      },
+      {
+        "id": "archimatos_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 3,
+          "kind": "ability",
+          "abilityId": "archimatos_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "let the galaxy burn",
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "arjac",
+    "displayName": "Arjac",
+    "faction": "Space Wolves",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 23,
+      "armor": 26,
+      "hp": 110,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "arjac_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 5,
+          "kind": "ability",
+          "abilityId": "arjac_active_1"
+        }
+      },
+      {
+        "id": "arjac_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "arjac_active_2"
+        }
+      },
+      {
+        "id": "arjac_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "arjac_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "resilient",
+      "teleport strike",
+      "terminator armour",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "asmodai",
+    "displayName": "Asmodai",
+    "faction": "Dark Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 23,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 4,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "asmodai_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "asmodai_active_1"
+        }
+      },
+      {
+        "id": "asmodai_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 60,
+          "kind": "ability",
+          "abilityId": "asmodai_active_2"
+        }
+      },
+      {
+        "id": "asmodai_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 80,
+          "kind": "ability",
+          "abilityId": "asmodai_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "terrifying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "atlacoya",
+    "displayName": "Atlacoya",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 19,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "parry",
+      "terrifying"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "aunShi",
+    "displayName": "Aun'Shi",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 13,
+      "armor": 16,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 5,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 5,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "aunShi_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "aunShi_active_1"
+        }
+      },
+      {
+        "id": "aunShi_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 60,
+          "kind": "ability",
+          "abilityId": "aunShi_active_2"
+        }
+      }
+    ],
+    "traits": [],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "azkor",
+    "displayName": "Azkor",
+    "faction": "World Eaters",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 24,
+      "armor": 20,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "eviscerating",
+      "hits": 2,
+      "pierceOverride": 0.5,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "azkor_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 28,
+          "kind": "ability",
+          "abilityId": "azkor_active_1"
+        }
+      },
+      {
+        "id": "azkor_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "azkor_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "blessings of khorne",
+      "daemon",
+      "resilient",
+      "terrifying",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "azrael",
+    "displayName": "Azrael",
+    "faction": "Dark Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 28,
+      "armor": 24,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "plasma",
+      "hits": 1,
+      "pierceOverride": 0.65,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "azrael_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "azrael_active_1"
+        }
+      },
+      {
+        "id": "azrael_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 55,
+          "kind": "ability",
+          "abilityId": "azrael_active_2"
+        }
+      },
+      {
+        "id": "azrael_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 9,
+          "kind": "ability",
+          "abilityId": "azrael_active_3"
+        }
+      },
+      {
+        "id": "azrael_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 11,
+          "kind": "ability",
+          "abilityId": "azrael_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "final justice",
+      "overwatch"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "baldr",
+    "displayName": "Baldr",
+    "faction": "Space Wolves",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 21,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "healer",
+      "final justice",
+      "terrifying"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "baraqiel",
+    "displayName": "Baraqiel",
+    "faction": "Dark Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 22,
+      "armor": 29,
+      "hp": 110,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "baraqiel_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "baraqiel_active_1"
+        }
+      },
+      {
+        "id": "baraqiel_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 16,
+          "kind": "ability",
+          "abilityId": "baraqiel_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "teleport strike",
+      "crushing strike",
+      "heavy weapon",
+      "terminator armour"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "bellator",
+    "displayName": "Bellator",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 10,
+      "armor": 13,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "bolter",
+      "hits": 6,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "bellator_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "bolter",
+          "hits": 1,
+          "damageFactor": 55,
+          "kind": "ability",
+          "abilityId": "bellator_active_1"
+        }
+      },
+      {
+        "id": "bellator_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "bolter",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "bellator_active_2"
+        }
+      },
+      {
+        "id": "bellator_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "bolter",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "bellator_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "flying",
+      "mk x gravis"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "biovore",
+    "displayName": "Biovore",
+    "faction": "Tyranids",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "burchard",
+    "displayName": "Burchard",
+    "faction": "Black templars",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 18,
+      "armor": 22,
+      "hp": 120,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "burchard_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 24,
+          "kind": "ability",
+          "abilityId": "burchard_active_1"
+        }
+      },
+      {
+        "id": "burchard_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "burchard_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "crushing strike",
+      "mk x gravis",
+      "suppressive fire"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "calandis",
+    "displayName": "Calandis",
+    "faction": "Aeldari",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 45,
+      "armor": 18,
+      "hp": 70,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "energy",
+      "hits": 1,
+      "pierceOverride": 0.3,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "calandis_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "calandis_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "heavy weapon",
+      "overwatch"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "calgar",
+    "displayName": "Calgar",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 28,
+      "armor": 20,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "calgar_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 35,
+          "kind": "ability",
+          "abilityId": "calgar_active_1"
+        }
+      },
+      {
+        "id": "calgar_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "calgar_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "crushing strike",
+      "final justice",
+      "mk x gravis"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "celestine",
+    "displayName": "Celestine",
+    "faction": "Adepta Sororitas",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 20,
+      "hp": 60,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "celestine_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 5,
+          "kind": "ability",
+          "abilityId": "celestine_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "act of faith",
+      "flying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "certus",
+    "displayName": "Certus",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 55,
+      "armor": 18,
+      "hp": 60,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 1,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "certus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "certus_active_1"
+        }
+      },
+      {
+        "id": "certus_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 50,
+          "kind": "ability",
+          "abilityId": "certus_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "overwatch",
+      "heavy weapon",
+      "infiltrate"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "corrodius",
+    "displayName": "Corrodius",
+    "faction": "Death Guard",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 40,
+      "armor": 25,
+      "hp": 125,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "plasma",
+      "hits": 1,
+      "pierceOverride": 0.65,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "corrodius_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "corrodius_active_1"
+        }
+      },
+      {
+        "id": "corrodius_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 35,
+          "kind": "ability",
+          "abilityId": "corrodius_active_2"
+        }
+      },
+      {
+        "id": "corrodius_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "corrodius_active_3"
+        }
+      },
+      {
+        "id": "corrodius_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "corrodius_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "contagions of nurgle",
+      "resilient"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "creed",
+    "displayName": "Creed",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 38,
+      "armor": 21,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "las",
+      "hits": 2,
+      "pierceOverride": 0.1,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "creed_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "las",
+          "hits": 1,
+          "damageFactor": 40,
+          "kind": "ability",
+          "abilityId": "creed_active_1"
+        }
+      },
+      {
+        "id": "creed_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "las",
+          "hits": 1,
+          "damageFactor": 24,
+          "kind": "ability",
+          "abilityId": "creed_active_2"
+        }
+      },
+      {
+        "id": "creed_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "las",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "creed_active_3"
+        }
+      }
+    ],
+    "traits": [],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "dante",
+    "displayName": "Dante",
+    "faction": "Blood Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 11,
+      "armor": 23,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 4,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "teleport strike",
+      "final justice",
+      "flying",
+      "rapid assault",
+      "terrifying"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "darkstrider",
+    "displayName": "Darkstrider",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 17,
+      "hp": 75,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 4
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 3,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "pulse",
+      "hits": 4,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "darkstrider_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": -8,
+          "kind": "ability",
+          "abilityId": "darkstrider_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "infiltrate",
+      "ranged specialist",
+      "suppressive fire"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "deathleaper",
+    "displayName": "Deathleaper",
+    "faction": "Tyranids",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 24,
+      "armor": 17,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "bio",
+      "hits": 3,
+      "pierceOverride": 0.3,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "deathleaper_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "deathleaper_active_1"
+        }
+      },
+      {
+        "id": "deathleaper_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "deathleaper_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "camouflage",
+      "teleport strike",
+      "infiltrate",
+      "terrifying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "dreir",
+    "displayName": "Dreir",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 28,
+      "armor": 17,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "resilient",
+      "unstoppable"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "eldryon",
+    "displayName": "Eldryon",
+    "faction": "Aeldari",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 16,
+      "armor": 16,
+      "hp": 75,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 2,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 2,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "eldryon_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "eldryon_active_1"
+        }
+      },
+      {
+        "id": "eldryon_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "eldryon_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "exitorRho",
+    "displayName": "Exitor-Rho",
+    "faction": "Adeptus Mechanicus",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 17,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "energy",
+      "hits": 2,
+      "pierceOverride": 0.3,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "exitorRho_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "exitorRho_active_1"
+        }
+      },
+      {
+        "id": "exitorRho_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "exitorRho_active_2"
+        }
+      },
+      {
+        "id": "exitorRho_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "exitorRho_active_3"
+        }
+      },
+      {
+        "id": "exitorRho_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "energy",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "exitorRho_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "mechanical",
+      "camouflage",
+      "infiltrate",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "exorcist",
+    "displayName": "Exorcist",
+    "faction": "Adepta Sororitas",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "farsight",
+    "displayName": "Farsight",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 20,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 4,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "plasma",
+      "hits": 2,
+      "pierceOverride": 0.65,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "beast snagga",
+      "big target",
+      "flying",
+      "mechanical"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "forcas",
+    "displayName": "Forcas",
+    "faction": "Dark Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 12,
+      "armor": 21,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 6,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "camouflage",
+      "parry"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "forgefiend",
+    "displayName": "Forgefiend",
+    "faction": "Black Legion",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "galatian",
+    "displayName": "Galatian",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "gibbascrapz",
+    "displayName": "Gibbascrapz",
+    "faction": "Orks",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 30,
+      "hp": 75,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 4,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "gibbascrapz_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 70,
+          "kind": "ability",
+          "abilityId": "gibbascrapz_active_1"
+        }
+      },
+      {
+        "id": "gibbascrapz_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "gibbascrapz_active_2"
+        }
+      },
+      {
+        "id": "gibbascrapz_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "gibbascrapz_active_3"
+        }
+      },
+      {
+        "id": "gibbascrapz_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "gibbascrapz_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "get stuck in",
+      "mechanic"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "godswyl",
+    "displayName": "Godswyl",
+    "faction": "Black templars",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 60,
+      "armor": 24,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "godswyl_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 60,
+          "kind": "ability",
+          "abilityId": "godswyl_active_1"
+        }
+      },
+      {
+        "id": "godswyl_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 65,
+          "kind": "ability",
+          "abilityId": "godswyl_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "parry",
+      "rapid assault"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "gulgortz",
+    "displayName": "Gulgortz",
+    "faction": "Orks",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 26,
+      "armor": 26,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "eviscerating",
+      "hits": 2,
+      "pierceOverride": 0.5,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 1,
+      "pierceOverride": 0.15,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "gulgortz_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "gulgortz_active_1"
+        }
+      },
+      {
+        "id": "gulgortz_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "gulgortz_active_2"
+        }
+      },
+      {
+        "id": "gulgortz_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 28,
+          "kind": "ability",
+          "abilityId": "gulgortz_active_3"
+        }
+      },
+      {
+        "id": "gulgortz_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "gulgortz_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "get stuck in",
+      "big target",
+      "crushing strike",
+      "final justice",
+      "mechanical"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "haarken",
+    "displayName": "Haarken",
+    "faction": "Black Legion",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 11,
+      "armor": 20,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 4,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "haarken_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "haarken_active_1"
+        }
+      },
+      {
+        "id": "haarken_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 18,
+          "kind": "ability",
+          "abilityId": "haarken_active_2"
+        }
+      },
+      {
+        "id": "haarken_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "haarken_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "let the galaxy burn",
+      "flying",
+      "terrifying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "hascule",
+    "displayName": "Hascule",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 15,
+      "armor": 19,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 3,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "thrill seekers",
+      "parry"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "helbrecht",
+    "displayName": "Helbrecht",
+    "faction": "Black templars",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 15,
+      "armor": 22,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 6,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "helbrecht_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 5,
+          "kind": "ability",
+          "abilityId": "helbrecht_active_1"
+        }
+      },
+      {
+        "id": "helbrecht_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 7,
+          "kind": "ability",
+          "abilityId": "helbrecht_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "final justice",
+      "parry"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "hollan",
+    "displayName": "Hollan",
+    "faction": "Genestealer Cults",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 36,
+      "armor": 12,
+      "hp": 55,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "toxic",
+      "hits": 1,
+      "pierceOverride": 0.7,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "hollan_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "toxic",
+          "hits": 1,
+          "damageFactor": 75,
+          "kind": "ability",
+          "abilityId": "hollan_active_1"
+        }
+      },
+      {
+        "id": "hollan_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "toxic",
+          "hits": 1,
+          "damageFactor": 14,
+          "kind": "ability",
+          "abilityId": "hollan_active_2"
+        }
+      },
+      {
+        "id": "hollan_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "toxic",
+          "hits": 1,
+          "damageFactor": 39,
+          "kind": "ability",
+          "abilityId": "hollan_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "ambush",
+      "healer"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "imospekh",
+    "displayName": "Imospekh",
+    "faction": "Necrons",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 9,
+      "armor": 20,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 6
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "gauss",
+      "hits": 6,
+      "pierceOverride": 0.6,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "gauss",
+      "hits": 6,
+      "pierceOverride": 0.6,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "imospekh_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "molecular",
+          "hits": 1,
+          "damageFactor": 17,
+          "kind": "ability",
+          "abilityId": "imospekh_active_1"
+        }
+      },
+      {
+        "id": "imospekh_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "molecular",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "imospekh_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "overwatch",
+      "living metal",
+      "mechanical"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "incisus",
+    "displayName": "Incisus",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 46,
+      "armor": 22,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 1,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "incisus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 39,
+          "kind": "ability",
+          "abilityId": "incisus_active_1"
+        }
+      },
+      {
+        "id": "incisus_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 65,
+          "kind": "ability",
+          "abilityId": "incisus_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "healer"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "isaak",
+    "displayName": "Isaak",
+    "faction": "Genestealer Cults",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 30,
+      "armor": 14,
+      "hp": 70,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "bio",
+      "hits": 3,
+      "pierceOverride": 0.3,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bio",
+      "hits": 1,
+      "pierceOverride": 0.3,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "isaak_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "isaak_active_1"
+        }
+      },
+      {
+        "id": "isaak_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 24,
+          "kind": "ability",
+          "abilityId": "isaak_active_2"
+        }
+      },
+      {
+        "id": "isaak_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 6,
+          "kind": "ability",
+          "abilityId": "isaak_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "ambush"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "isabella",
+    "displayName": "Isabella",
+    "faction": "Adepta Sororitas",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 18,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "bolter",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "isabella_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "bolter",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "isabella_active_1"
+        }
+      },
+      {
+        "id": "isabella_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "bolter",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "isabella_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "act of faith",
+      "healer"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "jaeger",
+    "displayName": "Jaeger",
+    "faction": "Black templars",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 25,
+      "hp": 110,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "jaeger_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "jaeger_active_1"
+        }
+      },
+      {
+        "id": "jaeger_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 5,
+          "kind": "ability",
+          "abilityId": "jaeger_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "final justice",
+      "parry",
+      "rapid assault"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "jainZar",
+    "displayName": "Jain Zar",
+    "faction": "Aeldari",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 19,
+      "armor": 18,
+      "hp": 75,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 3,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "jainZar_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "jainZar_active_1"
+        }
+      },
+      {
+        "id": "jainZar_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "jainZar_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "infiltrate"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "judh",
+    "displayName": "Judh",
+    "faction": "Genestealer Cults",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 13,
+      "hp": 60,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "projectile",
+      "hits": 3,
+      "pierceOverride": 0.15,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "pierceOverride": 0.15,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "ambush",
+      "beast snagga"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "kariyan",
+    "displayName": "Kariyan",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 21,
+      "armor": 24,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "martial katah",
+      "beast snagga",
+      "rapid assault",
+      "parry",
+      "resilient"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "kharn",
+    "displayName": "Kharn",
+    "faction": "World Eaters",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 20,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "eviscerating",
+      "hits": 4,
+      "pierceOverride": 0.5,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "kharn_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 50,
+          "kind": "ability",
+          "abilityId": "kharn_active_1"
+        }
+      },
+      {
+        "id": "kharn_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 72,
+          "kind": "ability",
+          "abilityId": "kharn_active_2"
+        }
+      },
+      {
+        "id": "kharn_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "kharn_active_3"
+        }
+      },
+      {
+        "id": "kharn_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 16,
+          "kind": "ability",
+          "abilityId": "kharn_active_4"
+        }
+      },
+      {
+        "id": "kharn_active_5",
+        "name": "Active 5",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 5",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 33,
+          "kind": "ability",
+          "abilityId": "kharn_active_5"
+        }
+      }
+    ],
+    "traits": [
+      "blessings of khorne",
+      "rapid assault",
+      "final justice"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "kut",
+    "displayName": "Kut",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 35,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 4,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "kut_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "kut_active_1"
+        }
+      },
+      {
+        "id": "kut_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "kut_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "big target"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "laviscus",
+    "displayName": "Laviscus",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 40,
+      "armor": 21,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "thrill seekers",
+      "crushing strike"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "lucien",
+    "displayName": "Lucien",
+    "faction": "Blood Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 21,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 4,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "blast",
+      "hits": 3,
+      "pierceOverride": 0.15,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "lucien_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "lucien_active_1"
+        }
+      },
+      {
+        "id": "lucien_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "lucien_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "rapid assault",
+      "resilient",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "lucius",
+    "displayName": "Lucius",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 13,
+      "armor": 20,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 6,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "thrill seekers",
+      "parry"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "macer",
+    "displayName": "Macer",
+    "faction": "World Eaters",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 30,
+      "armor": 10,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "chain",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "macer_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "macer_active_1"
+        }
+      },
+      {
+        "id": "macer_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "macer_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "blessings of khorne",
+      "resilient"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "makhotep",
+    "displayName": "Makhotep",
+    "faction": "Necrons",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 20,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "gauss",
+      "hits": 2,
+      "pierceOverride": 0.6,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "makhotep_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "makhotep_active_1"
+        }
+      },
+      {
+        "id": "makhotep_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 16,
+          "kind": "ability",
+          "abilityId": "makhotep_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "living metal",
+      "mechanical"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "maladus",
+    "displayName": "Maladus",
+    "faction": "Death Guard",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 26,
+      "armor": 33,
+      "hp": 120,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "maladus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "maladus_active_1"
+        }
+      },
+      {
+        "id": "maladus_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 51,
+          "kind": "ability",
+          "abilityId": "maladus_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "contagions of nurgle",
+      "resilient",
+      "terminator armour"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "malleus",
+    "displayName": "Malleus Rocket Launcher",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "mataneo",
+    "displayName": "Mataneo",
+    "faction": "Blood Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 40,
+      "armor": 22,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "plasma",
+      "hits": 1,
+      "pierceOverride": 0.65,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "mataneo_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 32,
+          "kind": "ability",
+          "abilityId": "mataneo_active_1"
+        }
+      },
+      {
+        "id": "mataneo_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 40,
+          "kind": "ability",
+          "abilityId": "mataneo_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "teleport strike",
+      "flying",
+      "rapid assault"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "mauganRa",
+    "displayName": "Maugan Ra",
+    "faction": "Aeldari",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 9,
+      "armor": 22,
+      "hp": 70,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 5,
+      "rangedHits": 6
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 5,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "heavyRound",
+      "hits": 6,
+      "pierceOverride": 0.55,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "mauganRa_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 16,
+          "kind": "ability",
+          "abilityId": "mauganRa_active_1"
+        }
+      },
+      {
+        "id": "mauganRa_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "mauganRa_active_2"
+        }
+      },
+      {
+        "id": "mauganRa_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "mauganRa_active_3"
+        }
+      },
+      {
+        "id": "mauganRa_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 13,
+          "kind": "ability",
+          "abilityId": "mauganRa_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "terrifying",
+      "heavy weapon",
+      "overwatch"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "mephiston",
+    "displayName": "Mephiston",
+    "faction": "Blood Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 10,
+      "armor": 20,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "psychic",
+      "hits": 3,
+      "pierceOverride": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 2,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "mephiston_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 50,
+          "kind": "ability",
+          "abilityId": "mephiston_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "psyker",
+      "rapid assault",
+      "terrifying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "morvennVahl",
+    "displayName": "Morvenn Vahl",
+    "faction": "Adepta Sororitas",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 24,
+      "armor": 24,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "morvennVahl_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "morvennVahl_active_1"
+        }
+      },
+      {
+        "id": "morvennVahl_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 42,
+          "kind": "ability",
+          "abilityId": "morvennVahl_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "act of faith",
+      "big target",
+      "explodes",
+      "mechanical"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "neurothrope",
+    "displayName": "Neurothrope",
+    "faction": "Tyranids",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 17,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "neurothrope_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "neurothrope_active_1"
+        }
+      },
+      {
+        "id": "neurothrope_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "neurothrope_active_2"
+        }
+      },
+      {
+        "id": "neurothrope_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "neurothrope_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "ranged specialist",
+      "flying",
+      "psyker",
+      "shadow in the warp",
+      "synapse"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "nicodemus",
+    "displayName": "Nicodemus",
+    "faction": "Blood Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 23,
+      "armor": 23,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "chain",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "nicodemus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 50,
+          "kind": "ability",
+          "abilityId": "nicodemus_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "healer",
+      "rapid assault"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "njal",
+    "displayName": "Njal",
+    "faction": "Space Wolves",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 8,
+      "armor": 26,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "psychic",
+      "hits": 3,
+      "pierceOverride": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 2,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "njal_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 5,
+          "kind": "ability",
+          "abilityId": "njal_active_1"
+        }
+      },
+      {
+        "id": "njal_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 7,
+          "kind": "ability",
+          "abilityId": "njal_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "psyker",
+      "terminator armour",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "parasiteOfMortrex",
+    "displayName": "Parasite of Mortrex",
+    "faction": "Tyranids",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 45,
+      "armor": 17,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "toxic",
+      "hits": 1,
+      "pierceOverride": 0.7,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "parasiteOfMortrex_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "toxic",
+          "hits": 1,
+          "damageFactor": 63,
+          "kind": "ability",
+          "abilityId": "parasiteOfMortrex_active_1"
+        }
+      },
+      {
+        "id": "parasiteOfMortrex_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "toxic",
+          "hits": 1,
+          "damageFactor": 11,
+          "kind": "ability",
+          "abilityId": "parasiteOfMortrex_active_2"
+        }
+      },
+      {
+        "id": "parasiteOfMortrex_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "toxic",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "parasiteOfMortrex_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "flying",
+      "synapse"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "pestillian",
+    "displayName": "Pestillian",
+    "faction": "Death Guard",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 40,
+      "armor": 27,
+      "hp": 120,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "toxic",
+      "hits": 1,
+      "pierceOverride": 0.7,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "pestillian_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "toxic",
+          "hits": 1,
+          "damageFactor": 28,
+          "kind": "ability",
+          "abilityId": "pestillian_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "contagions of nurgle",
+      "resilient",
+      "putrid explosion"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "plaguecrawler",
+    "displayName": "Plagueburst Crawler",
+    "faction": "Death Guard",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "ragnar",
+    "displayName": "Ragnar",
+    "faction": "Space Wolves",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 14,
+      "armor": 24,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 7,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "chain",
+      "hits": 7,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "ragnar_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "ragnar_active_1"
+        }
+      },
+      {
+        "id": "ragnar_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 16,
+          "kind": "ability",
+          "abilityId": "ragnar_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "beast snagga",
+      "final justice",
+      "rapid assault"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "reVas",
+    "displayName": "Re'vas",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 7,
+      "armor": 25,
+      "hp": 105,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 6
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "flame",
+      "hits": 6,
+      "pierceOverride": 0.25,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "pulse",
+      "hits": 6,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "reVas_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 40,
+          "kind": "ability",
+          "abilityId": "reVas_active_1"
+        }
+      },
+      {
+        "id": "reVas_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 14,
+          "kind": "ability",
+          "abilityId": "reVas_active_2"
+        }
+      },
+      {
+        "id": "reVas_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "reVas_active_3"
+        }
+      },
+      {
+        "id": "reVas_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 26,
+          "kind": "ability",
+          "abilityId": "reVas_active_4"
+        }
+      }
+    ],
+    "traits": [
+      "big target",
+      "flying",
+      "mechanical",
+      "ranged specialist"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "roswitha",
+    "displayName": "Roswitha",
+    "faction": "Adepta Sororitas",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 17,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "chain",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 2,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "roswitha_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 32,
+          "kind": "ability",
+          "abilityId": "roswitha_active_1"
+        }
+      },
+      {
+        "id": "roswitha_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 38,
+          "kind": "ability",
+          "abilityId": "roswitha_active_2"
+        }
+      },
+      {
+        "id": "roswitha_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 35,
+          "kind": "ability",
+          "abilityId": "roswitha_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "act of faith"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "rotbone",
+    "displayName": "Rotbone",
+    "faction": "Death Guard",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 14,
+      "armor": 27,
+      "hp": 120,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 4,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "rotbone_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 35,
+          "kind": "ability",
+          "abilityId": "rotbone_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "contagions of nurgle",
+      "resilient",
+      "healer"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "rukkatrukk",
+    "displayName": "Rukkatrukk",
+    "faction": "Orks",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "sarquael",
+    "displayName": "Sarquael",
+    "faction": "Dark Angels",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 50,
+      "armor": 20,
+      "hp": 70,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "plasma",
+      "hits": 1,
+      "pierceOverride": 0.65,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "sarquael_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "sarquael_active_1"
+        }
+      },
+      {
+        "id": "sarquael_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 55,
+          "kind": "ability",
+          "abilityId": "sarquael_active_2"
+        }
+      },
+      {
+        "id": "sarquael_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "sarquael_active_3"
+        }
+      },
+      {
+        "id": "sarquael_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "sarquael_active_4"
+        }
+      },
+      {
+        "id": "sarquael_active_5",
+        "name": "Active 5",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 5",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "sarquael_active_5"
+        }
+      }
+    ],
+    "traits": [
+      "final justice",
+      "overwatch",
+      "heavy weapon"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "shadowsun",
+    "displayName": "Shadowsun",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 18,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "blast",
+      "hits": 2,
+      "pierceOverride": 0.15,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "melta",
+      "hits": 2,
+      "pierceOverride": 0.75,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "shadowsun_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "blast",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "shadowsun_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "camouflage",
+      "flying",
+      "infiltrate",
+      "ranged specialist"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "shiron",
+    "displayName": "Shiron",
+    "faction": "Emperor's Children",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 6,
+      "armor": 20,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 6
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "eviscerating",
+      "hits": 3,
+      "pierceOverride": 0.5,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "eviscerating",
+      "hits": 6,
+      "pierceOverride": 0.5,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "thrill seekers",
+      "heavy weapon",
+      "suppressive fire"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "shoSyl",
+    "displayName": "Sho'syl",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 40,
+      "armor": 16,
+      "hp": 65,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "pulse",
+      "hits": 1,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "piercing",
+      "hits": 1,
+      "pierceOverride": 0.8,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "shoSyl_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "pulse",
+          "hits": 1,
+          "damageFactor": 75,
+          "kind": "ability",
+          "abilityId": "shoSyl_active_1"
+        }
+      },
+      {
+        "id": "shoSyl_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "pulse",
+          "hits": 1,
+          "damageFactor": 85,
+          "kind": "ability",
+          "abilityId": "shoSyl_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "camouflage",
+      "ranged specialist"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "sibyll",
+    "displayName": "Sibyll",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 20,
+      "hp": 55,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "sibyll_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 34,
+          "kind": "ability",
+          "abilityId": "sibyll_active_1"
+        }
+      },
+      {
+        "id": "sibyll_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "sibyll_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "snappawrecka",
+    "displayName": "Snappawrecka",
+    "faction": "Orks",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 23,
+      "armor": 20,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "chain",
+      "hits": 3,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 3,
+      "pierceOverride": 0.15,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "snappawrecka_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "snappawrecka_active_1"
+        }
+      },
+      {
+        "id": "snappawrecka_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "snappawrecka_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "get stuck in",
+      "big target",
+      "explodes",
+      "mechanical"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "snotflogga",
+    "displayName": "Snotflogga",
+    "faction": "Orks",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 30,
+      "armor": 18,
+      "hp": 120,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 3,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "snotflogga_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 65.5,
+          "kind": "ability",
+          "abilityId": "snotflogga_active_1"
+        }
+      },
+      {
+        "id": "snotflogga_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 33,
+          "kind": "ability",
+          "abilityId": "snotflogga_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "get stuck in",
+      "beast snagga"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "sygex",
+    "displayName": "Sy-gex",
+    "faction": "Adeptus Mechanicus",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 17,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 4
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "flame",
+      "hits": 4,
+      "pierceOverride": 0.25,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "physical",
+      "hits": 4,
+      "pierceOverride": 0.01,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "mechanical",
+      "heavy weapon",
+      "overwatch",
+      "vehicle"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "tanGiDa",
+    "displayName": "Tan Gi'da",
+    "faction": "Adeptus Mechanicus",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 35,
+      "armor": 16,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 2,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "toxic",
+      "hits": 1,
+      "pierceOverride": 0.7,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "tanGiDa_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 11,
+          "kind": "ability",
+          "abilityId": "tanGiDa_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "mechanical"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "tanksmasha",
+    "displayName": "Tanksmasha",
+    "faction": "Orks",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 24,
+      "armor": 15,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "eviscerating",
+      "hits": 3,
+      "pierceOverride": 0.5,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "tanksmasha_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "tanksmasha_active_1"
+        }
+      },
+      {
+        "id": "tanksmasha_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "tanksmasha_active_2"
+        }
+      },
+      {
+        "id": "tanksmasha_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 1,
+          "kind": "ability",
+          "abilityId": "tanksmasha_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "get stuck in",
+      "beast snagga",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "tarvakh",
+    "displayName": "Tarvakh",
+    "faction": "World Eaters",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 48,
+      "armor": 24,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 1,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "blessings of khorne",
+      "rapid assault"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "thaddeus",
+    "displayName": "Thaddeus",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 38,
+      "armor": 15,
+      "hp": 65,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 3
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "las",
+      "hits": 1,
+      "pierceOverride": 0.1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "blast",
+      "hits": 3,
+      "pierceOverride": 0.15,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "thaddeus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "las",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "thaddeus_active_1"
+        }
+      },
+      {
+        "id": "thaddeus_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "las",
+          "hits": 1,
+          "damageFactor": 32,
+          "kind": "ability",
+          "abilityId": "thaddeus_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "suppressive fire",
+      "indirect fire"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "thaumachus",
+    "displayName": "Thaumachus",
+    "faction": "Thousand Sons",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 27,
+      "armor": 18,
+      "hp": 75,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "flame",
+      "hits": 1,
+      "pierceOverride": 0.25,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "thaumachus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 80,
+          "kind": "ability",
+          "abilityId": "thaumachus_active_1"
+        }
+      },
+      {
+        "id": "thaumachus_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 55,
+          "kind": "ability",
+          "abilityId": "thaumachus_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "weaver of fate",
+      "flying",
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "thePatermine",
+    "displayName": "The Patermine",
+    "faction": "Genestealer Cults",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 14,
+      "armor": 17,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 5,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "eviscerating",
+      "hits": 5,
+      "pierceOverride": 0.5,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "thePatermine_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "thePatermine_active_1"
+        }
+      },
+      {
+        "id": "thePatermine_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "thePatermine_active_2"
+        }
+      },
+      {
+        "id": "thePatermine_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "thePatermine_active_3"
+        }
+      },
+      {
+        "id": "thePatermine_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 21,
+          "kind": "ability",
+          "abilityId": "thePatermine_active_4"
+        }
+      },
+      {
+        "id": "thePatermine_active_5",
+        "name": "Active 5",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 5",
+          "damageType": "eviscerating",
+          "hits": 1,
+          "damageFactor": 12,
+          "kind": "ability",
+          "abilityId": "thePatermine_active_5"
+        }
+      }
+    ],
+    "traits": [
+      "infiltrate",
+      "synapse",
+      "terrifying",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "thoread",
+    "displayName": "Thoread",
+    "faction": "Black templars",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 33,
+      "armor": 22,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "thoread_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 100,
+          "kind": "ability",
+          "abilityId": "thoread_active_1"
+        }
+      },
+      {
+        "id": "thoread_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "thoread_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "final justice",
+      "parry"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "thutmose",
+    "displayName": "Thutmose",
+    "faction": "Necrons",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 36,
+      "armor": 18,
+      "hp": 75,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "plasma",
+      "hits": 2,
+      "pierceOverride": 0.65,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "plasma",
+      "hits": 2,
+      "pierceOverride": 0.65,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "thutmose_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 24,
+          "kind": "ability",
+          "abilityId": "thutmose_active_1"
+        }
+      },
+      {
+        "id": "thutmose_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "plasma",
+          "hits": 1,
+          "damageFactor": 28,
+          "kind": "ability",
+          "abilityId": "thutmose_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "living metal",
+      "mechanical",
+      "flying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "tigurius",
+    "displayName": "Tigurius",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 14,
+      "hp": 65,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "tigurius_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "tigurius_active_1"
+        }
+      },
+      {
+        "id": "tigurius_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "tigurius_active_2"
+        }
+      },
+      {
+        "id": "tigurius_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 3,
+          "kind": "ability",
+          "abilityId": "tigurius_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "titus",
+    "displayName": "Titus",
+    "faction": "Ultramarines",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 26,
+      "armor": 23,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "chain",
+      "hits": 4,
+      "pierceOverride": 0.2,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "titus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 40,
+          "kind": "ability",
+          "abilityId": "titus_active_1"
+        }
+      },
+      {
+        "id": "titus_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 50,
+          "kind": "ability",
+          "abilityId": "titus_active_2"
+        }
+      },
+      {
+        "id": "titus_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "titus_active_3"
+        }
+      },
+      {
+        "id": "titus_active_4",
+        "name": "Active 4",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 4",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "titus_active_4"
+        }
+      },
+      {
+        "id": "titus_active_5",
+        "name": "Active 5",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 5",
+          "damageType": "chain",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "titus_active_5"
+        }
+      }
+    ],
+    "traits": [
+      "beast snagga",
+      "final justice"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "tjark",
+    "displayName": "Tjark",
+    "faction": "Space Wolves",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 32,
+      "armor": 23,
+      "hp": 85,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 4,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "tjark_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 27,
+          "kind": "ability",
+          "abilityId": "tjark_active_1"
+        }
+      },
+      {
+        "id": "tjark_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 38,
+          "kind": "ability",
+          "abilityId": "tjark_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "infiltrate",
+      "terrifying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "toth",
+    "displayName": "Toth",
+    "faction": "Thousand Sons",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 10,
+      "armor": 27,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 5
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 4,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "flame",
+      "hits": 5,
+      "pierceOverride": 0.25,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "toth_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "toth_active_1"
+        }
+      },
+      {
+        "id": "toth_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 40,
+          "kind": "ability",
+          "abilityId": "toth_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "weaver of fate",
+      "suppressive fire",
+      "terminator armour"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "trajann",
+    "displayName": "Trajann",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 11,
+      "armor": 25,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 3,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "martial katah",
+      "crushing strike",
+      "resilient"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "tsonji",
+    "displayName": "Tson'ji",
+    "faction": "T'au Empire",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 2,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "projectile",
+      "hits": 2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "typhus",
+    "displayName": "Typhus",
+    "faction": "Death Guard",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 18,
+      "armor": 25,
+      "hp": 120,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 1,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "typhus_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 36,
+          "kind": "ability",
+          "abilityId": "typhus_active_1"
+        }
+      },
+      {
+        "id": "typhus_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "typhus_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "contagions of nurgle",
+      "resilient",
+      "psyker",
+      "terminator armour"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "tyrantGuard",
+    "displayName": "Tyrant Guard",
+    "faction": "Tyranids",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 16,
+      "armor": 22,
+      "hp": 125,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "piercing",
+      "hits": 2,
+      "pierceOverride": 0.8,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "tyrantGuard_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 15,
+          "kind": "ability",
+          "abilityId": "tyrantGuard_active_1"
+        }
+      },
+      {
+        "id": "tyrantGuard_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "piercing",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "tyrantGuard_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "big target",
+      "crushing strike"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "tyrith",
+    "displayName": "Tyrith",
+    "faction": "Adeptus Custodes",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 25,
+      "armor": 22,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 2,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "martial katah",
+      "resilient"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "ulf",
+    "displayName": "Ulf",
+    "faction": "Space Wolves",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 33,
+      "armor": 20,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "ulf_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "ulf_active_1"
+        }
+      },
+      {
+        "id": "ulf_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "ulf_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "final justice",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "uthar",
+    "displayName": "Uthar",
+    "faction": "Leagues of Votann",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 19,
+      "armor": 23,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 4
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "plasma",
+      "hits": 3,
+      "pierceOverride": 0.65,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "energy",
+      "hits": 4,
+      "pierceOverride": 0.3,
+      "kind": "ranged"
+    },
+    "abilities": [],
+    "traits": [
+      "prioritised efficiency",
+      "resilient"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "vindicta",
+    "displayName": "Vindicta",
+    "faction": "Adepta Sororitas",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 20,
+      "armor": 12,
+      "hp": 70,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 4
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "flame",
+      "hits": 4,
+      "pierceOverride": 0.25,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "vindicta_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "vindicta_active_1"
+        }
+      },
+      {
+        "id": "vindicta_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 25,
+          "kind": "ability",
+          "abilityId": "vindicta_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "act of faith",
+      "heavy weapon"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "vitruvius",
+    "displayName": "Vitruvius",
+    "faction": "Adeptus Mechanicus",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 50,
+      "armor": 18,
+      "hp": 90,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 1,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "gauss",
+      "hits": 1,
+      "pierceOverride": 0.6,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "vitruvius_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 45,
+          "kind": "ability",
+          "abilityId": "vitruvius_active_1"
+        }
+      },
+      {
+        "id": "vitruvius_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 55,
+          "kind": "ability",
+          "abilityId": "vitruvius_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "mechanical",
+      "mechanic"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "volk",
+    "displayName": "Volk",
+    "faction": "Black Legion",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 9,
+      "armor": 12,
+      "hp": 125,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 6
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 4,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "heavyRound",
+      "hits": 6,
+      "pierceOverride": 0.55,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "volk_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 23,
+          "kind": "ability",
+          "abilityId": "volk_active_1"
+        }
+      },
+      {
+        "id": "volk_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "volk_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "let the galaxy burn",
+      "big target",
+      "daemon",
+      "heavy weapon",
+      "suppressive fire"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "vynn",
+    "displayName": "Vynn",
+    "faction": "Leagues of Votann",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 25,
+      "armor": 16,
+      "hp": 80,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "prioritised efficiency",
+      "mechanic"
+    ],
+    "maxRarity": "mythic"
+  },
+  {
+    "id": "wingedPrime",
+    "displayName": "Winged Prime",
+    "faction": "Tyranids",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 11,
+      "armor": 19,
+      "hp": 100,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 6,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "bio",
+      "hits": 6,
+      "pierceOverride": 0.3,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "wingedPrime_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 80,
+          "kind": "ability",
+          "abilityId": "wingedPrime_active_1"
+        }
+      },
+      {
+        "id": "wingedPrime_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 30,
+          "kind": "ability",
+          "abilityId": "wingedPrime_active_2"
+        }
+      },
+      {
+        "id": "wingedPrime_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "bio",
+          "hits": 1,
+          "damageFactor": 16,
+          "kind": "ability",
+          "abilityId": "wingedPrime_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "synapse",
+      "flying",
+      "final justice"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "wrask",
+    "displayName": "Wrask",
+    "faction": "World Eaters",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 20,
+      "armor": 28,
+      "hp": 95,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 4,
+      "rangedHits": 0
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "flame",
+      "hits": 4,
+      "pierceOverride": 0.25,
+      "kind": "melee"
+    },
+    "abilities": [
+      {
+        "id": "wrask_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 35,
+          "kind": "ability",
+          "abilityId": "wrask_active_1"
+        }
+      },
+      {
+        "id": "wrask_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "flame",
+          "hits": 1,
+          "damageFactor": 42,
+          "kind": "ability",
+          "abilityId": "wrask_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "blessings of khorne",
+      "teleport strike",
+      "rapid assault",
+      "terminator armour",
+      "unstoppable"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "xybia",
+    "displayName": "Xybia",
+    "faction": "Genestealer Cults",
+    "alliance": "Xenos",
+    "baseStats": {
+      "damage": 15,
+      "armor": 11,
+      "hp": 55,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 2,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "psychic",
+      "hits": 2,
+      "pierceOverride": 1,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "psychic",
+      "hits": 2,
+      "pierceOverride": 1,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "xybia_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "psychic",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "xybia_active_1"
+        }
+      }
+    ],
+    "traits": [
+      "ambush",
+      "psyker"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "yarrick",
+    "displayName": "Yarrick",
+    "faction": "Astra militarum",
+    "alliance": "Imperial",
+    "baseStats": {
+      "damage": 30,
+      "armor": 17,
+      "hp": 75,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 2
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "pierceOverride": 0.4,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "bolter",
+      "hits": 2,
+      "pierceOverride": 0.2,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "yarrick_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 40,
+          "kind": "ability",
+          "abilityId": "yarrick_active_1"
+        }
+      },
+      {
+        "id": "yarrick_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 24,
+          "kind": "ability",
+          "abilityId": "yarrick_active_2"
+        }
+      },
+      {
+        "id": "yarrick_active_3",
+        "name": "Active 3",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 3",
+          "damageType": "power",
+          "hits": 1,
+          "damageFactor": 8,
+          "kind": "ability",
+          "abilityId": "yarrick_active_3"
+        }
+      }
+    ],
+    "traits": [
+      "resilient"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "yazaghor",
+    "displayName": "Yazaghor",
+    "faction": "Thousand Sons",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 49,
+      "armor": 14,
+      "hp": 65,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "physical",
+      "hits": 1,
+      "pierceOverride": 0.01,
+      "kind": "melee"
+    },
+    "ranged": {
+      "label": "Ranged",
+      "damageType": "heavyRound",
+      "hits": 1,
+      "pierceOverride": 0.55,
+      "kind": "ranged"
+    },
+    "abilities": [
+      {
+        "id": "yazaghor_active_1",
+        "name": "Active 1",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 1",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 10,
+          "kind": "ability",
+          "abilityId": "yazaghor_active_1"
+        }
+      },
+      {
+        "id": "yazaghor_active_2",
+        "name": "Active 2",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profile": {
+          "label": "Active 2",
+          "damageType": "physical",
+          "hits": 1,
+          "damageFactor": 20,
+          "kind": "ability",
+          "abilityId": "yazaghor_active_2"
+        }
+      }
+    ],
+    "traits": [
+      "weaver of fate",
+      "flying"
+    ],
+    "maxRarity": "legendary"
+  },
+  {
+    "id": "zkar",
+    "displayName": "Z'Kar",
+    "faction": "Thousand Sons",
+    "alliance": "Chaos",
+    "baseStats": {
+      "damage": 0,
+      "armor": 0,
+      "hp": 0,
+      "critChance": 0,
+      "critDamage": 0,
+      "blockChance": 0,
+      "blockDamage": 0,
+      "meleeHits": 3,
+      "rangedHits": 1
+    },
+    "melee": {
+      "label": "Melee",
+      "damageType": "power",
+      "hits": 3,
+      "kind": "melee"
+    },
+    "abilities": [],
+    "traits": [
+      "machine of war"
+    ],
+    "maxRarity": "mythic"
+  }
+]

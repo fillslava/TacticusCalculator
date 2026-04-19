@@ -1,0 +1,9293 @@
+[
+  {
+    "id": "block_20_common_block_L1",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 23
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_common_block_L2",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 35
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_common_block_L3",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 53
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_uncommon_block_L1",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 51
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_uncommon_block_L2",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 65
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_uncommon_block_L3",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 81
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_uncommon_block_L4",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 104
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_uncommon_block_L5",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 127
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_rare_block_L1",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 115
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_rare_block_L2",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 138
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_rare_block_L3",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 161
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_rare_block_L4",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 184
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_rare_block_L5",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 210
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_rare_block_L6",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 244
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_rare_block_L7",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 315
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L1",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 245
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L2",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 316
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L3",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 387
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L4",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 458
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L5",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 529
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L6",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 599
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L7",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 678
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L8",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 873
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_epic_block_L9",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1049
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L1",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 600
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L2",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 679
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L3",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 865
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L4",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1051
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L5",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1144
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L6",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1237
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L7",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1330
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L8",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1423
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L9",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1516
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L10",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1609
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_20_legendary_block_L11",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "blockChance": 0.2,
+      "blockDamage": 1807
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Aeldari"
+    ]
+  },
+  {
+    "id": "block_25_rare_block_L1",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.25,
+      "blockDamage": 90
+    },
+    "factions": [
+      "Adeptus Mechanicus",
+      "Astra militarum"
+    ]
+  },
+  {
+    "id": "block_25_rare_block_L2",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.25,
+      "blockDamage": 108
+    },
+    "factions": [
+      "Adeptus Mechanicus",
+      "Astra militarum"
+    ]
+  },
+  {
+    "id": "block_25_rare_block_L3",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.25,
+      "blockDamage": 126
+    },
+    "factions": [
+      "Adeptus Mechanicus",
+      "Astra militarum"
+    ]
+  },
+  {
+    "id": "block_25_rare_block_L4",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.25,
+      "blockDamage": 144
+    },
+    "factions": [
+      "Adeptus Mechanicus",
+      "Astra militarum"
+    ]
+  },
+  {
+    "id": "block_25_rare_block_L5",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.25,
+      "blockDamage": 165
+    },
+    "factions": [
+      "Adeptus Mechanicus",
+      "Astra militarum"
+    ]
+  },
+  {
+    "id": "block_25_rare_block_L6",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.25,
+      "blockDamage": 191
+    },
+    "factions": [
+      "Adeptus Mechanicus",
+      "Astra militarum"
+    ]
+  },
+  {
+    "id": "block_25_rare_block_L7",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.25,
+      "blockDamage": 246
+    },
+    "factions": [
+      "Adeptus Mechanicus",
+      "Astra militarum"
+    ]
+  },
+  {
+    "id": "block_30_common_block_L1",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 15
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_common_block_L2",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 20
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_common_block_L3",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 34
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_uncommon_block_L1",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 34
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_uncommon_block_L2",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 43
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_uncommon_block_L3",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 54
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_uncommon_block_L4",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 70
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_uncommon_block_L5",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 85
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_rare_block_L1",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 77
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_rare_block_L2",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 93
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_rare_block_L3",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 108
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_rare_block_L4",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 123
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_rare_block_L5",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 141
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_rare_block_L6",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 164
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_rare_block_L7",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 211
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L1",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 165
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L2",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 213
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L3",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 261
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L4",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 308
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L5",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 356
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L6",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 404
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L7",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 457
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L8",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 582
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_epic_block_L9",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 707
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L1",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 400
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L2",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 453
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L3",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 577
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L4",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 701
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L5",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 763
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L6",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 825
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L7",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 887
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L8",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 949
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L9",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 1011
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L10",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 1073
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_30_legendary_block_L11",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "blockChance": 0.3,
+      "blockDamage": 1205
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters",
+      "Space Wolves"
+    ]
+  },
+  {
+    "id": "block_35_common_block_L1",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 13
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_common_block_L2",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 20
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_common_block_L3",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 30
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_uncommon_block_L1",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 29
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_uncommon_block_L2",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 37
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_uncommon_block_L3",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 46
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_uncommon_block_L4",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 59
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_uncommon_block_L5",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 72
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_rare_block_L1",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 66
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_rare_block_L2",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 80
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_rare_block_L3",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 93
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_rare_block_L4",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 106
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_rare_block_L5",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 126
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_rare_block_L6",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 140
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_rare_block_L7",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 181
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L1",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 140
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L2",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 181
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L3",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 221
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L4",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 262
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L5",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 302
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L6",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 343
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L7",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 388
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L8",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 494
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_epic_block_L9",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 600
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L1",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 340
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L2",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 385
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L3",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 491
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L4",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 596
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L5",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 649
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L6",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 701
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L7",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 754
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L8",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 807
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L9",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 859
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L10",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 912
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_35_legendary_block_L11",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "blockChance": 0.35,
+      "blockDamage": 1024
+    },
+    "factions": [
+      "Black templars",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Necrons"
+    ]
+  },
+  {
+    "id": "block_booster_1_common_block_L1",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "blockDamage": 5
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_common_block_L2",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "blockDamage": 8
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_common_block_L3",
+    "slotId": 2,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "blockDamage": 12
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_uncommon_block_L1",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "blockDamage": 11
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_uncommon_block_L2",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "blockDamage": 14
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_uncommon_block_L3",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "blockDamage": 18
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_uncommon_block_L4",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "blockDamage": 23
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_uncommon_block_L5",
+    "slotId": 2,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "blockDamage": 28
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_rare_block_L1",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "blockDamage": 25
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_rare_block_L2",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "blockDamage": 30
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_rare_block_L3",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "blockDamage": 35
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_rare_block_L4",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "blockDamage": 40
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_rare_block_L5",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "blockDamage": 46
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_rare_block_L6",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "blockDamage": 54
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_rare_block_L7",
+    "slotId": 2,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "blockDamage": 69
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L1",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "blockDamage": 48
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L2",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "blockDamage": 62
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L3",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "blockDamage": 76
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L4",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "blockDamage": 90
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L5",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "blockDamage": 104
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L6",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "blockDamage": 118
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L7",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "blockDamage": 133
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L8",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "blockDamage": 170
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_epic_block_L9",
+    "slotId": 2,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "blockDamage": 206
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L1",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "blockDamage": 110
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L2",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "blockDamage": 125
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L3",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "blockDamage": 159
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L4",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "blockDamage": 193
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L5",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "blockDamage": 210
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L6",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "blockDamage": 227
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L7",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "blockDamage": 244
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L8",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "blockDamage": 261
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L9",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "blockDamage": 278
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L10",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "blockDamage": 295
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "block_booster_1_legendary_block_L11",
+    "slotId": 2,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "blockDamage": 332
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Necrons",
+      "Aeldari",
+      "T'au Empire",
+      "Space Wolves",
+      "Thousand Sons",
+      "Tyranids",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_common_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 22
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_common_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 33
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_common_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 50
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_uncommon_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 51
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_uncommon_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 65
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_uncommon_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 81
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_uncommon_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 104
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_uncommon_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 127
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_rare_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 115
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_rare_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 138
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_rare_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 161
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_rare_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 184
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_rare_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 210
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_rare_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 244
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_rare_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 315
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 245
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 316
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 387
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 458
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 529
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 599
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 678
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 863
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_epic_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1049
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 600
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 679
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 865
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1051
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1144
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1237
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1330
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1423
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1516
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L10",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1609
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_20_legendary_crit-dmg_L11",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "critChance": 0.2,
+      "critDamage": 1807
+    },
+    "factions": [
+      "Necrons",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black Legion",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Space Wolves",
+      "Thousand Sons",
+      "Ultramarines",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_common_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 18
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_common_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 27
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_common_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 41
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_uncommon_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 41
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_uncommon_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 52
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_uncommon_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 65
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_uncommon_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 84
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_uncommon_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 102
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_rare_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 92
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_rare_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 111
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_rare_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 129
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_rare_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 147
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_rare_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 168
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_rare_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 196
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_rare_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 252
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 195
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 252
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 308
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 364
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 421
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 477
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 540
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 687
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_epic_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 835
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 480
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 544
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 692
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 841
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 915
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 990
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 1064
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 1139
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 1213
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L10",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 1287
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_25_legendary_crit-dmg_L11",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "critChance": 0.25,
+      "critDamage": 1446
+    },
+    "factions": [
+      "Genestealer Cults",
+      "Tyranids",
+      "Astra militarum",
+      "Aeldari",
+      "T'au Empire",
+      "Thousand Sons",
+      "Adeptus Mechanicus",
+      "World Eaters"
+    ]
+  },
+  {
+    "id": "crit_30_uncommon_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "critChance": 0.3,
+      "critDamage": 36
+    },
+    "factions": []
+  },
+  {
+    "id": "crit_30_uncommon_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "critChance": 0.3,
+      "critDamage": 46
+    },
+    "factions": []
+  },
+  {
+    "id": "crit_30_uncommon_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "critChance": 0.3,
+      "critDamage": 57
+    },
+    "factions": []
+  },
+  {
+    "id": "crit_30_uncommon_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "critChance": 0.3,
+      "critDamage": 73
+    },
+    "factions": []
+  },
+  {
+    "id": "crit_30_uncommon_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "critChance": 0.3,
+      "critDamage": 90
+    },
+    "factions": []
+  },
+  {
+    "id": "crit_35_common_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 13
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_common_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 20
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_common_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 30
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_uncommon_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 29
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_uncommon_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 37
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_uncommon_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 46
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_uncommon_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 59
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_uncommon_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 72
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_rare_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 66
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_rare_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 80
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_rare_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 93
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_rare_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 106
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_rare_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 126
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_rare_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 140
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_rare_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 181
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 140
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 181
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 221
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 262
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 302
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 343
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 388
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 494
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_epic_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 600
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 340
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 385
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 491
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 596
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 649
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 701
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 754
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 807
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 859
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L10",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 912
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_35_legendary_crit-dmg_L11",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "critChance": 0.35,
+      "critDamage": 1024
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "World Eaters",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 300
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 340
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 433
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 526
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 572
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 619
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 665
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 712
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 758
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L10",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 805
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_40_legendary_crit-dmg_L11",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "critChance": 0.4,
+      "critDamage": 903
+    },
+    "factions": [
+      "Dark Angels"
+    ]
+  },
+  {
+    "id": "crit_booster_1_common_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "critDamage": 5
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_common_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "critDamage": 8
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_common_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "critDamage": 12
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_uncommon_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "critDamage": 11
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_uncommon_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "critDamage": 14
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_uncommon_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "critDamage": 18
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_uncommon_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "critDamage": 23
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_uncommon_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "critDamage": 28
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_rare_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "critDamage": 25
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_rare_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "critDamage": 30
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_rare_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "critDamage": 35
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_rare_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "critDamage": 40
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_rare_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "critDamage": 46
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_rare_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "critDamage": 54
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_rare_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "critDamage": 69
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "critDamage": 48
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "critDamage": 62
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "critDamage": 76
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "critDamage": 90
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "critDamage": 104
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "critDamage": 118
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "critDamage": 133
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "critDamage": 170
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_epic_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "critDamage": 206
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L1",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "critDamage": 110
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L2",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "critDamage": 125
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L3",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "critDamage": 159
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L4",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "critDamage": 193
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L5",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "critDamage": 210
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L6",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "critDamage": 227
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L7",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "critDamage": 244
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L8",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "critDamage": 261
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L9",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "critDamage": 278
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L10",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "critDamage": 295
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "crit_booster_1_legendary_crit-dmg_L11",
+    "slotId": 1,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "critDamage": 332
+    },
+    "factions": [
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Black Legion",
+      "Death Guard",
+      "Thousand Sons",
+      "World Eaters",
+      "Necrons",
+      "Orks",
+      "Aeldari",
+      "T'au Empire",
+      "Genestealer Cults",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_common_armour_L1",
+    "slotId": 3,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "armorFlat": 4
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_common_armour_L2",
+    "slotId": 3,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "armorFlat": 6
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_common_armour_L3",
+    "slotId": 3,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "armorFlat": 10
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_common_health_L1",
+    "slotId": 3,
+    "rarity": "common",
+    "level": 1,
+    "mods": {
+      "hpFlat": 7
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_common_health_L2",
+    "slotId": 3,
+    "rarity": "common",
+    "level": 2,
+    "mods": {
+      "hpFlat": 11
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_common_health_L3",
+    "slotId": 3,
+    "rarity": "common",
+    "level": 3,
+    "mods": {
+      "hpFlat": 16
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_armour_L1",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "armorFlat": 9
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_armour_L2",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "armorFlat": 12
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_armour_L3",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "armorFlat": 15
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_armour_L4",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "armorFlat": 19
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_armour_L5",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "armorFlat": 23
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_health_L1",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 1,
+    "mods": {
+      "hpFlat": 16
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_health_L2",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 2,
+    "mods": {
+      "hpFlat": 21
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_health_L3",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 3,
+    "mods": {
+      "hpFlat": 26
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_health_L4",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 4,
+    "mods": {
+      "hpFlat": 33
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_uncommon_health_L5",
+    "slotId": 3,
+    "rarity": "uncommon",
+    "level": 5,
+    "mods": {
+      "hpFlat": 40
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_armour_L1",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "armorFlat": 20
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_armour_L2",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "armorFlat": 24
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_armour_L3",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "armorFlat": 28
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_armour_L4",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "armorFlat": 32
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_armour_L5",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "armorFlat": 37
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_armour_L6",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "armorFlat": 43
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_armour_L7",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "armorFlat": 55
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_health_L1",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 1,
+    "mods": {
+      "hpFlat": 38
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_health_L2",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 2,
+    "mods": {
+      "hpFlat": 46
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_health_L3",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 3,
+    "mods": {
+      "hpFlat": 54
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_health_L4",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 4,
+    "mods": {
+      "hpFlat": 61
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_health_L5",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 5,
+    "mods": {
+      "hpFlat": 70
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_health_L6",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 6,
+    "mods": {
+      "hpFlat": 81
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_rare_health_L7",
+    "slotId": 3,
+    "rarity": "rare",
+    "level": 7,
+    "mods": {
+      "hpFlat": 104
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L1",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "armorFlat": 43
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L2",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "armorFlat": 56
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L3",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "armorFlat": 68
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L4",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "armorFlat": 81
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L5",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "armorFlat": 93
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L6",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "armorFlat": 106
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L7",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "armorFlat": 119
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L8",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "armorFlat": 152
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_armour_L9",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "armorFlat": 185
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L1",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 1,
+    "mods": {
+      "hpFlat": 77
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L2",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 2,
+    "mods": {
+      "hpFlat": 100
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L3",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 3,
+    "mods": {
+      "hpFlat": 122
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L4",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 4,
+    "mods": {
+      "hpFlat": 144
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L5",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 5,
+    "mods": {
+      "hpFlat": 166
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L6",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 6,
+    "mods": {
+      "hpFlat": 189
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L7",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 7,
+    "mods": {
+      "hpFlat": 213
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L8",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 8,
+    "mods": {
+      "hpFlat": 272
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_epic_health_L9",
+    "slotId": 3,
+    "rarity": "epic",
+    "level": 9,
+    "mods": {
+      "hpFlat": 330
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L1",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "armorFlat": 105
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L2",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "armorFlat": 119
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L3",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "armorFlat": 152
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L4",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "armorFlat": 184
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L5",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "armorFlat": 201
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L6",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "armorFlat": 217
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L7",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "armorFlat": 233
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L8",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "armorFlat": 249
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L9",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "armorFlat": 266
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L10",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "armorFlat": 282
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_armour_L11",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "armorFlat": 317
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L1",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 1,
+    "mods": {
+      "hpFlat": 188
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L2",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 2,
+    "mods": {
+      "hpFlat": 213
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L3",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 3,
+    "mods": {
+      "hpFlat": 271
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L4",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 4,
+    "mods": {
+      "hpFlat": 330
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L5",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 5,
+    "mods": {
+      "hpFlat": 359
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L6",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 6,
+    "mods": {
+      "hpFlat": 388
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L7",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 7,
+    "mods": {
+      "hpFlat": 417
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L8",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 8,
+    "mods": {
+      "hpFlat": 446
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L9",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 9,
+    "mods": {
+      "hpFlat": 475
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L10",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 10,
+    "mods": {
+      "hpFlat": 504
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  },
+  {
+    "id": "defense_0_legendary_health_L11",
+    "slotId": 3,
+    "rarity": "legendary",
+    "level": 11,
+    "mods": {
+      "hpFlat": 567
+    },
+    "factions": [
+      "Black templars",
+      "Blood Angels",
+      "Dark Angels",
+      "Space Wolves",
+      "Ultramarines",
+      "Adepta Sororitas",
+      "Adeptus Mechanicus",
+      "Astra militarum",
+      "Aeldari",
+      "Necrons",
+      "T'au Empire",
+      "Black Legion",
+      "Death Guard",
+      "Genestealer Cults",
+      "Orks",
+      "Thousand Sons",
+      "World Eaters",
+      "Tyranids"
+    ]
+  }
+]
