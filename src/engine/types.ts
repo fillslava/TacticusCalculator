@@ -117,10 +117,22 @@ export type AbilityTeamBuff =
     }
   | {
       kind: 'trajannLegendaryCommander';
-      /** Flat bonus damage added against enemies adjacent to a Shield Host
-       *  friend who used an active this turn. */
+      /**
+       * Enemies receive +flatDamage from *any* attack while they are
+       * adjacent to a friendly unit that has used an active ability
+       * earlier this turn. In single-boss Guild Raid the boss is treated
+       * as always-adjacent to every team member, so the gate reduces to
+       * "any friendly fired an active earlier this turn".
+       */
       flatDamage: number;
-      /** Extra hits appended to melee/ranged when adjacent. */
+      /**
+       * If the affected enemy is also adjacent to Trajann, friendly
+       * Characters score +extraHitsAdjacentToSelf additional hits on
+       * their FIRST attack that is not a normal attack (i.e. first
+       * ability attack) against that enemy this turn. In single-boss
+       * Guild Raid, "adjacent to Trajann" is assumed whenever Trajann is
+       * on the team.
+       */
       extraHitsAdjacentToSelf: number;
     }
   | {

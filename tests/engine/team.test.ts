@@ -167,21 +167,19 @@ function biovoreLike(pct = 20): CatalogCharacter {
   });
 }
 
-/** A Shield Host ally — carries the `shieldHost` trait + a simple active. */
-function shieldHostAlly(activeId = 'sh_active'): CatalogCharacter {
+/** A plain ally that carries a single simple active ability (used to fire
+ *  Trajann's trigger without any irrelevant flavor). */
+function allyWithActive(activeId = 'simple_active'): CatalogCharacter {
   const active: CatalogAbility = {
     id: activeId,
-    name: 'SH Active',
+    name: 'Simple Active',
     kind: 'active',
-    profiles: [{ label: 'SH', damageType: 'power', hits: 1, kind: 'ability' }],
+    profiles: [{ label: 'A', damageType: 'power', hits: 1, kind: 'ability' }],
     cooldown: 2,
   };
   return plainChar({
-    id: 'sh_ally',
-    displayName: 'SH Ally',
-    faction: 'Adeptus Custodes',
-    alliance: 'Imperial',
-    traits: ['shieldHost'],
+    id: 'ally_active',
+    displayName: 'Ally',
     abilities: [active],
   });
 }
@@ -390,91 +388,261 @@ describe('laviscusOutrage — damage aura to adjacent allies', () => {
 // Trajann LegendaryCommander
 // ---------------------------------------------------------------------------
 
-describe('trajannLegendaryCommander — bonus hits + conditional flat', () => {
-  it('adjacent Shield Host ally gets +extraHits on melee', () => {
-    const mTra = member('tra', trajannLike(0, 2), 0);
-    const mSh = member('sh', shieldHostAlly(), 1);
-    const rotSolo: TeamRotation = {
-      members: [member('solo', shieldHostAlly(), 0)],
-      turns: [{ actions: [{ memberId: 'solo', attack: meleeAttack() }] }],
-    };
-    const rotBuffed: TeamRotation = {
-      members: [mTra, mSh],
-      turns: [{ actions: [{ memberId: 'sh', attack: meleeAttack() }] }],
-    };
-    const base = resolveTeamRotation(rotSolo, makeTarget());
-    const buffed = resolveTeamRotation(rotBuffed, makeTarget());
-    // With +2 extra hits on melee (base 2 hits → 4 hits), damage roughly 2×.
-    const ratio =
-      buffed.perMember['sh'].perAction[0].result.expected /
-      base.perMember['solo'].perAction[0].result.expected;
-    expect(ratio).toBeCloseTo(2.0, 1);
+describe('trajannLegendaryCommander — conditional flat + per-member ability hits', () => {
+  // -------- Flat-damage component --------
 
-    expect(buffed.teamBuffApplications).toContainEqual(
-      expect.objectContaining({
-        sourceMemberId: 'tra',
-        kind: 'trajannLegendaryCommander',
-        appliedToMemberId: 'sh',
-        effect: expect.stringMatching(/\+2 hits/),
-      }),
-    );
-  });
-
-  it('adjacent non-Shield-Host ally does NOT get +extraHits', () => {
-    const mTra = member('tra', trajannLike(0, 2), 0);
-    const mAlly = member('a', plainChar({ id: 'random' }), 1); // no shieldHost
-    const rot: TeamRotation = {
-      members: [mTra, mAlly],
-      turns: [{ actions: [{ memberId: 'a', attack: meleeAttack() }] }],
-    };
-    const r = resolveTeamRotation(rot, makeTarget());
-    expect(
-      r.teamBuffApplications.filter(
-        (app) => app.kind === 'trajannLegendaryCommander' && app.appliedToMemberId === 'a',
-      ),
-    ).toEqual([]);
-  });
-
-  it('flat-damage bonus applies ONLY after a Shield Host active fires this turn', () => {
+  it('flat-damage buff fires after ANY friendly uses an active (no faction gate)', () => {
     const mTra = member('tra', trajannLike(1000, 0), 0);
-    const mSh = member('sh', shieldHostAlly('sh_active'), 1);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
     const mAttacker = member('x', plainChar({ id: 'x' }), 2);
 
-    // Shield Host fires active FIRST → x's melee afterward gets +flatDamage.
-    const rotFired: TeamRotation = {
-      members: [mTra, mSh, mAttacker],
+    // Caster fires an active FIRST → x's subsequent melee gets +flatDamage.
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mAttacker],
       turns: [
         {
           actions: [
-            { memberId: 'sh', attack: abilityAttack('sh_active', 2) },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
             { memberId: 'x', attack: meleeAttack() },
           ],
         },
       ],
     };
-    const r1 = resolveTeamRotation(rotFired, makeTarget());
-    expect(
-      r1.teamBuffApplications.some(
-        (a) =>
-          a.sourceMemberId === 'tra' &&
-          a.kind === 'trajannLegendaryCommander' &&
-          a.appliedToMemberId === 'x' &&
-          /flat dmg/.test(a.effect),
-      ),
-    ).toBe(true);
+    const r = resolveTeamRotation(rot, makeTarget());
+    const flatApp = r.teamBuffApplications.find(
+      (a) =>
+        a.sourceMemberId === 'tra' &&
+        a.kind === 'trajannLegendaryCommander' &&
+        a.appliedToMemberId === 'x' &&
+        /flat dmg/.test(a.effect),
+    );
+    expect(flatApp).toBeDefined();
+    expect(flatApp?.effect).toMatch(/\+1000 flat dmg/);
+  });
 
-    // No SH active fired → no flat-damage buff.
-    const rotNotFired: TeamRotation = {
-      members: [mTra, mSh, mAttacker],
+  it('flat-damage buff does NOT fire before any friendly active', () => {
+    const mTra = member('tra', trajannLike(1000, 0), 0);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 2);
+
+    // Order flipped: x attacks BEFORE the active fires → no flat buff on x.
+    // (And the caster's own active attack also precedes any trigger.)
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mAttacker],
       turns: [
         {
-          actions: [{ memberId: 'x', attack: meleeAttack() }],
+          actions: [
+            { memberId: 'x', attack: meleeAttack() },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+          ],
         },
       ],
     };
-    const r2 = resolveTeamRotation(rotNotFired, makeTarget());
+    const r = resolveTeamRotation(rot, makeTarget());
     expect(
-      r2.teamBuffApplications.filter((a) => /flat dmg/.test(a.effect)),
+      r.teamBuffApplications.filter(
+        (a) => a.kind === 'trajannLegendaryCommander' && /flat dmg/.test(a.effect),
+      ),
+    ).toEqual([]);
+  });
+
+  it('no Trajann on team → no flat-damage buff even when actives fire', () => {
+    const mCaster = member('c', allyWithActive('simple_active'), 0);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 1);
+    const rot: TeamRotation = {
+      members: [mCaster, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'x', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    expect(
+      r.teamBuffApplications.filter((a) => a.kind === 'trajannLegendaryCommander'),
+    ).toEqual([]);
+  });
+
+  // -------- Extra-hits component (first non-normal attack per member) --------
+
+  it('extra hits apply on a member\'s FIRST ability attack after a friendly active', () => {
+    // Trajann fires his own active (arming the trigger), then attacker fires
+    // an ability — which should get +extraHits.
+    const mTra = member('tra', trajannLike(0, 2), 0);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const xSrc = plainChar({
+      id: 'x',
+      abilities: [
+        {
+          id: 'x_active',
+          name: 'X Active',
+          kind: 'active',
+          profiles: [{ label: 'X', damageType: 'power', hits: 1, kind: 'ability' }],
+          cooldown: 3,
+        },
+      ],
+    });
+    const mAttacker = member('x', xSrc, 2);
+
+    // Baseline: same ability without Trajann present.
+    const rotBase: TeamRotation = {
+      members: [mCaster, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'x', attack: abilityAttack('x_active', 3) },
+          ],
+        },
+      ],
+    };
+    const rotBuffed: TeamRotation = {
+      members: [mTra, mCaster, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'x', attack: abilityAttack('x_active', 3) },
+          ],
+        },
+      ],
+    };
+
+    const baseR = resolveTeamRotation(rotBase, makeTarget());
+    const buffedR = resolveTeamRotation(rotBuffed, makeTarget());
+    // Base ability has 1 hit; +2 extra hits → 3 hits → ~3× damage.
+    const ratio =
+      buffedR.perMember['x'].perAction[0].result.expected /
+      baseR.perMember['x'].perAction[0].result.expected;
+    expect(ratio).toBeCloseTo(3.0, 1);
+
+    // Application recorded.
+    expect(buffedR.teamBuffApplications).toContainEqual(
+      expect.objectContaining({
+        sourceMemberId: 'tra',
+        kind: 'trajannLegendaryCommander',
+        appliedToMemberId: 'x',
+        effect: expect.stringMatching(/\+2 hits on first ability/),
+      }),
+    );
+  });
+
+  it('extra hits do NOT apply to a melee (normal) attack even after trigger', () => {
+    const mTra = member('tra', trajannLike(0, 2), 0);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 2);
+
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'x', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // No "+X hits on first ability" application targeted at x.
+    expect(
+      r.teamBuffApplications.filter(
+        (a) =>
+          a.appliedToMemberId === 'x' &&
+          a.kind === 'trajannLegendaryCommander' &&
+          /hits on first ability/.test(a.effect),
+      ),
+    ).toEqual([]);
+  });
+
+  it('extra hits do NOT apply to a member\'s SECOND ability attack the same turn', () => {
+    const mTra = member('tra', trajannLike(0, 2), 0);
+    const xSrc = plainChar({
+      id: 'x',
+      abilities: [
+        {
+          id: 'x_a',
+          name: 'A',
+          kind: 'active',
+          profiles: [{ label: 'A', damageType: 'power', hits: 1, kind: 'ability' }],
+          cooldown: 0,
+        },
+        {
+          id: 'x_b',
+          name: 'B',
+          kind: 'active',
+          profiles: [{ label: 'B', damageType: 'power', hits: 1, kind: 'ability' }],
+          cooldown: 0,
+        },
+      ],
+    });
+    const mAttacker = member('x', xSrc, 1);
+
+    // x fires its own active first (arms friendlyActiveFiredThisTurn AFTER
+    // resolving), then a second ability. Per updateTurnStateAfterAction
+    // ordering, the trigger is set AFTER the first action, so the second
+    // ability sees friendlyActiveFiredThisTurn = true AND is x's SECOND
+    // non-normal attack → no +hits. (The first also doesn't get +hits
+    // because the trigger hadn't fired yet — that's covered separately.)
+    const rot: TeamRotation = {
+      members: [mTra, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'x', attack: abilityAttack('x_a', 0) },
+            { memberId: 'x', attack: abilityAttack('x_b', 0) },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // Zero "+hits on first ability" applications targeted at x.
+    expect(
+      r.teamBuffApplications.filter(
+        (a) =>
+          a.appliedToMemberId === 'x' &&
+          a.kind === 'trajannLegendaryCommander' &&
+          /hits on first ability/.test(a.effect),
+      ),
+    ).toEqual([]);
+  });
+
+  it('extra hits do NOT apply before any friendly active fires', () => {
+    // x fires an ability on turn 0 BEFORE anyone has fired an active →
+    // trigger not yet armed → no +hits on x's ability.
+    const mTra = member('tra', trajannLike(0, 2), 0);
+    const xSrc = plainChar({
+      id: 'x',
+      abilities: [
+        {
+          id: 'x_active',
+          name: 'X',
+          kind: 'active',
+          profiles: [{ label: 'X', damageType: 'power', hits: 1, kind: 'ability' }],
+          cooldown: 3,
+        },
+      ],
+    });
+    const mAttacker = member('x', xSrc, 1);
+    const rot: TeamRotation = {
+      members: [mTra, mAttacker],
+      turns: [
+        {
+          actions: [{ memberId: 'x', attack: abilityAttack('x_active', 3) }],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    expect(
+      r.teamBuffApplications.filter(
+        (a) =>
+          a.appliedToMemberId === 'x' &&
+          a.kind === 'trajannLegendaryCommander' &&
+          /hits on first ability/.test(a.effect),
+      ),
     ).toEqual([]);
   });
 });

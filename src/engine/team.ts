@@ -15,14 +15,18 @@
  *    at the moment Laviscus attacks. Order-sensitive: if Laviscus goes
  *    first, he has no contributors. Actions process in schedule order.
  *
- *  - `trajannLegendaryCommander`: Trajann grants adjacent Shield Host
- *    allies `extraHitsAdjacentToSelf` extra normal-attack hits (passive
- *    aura). Additionally, if any Shield Host ally has used an active
- *    earlier this turn, every attack this turn — from any member — gets
- *    `flatDamage` added. Shield Host is gated on a `shieldHost` trait
- *    the beneficiary carries; if the catalog hasn't tagged anyone with
- *    that trait yet, the effect stays dormant (correct by-design
- *    degradation).
+ *  - `trajannLegendaryCommander`: enemies receive +`flatDamage` from any
+ *    attack while they are adjacent to a friendly that has used an
+ *    active ability earlier this turn. For single-boss Guild Raid we
+ *    treat the boss as always-adjacent to every team member, so the
+ *    gate collapses to "any friendly fired an active earlier this
+ *    turn". Additionally, if the affected enemy is also adjacent to
+ *    Trajann (again: always true in single-boss MVP if Trajann is on
+ *    the team), friendly Characters score +`extraHitsAdjacentToSelf`
+ *    additional hits on their FIRST attack that is not a normal
+ *    attack (i.e. first ability attack) against that enemy this turn.
+ *    Per-member: each friendly gets the bonus exactly once, on their
+ *    first non-normal attack after the trigger has fired.
  *
  *  - `biovoreMythicAcid`: once Biovore's Spore-Mine ability damages the
  *    target during a turn, subsequent attacks that turn from Mythic-tier
@@ -52,6 +56,7 @@ import type {
   AbilityTeamBuff,
   Attacker,
   AttackContext,
+  AttackProfile,
   CatalogAbility,
   CatalogCharacter,
   MemberBreakdown,
@@ -92,10 +97,6 @@ function collectTargetTraits(target: Target): TraitId[] {
   return [...target.source.traits, ...debuffTraits];
 }
 
-function memberHasTrait(member: TeamMember, trait: TraitId): boolean {
-  return (member.attacker.source.traits ?? []).includes(trait);
-}
-
 /** Find a teamBuff of the given kind on any of the member's abilities. */
 function teamBuffOf<K extends AbilityTeamBuff['kind']>(
   member: TeamMember,
@@ -129,10 +130,19 @@ interface TurnState {
    */
   outrageContributors: Record<string, number>;
   /**
-   * True once any Shield Host ally has fired an `active` ability during
-   * this turn. Gates Trajann's flat-damage component.
+   * True once ANY friendly has fired an `active` ability during this
+   * turn. Gates Trajann's flat-damage component and extra-hits component.
+   * (In original mechanic this is "enemies adjacent to that specific
+   * active-user take +X"; single-boss MVP treats the boss as always in
+   * range so the filter collapses to a team-wide boolean.)
    */
-  shieldHostUsedActiveThisTurn: boolean;
+  friendlyActiveFiredThisTurn: boolean;
+  /**
+   * Per-member: has this member already performed a non-normal (ability)
+   * attack during this turn? Gates Trajann's "first attack that is not a
+   * normal attack" per-member once-per-turn bonus.
+   */
+  memberNonNormalAttackHappened: Record<string, boolean>;
   /**
    * True once a Biovore Spore-Mine ability has damaged the target this
    * turn. Gates biovoreMythicAcid for Mythic allies that act afterward.
@@ -143,7 +153,8 @@ interface TurnState {
 function initTurnState(): TurnState {
   return {
     outrageContributors: {},
-    shieldHostUsedActiveThisTurn: false,
+    friendlyActiveFiredThisTurn: false,
+    memberNonNormalAttackHappened: {},
     sporeMineDamagedTarget: false,
   };
 }
@@ -163,6 +174,7 @@ function initTurnState(): TurnState {
 function deriveTeamBuffs(
   member: TeamMember,
   team: TeamMember[],
+  currentProfile: AttackProfile,
   turn: TurnState,
   turnIdx: number,
   appsSink: TeamBuffApplication[],
@@ -210,36 +222,11 @@ function deriveTeamBuffs(
     }
   }
 
-  // ------ 3) Trajann LegendaryCommander aura: extra normal-attack hits on
-  //        adjacent Shield Host allies.
-  for (const other of team) {
-    if (other.id === member.id) continue;
-    if (!isAdjacent(other.position, member.position)) continue;
-    const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
-    if (!cmdr) continue;
-    if (!memberHasTrait(member, 'shieldHost')) continue; // trait gate
-    if (cmdr.extraHitsAdjacentToSelf > 0) {
-      buffs.push({
-        id: `trajann-hits:${other.id}`,
-        name: 'Legendary Commander (hits)',
-        bonusHits: cmdr.extraHitsAdjacentToSelf,
-        bonusHitsOn: 'normal',
-      });
-      appsSink.push({
-        turnIdx,
-        sourceMemberId: other.id,
-        kind: 'trajannLegendaryCommander',
-        appliedToMemberId: member.id,
-        effect: `+${cmdr.extraHitsAdjacentToSelf} hits (Shield Host adjacent to ${other.attacker.source.displayName})`,
-      });
-    }
-  }
-
-  // ------ 4) Trajann flat damage: if a Shield Host ally used an active
-  //        earlier this turn, every member gets a flat damage bonus.
-  if (turn.shieldHostUsedActiveThisTurn) {
-    // Apply once per Trajann-carrier present on the team (stacks if, say,
-    // two Trajanns are somehow fielded — catalog doesn't restrict).
+  // ------ 3) Trajann LegendaryCommander: flat damage to the target when a
+  //        friendly has already fired an active this turn. Applies to EVERY
+  //        team member's attacks against the enemy (not just the Shield
+  //        Host ally that fired the active).
+  if (turn.friendlyActiveFiredThisTurn) {
     for (const other of team) {
       const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
       if (!cmdr) continue;
@@ -253,7 +240,41 @@ function deriveTeamBuffs(
         sourceMemberId: other.id,
         kind: 'trajannLegendaryCommander',
         appliedToMemberId: member.id,
-        effect: `+${cmdr.flatDamage} flat dmg (Shield Host active fired)`,
+        effect: `+${cmdr.flatDamage} flat dmg (friendly active fired)`,
+      });
+    }
+  }
+
+  // ------ 4) Trajann LegendaryCommander: extra hits on the attacker's
+  //        FIRST non-normal (ability) attack this turn, once the flat-
+  //        damage trigger has fired AND Trajann is on the team. Gated on:
+  //          - a friendly fired an active earlier this turn (trigger)
+  //          - current action is an ability (first non-normal attack)
+  //          - this member hasn't yet resolved a non-normal attack this turn
+  //        The per-member `memberNonNormalAttackHappened` flag is set in
+  //        `updateTurnStateAfterAction` AFTER this action resolves, so the
+  //        first ability gets the bonus and later abilities do not.
+  if (
+    turn.friendlyActiveFiredThisTurn &&
+    currentProfile.kind === 'ability' &&
+    !turn.memberNonNormalAttackHappened[member.id]
+  ) {
+    for (const other of team) {
+      const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
+      if (!cmdr) continue;
+      if (cmdr.extraHitsAdjacentToSelf <= 0) continue;
+      buffs.push({
+        id: `trajann-hits:${other.id}`,
+        name: 'Legendary Commander (hits)',
+        bonusHits: cmdr.extraHitsAdjacentToSelf,
+        bonusHitsOn: 'ability',
+      });
+      appsSink.push({
+        turnIdx,
+        sourceMemberId: other.id,
+        kind: 'trajannLegendaryCommander',
+        appliedToMemberId: member.id,
+        effect: `+${cmdr.extraHitsAdjacentToSelf} hits on first ability (Trajann)`,
       });
     }
   }
@@ -304,13 +325,22 @@ function updateTurnStateAfterAction(
       (turn.outrageContributors[other.id] ?? 0) + 1;
   }
 
-  // Trajann: Shield Host ally used an active?
+  // Trajann flat-damage trigger: ANY friendly firing an active ability
+  // this turn arms the flag (no Shield Host gate — in original mechanic
+  // the filter is target-adjacency, which single-boss MVP treats as
+  // always true).
   if (
     attack.profile.kind === 'ability' &&
-    memberHasTrait(actor, 'shieldHost') &&
     isAbilityActive(actor.attacker, attack.profile.abilityId)
   ) {
-    turn.shieldHostUsedActiveThisTurn = true;
+    turn.friendlyActiveFiredThisTurn = true;
+  }
+
+  // Trajann extra-hits gate: record this member as having performed a
+  // non-normal (ability) attack this turn, so a later ability this turn
+  // from the same member doesn't re-consume the "first ability" bonus.
+  if (attack.profile.kind === 'ability') {
+    turn.memberNonNormalAttackHappened[actor.id] = true;
   }
 
   // Biovore: did this action fire the Mythic-Acid-carrier ability?
@@ -347,8 +377,8 @@ function isAbilityActive(attacker: Attacker, abilityId: string | undefined): boo
  *     e. Stamp cooldown on the actor's state.
  *     f. Fire matching passives on the actor — each profile consumes the
  *        same shield/HP pool.
- *     g. Update turn-local reactive flags (outrage contributors, spore-
- *        mine, shield-host-active).
+ *     g. Update turn-local reactive flags (outrage contributors,
+ *        friendly-active-fired, member-non-normal-happened, spore-mine).
  *  2. End of turn: tick each member's cooldowns; advance turnsAttacked.
  *  3. Record cumulative team total.
  */
@@ -401,6 +431,7 @@ export function resolveTeamRotation(
       const teamBuffs = deriveTeamBuffs(
         member,
         rotation.members,
+        action.attack.profile,
         turnState,
         turnIdx,
         teamBuffApplications,
