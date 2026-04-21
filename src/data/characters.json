@@ -1333,7 +1333,52 @@
       "hits": 3,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "biovore_bio_minefield",
+        "name": "Bio Minefield",
+        "kind": "active",
+        "cooldown": 2,
+        "profiles": [
+          {
+            "label": "Spore Mine — Toxic",
+            "damageType": "toxic",
+            "hits": 1,
+            "preArmorAddFlat": 7896,
+            "damageFactor": 1,
+            "kind": "ability",
+            "abilityId": "biovore_bio_minefield"
+          }
+        ]
+      },
+      {
+        "id": "biovore_spore_mines_launcher",
+        "name": "Spore Mines Launcher",
+        "kind": "active",
+        "cooldown": 0,
+        "profiles": [
+          {
+            "label": "Spore Mine — Toxic",
+            "damageType": "toxic",
+            "hits": 1,
+            "preArmorAddFlat": 7896,
+            "damageFactor": 1,
+            "kind": "ability",
+            "abilityId": "biovore_spore_mines_launcher"
+          }
+        ]
+      },
+      {
+        "id": "biovore_hyper_corrosive_acid",
+        "name": "Hyper Corrosive Acid",
+        "kind": "passive",
+        "teamBuff": {
+          "kind": "biovoreMythicAcid",
+          "pct": 20
+        },
+        "profiles": []
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -2473,60 +2518,43 @@
     },
     "abilities": [
       {
-        "id": "gulgortz_active_1",
-        "name": "Active 1",
+        "id": "gulgortz_waaagh",
+        "name": "WAAAGH!",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "gulgortz_active_1"
-        }
+        "cooldown": 2,
+        "profiles": [
+          {
+            "label": "WAAAGH! — Charge (melee attack)",
+            "damageType": "eviscerating",
+            "hits": 2,
+            "pierceOverride": 0.5,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1044,
+            "kind": "ability",
+            "abilityId": "gulgortz_waaagh"
+          }
+        ]
       },
       {
-        "id": "gulgortz_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "gulgortz_light_im_up",
+        "name": "Light 'Im Up",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "gulgortz_active_2"
-        }
-      },
-      {
-        "id": "gulgortz_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 28,
-          "kind": "ability",
-          "abilityId": "gulgortz_active_3"
-        }
-      },
-      {
-        "id": "gulgortz_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "gulgortz_active_4"
-        }
+        "trigger": {
+          "kind": "afterOwnNormalAttack"
+        },
+        "profiles": [
+          {
+            "label": "Light 'Im Up — Projectile",
+            "damageType": "projectile",
+            "hits": 3,
+            "pierceOverride": 0.15,
+            "damageFactor": 0.2244,
+            "kind": "ability",
+            "abilityId": "gulgortz_light_im_up"
+          }
+        ]
       }
     ],
     "traits": [
@@ -3222,7 +3250,68 @@
       "pierceOverride": 0.4,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "kariyan_martial_inspiration",
+        "name": "Martial Inspiration",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "cooldown": 2,
+        "scaling": {
+          "per": "turnsAttackedThisBattle",
+          "pctPerStep": 33
+        },
+        "profiles": [
+          {
+            "label": "Martial Inspiration — Eviscerating",
+            "damageType": "eviscerating",
+            "hits": 3,
+            "damageFactor": 0.524,
+            "kind": "ability",
+            "abilityId": "kariyan_martial_inspiration"
+          }
+        ]
+      },
+      {
+        "id": "kariyan_loc_piercing",
+        "name": "Legacy of Combat (vs Big Target)",
+        "kind": "passive",
+        "curveId": "abilityFactor",
+        "trigger": {
+          "kind": "afterOwnFirstAttackOfTurn",
+          "requiresTargetTrait": "big target"
+        },
+        "profiles": [
+          {
+            "label": "LoC — Piercing",
+            "damageType": "piercing",
+            "hits": 1,
+            "damageFactor": 2.571,
+            "kind": "ability",
+            "abilityId": "kariyan_loc_piercing"
+          }
+        ]
+      },
+      {
+        "id": "kariyan_loc_power",
+        "name": "Legacy of Combat (normal target)",
+        "kind": "passive",
+        "curveId": "abilityFactor",
+        "trigger": {
+          "kind": "afterOwnFirstAttackOfTurn"
+        },
+        "profiles": [
+          {
+            "label": "LoC — Power",
+            "damageType": "power",
+            "hits": 3,
+            "damageFactor": 0.2143,
+            "kind": "ability",
+            "abilityId": "kariyan_loc_power"
+          }
+        ]
+      }
+    ],
     "traits": [
       "martial katah",
       "beast snagga",
@@ -3257,74 +3346,56 @@
     },
     "abilities": [
       {
-        "id": "kharn_active_1",
-        "name": "Active 1",
+        "id": "kharn_kmb",
+        "name": "Kill! Maim! Burn!",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 50,
-          "kind": "ability",
-          "abilityId": "kharn_active_1"
-        }
+        "cooldown": 3,
+        "profiles": [
+          {
+            "label": "KMB — Piercing",
+            "damageType": "piercing",
+            "hits": 1,
+            "damageFactor": 2.44,
+            "kind": "ability",
+            "abilityId": "kharn_kmb"
+          },
+          {
+            "label": "KMB — Eviscerating",
+            "damageType": "eviscerating",
+            "hits": 6,
+            "damageFactor": 0.0933,
+            "kind": "ability",
+            "abilityId": "kharn_kmb"
+          },
+          {
+            "label": "KMB — Plasma",
+            "damageType": "plasma",
+            "hits": 1,
+            "damageFactor": 1.62,
+            "kind": "ability",
+            "abilityId": "kharn_kmb"
+          }
+        ]
       },
       {
-        "id": "kharn_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "kharn_betrayer",
+        "name": "The Betrayer",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 72,
-          "kind": "ability",
-          "abilityId": "kharn_active_2"
-        }
-      },
-      {
-        "id": "kharn_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "kharn_active_3"
-        }
-      },
-      {
-        "id": "kharn_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 16,
-          "kind": "ability",
-          "abilityId": "kharn_active_4"
-        }
-      },
-      {
-        "id": "kharn_active_5",
-        "name": "Active 5",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 5",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 33,
-          "kind": "ability",
-          "abilityId": "kharn_active_5"
-        }
+        "trigger": {
+          "kind": "afterOwnNormalAttack"
+        },
+        "profiles": [
+          {
+            "label": "Betrayer — Eviscerating",
+            "damageType": "eviscerating",
+            "hits": 4,
+            "damageFactor": 0.1601,
+            "kind": "ability",
+            "abilityId": "kharn_betrayer"
+          }
+        ]
       }
     ],
     "traits": [
@@ -3415,7 +3486,37 @@
       "pierceOverride": 0.4,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "laviscus_euphoric_strikes",
+        "name": "Euphoric Strikes",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "cooldown": 1,
+        "profiles": [
+          {
+            "label": "Euphoric Strikes — Power",
+            "damageType": "power",
+            "hits": 1,
+            "damageFactor": 1.1,
+            "kind": "ability",
+            "abilityId": "laviscus_euphoric_strikes"
+          }
+        ]
+      },
+      {
+        "id": "laviscus_refusal_outdone",
+        "name": "Refusal to be Outdone",
+        "kind": "passive",
+        "curveId": "abilityFactor",
+        "teamBuff": {
+          "kind": "laviscusOutrage",
+          "outragePct": 120,
+          "critDmgPerContributor": 1044
+        },
+        "profiles": []
+      }
+    ],
     "traits": [
       "thrill seekers",
       "crushing strike"
@@ -6021,7 +6122,37 @@
       "pierceOverride": 0.8,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "trajann_moment_shackle",
+        "name": "Moment Shackle",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "cooldown": 3,
+        "profiles": [
+          {
+            "label": "Moment Shackle — Bolter (reactive)",
+            "damageType": "bolter",
+            "hits": 2,
+            "damageFactor": 1.637,
+            "kind": "ability",
+            "abilityId": "trajann_moment_shackle"
+          }
+        ]
+      },
+      {
+        "id": "trajann_legendary_commander",
+        "name": "Legendary Commander",
+        "kind": "passive",
+        "curveId": "abilityFactor",
+        "teamBuff": {
+          "kind": "trajannLegendaryCommander",
+          "flatDamage": 1436,
+          "extraHitsAdjacentToSelf": 2
+        },
+        "profiles": []
+      }
+    ],
     "traits": [
       "martial katah",
       "crushing strike",

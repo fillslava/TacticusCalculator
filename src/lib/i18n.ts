@@ -104,6 +104,23 @@ const en: Dict = {
   'rarity.epic': 'Epic',
   'rarity.legendary': 'Legendary',
   'rarity.mythic': 'Mythic',
+
+  'note.assumptions.title': 'Modeling assumptions',
+  'note.assumptions.intro':
+    'This character uses recently-modeled mechanics. Verify against in-game damage preview:',
+  'note.assumptions.verify':
+    'If numbers disagree, report the discrepancy so we can fix the calculator.',
+  'note.assumptions.multiComponent': 'multi-component',
+  'note.assumptions.triggered': 'triggered',
+  'note.assumptions.teamBuff': 'team buff',
+  'note.assumptions.scaling': 'scales',
+  'note.assumptions.cooldown': 'cd',
+  'note.assumptions.oncePerBattle': 'once/battle',
+  'note.assumptions.trigger.afterNormal': 'after own normal attack',
+  'note.assumptions.trigger.firstAttackOfTurn': 'after own first attack of turn',
+  'note.assumptions.trigger.targetTrait': 'target trait',
+  'note.assumptions.scaling.per': 'per',
+  'note.assumptions.guildRaidOnly': 'Guild Raid only',
 };
 
 const ru: Dict = {
@@ -189,6 +206,23 @@ const ru: Dict = {
   'rarity.epic': 'Эпический',
   'rarity.legendary': 'Легендарный',
   'rarity.mythic': 'Мифический',
+
+  'note.assumptions.title': 'Предположения модели',
+  'note.assumptions.intro':
+    'У этого персонажа недавно добавлены механики. Сверьте с игровым превью урона:',
+  'note.assumptions.verify':
+    'Если числа не сходятся — сообщите о расхождении, поправим калькулятор.',
+  'note.assumptions.multiComponent': 'мульти-удар',
+  'note.assumptions.triggered': 'триггер',
+  'note.assumptions.teamBuff': 'команд. баф',
+  'note.assumptions.scaling': 'масштаб',
+  'note.assumptions.cooldown': 'кд',
+  'note.assumptions.oncePerBattle': 'раз/бой',
+  'note.assumptions.trigger.afterNormal': 'после своей обычной атаки',
+  'note.assumptions.trigger.firstAttackOfTurn': 'после первой своей атаки хода',
+  'note.assumptions.trigger.targetTrait': 'трейт цели',
+  'note.assumptions.scaling.per': 'за',
+  'note.assumptions.guildRaidOnly': 'только в рейде гильдии',
 };
 
 const de: Dict = {
@@ -274,6 +308,23 @@ const de: Dict = {
   'rarity.epic': 'Episch',
   'rarity.legendary': 'Legendär',
   'rarity.mythic': 'Mythisch',
+
+  'note.assumptions.title': 'Modellannahmen',
+  'note.assumptions.intro':
+    'Dieser Charakter nutzt neu modellierte Mechaniken. Mit der Ingame-Schadensvorschau vergleichen:',
+  'note.assumptions.verify':
+    'Bei Abweichungen bitte melden — wir korrigieren den Rechner.',
+  'note.assumptions.multiComponent': 'Multi-Komponente',
+  'note.assumptions.triggered': 'ausgelöst',
+  'note.assumptions.teamBuff': 'Team-Buff',
+  'note.assumptions.scaling': 'skaliert',
+  'note.assumptions.cooldown': 'CD',
+  'note.assumptions.oncePerBattle': '1×/Kampf',
+  'note.assumptions.trigger.afterNormal': 'nach eigenem Normalangriff',
+  'note.assumptions.trigger.firstAttackOfTurn': 'nach erstem Angriff des Zuges',
+  'note.assumptions.trigger.targetTrait': 'Ziel-Merkmal',
+  'note.assumptions.scaling.per': 'pro',
+  'note.assumptions.guildRaidOnly': 'nur im Gilden-Raid',
 };
 
 const fr: Dict = {
@@ -359,6 +410,23 @@ const fr: Dict = {
   'rarity.epic': 'Épique',
   'rarity.legendary': 'Légendaire',
   'rarity.mythic': 'Mythique',
+
+  'note.assumptions.title': 'Hypothèses de modélisation',
+  'note.assumptions.intro':
+    "Ce personnage utilise des mécaniques récemment modélisées. Vérifier avec l'aperçu de dégâts en jeu:",
+  'note.assumptions.verify':
+    'En cas de divergence, signalez-la pour que nous corrigions le calculateur.',
+  'note.assumptions.multiComponent': 'multi-composant',
+  'note.assumptions.triggered': 'déclenché',
+  'note.assumptions.teamBuff': "bonus d'équipe",
+  'note.assumptions.scaling': 'échelle',
+  'note.assumptions.cooldown': 'cd',
+  'note.assumptions.oncePerBattle': '1×/combat',
+  'note.assumptions.trigger.afterNormal': 'après votre attaque normale',
+  'note.assumptions.trigger.firstAttackOfTurn': 'après votre 1re attaque du tour',
+  'note.assumptions.trigger.targetTrait': 'trait de la cible',
+  'note.assumptions.scaling.per': 'par',
+  'note.assumptions.guildRaidOnly': 'raid de guilde uniquement',
 };
 
 const nl: Dict = {
@@ -444,6 +512,23 @@ const nl: Dict = {
   'rarity.epic': 'Episch',
   'rarity.legendary': 'Legendarisch',
   'rarity.mythic': 'Mythisch',
+
+  'note.assumptions.title': 'Modelaannames',
+  'note.assumptions.intro':
+    'Dit personage gebruikt recent gemodelleerde mechanieken. Vergelijk met de in-game schadevoorbeeld:',
+  'note.assumptions.verify':
+    'Bij afwijking graag melden zodat we de calculator kunnen corrigeren.',
+  'note.assumptions.multiComponent': 'multi-component',
+  'note.assumptions.triggered': 'geactiveerd',
+  'note.assumptions.teamBuff': 'team-buff',
+  'note.assumptions.scaling': 'schaalt',
+  'note.assumptions.cooldown': 'cd',
+  'note.assumptions.oncePerBattle': '1×/gevecht',
+  'note.assumptions.trigger.afterNormal': 'na eigen normale aanval',
+  'note.assumptions.trigger.firstAttackOfTurn': 'na eigen 1e aanval van beurt',
+  'note.assumptions.trigger.targetTrait': 'eigenschap doel',
+  'note.assumptions.scaling.per': 'per',
+  'note.assumptions.guildRaidOnly': 'alleen in Guild Raid',
 };
 
 const dicts: Record<Lang, Dict> = { en, ru, de, fr, nl };

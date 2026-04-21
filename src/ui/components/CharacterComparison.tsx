@@ -20,11 +20,16 @@ import type {
 
 type Attack = 'melee' | 'ranged' | 'ability1' | 'ability2' | 'ability3';
 
-function pickProfile(char: CatalogCharacter, attack: Attack): AttackProfile | undefined {
-  if (attack === 'melee') return char.melee;
-  if (attack === 'ranged') return char.ranged;
+/**
+ * Returns one or more profiles for the selected attack. Multi-component
+ * abilities (e.g. Kharn's "Kill! Maim! Burn!") return one profile per
+ * component; the caller sums the resulting damage values.
+ */
+function pickProfiles(char: CatalogCharacter, attack: Attack): AttackProfile[] {
+  if (attack === 'melee') return char.melee ? [char.melee] : [];
+  if (attack === 'ranged') return char.ranged ? [char.ranged] : [];
   const abIdx = attack === 'ability1' ? 0 : attack === 'ability2' ? 1 : 2;
-  return char.abilities[abIdx]?.profile;
+  return char.abilities[abIdx]?.profiles ?? [];
 }
 
 function customBoss(armor: number, hp: number, shield: number, traits: string[]): CatalogBoss {
@@ -95,8 +100,8 @@ export function CharacterComparison() {
 
     for (const char of allChars) {
       if (factionFilter !== 'all' && char.faction !== factionFilter) continue;
-      const profile = pickProfile(char, attack);
-      if (!profile) {
+      const profiles = pickProfiles(char, attack);
+      if (profiles.length === 0) {
         out.push({
           id: char.id,
           name: char.displayName,
@@ -119,17 +124,28 @@ export function CharacterComparison() {
         },
         equipment: [],
       };
-      const ctx: AttackContext = { profile, rngMode: 'expected' };
-      const r = resolveRotation(attacker, t, { turns: [{ attacks: [ctx], buffs: turnBuffs }] });
-      const first = r.perTurn[0];
+      const ctxs: AttackContext[] = profiles.map((profile) => ({
+        profile,
+        rngMode: 'expected',
+      }));
+      const r = resolveRotation(attacker, t, { turns: [{ attacks: ctxs, buffs: turnBuffs }] });
+      // Sum across all components resolved for this turn (one per profile)
+      const firstTurnPerTurn = r.perTurn.slice(0, ctxs.length);
+      const totalHits = profiles.reduce((n, p) => n + Math.max(1, p.hits), 0);
+      const firstTurnTotal = firstTurnPerTurn.reduce((s, d) => s + d.expected, 0);
+      const avgCrit =
+        firstTurnPerTurn.length > 0
+          ? firstTurnPerTurn.reduce((s, d) => s + d.critProbability, 0) /
+            firstTurnPerTurn.length
+          : 0;
       out.push({
         id: char.id,
         name: char.displayName,
         faction: char.faction,
         alliance: char.alliance,
-        firstTurn: first?.expected ?? 0,
-        perHit: first ? first.expected / Math.max(1, profile.hits) : 0,
-        crit: first?.critProbability ?? 0,
+        firstTurn: firstTurnTotal,
+        perHit: firstTurnTotal / Math.max(1, totalHits),
+        crit: avgCrit,
       });
     }
 

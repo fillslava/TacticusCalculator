@@ -10,7 +10,6 @@ import {
 import type {
   Attacker,
   AttackContext,
-  AttackProfile,
   CatalogBoss,
   CatalogCharacter,
   CatalogEquipmentSlot,
@@ -18,19 +17,31 @@ import type {
   Target,
 } from '../../engine/types';
 
-function attackContextFor(
+/**
+ * Expands an `attackKey` (melee / ranged / ability:id) into the list of
+ * atomic {@link AttackContext}s to resolve in a single turn slot. Most
+ * abilities return a singleton; multi-component abilities like Kharn's
+ * "Kill! Maim! Burn!" return one context per component (Piercing +
+ * Eviscerating + Plasma), which the rotation engine sums.
+ */
+function attackContextsFor(
   key: string,
   char: CatalogCharacter,
-): AttackContext | null {
-  let profile: AttackProfile | undefined;
-  if (key === 'melee') profile = char.melee;
-  else if (key === 'ranged') profile = char.ranged;
-  else if (key.startsWith('ability:')) {
+): AttackContext[] {
+  if (key === 'melee' && char.melee)
+    return [{ profile: char.melee, rngMode: 'expected' }];
+  if (key === 'ranged' && char.ranged)
+    return [{ profile: char.ranged, rngMode: 'expected' }];
+  if (key.startsWith('ability:')) {
     const id = key.slice('ability:'.length);
-    profile = char.abilities.find((a) => a.id === id)?.profile;
+    const ability = char.abilities.find((a) => a.id === id);
+    if (!ability) return [];
+    return ability.profiles.map<AttackContext>((profile) => ({
+      profile,
+      rngMode: 'expected',
+    }));
   }
-  if (!profile) return null;
-  return { profile, rngMode: 'expected' };
+  return [];
 }
 
 function customBoss(
@@ -118,8 +129,8 @@ export function useDamage() {
 
     const turns = rotation
       .map((t) => {
-        const ctx = attackContextFor(t.attackKey, char);
-        return ctx ? { attacks: [ctx], buffs: t.buffs } : null;
+        const ctxs = attackContextsFor(t.attackKey, char);
+        return ctxs.length > 0 ? { attacks: ctxs, buffs: t.buffs } : null;
       })
       .filter((t): t is { attacks: AttackContext[]; buffs: import('../../engine/types').TurnBuff[] } => Boolean(t));
 

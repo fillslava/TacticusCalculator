@@ -81,13 +81,81 @@ export const ITEM_STAT_KEYS: (keyof ItemStatMods)[] = [
 
 export type TraitId = string;
 
+/**
+ * Trigger for a passive that reacts to in-battle events. Populated on
+ * catalog passives that fire their `profiles` automatically (Kharn's
+ * Betrayer, Gulgortz's Light 'em Up, Kariyan's Legacy of Combat).
+ */
+export type AbilityTrigger =
+  | { kind: 'afterOwnNormalAttack' }
+  | {
+      kind: 'afterOwnFirstAttackOfTurn';
+      /** Restricts the passive to targets carrying this trait. */
+      requiresTargetTrait?: TraitId;
+    };
+
+/**
+ * Per-battle scaling — each step adds `pctPerStep` to the ability's final
+ * damage. Used by Kariyan's Martial Inspiration (+33% damage per turn she
+ * has attacked this battle).
+ */
+export interface AbilityScaling {
+  per: 'turnsAttackedThisBattle';
+  pctPerStep: number;
+}
+
+/**
+ * Team-context buffs that only resolve in Guild Raid mode. The engine
+ * ignores these outside the team rotation so single-attacker calculations
+ * stay pure.
+ */
+export type AbilityTeamBuff =
+  | {
+      kind: 'laviscusOutrage';
+      /** Flat ATK buff (%) added to each adjacent ally's damage. */
+      outragePct: number;
+      /** Extra crit-damage per Outrage contributor. */
+      critDmgPerContributor: number;
+    }
+  | {
+      kind: 'trajannLegendaryCommander';
+      /** Flat bonus damage added against enemies adjacent to a Shield Host
+       *  friend who used an active this turn. */
+      flatDamage: number;
+      /** Extra hits appended to melee/ranged when adjacent. */
+      extraHitsAdjacentToSelf: number;
+    }
+  | {
+      kind: 'biovoreMythicAcid';
+      /** % damage bonus granted to Mythic-tier allies after a Spore Mine
+       *  damages the same target. */
+      pct: number;
+    };
+
 export interface CatalogAbility {
   id: string;
   name: string;
   kind: 'active' | 'passive';
   curveId?: string;
-  profile?: AttackProfile;
+  /**
+   * Ordered list of component attack profiles that resolve together when
+   * the ability triggers. Most abilities have a single component; Kharn's
+   * "Kill! Maim! Burn!" has three (Piercing, Eviscerating, Plasma).
+   *
+   * Purely buff/utility passives may have an empty list.
+   */
+  profiles: AttackProfile[];
+  /**
+   * Cooldown in rounds. `999` is the sentinel for "once per battle".
+   * Undefined on passives.
+   */
   cooldown?: number;
+  /** Triggering event for passives that auto-fire. */
+  trigger?: AbilityTrigger;
+  /** Per-battle damage scaling. */
+  scaling?: AbilityScaling;
+  /** Team-level buff effect (Guild Raid only). */
+  teamBuff?: AbilityTeamBuff;
 }
 
 export interface CatalogCharacter {

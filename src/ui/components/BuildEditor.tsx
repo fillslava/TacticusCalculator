@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { useApp } from '../../state/store';
 import { useT } from '../../lib/i18n';
 import { listCharacters, getEquipment, loadCatalog } from '../../data/catalog';
@@ -10,7 +10,11 @@ import {
   progressionToStarLevel,
   clampProgression,
 } from '../../engine/progression';
-import type { AbilityLevel, ItemStatMods } from '../../engine/types';
+import type {
+  AbilityLevel,
+  CatalogAbility,
+  ItemStatMods,
+} from '../../engine/types';
 import { ITEM_STAT_KEYS } from '../../engine/types';
 
 const MAX_XP_LEVEL = 60;
@@ -262,6 +266,10 @@ export function BuildEditor() {
             </span>
           ))}
         </div>
+      )}
+
+      {selected && selected.abilities.length > 0 && (
+        <AbilityAssumptionsNote abilities={selected.abilities} />
       )}
 
       {selected && selected.abilities.length > 0 && (
@@ -613,4 +621,148 @@ function Stat({ label, value }: { label: string; value: string }) {
       <div className="font-mono">{value}</div>
     </div>
   );
+}
+
+/**
+ * Renders a compact, collapsible note listing the modeling assumptions for any
+ * ability on the selected character that uses one of the recently-added
+ * mechanics (multi-component profiles, triggered passives, scaling, or team
+ * buffs). Invisible if nothing about the character is "interesting", so regular
+ * characters don't see extra chrome.
+ *
+ * Purpose: knowledgeable players can cross-check the model against the in-game
+ * damage preview and report discrepancies. Every tagged ability exposes its
+ * assumed cooldown, damage-type × hit count, and trigger/scaling/team-buff
+ * metadata — the same inputs the engine consumes.
+ */
+function AbilityAssumptionsNote({ abilities }: { abilities: CatalogAbility[] }) {
+  const t = useT();
+  const interesting = abilities.filter(
+    (a) =>
+      a.profiles.length >= 2 ||
+      Boolean(a.trigger) ||
+      Boolean(a.teamBuff) ||
+      Boolean(a.scaling),
+  );
+  if (interesting.length === 0) return null;
+  return (
+    <details className="mt-3 rounded border border-amber-900/40 bg-amber-950/20 p-2 text-xs open:pb-3">
+      <summary className="cursor-pointer font-semibold text-amber-300">
+        {t('note.assumptions.title')}{' '}
+        <span className="text-[10px] font-normal text-amber-300/60">
+          ({interesting.length})
+        </span>
+      </summary>
+      <p className="mt-1 text-slate-300">{t('note.assumptions.intro')}</p>
+      <ul className="mt-2 space-y-2">
+        {interesting.map((ab) => (
+          <AbilityAssumptionRow key={ab.id} ability={ab} />
+        ))}
+      </ul>
+      <p className="mt-2 text-[11px] italic text-slate-500">
+        {t('note.assumptions.verify')}
+      </p>
+    </details>
+  );
+}
+
+function AbilityAssumptionRow({ ability }: { ability: CatalogAbility }) {
+  const t = useT();
+  return (
+    <li className="rounded bg-bg-base/60 p-2">
+      <div className="flex flex-wrap items-center gap-1">
+        <span className="text-[10px] uppercase text-slate-500">
+          {ability.kind}
+        </span>
+        <span className="text-slate-100">{ability.name}</span>
+        {ability.cooldown !== undefined && (
+          <span className="rounded bg-bg-elevated px-1 text-[10px] text-slate-400">
+            {ability.cooldown >= 999
+              ? t('note.assumptions.oncePerBattle')
+              : `${t('note.assumptions.cooldown')} ${ability.cooldown}`}
+          </span>
+        )}
+        {ability.profiles.length >= 2 && (
+          <AssumptionTag color="cyan">
+            {t('note.assumptions.multiComponent')}
+          </AssumptionTag>
+        )}
+        {ability.trigger && (
+          <AssumptionTag color="violet">
+            {t('note.assumptions.triggered')}
+          </AssumptionTag>
+        )}
+        {ability.teamBuff && (
+          <AssumptionTag color="amber">
+            {t('note.assumptions.teamBuff')}
+          </AssumptionTag>
+        )}
+        {ability.scaling && (
+          <AssumptionTag color="rose">
+            {t('note.assumptions.scaling')}
+          </AssumptionTag>
+        )}
+      </div>
+      {ability.profiles.length > 0 && (
+        <div className="mt-1 flex flex-wrap gap-1 font-mono text-[10px] text-slate-400">
+          {ability.profiles.map((p, i) => (
+            <span key={i} className="rounded bg-bg-elevated px-1 py-0.5">
+              {p.hits}× {p.damageType}
+              {p.damageFactor !== undefined && p.damageFactor !== 1
+                ? ` · ×${p.damageFactor}`
+                : ''}
+              {p.preArmorAddFlat ? ` · +${p.preArmorAddFlat}` : ''}
+            </span>
+          ))}
+        </div>
+      )}
+      {ability.trigger && (
+        <div className="mt-1 text-[10px] text-slate-500">
+          →{' '}
+          {ability.trigger.kind === 'afterOwnNormalAttack'
+            ? t('note.assumptions.trigger.afterNormal')
+            : t('note.assumptions.trigger.firstAttackOfTurn')}
+          {ability.trigger.kind === 'afterOwnFirstAttackOfTurn' &&
+            ability.trigger.requiresTargetTrait && (
+              <>
+                {' · '}
+                {t('note.assumptions.trigger.targetTrait')}:{' '}
+                <span className="text-slate-400">
+                  {ability.trigger.requiresTargetTrait}
+                </span>
+              </>
+            )}
+        </div>
+      )}
+      {ability.scaling && (
+        <div className="mt-1 text-[10px] text-slate-500">
+          → +{ability.scaling.pctPerStep}% {t('note.assumptions.scaling.per')}{' '}
+          <span className="text-slate-400">{ability.scaling.per}</span>
+        </div>
+      )}
+      {ability.teamBuff && (
+        <div className="mt-1 text-[10px] text-slate-500">
+          → <span className="text-slate-400">{ability.teamBuff.kind}</span>
+          {' · '}
+          <span className="italic">{t('note.assumptions.guildRaidOnly')}</span>
+        </div>
+      )}
+    </li>
+  );
+}
+
+function AssumptionTag({
+  color,
+  children,
+}: {
+  color: 'cyan' | 'violet' | 'amber' | 'rose';
+  children: ReactNode;
+}) {
+  const cls = {
+    cyan: 'bg-cyan-950/60 text-cyan-300',
+    violet: 'bg-violet-950/60 text-violet-300',
+    amber: 'bg-amber-950/60 text-amber-300',
+    rose: 'bg-rose-950/60 text-rose-300',
+  }[color];
+  return <span className={`rounded px-1 text-[10px] ${cls}`}>{children}</span>;
 }

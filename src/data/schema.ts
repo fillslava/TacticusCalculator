@@ -62,13 +62,53 @@ export const AttackProfileSchema = z.object({
   ignoresCrit: z.boolean().optional(),
 });
 
+export const AbilityTriggerSchema = z.union([
+  z.object({ kind: z.literal('afterOwnNormalAttack') }),
+  z.object({
+    kind: z.literal('afterOwnFirstAttackOfTurn'),
+    requiresTargetTrait: z.string().optional(),
+  }),
+]);
+
+export const AbilityScalingSchema = z.object({
+  per: z.enum(['turnsAttackedThisBattle']),
+  pctPerStep: z.number(),
+});
+
+export const AbilityTeamBuffSchema = z.union([
+  z.object({
+    kind: z.literal('laviscusOutrage'),
+    outragePct: z.number(),
+    critDmgPerContributor: z.number(),
+  }),
+  z.object({
+    kind: z.literal('trajannLegendaryCommander'),
+    flatDamage: z.number(),
+    extraHitsAdjacentToSelf: z.number().int(),
+  }),
+  z.object({
+    kind: z.literal('biovoreMythicAcid'),
+    pct: z.number(),
+  }),
+]);
+
+/**
+ * Raw ability shape as it appears in catalog JSON. Accepts both the legacy
+ * singleton `profile` and the new `profiles` array so older scraper output
+ * and hand-authored entries both load. The loader coerces to `profiles`
+ * (see catalog.ts::normalizeAbility).
+ */
 export const AbilitySchema = z.object({
   id: z.string(),
   name: z.string(),
   kind: z.enum(['active', 'passive']),
   curveId: z.string().optional(),
   profile: AttackProfileSchema.optional(),
+  profiles: z.array(AttackProfileSchema).optional(),
   cooldown: z.number().int().optional(),
+  trigger: AbilityTriggerSchema.optional(),
+  scaling: AbilityScalingSchema.optional(),
+  teamBuff: AbilityTeamBuffSchema.optional(),
 });
 
 export const CharacterSchema = z.object({
