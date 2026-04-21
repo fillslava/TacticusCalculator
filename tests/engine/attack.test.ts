@@ -237,6 +237,130 @@ describe('resolveAttack — ability scaling (wiki calibration)', () => {
     expect(r.expected).toBeGreaterThan(7961 * 0.95);
     expect(r.expected).toBeLessThan(7961 * 1.05);
   });
+
+  /**
+   * HDTW step 1 reads "Damage value" as the per-hit ability damage (already
+   * includes damageFactor × abilityMul). Crit "replaces Damage with Damage +
+   * Crit Damage" at that per-hit level — so critDamage is a FLAT bonus on
+   * top of the already-scaled ability hit, not a multiplier input.
+   *
+   * User-reported regression: with a 1797-crit Mythic weapon equipped, the
+   * calculator's crit-max ballooned to ~595 000 on a single Kharn KMB
+   * because the engine folded critDamage into baseDamage BEFORE multiplying
+   * by damageFactor×abilityMul (~130 at Mythic L60). Expected crit hit is
+   * roughly `7961 + 1797 ≈ 9758`, not `(25+1797) × 2.44 × 130.5 ≈ 579 829`.
+   */
+  it('crit bonus is added after damageFactor, not multiplied by it', () => {
+    const kharn: CatalogCharacter = {
+      id: 'kharnCritStub',
+      displayName: 'Kharn',
+      faction: 'World Eaters',
+      alliance: 'Chaos',
+      baseStats: {
+        damage: 25,
+        armor: 20,
+        hp: 90,
+        critChance: 1,
+        critDamage: 1797,
+        blockChance: 0,
+        blockDamage: 0,
+        meleeHits: 4,
+        rangedHits: 0,
+      },
+      melee: {
+        label: 'Melee',
+        damageType: 'eviscerating',
+        hits: 4,
+        pierceOverride: 0.5,
+        kind: 'melee',
+      },
+      abilities: [],
+      traits: [],
+      maxRarity: 'mythic',
+    };
+    const dummyBoss: CatalogBoss = {
+      id: 'zeroArmor',
+      displayName: 'Zero Armor',
+      stages: [{ name: 'L1', hp: 10_000_000, armor: 0, traits: [] }],
+    };
+    const attacker: Attacker = {
+      source: kharn,
+      progression: { stars: 5, rank: 19, xpLevel: 60, rarity: 'mythic' },
+      equipment: [],
+    };
+    const target: Target = { source: dummyBoss, stageIndex: 0 };
+    const ctx: AttackContext = {
+      profile: {
+        label: 'KMB — Piercing',
+        damageType: 'piercing',
+        hits: 1,
+        damageFactor: 2.44,
+        kind: 'ability',
+        abilityId: 'kharn_kmb',
+      },
+      rngMode: 'expected',
+    };
+    const r = resolveAttack(attacker, target, ctx);
+    // All crits at 100% crit chance; per-hit = 7961 + 1797 = 9758 mid.
+    // Allow ±15% for pierce (piercing=0.8) + variance rounding.
+    expect(r.expected).toBeGreaterThan(9758 * 0.85);
+    expect(r.expected).toBeLessThan(9758 * 1.15);
+    // Hard upper bound: must be nowhere near the old buggy 500k+ regime.
+    expect(r.expected).toBeLessThan(20_000);
+  });
+
+  /**
+   * Range reporting regression: with pCrit=0 the max field should equal the
+   * non-crit max, and with pCrit=1 the min field should equal the crit min.
+   * The old engine always used `nonCrit.min` and `crit.max` regardless of
+   * crit chance, which produced misleading envelopes like "6150–51366" for
+   * a 0%-crit build.
+   */
+  it('pCrit=0 reports non-crit max (range not inflated by unreachable crits)', () => {
+    const charNoCrit: CatalogCharacter = {
+      id: 'zeroCritStub',
+      displayName: 'Zero Crit',
+      faction: 'Space Marines',
+      alliance: 'Imperial',
+      baseStats: {
+        damage: 100,
+        armor: 50,
+        hp: 1000,
+        critChance: 0,
+        critDamage: 5000, // huge critDamage — should NOT appear if pCrit=0
+        blockChance: 0,
+        blockDamage: 0,
+        meleeHits: 3,
+        rangedHits: 0,
+      },
+      melee: { label: 'Melee', damageType: 'power', hits: 3, kind: 'melee' },
+      abilities: [],
+      traits: [],
+      maxRarity: 'legendary',
+    };
+    const attacker: Attacker = {
+      source: charNoCrit,
+      progression: { stars: 0, rank: 0, xpLevel: 1, rarity: 'legendary' },
+      equipment: [],
+    };
+    const target: Target = {
+      source: {
+        id: 'z',
+        displayName: 'Z',
+        stages: [{ name: 'L1', hp: 100_000, armor: 0, traits: [] }],
+      },
+      stageIndex: 0,
+    };
+    const ctx: AttackContext = {
+      profile: { label: 'Melee', damageType: 'power', hits: 3, kind: 'melee' },
+      rngMode: 'expected',
+    };
+    const r = resolveAttack(attacker, target, ctx);
+    // expected = 100 × 3 hits × 1.0 mid = 300 per-hit × variance ≈ 300 × 3.
+    // max should be variance-high only (≤ 360), NOT critDamage-inflated.
+    expect(r.max).toBeLessThan(r.expected * 1.35);
+    expect(r.min).toBeLessThan(r.expected);
+  });
 });
 
 describe('resolveRotation', () => {

@@ -141,9 +141,16 @@ function perHitDamage(
   isCrit: boolean,
   frame: Frame,
 ): { expected: number; min: number; max: number } {
+  // Per HDTW wiki step 1: "Damage value" = the per-hit damage written on the
+  // ability description (i.e. baseDamage × damageFactor × abilityMul).
+  // Crit replaces that per-hit value with (Damage + Crit Damage). So the
+  // critDamage flat bonus MUST be added AFTER the damage-factor chain, not
+  // before — otherwise an ability with damageFactor×abilityMul = 130 (Mythic
+  // L60) would amplify a 1797-point crit weapon into 234 000 per hit, which
+  // is an order of magnitude more than the game actually deals.
+  const effectiveBeforeCrit = baseDamage * frame.damageFactor;
   const critBonus = isCrit ? frame.critDamage : 0;
-  const base = baseDamage + critBonus;
-  const effective = base * frame.damageFactor + frame.preArmorFlat;
+  const effective = effectiveBeforeCrit + critBonus + frame.preArmorFlat;
   const effectiveMul = effective * frame.preArmorMultiplier;
 
   let capped = effectiveMul;
@@ -201,8 +208,12 @@ export function resolveAttack(
     const crit = perHitDamage(baseDamage, true, frame);
     const nonCrit = perHitDamage(baseDamage, false, frame);
     const expected = crit.expected * pCrit + nonCrit.expected * (1 - pCrit);
-    const min = nonCrit.min;
-    const max = crit.max;
+    // Range must respect the actual crit probability. With pCrit=0 the hit
+    // cannot crit, so reporting crit.max as the max artificially inflates
+    // the envelope; with pCrit=1 the hit must crit, so nonCrit.min is
+    // unreachable. Interpolate the bounds accordingly.
+    const min = pCrit >= 1 ? crit.min : nonCrit.min;
+    const max = pCrit <= 0 ? nonCrit.max : crit.max;
     totalExpected += expected;
     totalMin += min;
     totalMax += max;

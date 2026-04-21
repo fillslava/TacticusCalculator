@@ -306,8 +306,8 @@ export function BuildEditor() {
                     <div className="rounded bg-bg-base px-2 py-1 font-mono text-[11px] text-slate-300">
                       {relic!.id}
                       <div className="text-[10px] text-slate-500">
-                        L{relic!.level} · {relic!.rarity} · mods unknown — add via
-                        manual stat bonuses
+                        L{relic!.level} · {String(relic!.rarity).toLowerCase()} ·
+                        mods unknown — add via manual stat bonuses
                       </div>
                     </div>
                   ) : (
@@ -334,7 +334,11 @@ export function BuildEditor() {
                       </select>
                       {relic && (
                         <span className="text-[10px] italic text-amber-300/80">
-                          {relic.id} (legendary-approx stats)
+                          {relic.id} ({String(relic.rarity).toLowerCase()}
+                          {String(relic.rarity).toLowerCase() === 'mythic'
+                            ? ' — using legendary-approx stats (mythic gear not yet scraped)'
+                            : ''}
+                          )
                         </span>
                       )}
                     </>
