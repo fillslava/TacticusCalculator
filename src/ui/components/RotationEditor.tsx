@@ -23,7 +23,12 @@ export function RotationEditor() {
 
   const options: { key: string; label: string }[] = [{ key: 'melee', label: t('label.melee') }];
   if (char?.ranged) options.push({ key: 'ranged', label: t('label.ranged') });
+  // Only active abilities are user-selectable. Passives (Kharn's Betrayer,
+  // Kariyan's Legacy of Combat, Gulgortz's Light 'Im Up, …) auto-trigger off
+  // normal attacks in Phase 2 — picking them as a standalone turn action
+  // would double-count their damage.
   for (const ab of char?.abilities ?? []) {
+    if (ab.kind !== 'active') continue;
     options.push({ key: `ability:${ab.id}`, label: ab.name });
   }
 

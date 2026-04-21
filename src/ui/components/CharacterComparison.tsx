@@ -28,8 +28,11 @@ type Attack = 'melee' | 'ranged' | 'ability1' | 'ability2' | 'ability3';
 function pickProfiles(char: CatalogCharacter, attack: Attack): AttackProfile[] {
   if (attack === 'melee') return char.melee ? [char.melee] : [];
   if (attack === 'ranged') return char.ranged ? [char.ranged] : [];
+  // Index into ACTIVE abilities only — passives auto-trigger off normals in
+  // Phase 2, they're not standalone actions a player picks in a turn.
+  const actives = char.abilities.filter((a) => a.kind === 'active');
   const abIdx = attack === 'ability1' ? 0 : attack === 'ability2' ? 1 : 2;
-  return char.abilities[abIdx]?.profiles ?? [];
+  return actives[abIdx]?.profiles ?? [];
 }
 
 function customBoss(armor: number, hp: number, shield: number, traits: string[]): CatalogBoss {

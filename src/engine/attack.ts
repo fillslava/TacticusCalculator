@@ -71,7 +71,7 @@ function resolveTargetStats(target: Target): TargetResolvedStats {
 }
 
 function buildInitialFrame(attacker: Attacker, target: Target, ctx: AttackContext): Frame {
-  const a = resolveAttackerStats(attacker);
+  let a = resolveAttackerStats(attacker);
   const t = resolveTargetStats(target);
   const profile = { ...ctx.profile };
   const pierce = pierceOf(profile.damageType, profile.pierceOverride);
@@ -86,6 +86,15 @@ function buildInitialFrame(attacker: Attacker, target: Target, ctx: AttackContex
       curves.abilityFactor,
     );
     damageFactor *= abilityMul;
+    // Ability damage does NOT scale with stars/rank in Tacticus — the
+    // tacticus.wiki.gg damage tables (verified across all 6 rarities for
+    // Kharn's "Kill! Maim! Burn!" Piercing) use the raw level-1-rank-0 base
+    // damage stat, combined only with damageFactor and the ability-level ×
+    // rarity multiplier. `resolveAttackerStats` has already multiplied by
+    // statFactor for normal attacks, so we revert that here for abilities
+    // only. Crit chance, crit damage, and traits stay scaled — they
+    // participate in the ability damage formula unchanged.
+    a = { ...a, damage: attacker.source.baseStats.damage };
   }
 
   const sf = statFactor(attacker.progression.stars, attacker.progression.rank);

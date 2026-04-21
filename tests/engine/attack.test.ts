@@ -166,6 +166,79 @@ describe('resolveAttack — baseline', () => {
   });
 });
 
+describe('resolveAttack — ability scaling (wiki calibration)', () => {
+  /**
+   * Wiki-calibrated formula check: Kharn's "Kill! Maim! Burn!" Piercing
+   * component at Mythic L60 shows 6526–9396 (mid 7961) on tacticus.wiki.gg.
+   *
+   * Cross-verified across all 6 rarities with baseStats.damage=25:
+   *   mid = 25 × damageFactor × abilityFactor[level-1] × rarityMultiplier
+   * gives damageFactor=2.44 exactly for Common L8, Uncommon L17, Rare L26,
+   * Epic L35, Legendary L50, Mythic L60. This locks the contract: ability
+   * damage does NOT include the stars×rank statFactor (only normal attacks
+   * do). Regression guard for a previous bug where the engine applied
+   * statFactor on top of abilityLevelMultiplier, producing ~664k instead of
+   * ~8k at 5★ rank 19.
+   */
+  it('Kharn KMB Piercing @ Mythic L60, 5★ rank 19 ≈ 7961 (wiki mid)', () => {
+    const kharn: CatalogCharacter = {
+      id: 'kharnStub',
+      displayName: 'Kharn',
+      faction: 'World Eaters',
+      alliance: 'Chaos',
+      baseStats: {
+        damage: 25,
+        armor: 20,
+        hp: 90,
+        critChance: 0,
+        critDamage: 0,
+        blockChance: 0,
+        blockDamage: 0,
+        meleeHits: 4,
+        rangedHits: 0,
+      },
+      melee: {
+        label: 'Melee',
+        damageType: 'eviscerating',
+        hits: 4,
+        pierceOverride: 0.5,
+        kind: 'melee',
+      },
+      abilities: [],
+      traits: [],
+      maxRarity: 'mythic',
+    };
+    const dummyBoss: CatalogBoss = {
+      id: 'zeroArmor',
+      displayName: 'Zero Armor',
+      stages: [{ name: 'L1', hp: 1_000_000, armor: 0, traits: [] }],
+    };
+    const attacker: Attacker = {
+      source: kharn,
+      // 5★ rank 19 would normally multiply damage by ~83× via statFactor.
+      // The ability path must revert that and use raw baseDamage=25 instead.
+      progression: { stars: 5, rank: 19, xpLevel: 60, rarity: 'mythic' },
+      equipment: [],
+    };
+    const target: Target = { source: dummyBoss, stageIndex: 0 };
+    const ctx: AttackContext = {
+      profile: {
+        label: 'KMB — Piercing',
+        damageType: 'piercing',
+        hits: 1,
+        damageFactor: 2.44,
+        kind: 'ability',
+        abilityId: 'kharn_kmb',
+      },
+      rngMode: 'expected',
+    };
+    const r = resolveAttack(attacker, target, ctx);
+    // Wiki mid is 7961; allow ±5% for pierce/variance rounding.
+    expect(r.expected).toBeGreaterThan(7961 * 0.95);
+    expect(r.expected).toBeLessThan(7961 * 1.05);
+  });
+});
+
 describe('resolveRotation', () => {
   it('accumulates damage across turns', () => {
     const a = makeAttacker();
