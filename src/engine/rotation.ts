@@ -1,8 +1,20 @@
 import { resolveAttack } from './attack';
+import {
+  abilityFor,
+  applyScaling,
+  canFireAbility,
+  initRotationState,
+  RotationState,
+  scalingMultiplier,
+  shouldTrigger,
+  stampCooldown,
+  tickCooldowns,
+} from './triggers';
 import type {
   Attacker,
   AttackContext,
   AttackProfile,
+  CatalogAbility,
   DamageBreakdown,
   ModifierStack,
   Rotation,
@@ -57,6 +69,28 @@ export function applyBonusHits(
   return { ...profile, hits: Math.max(1, profile.hits + extra) };
 }
 
+/**
+ * Resolve a full rotation against a target. Threads cooldown state and
+ * per-battle counters across turns, auto-fires passive triggers after each
+ * normal/first-attack, and applies Kariyan-style scaling to abilities
+ * that declare it.
+ *
+ * Ordering per turn:
+ *   1. apply user turn buffs
+ *   2. for each scheduled attack (in order):
+ *      a. if ability & on cooldown → record a skip, continue
+ *      b. apply scaling multiplier (if ability has `scaling`)
+ *      c. resolve attack, append to perTurn, drain shield/HP
+ *      d. stamp cooldown if ability
+ *      e. fire all passives whose triggers match (appending extra perTurn
+ *         entries; each consumes the same shield/HP pool)
+ *   3. tick cooldowns down by 1
+ *   4. increment turnsAttackedThisBattle
+ *
+ * Triggered-passive damage is included in perTurn alongside scheduled
+ * attacks — `triggeredFires` annotates which entries came from passives
+ * so the UI can label them.
+ */
 export function resolveRotation(
   attacker: Attacker,
   target: Target,
@@ -64,6 +98,9 @@ export function resolveRotation(
 ): RotationBreakdown {
   const perTurn: DamageBreakdown[] = [];
   const cumulativeExpected: number[] = [];
+  const cooldownSkips: { turnIdx: number; abilityId: string }[] = [];
+  const triggeredFires: { turnIdx: number; abilityId: string; profileIdx: number }[] = [];
+  const state: RotationState = initRotationState();
   let cumulative = 0;
   let remainingShield = target.currentShield ?? 0;
   let remainingHp = target.currentHp ?? resolveBaseHp(target);
@@ -72,17 +109,18 @@ export function resolveRotation(
   rotation.turns.forEach((turn, turnIdx) => {
     const buffedAttacker = applyTurnBuffs(attacker, turn.buffs);
     let turnTotal = 0;
-    for (const ctx of turn.attacks) {
+    let isFirstAttackOfTurn = true;
+
+    /** Resolve a single AttackContext given current shield/HP state.
+     *  Mutates closure variables `remainingShield`/`remainingHp` and pushes
+     *  into `perTurn`. */
+    const runAttack = (ctx: AttackContext): DamageBreakdown => {
       const stepTarget: Target = {
         ...target,
         currentShield: remainingShield,
         currentHp: remainingHp,
       };
-      const adjusted: AttackContext = {
-        ...ctx,
-        profile: applyBonusHits(ctx.profile, turn.buffs, turnIdx === 0),
-      };
-      const result = resolveAttack(buffedAttacker, stepTarget, adjusted);
+      const result = resolveAttack(buffedAttacker, stepTarget, ctx);
       perTurn.push(result);
       turnTotal += result.expected;
 
@@ -93,15 +131,92 @@ export function resolveRotation(
         dmgLeft -= absorbed;
       }
       remainingHp = Math.max(0, remainingHp - dmgLeft);
+      return result;
+    };
+
+    for (const ctx of turn.attacks) {
+      // 1. Cooldown gate.
+      if (!canFireAbility(ctx.profile, state)) {
+        cooldownSkips.push({
+          turnIdx,
+          abilityId: ctx.profile.abilityId ?? '<unknown>',
+        });
+        continue;
+      }
+
+      // 2. Apply scaling (Kariyan-style) to the profile before resolving.
+      const matchedAbility = abilityFor(buffedAttacker, ctx.profile);
+      const scaleMul = scalingMultiplier(matchedAbility, state);
+      const scaled = applyScaling(ctx.profile, scaleMul);
+
+      // 3. Apply per-turn bonus hits and resolve.
+      const adjusted: AttackContext = {
+        ...ctx,
+        profile: applyBonusHits(scaled, turn.buffs, turnIdx === 0),
+      };
+      runAttack(adjusted);
+
+      // 4. Cooldown stamp (only actual abilities).
+      stampCooldown(buffedAttacker, ctx.profile, state);
+
+      // 5. Fire any passive triggers off this attack.
+      for (const passive of buffedAttacker.source.abilities) {
+        const shouldFire = shouldTrigger(passive, {
+          profile: ctx.profile,
+          isFirstAttackOfTurn,
+          targetTraits: collectTargetTraits(target),
+        });
+        if (!shouldFire) continue;
+        passive.profiles.forEach((p, profileIdx) => {
+          const passiveCtx: AttackContext = {
+            profile: applyBonusHits(p, turn.buffs, turnIdx === 0),
+            rngMode: ctx.rngMode,
+          };
+          runAttack(passiveCtx);
+          triggeredFires.push({
+            turnIdx,
+            abilityId: passive.id,
+            profileIdx,
+          });
+        });
+      }
+
+      isFirstAttackOfTurn = false;
     }
+
     cumulative += turnTotal;
     cumulativeExpected.push(cumulative);
     if (remainingHp <= 0 && turnsToKill === 'unreachable') {
       turnsToKill = turnIdx + 1;
     }
+
+    // End-of-turn state tick: decrement cooldowns, advance attack counter.
+    tickCooldowns(state);
+    state.turnsAttackedThisBattle++;
   });
 
-  return { perTurn, cumulativeExpected, turnsToKill };
+  return {
+    perTurn,
+    cumulativeExpected,
+    turnsToKill,
+    cooldownSkips,
+    triggeredFires,
+  };
+}
+
+/**
+ * Collect the traits visible on the target — stage traits for bosses,
+ * character traits for hero targets, plus any debuff-applied traits.
+ * Used by `shouldTrigger` to evaluate `requiresTargetTrait` filters.
+ */
+function collectTargetTraits(target: Target): string[] {
+  const debuffTraits = target.activeDebuffs?.traits ?? [];
+  if ('stages' in target.source) {
+    const idx = target.stageIndex ?? 0;
+    const stage = target.source.stages[Math.min(idx, target.source.stages.length - 1)];
+    return [...stage.traits, ...debuffTraits];
+  }
+  return [...target.source.traits, ...debuffTraits];
 }
 
 function resolveBaseHp(target: Target): number {
@@ -116,3 +231,11 @@ function resolveBaseHp(target: Target): number {
 export function singleAttackRotation(ctx: AttackContext): Rotation {
   return { turns: [{ attacks: [ctx] }] };
 }
+
+// Re-export for convenience.
+export type { RotationState };
+export { initRotationState };
+
+// Silence unused-import warning — CatalogAbility is used for cross-file
+// type narrowing in tests; re-exporting keeps it in the public surface.
+export type { CatalogAbility };

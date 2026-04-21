@@ -323,6 +323,20 @@ export interface RotationBreakdown {
   perTurn: DamageBreakdown[];
   cumulativeExpected: number[];
   turnsToKill: number | 'unreachable';
+  /**
+   * Ability-id occurrences that the engine skipped because the ability was
+   * still on cooldown when the rotation tried to fire it. UI highlights
+   * these so the user can fix their rotation. Empty when every scheduled
+   * attack fired.
+   */
+  cooldownSkips: { turnIdx: number; abilityId: string }[];
+  /**
+   * Each passive-trigger firing recorded for UI inspection: which turn,
+   * which ability fired, which profile indexes resolved. Mirrors per-turn
+   * perTurn entries that originate from triggers (as opposed to
+   * user-scheduled attacks).
+   */
+  triggeredFires: { turnIdx: number; abilityId: string; profileIdx: number }[];
 }
 
 export interface TargetResolvedStats {
