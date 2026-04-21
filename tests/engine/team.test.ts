@@ -101,7 +101,10 @@ function abilityAttack(abilityId: string, cooldown = 2): AttackContext {
 // Team-buff-carrying character factories
 // ---------------------------------------------------------------------------
 
-function laviscusLike(outragePct = 120, critDmgPerContributor = 1000): CatalogCharacter {
+function laviscusLike(
+  outragePctOfOutrage = 120,
+  critDmgPerChaosContributor = 1000,
+): CatalogCharacter {
   const passive: CatalogAbility = {
     id: 'laviscus_refusal',
     name: 'Refusal to Be Outdone',
@@ -109,8 +112,8 @@ function laviscusLike(outragePct = 120, critDmgPerContributor = 1000): CatalogCh
     profiles: [],
     teamBuff: {
       kind: 'laviscusOutrage',
-      outragePct,
-      critDmgPerContributor,
+      outragePctOfOutrage,
+      critDmgPerChaosContributor,
     },
   };
   return plainChar({
@@ -250,137 +253,462 @@ describe('resolveTeamRotation — baseline', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Laviscus Outrage aura
+// Laviscus Outrage (self-buff powered by friendly non-psychic hits)
 // ---------------------------------------------------------------------------
 
-describe('laviscusOutrage — damage aura to adjacent allies', () => {
-  it('adjacent ally damage scales by 1 + outragePct/100', () => {
-    const ally = plainChar({ id: 'ally' });
-    const mLav = member('lav', laviscusLike(100, 0), 0);
-    const mAdj = member('adj', ally, 1); // adjacent
-    const rotBaseline: TeamRotation = {
-      members: [member('solo', ally, 0)],
-      turns: [{ actions: [{ memberId: 'solo', attack: meleeAttack() }] }],
-    };
-    const rotBuffed: TeamRotation = {
-      members: [mLav, mAdj],
-      turns: [{ actions: [{ memberId: 'adj', attack: meleeAttack() }] }],
-    };
-    const baseline = resolveTeamRotation(rotBaseline, makeTarget());
-    const buffed = resolveTeamRotation(rotBuffed, makeTarget());
-    const baseDmg = baseline.perMember['solo'].perAction[0].result.expected;
-    const buffedDmg = buffed.perMember['adj'].perAction[0].result.expected;
-    expect(buffedDmg / baseDmg).toBeCloseTo(2.0, 2); // 1 + 100/100 = 2.0x
+/** Imperial ally — still contributes to Outrage accumulation but is NOT
+ *  Chaos, so no crit-damage bonus. */
+function imperialAlly(id = 'imp'): CatalogCharacter {
+  return plainChar({ id, alliance: 'Imperial' });
+}
 
-    // Application recorded.
-    expect(buffed.teamBuffApplications).toContainEqual(
-      expect.objectContaining({
-        turnIdx: 0,
-        sourceMemberId: 'lav',
-        kind: 'laviscusOutrage',
-        appliedToMemberId: 'adj',
-      }),
+/** A plain Chaos ally (contributes to Outrage AND counts for Chaos crit). */
+function chaosAlly(id = 'chaos'): CatalogCharacter {
+  return plainChar({ id, alliance: 'Chaos' });
+}
+
+/** Laviscus as a melee attacker (he has a 1-hit melee profile). */
+function lavMelee(): AttackContext {
+  return {
+    profile: {
+      label: 'Lav melee',
+      damageType: 'power',
+      hits: 1,
+      kind: 'melee',
+    },
+    rngMode: 'expected',
+  };
+}
+/** Laviscus as an ability attacker. */
+function lavAbility(abilityId = 'lav_ability'): AttackContext {
+  return {
+    profile: {
+      label: 'Lav ability',
+      damageType: 'power',
+      hits: 1,
+      kind: 'ability',
+      abilityId,
+      cooldown: 1,
+    },
+    rngMode: 'expected',
+  };
+}
+/** A psychic attack context (for contribution-exclusion tests). */
+function psychicAttack(): AttackContext {
+  return {
+    profile: { label: 'Mind', damageType: 'psychic', hits: 1, kind: 'ability', abilityId: 'mind', cooldown: 1 },
+    rngMode: 'expected',
+  };
+}
+
+describe('laviscusOutrage — self-buff from friendly non-psychic contributions', () => {
+  // Laviscus doesn't carry a normal-attack ability on the simple fixture;
+  // give him both a melee and a cheap ability via an attacker with matching
+  // ability entries where needed. The `lavAbility` helper supplies the
+  // active id.
+
+  it('Chaos contributor → Laviscus gets +% Outrage flat dmg AND +crit on normal attack', () => {
+    const mLav = member('lav', laviscusLike(120, 500), 1);
+    const mContrib = member('c', chaosAlly('chaos1'), 0);
+    const rot: TeamRotation = {
+      members: [mContrib, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+
+    // Flat-dmg buff recorded.
+    const flatApp = r.teamBuffApplications.find(
+      (a) =>
+        a.sourceMemberId === 'lav' &&
+        a.kind === 'laviscusOutrage' &&
+        a.appliedToMemberId === 'lav' &&
+        /flat dmg/.test(a.effect),
     );
+    expect(flatApp).toBeDefined();
+    expect(flatApp?.effect).toMatch(/120% of/);
+    expect(flatApp?.effect).toMatch(/Outrage/);
+
+    // Crit-dmg buff recorded (normal attack + Chaos contributor).
+    const critApp = r.teamBuffApplications.find(
+      (a) =>
+        a.sourceMemberId === 'lav' &&
+        a.kind === 'laviscusOutrage' &&
+        a.appliedToMemberId === 'lav' &&
+        /crit dmg/.test(a.effect),
+    );
+    expect(critApp).toBeDefined();
+    expect(critApp?.effect).toMatch(/\+500 crit dmg/);
+    expect(critApp?.effect).toMatch(/1 Chaos contributor/);
   });
 
-  it('non-adjacent ally gets NO outrage buff', () => {
-    const ally = plainChar({ id: 'ally' });
-    const mLav = member('lav', laviscusLike(100, 0), 0);
-    const mFar = member('far', ally, 2); // position 2, not adjacent to 0
+  it('Non-Chaos contributor → flat dmg applies, but NO Chaos-crit bonus', () => {
+    const mLav = member('lav', laviscusLike(120, 500), 1);
+    const mImperial = member('i', imperialAlly('imp1'), 0);
+    const rot: TeamRotation = {
+      members: [mImperial, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'i', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
 
-    const rotBaseline: TeamRotation = {
-      members: [member('solo', ally, 0)],
-      turns: [{ actions: [{ memberId: 'solo', attack: meleeAttack() }] }],
-    };
-    const rotTeamed: TeamRotation = {
-      members: [mLav, mFar],
-      turns: [{ actions: [{ memberId: 'far', attack: meleeAttack() }] }],
-    };
-    const base = resolveTeamRotation(rotBaseline, makeTarget());
-    const teamed = resolveTeamRotation(rotTeamed, makeTarget());
-    expect(teamed.perMember['far'].perAction[0].result.expected).toBeCloseTo(
-      base.perMember['solo'].perAction[0].result.expected,
-      5,
-    );
+    // Flat-dmg buff yes.
     expect(
-      teamed.teamBuffApplications.filter((a) => a.appliedToMemberId === 'far'),
+      r.teamBuffApplications.some(
+        (a) =>
+          a.kind === 'laviscusOutrage' &&
+          a.appliedToMemberId === 'lav' &&
+          /flat dmg/.test(a.effect),
+      ),
+    ).toBe(true);
+
+    // Crit-dmg buff no (Imperial doesn't count as Chaos contributor).
+    expect(
+      r.teamBuffApplications.some(
+        (a) =>
+          a.kind === 'laviscusOutrage' &&
+          a.appliedToMemberId === 'lav' &&
+          /crit dmg/.test(a.effect),
+      ),
+    ).toBe(false);
+  });
+
+  it('Psychic hits do NOT contribute to Outrage (no flat-dmg buff)', () => {
+    // Contributor fires a psychic ability before Laviscus attacks.
+    const psychicSrc = plainChar({
+      id: 'psy',
+      alliance: 'Chaos',
+      abilities: [
+        {
+          id: 'mind',
+          name: 'Mind',
+          kind: 'active',
+          profiles: [
+            { label: 'Mind', damageType: 'psychic', hits: 1, kind: 'ability', abilityId: 'mind' },
+          ],
+          cooldown: 1,
+        },
+      ],
+    });
+    const mLav = member('lav', laviscusLike(120, 500), 1);
+    const mPsy = member('p', psychicSrc, 0);
+    const rot: TeamRotation = {
+      members: [mPsy, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'p', attack: psychicAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    expect(
+      r.teamBuffApplications.filter(
+        (a) => a.kind === 'laviscusOutrage' && a.appliedToMemberId === 'lav',
+      ),
     ).toEqual([]);
   });
 
-  it('Laviscus himself gains +critDmg × contributors when attacking AFTER allies', () => {
-    const ally = plainChar({ id: 'ally' });
-    const mLav = member('lav', laviscusLike(0, 500), 1); // position 1
-    const mLeft = member('l', ally, 0);
-    const mRight = member('r', ally, 2);
-
-    // Contributors attack FIRST, then Laviscus.
+  it('Ability attack by Laviscus gets flat-dmg buff but NO crit buff (normal-only)', () => {
+    // Give Laviscus a 1-hit ability so we can have him fire one.
+    const lavSrc = laviscusLike(120, 500);
+    lavSrc.abilities.push({
+      id: 'lav_ability',
+      name: 'Lav Ability',
+      kind: 'active',
+      profiles: [{ label: 'Lav A', damageType: 'power', hits: 1, kind: 'ability', abilityId: 'lav_ability' }],
+      cooldown: 1,
+    });
+    const mLav = member('lav', lavSrc, 1);
+    const mContrib = member('c', chaosAlly('chaos1'), 0);
     const rot: TeamRotation = {
-      members: [mLeft, mLav, mRight],
+      members: [mContrib, mLav],
       turns: [
         {
           actions: [
-            { memberId: 'l', attack: meleeAttack() },
-            { memberId: 'r', attack: meleeAttack() },
-            {
-              memberId: 'lav',
-              attack: {
-                profile: {
-                  label: 'Lav',
-                  damageType: 'power',
-                  hits: 1,
-                  kind: 'melee',
-                },
-                rngMode: 'expected',
-              },
-            },
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavAbility('lav_ability') },
           ],
         },
       ],
     };
     const r = resolveTeamRotation(rot, makeTarget());
-    // Laviscus's per-action entry should have a team-buff with +500×2=+1000 critDamage.
-    const app = r.teamBuffApplications.find(
-      (a) =>
-        a.sourceMemberId === 'lav' &&
-        a.appliedToMemberId === 'lav' &&
-        a.kind === 'laviscusOutrage',
-    );
-    expect(app).toBeDefined();
-    expect(app?.effect).toMatch(/\+1000 crit dmg/);
-    expect(app?.effect).toMatch(/2 contributors/);
+    // Flat yes.
+    expect(
+      r.teamBuffApplications.some(
+        (a) =>
+          a.kind === 'laviscusOutrage' &&
+          a.appliedToMemberId === 'lav' &&
+          /flat dmg/.test(a.effect),
+      ),
+    ).toBe(true);
+    // Crit no (ability, not normal).
+    expect(
+      r.teamBuffApplications.some(
+        (a) =>
+          a.kind === 'laviscusOutrage' &&
+          a.appliedToMemberId === 'lav' &&
+          /crit dmg/.test(a.effect),
+      ),
+    ).toBe(false);
   });
 
-  it('Laviscus does NOT get contributor bonus if he attacks FIRST', () => {
-    const ally = plainChar({ id: 'ally' });
-    const mLav = member('lav', laviscusLike(0, 500), 1);
-    const mLeft = member('l', ally, 0);
-    const mRight = member('r', ally, 2);
-
-    // Laviscus FIRST.
+  it('Laviscus going FIRST gets no buffs (Outrage not yet accumulated)', () => {
+    const mLav = member('lav', laviscusLike(120, 500), 1);
+    const mContrib = member('c', chaosAlly('chaos1'), 0);
     const rot: TeamRotation = {
-      members: [mLeft, mLav, mRight],
+      members: [mContrib, mLav],
       turns: [
         {
           actions: [
-            {
-              memberId: 'lav',
-              attack: meleeAttack(),
-            },
-            { memberId: 'l', attack: meleeAttack() },
-            { memberId: 'r', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+            { memberId: 'c', attack: meleeAttack() },
           ],
         },
       ],
     };
     const r = resolveTeamRotation(rot, makeTarget());
-    // No self-outrage application because contributors == 0 at that moment.
-    const app = r.teamBuffApplications.find(
+    expect(
+      r.teamBuffApplications.filter(
+        (a) => a.kind === 'laviscusOutrage' && a.appliedToMemberId === 'lav',
+      ),
+    ).toEqual([]);
+  });
+
+  it('Laviscus normal attack RESETS Outrage (no buff on second normal attack)', () => {
+    // Three-action turn: Chaos attacks → Laviscus normal (gets buffs +
+    // resets) → Chaos attacks again → Laviscus normal again should see
+    // no Outrage because the reset flag blocks further contributions.
+    const lavSrc = laviscusLike(120, 500);
+    const mLav = member('lav', lavSrc, 1);
+    const mContrib = member('c', chaosAlly('chaos1'), 0);
+    const rot: TeamRotation = {
+      members: [mContrib, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // Laviscus has two actions resolved. First should have a flat-dmg
+    // application, second should have ZERO outrage applications.
+    const flatApps = r.teamBuffApplications.filter(
       (a) =>
-        a.sourceMemberId === 'lav' &&
+        a.kind === 'laviscusOutrage' &&
         a.appliedToMemberId === 'lav' &&
-        a.kind === 'laviscusOutrage',
+        /flat dmg/.test(a.effect),
     );
-    expect(app).toBeUndefined();
+    expect(flatApps).toHaveLength(1);
+  });
+
+  it('Laviscus ability does NOT reset Outrage (subsequent normal still buffed)', () => {
+    const lavSrc = laviscusLike(120, 500);
+    lavSrc.abilities.push({
+      id: 'lav_ability',
+      name: 'Lav Ability',
+      kind: 'active',
+      profiles: [{ label: 'Lav A', damageType: 'power', hits: 1, kind: 'ability', abilityId: 'lav_ability' }],
+      cooldown: 0,
+    });
+    const mLav = member('lav', lavSrc, 1);
+    const mContrib = member('c', chaosAlly('chaos1'), 0);
+    // Chaos attacks → Laviscus ABILITY (no reset) → Laviscus NORMAL
+    // should still see the Outrage.
+    const rot: TeamRotation = {
+      members: [mContrib, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavAbility('lav_ability') },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // Laviscus should have 2 flat-dmg applications (one for the ability,
+    // one for the normal) — Outrage persists through his own ability.
+    const flatApps = r.teamBuffApplications.filter(
+      (a) =>
+        a.kind === 'laviscusOutrage' &&
+        a.appliedToMemberId === 'lav' &&
+        /flat dmg/.test(a.effect),
+    );
+    expect(flatApps).toHaveLength(2);
+    // Crit application only on the normal attack (Chaos contributor + normal).
+    const critApps = r.teamBuffApplications.filter(
+      (a) =>
+        a.kind === 'laviscusOutrage' &&
+        a.appliedToMemberId === 'lav' &&
+        /crit dmg/.test(a.effect),
+    );
+    expect(critApps).toHaveLength(1);
+  });
+
+  it('Multiple contributors: Chaos count reflects only Chaos (not total contributors)', () => {
+    const lavSrc = laviscusLike(0, 500); // flat=0 to isolate crit side
+    const mLav = member('lav', lavSrc, 1);
+    const mChaos = member('c', chaosAlly('chaos1'), 0);
+    const mImp = member('i', imperialAlly('imp1'), 2);
+    const rot: TeamRotation = {
+      members: [mChaos, mLav, mImp],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'i', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const critApp = r.teamBuffApplications.find(
+      (a) =>
+        a.kind === 'laviscusOutrage' &&
+        a.appliedToMemberId === 'lav' &&
+        /crit dmg/.test(a.effect),
+    );
+    expect(critApp).toBeDefined();
+    // 1 Chaos contributor × 500 = +500.
+    expect(critApp?.effect).toMatch(/\+500 crit dmg/);
+    expect(critApp?.effect).toMatch(/1 Chaos contributor/);
+  });
+
+  it('Per-contributor tracking is MAX, not SUM (two identical attacks = one attack)', () => {
+    // If the ledger summed per-contributor attacks, attacking twice would
+    // double Outrage. The mechanic says "equal to the highest damage" so
+    // per-contributor we keep a running MAX.
+    const lavSrc = laviscusLike(120, 0); // isolate flat side
+    const mLav = member('lav', lavSrc, 1);
+    const mContrib = member('c', chaosAlly('chaos1'), 0);
+    const rotTwice: TeamRotation = {
+      members: [mContrib, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'c', attack: meleeAttack() }, // identical repeat
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const rotOnce: TeamRotation = {
+      members: [mContrib, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const rTwice = resolveTeamRotation(rotTwice, makeTarget());
+    const rOnce = resolveTeamRotation(rotOnce, makeTarget());
+    const flatTwice = rTwice.teamBuffApplications.find(
+      (a) =>
+        a.kind === 'laviscusOutrage' &&
+        a.appliedToMemberId === 'lav' &&
+        /flat dmg/.test(a.effect),
+    );
+    const flatOnce = rOnce.teamBuffApplications.find(
+      (a) =>
+        a.kind === 'laviscusOutrage' &&
+        a.appliedToMemberId === 'lav' &&
+        /flat dmg/.test(a.effect),
+    );
+    // Max tracking → both runs yield the same Outrage and same flat buff.
+    expect(flatTwice?.effect).toBe(flatOnce?.effect);
+  });
+
+  it('Outrage SUMS across multiple contributors (each contributes their own max)', () => {
+    // Two different Chaos allies attack, each with their own melee. The
+    // ledger keeps each's max and sums them. Compare against a single
+    // contributor: two-contributor Outrage should be > one-contributor.
+    const lavSrc = laviscusLike(120, 0);
+    const mLav = member('lav', lavSrc, 2);
+    const mC1 = member('c1', chaosAlly('ca1'), 0);
+    const mC2 = member('c2', chaosAlly('ca2'), 1);
+    const rotTwo: TeamRotation = {
+      members: [mC1, mC2, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c1', attack: meleeAttack() },
+            { memberId: 'c2', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const rotOne: TeamRotation = {
+      members: [mC1, mLav],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c1', attack: meleeAttack() },
+            { memberId: 'lav', attack: lavMelee() },
+          ],
+        },
+      ],
+    };
+    const rTwo = resolveTeamRotation(rotTwo, makeTarget());
+    const rOne = resolveTeamRotation(rotOne, makeTarget());
+    // Extract numeric Outrage from effect string: "120% of N Outrage".
+    const outrageFrom = (effect: string | undefined): number => {
+      const m = effect?.match(/of (\d+) Outrage/);
+      return m ? Number(m[1]) : 0;
+    };
+    const outrageTwo = outrageFrom(
+      rTwo.teamBuffApplications.find(
+        (a) => a.appliedToMemberId === 'lav' && /flat dmg/.test(a.effect),
+      )?.effect,
+    );
+    const outrageOne = outrageFrom(
+      rOne.teamBuffApplications.find(
+        (a) => a.appliedToMemberId === 'lav' && /flat dmg/.test(a.effect),
+      )?.effect,
+    );
+    // Two contributors sum → roughly double one contributor's Outrage.
+    expect(outrageTwo).toBeCloseTo(outrageOne * 2, 0);
+  });
+
+  it('Laviscus does NOT contribute to his own Outrage', () => {
+    // Solo Laviscus attacks with his own melee → no Outrage application.
+    const mLav = member('lav', laviscusLike(120, 500), 0);
+    const rot: TeamRotation = {
+      members: [mLav],
+      turns: [{ actions: [{ memberId: 'lav', attack: lavMelee() }] }],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    expect(
+      r.teamBuffApplications.filter(
+        (a) => a.kind === 'laviscusOutrage' && a.appliedToMemberId === 'lav',
+      ),
+    ).toEqual([]);
   });
 });
 

@@ -471,8 +471,8 @@ const SCALING_BY_ID: Record<string, AbilityScaling> = {
 const TEAM_BUFF_BUILDERS: Record<string, (a: GameInfoAbility) => AbilityTeamBuff> = {
   RefusalToBeOutdone: (_a) => ({
     kind: 'laviscusOutrage',
-    outragePct: 120,
-    critDmgPerContributor: 1044,
+    outragePctOfOutrage: 120,
+    critDmgPerChaosContributor: 1044,
   }),
   LegendaryCommander: (a) => ({
     kind: 'trajannLegendaryCommander',

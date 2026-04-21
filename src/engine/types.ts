@@ -110,10 +110,21 @@ export interface AbilityScaling {
 export type AbilityTeamBuff =
   | {
       kind: 'laviscusOutrage';
-      /** Flat ATK buff (%) added to each adjacent ally's damage. */
-      outragePct: number;
-      /** Extra crit-damage per Outrage contributor. */
-      critDmgPerContributor: number;
+      /**
+       * Laviscus's Outrage stat = per-contributor max non-psychic hit,
+       * summed across contributors this turn. This field is the % of
+       * accumulated Outrage added to Laviscus's Damage stat as a flat
+       * bonus on every attack he makes (before the outrage resets).
+       * E.g. outragePctOfOutrage=120 + accumulated Outrage=10000 →
+       * +12000 damageFlat.
+       */
+      outragePctOfOutrage: number;
+      /**
+       * +crit damage added to Laviscus's NORMAL attacks only (melee/
+       * ranged — not abilities), per friendly Chaos character that
+       * contributed to Outrage this turn.
+       */
+      critDmgPerChaosContributor: number;
     }
   | {
       kind: 'trajannLegendaryCommander';

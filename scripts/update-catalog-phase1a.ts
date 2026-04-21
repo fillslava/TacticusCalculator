@@ -201,8 +201,8 @@ replace('laviscus', (c) => ({
       curveId: 'abilityFactor',
       teamBuff: {
         kind: 'laviscusOutrage',
-        outragePct: 120,
-        critDmgPerContributor: 1044,
+        outragePctOfOutrage: 120,
+        critDmgPerChaosContributor: 1044,
       },
       profiles: [],
     },

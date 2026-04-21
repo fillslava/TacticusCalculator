@@ -8,12 +8,22 @@
  * Three currently-modelled buff kinds (matching the catalog's `teamBuff`
  * union):
  *
- *  - `laviscusOutrage`: Laviscus aura-buffs adjacent allies' damage by
- *    `outragePct` (passive aura; always-on while adjacent). Laviscus
- *    himself gains `critDmgPerContributor` × N crit damage where N is
- *    the number of adjacent allies who have *already* acted this turn
- *    at the moment Laviscus attacks. Order-sensitive: if Laviscus goes
- *    first, he has no contributors. Actions process in schedule order.
+ *  - `laviscusOutrage`: Laviscus has a per-turn Outrage stat. Every time
+ *    a friendly character attacks an enemy adjacent to Laviscus with a
+ *    non-psychic hit, that contributor's *maximum* non-psychic hit this
+ *    turn is tracked against Laviscus. Outrage = sum of each contributor's
+ *    max hit. In single-boss Guild Raid we treat the boss as always-
+ *    adjacent to Laviscus when he's on the team. Effects, applied to
+ *    Laviscus's own attacks while his Outrage > 0:
+ *      (i) +`outragePctOfOutrage`% of Outrage as flat damage on every
+ *          attack.
+ *      (ii) +`critDmgPerChaosContributor` × (# Chaos contributors) crit
+ *           damage — but ONLY on Laviscus's normal (melee/ranged)
+ *           attacks. Abilities do not get the crit bonus.
+ *    Reset: Outrage clears at end of turn automatically AND mid-turn
+ *    after Laviscus resolves a normal attack. Laviscus never contributes
+ *    to his own Outrage. Order-sensitive — allies who act after Laviscus
+ *    don't count.
  *
  *  - `trajannLegendaryCommander`: enemies receive +`flatDamage` from any
  *    attack while they are adjacent to a friendly that has used an
@@ -59,10 +69,10 @@ import type {
   AttackProfile,
   CatalogAbility,
   CatalogCharacter,
+  DamageBreakdown,
   MemberBreakdown,
   TeamBuffApplication,
   TeamMember,
-  TeamPosition,
   TeamRotation,
   TeamRotationBreakdown,
   Target,
@@ -73,10 +83,6 @@ import type {
 // ---------------------------------------------------------------------------
 // Small helpers
 // ---------------------------------------------------------------------------
-
-function isAdjacent(a: TeamPosition, b: TeamPosition): boolean {
-  return Math.abs(a - b) === 1;
-}
 
 function resolveBaseHp(target: Target): number {
   if (target.statOverrides?.hp !== undefined) return target.statOverrides.hp;
@@ -124,11 +130,21 @@ function findAbilityWithTeamBuff(
 
 interface TurnState {
   /**
-   * For each Laviscus member (by memberId), the running count of adjacent
-   * allies who have acted during this turn. Laviscus's buff reads this at
-   * the moment he attacks.
+   * Per-Laviscus running Outrage ledger.
+   *   outer key: Laviscus's memberId
+   *   inner key: contributing friendly's memberId
+   *   value:     that contributor's MAX non-psychic hit so far this turn
+   * Outrage = sum over inner values. Updated in `updateTurnStateAfterAction`
+   * after each friendly's attack resolves.
    */
-  outrageContributors: Record<string, number>;
+  outrageContributions: Record<string, Record<string, number>>;
+  /**
+   * Per-Laviscus flag: once Laviscus performs a normal (melee/ranged)
+   * attack, Outrage resets AND further contributions this turn are
+   * ignored for this Laviscus. (Per mechanic: "Outrage resets after
+   * Laviscus performs a Normal Attack.")
+   */
+  laviscusOutrageResetThisTurn: Record<string, boolean>;
   /**
    * True once ANY friendly has fired an `active` ability during this
    * turn. Gates Trajann's flat-damage component and extra-hits component.
@@ -152,7 +168,8 @@ interface TurnState {
 
 function initTurnState(): TurnState {
   return {
-    outrageContributors: {},
+    outrageContributions: {},
+    laviscusOutrageResetThisTurn: {},
     friendlyActiveFiredThisTurn: false,
     memberNonNormalAttackHappened: {},
     sporeMineDamagedTarget: false,
@@ -181,44 +198,62 @@ function deriveTeamBuffs(
 ): TurnBuff[] {
   const buffs: TurnBuff[] = [];
 
-  // ------ 1) Laviscus Outrage aura: damage buff from adjacent Laviscus ----
-  for (const other of team) {
-    if (other.id === member.id) continue;
-    if (!isAdjacent(other.position, member.position)) continue;
-    const outrage = teamBuffOf(other, 'laviscusOutrage');
-    if (!outrage) continue;
-    buffs.push({
-      id: `outrage-aura:${other.id}`,
-      name: 'Outrage',
-      damageMultiplier: 1 + outrage.outragePct / 100,
-    });
-    appsSink.push({
-      turnIdx,
-      sourceMemberId: other.id,
-      kind: 'laviscusOutrage',
-      appliedToMemberId: member.id,
-      effect: `+${outrage.outragePct}% damage (adjacent to ${other.attacker.source.displayName})`,
-    });
-  }
-
-  // ------ 2) Laviscus self: crit-damage per adjacent ally who already acted
+  // ------ 1) Laviscus self-buffs from his Outrage stat.
+  //
+  //        The passive ONLY buffs Laviscus himself — it does NOT grant
+  //        adjacent allies a damage aura. Two components:
+  //          (i)  +outragePctOfOutrage% × Outrage as flat damage, on
+  //               every attack he makes (while Outrage > 0).
+  //          (ii) +critDmgPerChaosContributor × (# Chaos contributors)
+  //               crit damage, on his NORMAL attacks only.
+  //        Once Laviscus performs a normal attack, Outrage resets mid-
+  //        turn and neither component applies to further attacks.
   const ownOutrage = teamBuffOf(member, 'laviscusOutrage');
-  if (ownOutrage) {
-    const contributors = turn.outrageContributors[member.id] ?? 0;
-    if (contributors > 0) {
-      const critDmg = contributors * ownOutrage.critDmgPerContributor;
+  if (ownOutrage && !turn.laviscusOutrageResetThisTurn[member.id]) {
+    const contribs = turn.outrageContributions[member.id] ?? {};
+    const contribIds = Object.keys(contribs);
+    const accumulated = contribIds.reduce((s, id) => s + contribs[id], 0);
+
+    // (i) Flat damage from % of accumulated Outrage.
+    if (accumulated > 0) {
+      const flat = Math.floor((ownOutrage.outragePctOfOutrage / 100) * accumulated);
       buffs.push({
-        id: 'outrage-self',
-        name: 'Outrage (contributors)',
-        critDamage: critDmg,
+        id: 'outrage-self-flat',
+        name: 'Outrage (stat)',
+        damageFlat: flat,
       });
       appsSink.push({
         turnIdx,
         sourceMemberId: member.id,
         kind: 'laviscusOutrage',
         appliedToMemberId: member.id,
-        effect: `+${critDmg} crit dmg (${contributors} contributor${contributors === 1 ? '' : 's'})`,
+        effect: `+${flat} flat dmg (${ownOutrage.outragePctOfOutrage}% of ${accumulated} Outrage)`,
       });
+    }
+
+    // (ii) Crit damage per Chaos contributor — NORMAL attacks only.
+    const isNormal =
+      currentProfile.kind === 'melee' || currentProfile.kind === 'ranged';
+    if (isNormal) {
+      const chaosCount = contribIds.filter((id) => {
+        const m = team.find((t) => t.id === id);
+        return m?.attacker.source.alliance === 'Chaos';
+      }).length;
+      if (chaosCount > 0) {
+        const critDmg = chaosCount * ownOutrage.critDmgPerChaosContributor;
+        buffs.push({
+          id: 'outrage-self-crit',
+          name: 'Outrage (Chaos crit)',
+          critDamage: critDmg,
+        });
+        appsSink.push({
+          turnIdx,
+          sourceMemberId: member.id,
+          kind: 'laviscusOutrage',
+          appliedToMemberId: member.id,
+          effect: `+${critDmg} crit dmg (${chaosCount} Chaos contributor${chaosCount === 1 ? '' : 's'})`,
+        });
+      }
     }
   }
 
@@ -312,17 +347,45 @@ function deriveTeamBuffs(
 function updateTurnStateAfterAction(
   actor: TeamMember,
   attack: AttackContext,
+  result: DamageBreakdown,
   team: TeamMember[],
   turn: TurnState,
 ): void {
-  // Laviscus outrage: if this actor is adjacent to a Laviscus, they become
-  // that Laviscus's contributor.
-  for (const other of team) {
-    if (other.id === actor.id) continue;
-    if (!isAdjacent(other.position, actor.position)) continue;
-    if (!teamBuffOf(other, 'laviscusOutrage')) continue;
-    turn.outrageContributors[other.id] =
-      (turn.outrageContributors[other.id] ?? 0) + 1;
+  // Laviscus outrage contributions: any friendly that ISN'T Laviscus,
+  // whose attack is non-psychic, contributes their MAX per-hit value to
+  // each Laviscus's Outrage ledger. Per-contributor we keep the maximum
+  // across their attacks this turn (not the sum). Single-boss MVP treats
+  // the boss as always-adjacent to Laviscus, so every friendly
+  // attacking the boss qualifies.
+  const actorCarriesOutrage = !!teamBuffOf(actor, 'laviscusOutrage');
+  if (!actorCarriesOutrage && attack.profile.damageType !== 'psychic') {
+    const perHits = result.perHit;
+    if (perHits && perHits.length > 0) {
+      const bestHit = Math.max(...perHits.map((h) => h.expected));
+      if (bestHit > 0) {
+        for (const other of team) {
+          if (!teamBuffOf(other, 'laviscusOutrage')) continue;
+          if (turn.laviscusOutrageResetThisTurn[other.id]) continue;
+          const ledger = turn.outrageContributions[other.id] ?? {};
+          const prev = ledger[actor.id] ?? 0;
+          if (bestHit > prev) ledger[actor.id] = bestHit;
+          turn.outrageContributions[other.id] = ledger;
+        }
+      }
+    }
+  }
+
+  // Laviscus reset: if THIS actor is a Laviscus and he just performed a
+  // normal (melee/ranged) attack, clear his Outrage ledger AND mark the
+  // reset flag so later contributors this turn don't accumulate against
+  // him again.
+  if (actorCarriesOutrage) {
+    const isNormal =
+      attack.profile.kind === 'melee' || attack.profile.kind === 'ranged';
+    if (isNormal) {
+      turn.outrageContributions[actor.id] = {};
+      turn.laviscusOutrageResetThisTurn[actor.id] = true;
+    }
   }
 
   // Trajann flat-damage trigger: ANY friendly firing an active ability
@@ -506,9 +569,12 @@ export function resolveTeamRotation(
       }
 
       // 8. Update reactive flags AFTER resolving, so order-sensitive buffs
-      //    (outrage contributors, spore-mine-hit) don't apply to the
-      //    triggering action itself.
-      updateTurnStateAfterAction(member, action.attack, rotation.members, turnState);
+      //    (outrage contributions, spore-mine-hit) don't apply to the
+      //    triggering action itself. The resolved scheduled-attack result
+      //    feeds per-hit data to Laviscus's Outrage ledger; triggered
+      //    passives don't feed Outrage (they're not "friendly attacks"
+      //    in the normal sense).
+      updateTurnStateAfterAction(member, action.attack, result, rotation.members, turnState);
 
       isFirstAttackOfTurn[action.memberId] = false;
     });

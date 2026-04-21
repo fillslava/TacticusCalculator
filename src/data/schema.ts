@@ -77,8 +77,8 @@ export const AbilityScalingSchema = z.object({
 export const AbilityTeamBuffSchema = z.union([
   z.object({
     kind: z.literal('laviscusOutrage'),
-    outragePct: z.number(),
-    critDmgPerContributor: z.number(),
+    outragePctOfOutrage: z.number(),
+    critDmgPerChaosContributor: z.number(),
   }),
   z.object({
     kind: z.literal('trajannLegendaryCommander'),
