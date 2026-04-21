@@ -1,12 +1,22 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { z } from 'zod';
 import {
+  AbilityScalingSchema,
+  AbilityTeamBuffSchema,
+  AbilityTriggerSchema,
+  AttackProfileSchema,
   BossesCatalogSchema,
   CharactersCatalogSchema,
   type BossData,
   type CharacterData,
 } from '../src/data/schema';
+
+type AttackProfile = z.infer<typeof AttackProfileSchema>;
+type AbilityTrigger = z.infer<typeof AbilityTriggerSchema>;
+type AbilityScaling = z.infer<typeof AbilityScalingSchema>;
+type AbilityTeamBuff = z.infer<typeof AbilityTeamBuffSchema>;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -58,6 +68,10 @@ interface GameInfoUnit {
   rangeWeapon?: GameInfoWeapon | null;
   ranks?: GameInfoRank[];
   stats?: GameInfoStat[];
+  activeAbility?: string | null;
+  passiveAbility?: string | null;
+  mowActiveAbility?: string[] | null;
+  mythicAbilities?: string[] | null;
 }
 
 interface GameInfoAbility {
@@ -209,6 +223,7 @@ const DAMAGE_PROFILE_MAP: Record<string, string> = {
   Pulse: 'pulse',
   Toxic: 'toxic',
   Direct: 'direct',
+  DirectDamage: 'direct',
   Molecular: 'molecular',
 };
 
@@ -373,6 +388,253 @@ function buildBosses(raw: GameInfo): BossData[] {
   return bosses;
 }
 
+/**
+ * Characters whose `abilities` are hand-authored (with verified damage
+ * factors, triggers, teamBuffs, scaling). The extractor skips these so we
+ * don't clobber reviewed data. Any character not on this list gets abilities
+ * derived fresh from gameinfo.
+ */
+const HAND_AUTHORED_ABILITY_IDS = new Set([
+  'kharn',
+  'kariyan',
+  'laviscus',
+  'gulgortz',
+  'trajann',
+  'biovore',
+]);
+
+/**
+ * Ability damage variables in gameinfo are 65-entry arrays indexed by
+ * xpLevel (1..65). For the scraper-derived `preArmorAddFlat` we pin to
+ * xpLevel 50 (index 49) — legendary-cap — as a representative value. A
+ * future engine upgrade can store the full array and scale per-level; for
+ * now the hand-authored entries (Phase 2) cover abilities we need exact
+ * scaling for.
+ */
+const REFERENCE_LEVEL_INDEX = 49;
+const COMPONENT_SUFFIXES = ['', '_2', '_3', '_4', '_5'] as const;
+
+function numArray(v: unknown): number[] | null {
+  if (!Array.isArray(v)) return null;
+  const nums = v.map((x) => (typeof x === 'number' ? x : Number(x as string)));
+  return nums.every((n) => Number.isFinite(n)) ? nums : null;
+}
+
+function atLevel(arr: number[] | null, level = REFERENCE_LEVEL_INDEX): number | null {
+  if (!arr || arr.length === 0) return null;
+  return arr[Math.min(level, arr.length - 1)] ?? null;
+}
+
+function numAtLevel(a: GameInfoAbility, key: string, level = REFERENCE_LEVEL_INDEX): number | null {
+  const arr = numArray(a.variables?.[key]);
+  const v = atLevel(arr, level);
+  return v === null ? null : Math.round(v);
+}
+
+/**
+ * Derive a passive's trigger from its description text. We only detect the
+ * two shapes the engine currently supports; unmatched descriptions return
+ * undefined (the ability is treated as an aura/teamBuff).
+ */
+function describeTrigger(desc: string | undefined): AbilityTrigger | undefined {
+  if (!desc) return undefined;
+  const clean = desc.replace(/<[^>]+>/g, '').toLowerCase();
+  if (/after performing (?:a |an )?normal attack/.test(clean)) {
+    return { kind: 'afterOwnNormalAttack' };
+  }
+  if (/after performing (?:his|her|its|their) first attack (?:each|this) turn/.test(clean)) {
+    const requires = /big target/.test(clean) ? 'big target' : undefined;
+    return requires
+      ? { kind: 'afterOwnFirstAttackOfTurn', requiresTargetTrait: requires }
+      : { kind: 'afterOwnFirstAttackOfTurn' };
+  }
+  return undefined;
+}
+
+/**
+ * Known scaling abilities. Gameinfo surfaces scaling only by description
+ * text ("deals +X% for each turn you've been attacked…") — a structured
+ * detection would require description parsing per ability, so we keep a
+ * small explicit map. Any other ability scales as if pctPerStep=0.
+ */
+const SCALING_BY_ID: Record<string, AbilityScaling> = {
+  MartialInspiration: { per: 'turnsAttackedThisBattle', pctPerStep: 33 },
+};
+
+/**
+ * Known team-buff ability builders. Values derive from per-level variables
+ * where possible (LegendaryCommander's extraDmg and nrOfHits), fall back to
+ * constants from the hand-authored reconciliation where gameinfo doesn't
+ * expose them (Laviscus's outrage multipliers are encoded into the passive
+ * description but not the variables block).
+ */
+const TEAM_BUFF_BUILDERS: Record<string, (a: GameInfoAbility) => AbilityTeamBuff> = {
+  RefusalToBeOutdone: (_a) => ({
+    kind: 'laviscusOutrage',
+    outragePct: 120,
+    critDmgPerContributor: 1044,
+  }),
+  LegendaryCommander: (a) => ({
+    kind: 'trajannLegendaryCommander',
+    flatDamage: numAtLevel(a, 'extraDmg') ?? 0,
+    extraHitsAdjacentToSelf: numAtLevel(a, 'nrOfHits') ?? 2,
+  }),
+};
+
+/**
+ * Convert a gameinfo ability id (PascalCase-like `KillMaimBurn`) into the
+ * catalog's `charId_snake_case` form. Falls back to a normalised slug when
+ * the input lacks word boundaries.
+ */
+function abilityLocalId(charId: string, gameId: string): string {
+  const snake = gameId
+    .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+  return `${charId}_${snake || 'ability'}`;
+}
+
+/**
+ * Extract the damage profiles encoded under a gameinfo ability. Multi-
+ * component abilities (Kharn's Kill! Maim! Burn!) tag suffixes `_2`, `_3`,
+ * … on `damageProfile`, `nrOfHits`, `minDmg`, `maxDmg`. Profiles follow the
+ * declaration order (1, 2, 3, …). preArmorAddFlat is pinned to xpLevel 50
+ * (see REFERENCE_LEVEL_INDEX).
+ *
+ * Fallback rules (observed in wild gameinfo data):
+ * - Suffix components inherit the base `damageProfile` if their own isn't
+ *   set (e.g. Typhus's PlagueWind: all three components are Psychic but
+ *   only the base `damageProfile` constant exists).
+ * - Suffix components inherit base `nrOfHits` likewise.
+ * - A component is considered "present" if it has damage data (minDmg+maxDmg
+ *   or a single `dmg` variable). Suffixes with only a constants entry but
+ *   no damage data are skipped.
+ */
+function extractProfiles(abilityId: string, ability: GameInfoAbility): AttackProfile[] {
+  const profiles: AttackProfile[] = [];
+  const constants = ability.constants ?? {};
+  const variables = ability.variables ?? {};
+  const baseProfile = constants['damageProfile'];
+  const baseHits = Number(constants['nrOfHits'] ?? 1) || 1;
+
+  for (const suffix of COMPONENT_SUFFIXES) {
+    const dpKey = 'damageProfile' + suffix;
+    const hitsKey = 'nrOfHits' + suffix;
+    const minKey = 'minDmg' + suffix;
+    const maxKey = 'maxDmg' + suffix;
+    const flatKey = 'dmg' + suffix;
+
+    const rawProfile = constants[dpKey] ?? baseProfile;
+    if (!rawProfile) continue;
+
+    const minArr = numArray(variables[minKey]);
+    const maxArr = numArray(variables[maxKey]);
+    const flatArr = numArray(variables[flatKey]);
+    const minAtLevel = atLevel(minArr);
+    const maxAtLevel = atLevel(maxArr);
+    const flatAtLevel = atLevel(flatArr);
+
+    // Skip a suffix component that has no damage data of its own. The base
+    // component ('' suffix) always emits if rawProfile exists; suffix
+    // components need their own dmg variables to justify a profile entry.
+    if (suffix !== '' && minAtLevel === null && maxAtLevel === null && flatAtLevel === null) {
+      continue;
+    }
+
+    const damageType = DAMAGE_PROFILE_MAP[rawProfile];
+    if (!damageType) {
+      console.warn(`extractProfiles(${abilityId}): unknown damageProfile "${rawProfile}"`);
+      continue;
+    }
+    const rawHits = constants[hitsKey] ?? constants['nrOfHits'];
+    const hits = Number(rawHits ?? baseHits) || baseHits || 1;
+
+    const midAtLevel =
+      minAtLevel !== null && maxAtLevel !== null
+        ? (minAtLevel + maxAtLevel) / 2
+        : flatAtLevel;
+
+    // Use the canonical damage type name in the label (so `DirectDamage`
+    // appears as "direct" not the raw gameinfo string). Component number
+    // suffix stays numeric for multi-hit abilities.
+    const componentName = damageType;
+    const componentLabel =
+      suffix === '' ? componentName : `${componentName} #${suffix.slice(1)}`;
+    profiles.push({
+      label: `${ability.name} — ${componentLabel}`,
+      damageType: damageType as AttackProfile['damageType'],
+      hits,
+      ...(midAtLevel !== null ? { preArmorAddFlat: Math.round(midAtLevel) } : {}),
+      damageFactor: 1,
+      kind: 'ability',
+      abilityId,
+    });
+  }
+  return profiles;
+}
+
+/**
+ * Build `CharacterData['abilities']` for a hero from its gameinfo record.
+ * Emits one CatalogAbility per populated slot (`activeAbility`,
+ * `passiveAbility`), with profiles[] extracted from the ability's damage
+ * constants/variables. teamBuff/scaling applied from known maps.
+ *
+ * Limitations:
+ * - MoW and mythic abilities are ignored (no hero has them in this snapshot)
+ * - Passives that condition on multiple target-trait branches (Kariyan's
+ *   Legacy of Combat) aren't split into separate ability entries; consumers
+ *   that need that split should hand-author the character
+ * - Single component only: abilities with only `damageProfile_2` (no base)
+ *   drop to an empty profiles list
+ */
+function extractHeroAbilities(
+  charId: string,
+  hero: GameInfoUnit,
+  raw: GameInfo,
+): CharacterData['abilities'] {
+  const out: CharacterData['abilities'] = [];
+  const abilityMap = raw.abilities ?? {};
+  const slots: [string | null | undefined, 'active' | 'passive'][] = [
+    [hero.activeAbility, 'active'],
+    [hero.passiveAbility, 'passive'],
+  ];
+  for (const [gameId, kind] of slots) {
+    if (!gameId) continue;
+    const a = abilityMap[gameId];
+    if (!a) {
+      console.warn(`${charId}: ability "${gameId}" referenced by hero but absent from abilities{}`);
+      continue;
+    }
+    const localId = abilityLocalId(charId, gameId);
+    const profiles = extractProfiles(localId, a);
+    // Prefer `cooldownTurns` (the recurring cooldown after first use). Fall
+    // back to `initialCooldownTurns` only when the recurring one is absent —
+    // some actives only advertise the first-use delay in the snapshot, and
+    // most of those recur at the same cadence in-game.
+    const cooldownRaw = a.constants?.cooldownTurns ?? a.constants?.initialCooldownTurns;
+    const cooldown = cooldownRaw !== undefined ? Number(cooldownRaw) : undefined;
+    const trigger = kind === 'passive' ? describeTrigger(a.description) : undefined;
+    const scaling = SCALING_BY_ID[gameId];
+    const teamBuild = TEAM_BUFF_BUILDERS[gameId];
+    const teamBuff = teamBuild ? teamBuild(a) : undefined;
+
+    out.push({
+      id: localId,
+      name: a.name,
+      kind,
+      ...(profiles.length > 0 ? { curveId: 'abilityFactor' } : {}),
+      profiles,
+      ...(cooldown !== undefined && Number.isFinite(cooldown) ? { cooldown } : {}),
+      ...(trigger ? { trigger } : {}),
+      ...(scaling ? { scaling } : {}),
+      ...(teamBuff ? { teamBuff } : {}),
+    });
+  }
+  return out;
+}
+
 function patchCharacters(raw: GameInfo, current: CharacterData[]): CharacterData[] {
   const pool: GameInfoUnit[] = [
     ...Object.values(raw.heroes ?? {}),
@@ -381,7 +643,9 @@ function patchCharacters(raw: GameInfo, current: CharacterData[]): CharacterData
   const patched: CharacterData[] = [];
   let stats = 0,
     weapons = 0,
-    traits = 0;
+    traits = 0,
+    abilitiesPatched = 0,
+    abilitiesSkipped = 0;
   const unmatched: string[] = [];
 
   for (const ch of current) {
@@ -433,11 +697,20 @@ function patchCharacters(raw: GameInfo, current: CharacterData[]): CharacterData
       next.traits = mapCharTraits(hero.traits);
       traits++;
     }
+    if (HAND_AUTHORED_ABILITY_IDS.has(ch.id)) {
+      // Preserve hand-authored ability data (verified damage factors,
+      // multi-variant triggers, exact teamBuff numbers).
+      abilitiesSkipped++;
+    } else {
+      const extracted = extractHeroAbilities(ch.id, hero, raw);
+      next.abilities = extracted;
+      if (extracted.length > 0) abilitiesPatched++;
+    }
     patched.push(next);
   }
 
   console.log(
-    `Characters: ${stats} stat overrides · ${weapons} weapon overrides · ${traits} trait overrides`,
+    `Characters: ${stats} stat overrides · ${weapons} weapon overrides · ${traits} trait overrides · ${abilitiesPatched} ability overrides (${abilitiesSkipped} hand-authored preserved)`,
   );
   if (unmatched.length > 0) {
     console.log(`Unmatched (${unmatched.length}): ${unmatched.join(', ')}`);

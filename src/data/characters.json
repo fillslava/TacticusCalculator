@@ -31,74 +31,27 @@
     },
     "abilities": [
       {
-        "id": "abaddon_active_1",
-        "name": "Active 1",
+        "id": "abaddon_drachnyen",
+        "name": "Drach’nyen",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "abaddon_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Drach’nyen — Piercing",
+            "damageType": "piercing",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 748,
+            "kind": "ability",
+            "abilityId": "abaddon_drachnyen"
+          }
+        ]
       },
       {
-        "id": "abaddon_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 11,
-          "kind": "ability",
-          "abilityId": "abaddon_active_2"
-        }
-      },
-      {
-        "id": "abaddon_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "abaddon_active_3"
-        }
-      },
-      {
-        "id": "abaddon_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 24,
-          "kind": "ability",
-          "abilityId": "abaddon_active_4"
-        }
-      },
-      {
-        "id": "abaddon_active_5",
-        "name": "Active 5",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 5",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "abaddon_active_5"
-        }
+        "id": "abaddon_first_among_traitors",
+        "name": "First Among Traitors",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -140,60 +93,16 @@
     },
     "abilities": [
       {
-        "id": "abraxas_active_1",
-        "name": "Active 1",
+        "id": "abraxas_master_of_the_tutelaries",
+        "name": "Malefic Maelstrom",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "abraxas_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "abraxas_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 9,
-          "kind": "ability",
-          "abilityId": "abraxas_active_2"
-        }
-      },
-      {
-        "id": "abraxas_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "abraxas_active_3"
-        }
-      },
-      {
-        "id": "abraxas_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 18,
-          "kind": "ability",
-          "abilityId": "abraxas_active_4"
-        }
+        "id": "abraxas_infernal_pacts",
+        "name": "Infernal Pacts",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -234,18 +143,16 @@
     },
     "abilities": [
       {
-        "id": "actus_active_1",
-        "name": "Active 1",
+        "id": "actus_defend_the_divine_work",
+        "name": "Defend The Divine Work",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 60,
-          "kind": "ability",
-          "abilityId": "actus_active_1"
-        }
+        "profiles": []
+      },
+      {
+        "id": "actus_galvanic_field",
+        "name": "Galvanic Field",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -284,7 +191,31 @@
       "hits": 3,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "adamatar_doom_siren",
+        "name": "Doom Siren",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Doom Siren — DirectDamage",
+            "damageType": "direct",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 887,
+            "kind": "ability",
+            "abilityId": "adamatar_doom_siren"
+          }
+        ]
+      },
+      {
+        "id": "adamatar_obsessive_annunciation",
+        "name": "Obsessive Annunciation",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "thrill seekers"
     ],
@@ -313,7 +244,32 @@
       "pierceOverride": 0.01,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "aesoth_vexilla_magnifica",
+        "name": "Vexilla Magnifica",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Vexilla Magnifica — Physical",
+            "damageType": "physical",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2770,
+            "kind": "ability",
+            "abilityId": "aesoth_vexilla_magnifica"
+          }
+        ],
+        "cooldown": 2
+      },
+      {
+        "id": "aesoth_stand_vigil",
+        "name": "Stand Vigil",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "martial katah",
       "big target",
@@ -346,18 +302,26 @@
     },
     "abilities": [
       {
-        "id": "aethana_active_1",
-        "name": "Active 1",
+        "id": "aethana_loki_swooping_hawk",
+        "name": "Swooping Hawk",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "aethana_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Swooping Hawk — Piercing",
+            "damageType": "piercing",
+            "hits": 1,
+            "damageFactor": 1,
+            "kind": "ability",
+            "abilityId": "aethana_loki_swooping_hawk"
+          }
+        ]
+      },
+      {
+        "id": "aethana_path_of_command",
+        "name": "Path Of Command",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -398,32 +362,27 @@
     },
     "abilities": [
       {
-        "id": "ahriman_active_1",
-        "name": "Active 1",
+        "id": "ahriman_doombolt",
+        "name": "Doombolt",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "ahriman_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Doombolt — Psychic",
+            "damageType": "psychic",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 776,
+            "kind": "ability",
+            "abilityId": "ahriman_doombolt"
+          }
+        ]
       },
       {
-        "id": "ahriman_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 16,
-          "kind": "ability",
-          "abilityId": "ahriman_active_2"
-        }
+        "id": "ahriman_psychic_stalk",
+        "name": "Psychic Stalk",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -458,32 +417,16 @@
     },
     "abilities": [
       {
-        "id": "alephNull_active_1",
-        "name": "Active 1",
+        "id": "alephNull_scarab_hive",
+        "name": "Scarab Hive",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "particle",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "alephNull_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "alephNull_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "particle",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "alephNull_active_2"
-        }
+        "id": "alephNull_fabricator_claw_array",
+        "name": "Fabricator Claw Array",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -524,7 +467,20 @@
       "hits": 3,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "ammuk_ironkin_steeljack",
+        "name": "Ironkin Steeljack",
+        "kind": "active",
+        "profiles": []
+      },
+      {
+        "id": "ammuk_predictive_guidance",
+        "name": "Predictive Guidance",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "prioritised efficiency",
       "mechanical"
@@ -556,32 +512,27 @@
     },
     "abilities": [
       {
-        "id": "angrax_active_1",
-        "name": "Active 1",
+        "id": "angrax_bringer_of_despair",
+        "name": "Bringer of Despair",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "angrax_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Bringer of Despair — Power",
+            "damageType": "power",
+            "hits": 4,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1330,
+            "kind": "ability",
+            "abilityId": "angrax_bringer_of_despair"
+          }
+        ]
       },
       {
-        "id": "angrax_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 21,
-          "kind": "ability",
-          "abilityId": "angrax_active_2"
-        }
+        "id": "angrax_hateful_assault",
+        "name": "Hateful Assault",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -623,46 +574,27 @@
     },
     "abilities": [
       {
-        "id": "anuphet_active_1",
-        "name": "Active 1",
+        "id": "anuphet_resurrection_orb",
+        "name": "Resurrection Orb",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 60,
-          "kind": "ability",
-          "abilityId": "anuphet_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "anuphet_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "anuphet_martial_apotheosis",
+        "name": "Martial Apotheosis",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "anuphet_active_2"
-        }
-      },
-      {
-        "id": "anuphet_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "anuphet_active_3"
-        }
+        "profiles": [
+          {
+            "label": "Martial Apotheosis — Energy",
+            "damageType": "energy",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 942,
+            "kind": "ability",
+            "abilityId": "anuphet_martial_apotheosis"
+          }
+        ]
       }
     ],
     "traits": [
@@ -703,46 +635,16 @@
     },
     "abilities": [
       {
-        "id": "archimatos_active_1",
-        "name": "Active 1",
+        "id": "archimatos_incursion",
+        "name": "Daemonic Incursion",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 39,
-          "kind": "ability",
-          "abilityId": "archimatos_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "archimatos_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "archimatos_active_2"
-        }
-      },
-      {
-        "id": "archimatos_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 3,
-          "kind": "ability",
-          "abilityId": "archimatos_active_3"
-        }
+        "id": "archimatos_possession",
+        "name": "Possession",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -776,46 +678,27 @@
     },
     "abilities": [
       {
-        "id": "arjac_active_1",
-        "name": "Active 1",
+        "id": "arjac_foehammer",
+        "name": "Foehammer",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 5,
-          "kind": "ability",
-          "abilityId": "arjac_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Foehammer — Power",
+            "damageType": "power",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 416,
+            "kind": "ability",
+            "abilityId": "arjac_foehammer"
+          }
+        ]
       },
       {
-        "id": "arjac_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "arjac_active_2"
-        }
-      },
-      {
-        "id": "arjac_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "arjac_active_3"
-        }
+        "id": "arjac_anvil_shield",
+        "name": "Anvil Shield",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -851,46 +734,16 @@
     },
     "abilities": [
       {
-        "id": "asmodai_active_1",
-        "name": "Active 1",
+        "id": "asmodai_exemplar_of_hate",
+        "name": "Exemplar of Hate",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "asmodai_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "asmodai_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 60,
-          "kind": "ability",
-          "abilityId": "asmodai_active_2"
-        }
-      },
-      {
-        "id": "asmodai_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 80,
-          "kind": "ability",
-          "abilityId": "asmodai_active_3"
-        }
+        "id": "asmodai_feared_interrogator",
+        "name": "Feared Interrogator",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -921,7 +774,31 @@
       "pierceOverride": 0.4,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "atlacoya_talons_of_the_emperor",
+        "name": "Talons Of The Emperor",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Talons Of The Emperor — Power",
+            "damageType": "power",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2992,
+            "kind": "ability",
+            "abilityId": "atlacoya_talons_of_the_emperor"
+          }
+        ]
+      },
+      {
+        "id": "atlacoya_daughter_of_the_abyss",
+        "name": "Daughter Of The Abyss",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "parry",
       "terrifying"
@@ -953,32 +830,16 @@
     },
     "abilities": [
       {
-        "id": "aunShi_active_1",
-        "name": "Active 1",
+        "id": "aunShi_inspired_to_greatness",
+        "name": "Inspired to Greatness",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "aunShi_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "aunShi_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 60,
-          "kind": "ability",
-          "abilityId": "aunShi_active_2"
-        }
+        "id": "aunShi_serene_unifier",
+        "name": "Serene Unifier",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [],
@@ -1009,32 +870,27 @@
     },
     "abilities": [
       {
-        "id": "azkor_active_1",
-        "name": "Active 1",
+        "id": "azkor_overwhelming_wrath",
+        "name": "Overwhelming Wrath",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 28,
-          "kind": "ability",
-          "abilityId": "azkor_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Overwhelming Wrath — Eviscerate",
+            "damageType": "eviscerating",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1773,
+            "kind": "ability",
+            "abilityId": "azkor_overwhelming_wrath"
+          }
+        ]
       },
       {
-        "id": "azkor_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "azkor_active_2"
-        }
+        "id": "azkor_beacon_of_rage",
+        "name": "Beacon Of Rage",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1078,60 +934,36 @@
     },
     "abilities": [
       {
-        "id": "azrael_active_1",
-        "name": "Active 1",
+        "id": "azrael_dark_talon_strike",
+        "name": "Dark Talon Strike",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "azrael_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Dark Talon Strike — DirectDamage",
+            "damageType": "direct",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2770,
+            "kind": "ability",
+            "abilityId": "azrael_dark_talon_strike"
+          },
+          {
+            "label": "Dark Talon Strike — Bolter (component 2)",
+            "damageType": "bolter",
+            "hits": 6,
+            "damageFactor": 1,
+            "preArmorAddFlat": 554,
+            "kind": "ability",
+            "abilityId": "azrael_dark_talon_strike"
+          }
+        ]
       },
       {
-        "id": "azrael_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 55,
-          "kind": "ability",
-          "abilityId": "azrael_active_2"
-        }
-      },
-      {
-        "id": "azrael_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 9,
-          "kind": "ability",
-          "abilityId": "azrael_active_3"
-        }
-      },
-      {
-        "id": "azrael_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 11,
-          "kind": "ability",
-          "abilityId": "azrael_active_4"
-        }
+        "id": "azrael_lion_helm",
+        "name": "Lion Helm",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1163,7 +995,20 @@
       "pierceOverride": 0.4,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "baldr_rites_of_morkai",
+        "name": "Rites of Morkai",
+        "kind": "active",
+        "profiles": []
+      },
+      {
+        "id": "baldr_healing_balms",
+        "name": "Healing Balms",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "healer",
       "final justice",
@@ -1196,32 +1041,28 @@
     },
     "abilities": [
       {
-        "id": "baraqiel_active_1",
-        "name": "Active 1",
+        "id": "baraqiel_plasma_cannon",
+        "name": "Plasma Cannon",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "baraqiel_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Plasma Cannon — Plasma",
+            "damageType": "plasma",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 776,
+            "kind": "ability",
+            "abilityId": "baraqiel_plasma_cannon"
+          }
+        ],
+        "cooldown": 1
       },
       {
-        "id": "baraqiel_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 16,
-          "kind": "ability",
-          "abilityId": "baraqiel_active_2"
-        }
+        "id": "baraqiel_deathwing",
+        "name": "Deathwing",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1257,46 +1098,16 @@
     },
     "abilities": [
       {
-        "id": "bellator_active_1",
-        "name": "Active 1",
+        "id": "bellator_death_from_above",
+        "name": "Death From Above",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "bolter",
-          "hits": 1,
-          "damageFactor": 55,
-          "kind": "ability",
-          "abilityId": "bellator_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "bellator_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "bolter",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "bellator_active_2"
-        }
-      },
-      {
-        "id": "bellator_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "bolter",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "bellator_active_3"
-        }
+        "id": "bellator_shock_assault",
+        "name": "Shock Assault",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1338,45 +1149,45 @@
         "id": "biovore_bio_minefield",
         "name": "Bio Minefield",
         "kind": "active",
-        "cooldown": 2,
         "profiles": [
           {
             "label": "Spore Mine — Toxic",
             "damageType": "toxic",
             "hits": 1,
-            "preArmorAddFlat": 7896,
             "damageFactor": 1,
+            "preArmorAddFlat": 7896,
             "kind": "ability",
             "abilityId": "biovore_bio_minefield"
           }
-        ]
+        ],
+        "cooldown": 2
       },
       {
         "id": "biovore_spore_mines_launcher",
         "name": "Spore Mines Launcher",
         "kind": "active",
-        "cooldown": 0,
         "profiles": [
           {
             "label": "Spore Mine — Toxic",
             "damageType": "toxic",
             "hits": 1,
-            "preArmorAddFlat": 7896,
             "damageFactor": 1,
+            "preArmorAddFlat": 7896,
             "kind": "ability",
             "abilityId": "biovore_spore_mines_launcher"
           }
-        ]
+        ],
+        "cooldown": 0
       },
       {
         "id": "biovore_hyper_corrosive_acid",
         "name": "Hyper Corrosive Acid",
         "kind": "passive",
+        "profiles": [],
         "teamBuff": {
           "kind": "biovoreMythicAcid",
           "pct": 20
-        },
-        "profiles": []
+        }
       }
     ],
     "traits": [
@@ -1416,32 +1227,38 @@
     },
     "abilities": [
       {
-        "id": "burchard_active_1",
-        "name": "Active 1",
+        "id": "burchard_fragstorm_grenade_launcher",
+        "name": "Fragstorm Grenade Launcher",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 24,
-          "kind": "ability",
-          "abilityId": "burchard_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Fragstorm Grenade Launcher — Blast",
+            "damageType": "blast",
+            "hits": 6,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1496,
+            "kind": "ability",
+            "abilityId": "burchard_fragstorm_grenade_launcher"
+          }
+        ]
       },
       {
-        "id": "burchard_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "burchard_boltstorm",
+        "name": "Boltstorm",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "burchard_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Boltstorm — Bolter",
+            "damageType": "bolter",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1025,
+            "kind": "ability",
+            "abilityId": "burchard_boltstorm"
+          }
+        ]
       }
     ],
     "traits": [
@@ -1483,18 +1300,27 @@
     },
     "abilities": [
       {
-        "id": "calandis_active_1",
-        "name": "Active 1",
+        "id": "calandis_fire_and_reposition",
+        "name": "Fire And Reposition",
         "kind": "active",
+        "profiles": []
+      },
+      {
+        "id": "calandis_wireweave_net",
+        "name": "Wireweave Net",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "calandis_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Wireweave Net — Piercing",
+            "damageType": "piercing",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 831,
+            "kind": "ability",
+            "abilityId": "calandis_wireweave_net"
+          }
+        ]
       }
     ],
     "traits": [
@@ -1528,32 +1354,27 @@
     },
     "abilities": [
       {
-        "id": "calgar_active_1",
-        "name": "Active 1",
+        "id": "calgar_gauntlets_of_ultramar",
+        "name": "Gauntlets of Ultramar",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 35,
-          "kind": "ability",
-          "abilityId": "calgar_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Gauntlets of Ultramar — Bolter",
+            "damageType": "bolter",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2216,
+            "kind": "ability",
+            "abilityId": "calgar_gauntlets_of_ultramar"
+          }
+        ]
       },
       {
-        "id": "calgar_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "calgar_active_2"
-        }
+        "id": "calgar_rites_of_battle",
+        "name": "Rites of Battle",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1588,18 +1409,17 @@
     },
     "abilities": [
       {
-        "id": "celestine_active_1",
-        "name": "Active 1",
+        "id": "celestine_sky_strike",
+        "name": "Sky Strike",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 5,
-          "kind": "ability",
-          "abilityId": "celestine_active_1"
-        }
+        "profiles": [],
+        "cooldown": 1
+      },
+      {
+        "id": "celestine_geminae_superia",
+        "name": "Geminae Superia",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1640,32 +1460,37 @@
     },
     "abilities": [
       {
-        "id": "certus_active_1",
-        "name": "Active 1",
+        "id": "certus_mortis_round",
+        "name": "Mortis Round",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "certus_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Mortis Round — HeavyRound",
+            "damageType": "heavyRound",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2632,
+            "kind": "ability",
+            "abilityId": "certus_mortis_round"
+          }
+        ]
       },
       {
-        "id": "certus_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "certus_camo_cloak",
+        "name": "Camo Cloak",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 50,
-          "kind": "ability",
-          "abilityId": "certus_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Camo Cloak — Bolter",
+            "damageType": "bolter",
+            "hits": 1,
+            "damageFactor": 1,
+            "kind": "ability",
+            "abilityId": "certus_camo_cloak"
+          }
+        ]
       }
     ],
     "traits": [
@@ -1700,60 +1525,16 @@
     },
     "abilities": [
       {
-        "id": "corrodius_active_1",
-        "name": "Active 1",
+        "id": "corrodius_poxwalkers",
+        "name": "Poxwalkers",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "corrodius_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "corrodius_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 35,
-          "kind": "ability",
-          "abilityId": "corrodius_active_2"
-        }
-      },
-      {
-        "id": "corrodius_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "corrodius_active_3"
-        }
-      },
-      {
-        "id": "corrodius_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "corrodius_active_4"
-        }
+        "id": "corrodius_cursed_plague_bell",
+        "name": "Cursed Plague Bell",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1787,46 +1568,16 @@
     },
     "abilities": [
       {
-        "id": "creed_active_1",
-        "name": "Active 1",
+        "id": "creed_supreme_commander",
+        "name": "Supreme Commander",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "las",
-          "hits": 1,
-          "damageFactor": 40,
-          "kind": "ability",
-          "abilityId": "creed_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "creed_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "las",
-          "hits": 1,
-          "damageFactor": 24,
-          "kind": "ability",
-          "abilityId": "creed_active_2"
-        }
-      },
-      {
-        "id": "creed_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "las",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "creed_active_3"
-        }
+        "id": "creed_sworn_protector",
+        "name": "Sworn Protector",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [],
@@ -1855,7 +1606,31 @@
       "pierceOverride": 0.8,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "dante_light_of_sanguinius",
+        "name": "Light of Sanguinius",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Light of Sanguinius — Melta",
+            "damageType": "melta",
+            "hits": 5,
+            "damageFactor": 1,
+            "preArmorAddFlat": 582,
+            "kind": "ability",
+            "abilityId": "dante_light_of_sanguinius"
+          }
+        ]
+      },
+      {
+        "id": "dante_lord_of_the_host",
+        "name": "Lord of the Host",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "teleport strike",
       "final justice",
@@ -1897,18 +1672,16 @@
     },
     "abilities": [
       {
-        "id": "darkstrider_active_1",
-        "name": "Active 1",
+        "id": "darkstrider_fighting_retreat",
+        "name": "Fighting Retreat",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": -8,
-          "kind": "ability",
-          "abilityId": "darkstrider_active_1"
-        }
+        "profiles": []
+      },
+      {
+        "id": "darkstrider_structural_analyser",
+        "name": "Structural Analyser",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -1943,32 +1716,27 @@
     },
     "abilities": [
       {
-        "id": "deathleaper_active_1",
-        "name": "Active 1",
+        "id": "deathleaper_fear_of_the_unseen",
+        "name": "Fear of the Unseen",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "deathleaper_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Fear of the Unseen — DirectDamage",
+            "damageType": "direct",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 748,
+            "kind": "ability",
+            "abilityId": "deathleaper_fear_of_the_unseen"
+          }
+        ]
       },
       {
-        "id": "deathleaper_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "deathleaper_active_2"
-        }
+        "id": "deathleaper_feeder_tendrils",
+        "name": "Feeder Tendrils",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2008,7 +1776,31 @@
       "hits": 3,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "dreir_leading_the_charge",
+        "name": "Leading the Charge",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Leading the Charge — Power",
+            "damageType": "power",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1552,
+            "kind": "ability",
+            "abilityId": "dreir_leading_the_charge"
+          }
+        ]
+      },
+      {
+        "id": "dreir_tough_to_kill",
+        "name": "Tough to Kill",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "resilient",
       "unstoppable"
@@ -2047,32 +1839,16 @@
     },
     "abilities": [
       {
-        "id": "eldryon_active_1",
-        "name": "Active 1",
+        "id": "eldryon_executioner",
+        "name": "Executioner",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "eldryon_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "eldryon_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "eldryon_active_2"
-        }
+        "id": "eldryon_doom",
+        "name": "Doom",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2105,60 +1881,47 @@
     },
     "abilities": [
       {
-        "id": "exitorRho_active_1",
-        "name": "Active 1",
+        "id": "exitorRho_cord_claw",
+        "name": "Chordclaw",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "exitorRho_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Chordclaw — DirectDamage",
+            "damageType": "direct",
+            "hits": 4,
+            "damageFactor": 1,
+            "preArmorAddFlat": 748,
+            "kind": "ability",
+            "abilityId": "exitorRho_cord_claw"
+          },
+          {
+            "label": "Chordclaw — DirectDamage (component 2)",
+            "damageType": "direct",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 554,
+            "kind": "ability",
+            "abilityId": "exitorRho_cord_claw"
+          }
+        ]
       },
       {
-        "id": "exitorRho_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "exitorRho_optimized_gait",
+        "name": "Optimised Gait",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "exitorRho_active_2"
-        }
-      },
-      {
-        "id": "exitorRho_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "exitorRho_active_3"
-        }
-      },
-      {
-        "id": "exitorRho_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "energy",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "exitorRho_active_4"
-        }
+        "profiles": [
+          {
+            "label": "Optimised Gait — Energy",
+            "damageType": "energy",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1413,
+            "kind": "ability",
+            "abilityId": "exitorRho_optimized_gait"
+          }
+        ]
       }
     ],
     "traits": [
@@ -2197,7 +1960,26 @@
       "hits": 3,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "exorcist_thrice_blessed_conflagration",
+        "name": "Thrice-Blessed Conflagration",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Thrice-Blessed Conflagration — Flame",
+            "damageType": "flame",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2438,
+            "kind": "ability",
+            "abilityId": "exorcist_thrice_blessed_conflagration"
+          }
+        ],
+        "cooldown": 1
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -2233,7 +2015,20 @@
       "pierceOverride": 0.65,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "farsight_exemplar_of_the_montka",
+        "name": "Exemplar of the Mont'ka",
+        "kind": "active",
+        "profiles": []
+      },
+      {
+        "id": "farsight_way_of_the_short_blade",
+        "name": "Way of the Short Blade",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "beast snagga",
       "big target",
@@ -2265,7 +2060,31 @@
       "pierceOverride": 0.4,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "forcas_calibanite_greatsword",
+        "name": "Calibanite Greatsword",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Calibanite Greatsword — Power",
+            "damageType": "power",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 665,
+            "kind": "ability",
+            "abilityId": "forcas_calibanite_greatsword"
+          }
+        ]
+      },
+      {
+        "id": "forcas_enmity_for_the_unworthy",
+        "name": "Enmity for the Unworthy",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "camouflage",
       "parry"
@@ -2300,7 +2119,26 @@
       "hits": 2,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "forgefiend_hades_autocannons",
+        "name": "Hades Autocannons",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Hades Autocannons — Flame",
+            "damageType": "flame",
+            "hits": 6,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2327,
+            "kind": "ability",
+            "abilityId": "forgefiend_hades_autocannons"
+          }
+        ],
+        "cooldown": 0
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -2334,7 +2172,15 @@
       "hits": 2,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "galatian_duty_eternal",
+        "name": "Duty Eternal",
+        "kind": "active",
+        "profiles": [],
+        "cooldown": 2
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -2365,60 +2211,16 @@
     },
     "abilities": [
       {
-        "id": "gibbascrapz_active_1",
-        "name": "Active 1",
+        "id": "gibbascrapz_grot_tank",
+        "name": "Grot Tank",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 70,
-          "kind": "ability",
-          "abilityId": "gibbascrapz_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "gibbascrapz_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "gibbascrapz_active_2"
-        }
-      },
-      {
-        "id": "gibbascrapz_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "gibbascrapz_active_3"
-        }
-      },
-      {
-        "id": "gibbascrapz_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "gibbascrapz_active_4"
-        }
+        "id": "gibbascrapz_kustom_force_field",
+        "name": "Kustom Force Field",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2452,32 +2254,38 @@
     },
     "abilities": [
       {
-        "id": "godswyl_active_1",
-        "name": "Active 1",
+        "id": "godswyl_thunderous_assault",
+        "name": "Thunderous Assault",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 60,
-          "kind": "ability",
-          "abilityId": "godswyl_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Thunderous Assault — Power",
+            "damageType": "power",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 3462,
+            "kind": "ability",
+            "abilityId": "godswyl_thunderous_assault"
+          }
+        ]
       },
       {
-        "id": "godswyl_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "godswyl_champion_of_the_feast",
+        "name": "Champion Of The Feast",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 65,
-          "kind": "ability",
-          "abilityId": "godswyl_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Champion Of The Feast — Power",
+            "damageType": "power",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1662,
+            "kind": "ability",
+            "abilityId": "godswyl_champion_of_the_feast"
+          }
+        ]
       }
     ],
     "traits": [
@@ -2522,7 +2330,6 @@
         "name": "WAAAGH!",
         "kind": "active",
         "curveId": "abilityFactor",
-        "cooldown": 2,
         "profiles": [
           {
             "label": "WAAAGH! — Charge (melee attack)",
@@ -2534,16 +2341,14 @@
             "kind": "ability",
             "abilityId": "gulgortz_waaagh"
           }
-        ]
+        ],
+        "cooldown": 2
       },
       {
         "id": "gulgortz_light_im_up",
         "name": "Light 'Im Up",
         "kind": "passive",
         "curveId": "abilityFactor",
-        "trigger": {
-          "kind": "afterOwnNormalAttack"
-        },
         "profiles": [
           {
             "label": "Light 'Im Up — Projectile",
@@ -2554,7 +2359,10 @@
             "kind": "ability",
             "abilityId": "gulgortz_light_im_up"
           }
-        ]
+        ],
+        "trigger": {
+          "kind": "afterOwnNormalAttack"
+        }
       }
     ],
     "traits": [
@@ -2591,46 +2399,27 @@
     },
     "abilities": [
       {
-        "id": "haarken_active_1",
-        "name": "Active 1",
+        "id": "haarken_herald_of_the_apocalypse",
+        "name": "Herald of the Apocalypse",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "haarken_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Herald of the Apocalypse — Piercing",
+            "damageType": "piercing",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1219,
+            "kind": "ability",
+            "abilityId": "haarken_herald_of_the_apocalypse"
+          }
+        ]
       },
       {
-        "id": "haarken_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 18,
-          "kind": "ability",
-          "abilityId": "haarken_active_2"
-        }
-      },
-      {
-        "id": "haarken_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "haarken_active_3"
-        }
+        "id": "haarken_head_claimer",
+        "name": "Head-Claimer",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2663,7 +2452,31 @@
       "pierceOverride": 0.8,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "hascule_daemonic_patrons",
+        "name": "Daemonic Patrons",
+        "kind": "active",
+        "profiles": []
+      },
+      {
+        "id": "hascule_ecstatic_slaughter",
+        "name": "Ecstatic Slaughter",
+        "kind": "passive",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Ecstatic Slaughter — Eviscerate",
+            "damageType": "eviscerating",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1108,
+            "kind": "ability",
+            "abilityId": "hascule_ecstatic_slaughter"
+          }
+        ]
+      }
+    ],
     "traits": [
       "thrill seekers",
       "parry"
@@ -2702,32 +2515,16 @@
     },
     "abilities": [
       {
-        "id": "helbrecht_active_1",
-        "name": "Active 1",
+        "id": "helbrecht_crusade_of_wrath",
+        "name": "Crusade Of Wrath",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 5,
-          "kind": "ability",
-          "abilityId": "helbrecht_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "helbrecht_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 7,
-          "kind": "ability",
-          "abilityId": "helbrecht_active_2"
-        }
+        "id": "helbrecht_destroy_the_witch",
+        "name": "Destroy The Witch",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2761,46 +2558,16 @@
     },
     "abilities": [
       {
-        "id": "hollan_active_1",
-        "name": "Active 1",
+        "id": "hollan_aberrant_hypermorph",
+        "name": "Aberrant Hypermorph",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "toxic",
-          "hits": 1,
-          "damageFactor": 75,
-          "kind": "ability",
-          "abilityId": "hollan_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "hollan_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "toxic",
-          "hits": 1,
-          "damageFactor": 14,
-          "kind": "ability",
-          "abilityId": "hollan_active_2"
-        }
-      },
-      {
-        "id": "hollan_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "toxic",
-          "hits": 1,
-          "damageFactor": 39,
-          "kind": "ability",
-          "abilityId": "hollan_active_3"
-        }
+        "id": "hollan_twisted_science",
+        "name": "Twisted Science",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2829,42 +2596,39 @@
       "label": "Melee",
       "damageType": "molecular",
       "hits": 6,
+      "pierceOverride": 0.6,
       "kind": "melee"
     },
     "ranged": {
       "label": "Ranged",
       "damageType": "molecular",
       "hits": 6,
+      "pierceOverride": 0.6,
       "kind": "ranged"
     },
     "abilities": [
       {
-        "id": "imospekh_active_1",
-        "name": "Active 1",
+        "id": "imospekh_multi_threat_eliminator",
+        "name": "Multi-Threat Eliminator",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "molecular",
-          "hits": 1,
-          "damageFactor": 17,
-          "kind": "ability",
-          "abilityId": "imospekh_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Multi-Threat Eliminator — Gauss",
+            "damageType": "molecular",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 998,
+            "kind": "ability",
+            "abilityId": "imospekh_multi_threat_eliminator"
+          }
+        ]
       },
       {
-        "id": "imospekh_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "molecular",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "imospekh_active_2"
-        }
+        "id": "imospekh_inescapable_death",
+        "name": "Inescapable Death",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2899,32 +2663,16 @@
     },
     "abilities": [
       {
-        "id": "incisus_active_1",
-        "name": "Active 1",
+        "id": "incisus_combat_restoratives",
+        "name": "Combat Restoratives",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 39,
-          "kind": "ability",
-          "abilityId": "incisus_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "incisus_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 65,
-          "kind": "ability",
-          "abilityId": "incisus_active_2"
-        }
+        "id": "incisus_narthecium",
+        "name": "Narthecium",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -2964,46 +2712,27 @@
     },
     "abilities": [
       {
-        "id": "isaak_active_1",
-        "name": "Active 1",
+        "id": "isaak_cult_demagogue",
+        "name": "Cult Demagogue",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "isaak_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "isaak_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "isaak_decoys_and_misdirection",
+        "name": "Decoys and Misdirection",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 24,
-          "kind": "ability",
-          "abilityId": "isaak_active_2"
-        }
-      },
-      {
-        "id": "isaak_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 6,
-          "kind": "ability",
-          "abilityId": "isaak_active_3"
-        }
+        "profiles": [
+          {
+            "label": "Decoys and Misdirection — Blast",
+            "damageType": "blast",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1220,
+            "kind": "ability",
+            "abilityId": "isaak_decoys_and_misdirection"
+          }
+        ]
       }
     ],
     "traits": [
@@ -3036,32 +2765,16 @@
     },
     "abilities": [
       {
-        "id": "isabella_active_1",
-        "name": "Active 1",
+        "id": "isabella_rites_of_restoration",
+        "name": "Rites of Restoration",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "bolter",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "isabella_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "isabella_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "bolter",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "isabella_active_2"
-        }
+        "id": "isabella_medicus_ministorum",
+        "name": "Medicus Ministorum",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -3095,32 +2808,27 @@
     },
     "abilities": [
       {
-        "id": "jaeger_active_1",
-        "name": "Active 1",
+        "id": "jaeger_holy_duel",
+        "name": "Holy Duel",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "jaeger_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "jaeger_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "jaeger_martial_superiority",
+        "name": "Martial Superiority",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 5,
-          "kind": "ability",
-          "abilityId": "jaeger_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Martial Superiority — Power",
+            "damageType": "power",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1164,
+            "kind": "ability",
+            "abilityId": "jaeger_martial_superiority"
+          }
+        ]
       }
     ],
     "traits": [
@@ -3155,32 +2863,27 @@
     },
     "abilities": [
       {
-        "id": "jainZar_active_1",
-        "name": "Active 1",
+        "id": "jainZar_silent_death",
+        "name": "Silent Death",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "jainZar_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Silent Death — Piercing",
+            "damageType": "piercing",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 748,
+            "kind": "ability",
+            "abilityId": "jainZar_silent_death"
+          }
+        ]
       },
       {
-        "id": "jainZar_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "jainZar_active_2"
-        }
+        "id": "jainZar_terrors_lament",
+        "name": "Terror's Lament",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -3218,7 +2921,42 @@
       "pierceOverride": 0.15,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "judh_heroic_fusillade",
+        "name": "Heroic Fusillade",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Heroic Fusillade — Projectile",
+            "damageType": "projectile",
+            "hits": 6,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1220,
+            "kind": "ability",
+            "abilityId": "judh_heroic_fusillade"
+          }
+        ]
+      },
+      {
+        "id": "judh_hypersensory_abilities",
+        "name": "Hypersensory Abilities",
+        "kind": "passive",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Hypersensory Abilities — Projectile",
+            "damageType": "projectile",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1386,
+            "kind": "ability",
+            "abilityId": "judh_hypersensory_abilities"
+          }
+        ]
+      }
+    ],
     "traits": [
       "ambush",
       "beast snagga"
@@ -3254,11 +2992,6 @@
         "name": "Martial Inspiration",
         "kind": "active",
         "curveId": "abilityFactor",
-        "cooldown": 2,
-        "scaling": {
-          "per": "turnsAttackedThisBattle",
-          "pctPerStep": 33
-        },
         "profiles": [
           {
             "label": "Martial Inspiration — Eviscerating",
@@ -3268,17 +3001,18 @@
             "kind": "ability",
             "abilityId": "kariyan_martial_inspiration"
           }
-        ]
+        ],
+        "cooldown": 2,
+        "scaling": {
+          "per": "turnsAttackedThisBattle",
+          "pctPerStep": 33
+        }
       },
       {
         "id": "kariyan_loc_piercing",
         "name": "Legacy of Combat (vs Big Target)",
         "kind": "passive",
         "curveId": "abilityFactor",
-        "trigger": {
-          "kind": "afterOwnFirstAttackOfTurn",
-          "requiresTargetTrait": "big target"
-        },
         "profiles": [
           {
             "label": "LoC — Piercing",
@@ -3288,16 +3022,17 @@
             "kind": "ability",
             "abilityId": "kariyan_loc_piercing"
           }
-        ]
+        ],
+        "trigger": {
+          "kind": "afterOwnFirstAttackOfTurn",
+          "requiresTargetTrait": "big target"
+        }
       },
       {
         "id": "kariyan_loc_power",
         "name": "Legacy of Combat (normal target)",
         "kind": "passive",
         "curveId": "abilityFactor",
-        "trigger": {
-          "kind": "afterOwnFirstAttackOfTurn"
-        },
         "profiles": [
           {
             "label": "LoC — Power",
@@ -3307,7 +3042,10 @@
             "kind": "ability",
             "abilityId": "kariyan_loc_power"
           }
-        ]
+        ],
+        "trigger": {
+          "kind": "afterOwnFirstAttackOfTurn"
+        }
       }
     ],
     "traits": [
@@ -3348,7 +3086,6 @@
         "name": "Kill! Maim! Burn!",
         "kind": "active",
         "curveId": "abilityFactor",
-        "cooldown": 3,
         "profiles": [
           {
             "label": "KMB — Piercing",
@@ -3374,16 +3111,14 @@
             "kind": "ability",
             "abilityId": "kharn_kmb"
           }
-        ]
+        ],
+        "cooldown": 3
       },
       {
         "id": "kharn_betrayer",
         "name": "The Betrayer",
         "kind": "passive",
         "curveId": "abilityFactor",
-        "trigger": {
-          "kind": "afterOwnNormalAttack"
-        },
         "profiles": [
           {
             "label": "Betrayer — Eviscerating",
@@ -3393,7 +3128,10 @@
             "kind": "ability",
             "abilityId": "kharn_betrayer"
           }
-        ]
+        ],
+        "trigger": {
+          "kind": "afterOwnNormalAttack"
+        }
       }
     ],
     "traits": [
@@ -3428,32 +3166,27 @@
     },
     "abilities": [
       {
-        "id": "kut_active_1",
-        "name": "Active 1",
+        "id": "kut_frag_bomb",
+        "name": "Frag Bomb",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "kut_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Frag Bomb — Blast",
+            "damageType": "blast",
+            "hits": 6,
+            "damageFactor": 1,
+            "preArmorAddFlat": 693,
+            "kind": "ability",
+            "abilityId": "kut_frag_bomb"
+          }
+        ]
       },
       {
-        "id": "kut_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "kut_active_2"
-        }
+        "id": "kut_avalanche_of_muscle",
+        "name": "Avalanche of Muscle",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -3490,7 +3223,6 @@
         "name": "Euphoric Strikes",
         "kind": "active",
         "curveId": "abilityFactor",
-        "cooldown": 1,
         "profiles": [
           {
             "label": "Euphoric Strikes — Power",
@@ -3500,19 +3232,20 @@
             "kind": "ability",
             "abilityId": "laviscus_euphoric_strikes"
           }
-        ]
+        ],
+        "cooldown": 1
       },
       {
         "id": "laviscus_refusal_outdone",
         "name": "Refusal to be Outdone",
         "kind": "passive",
         "curveId": "abilityFactor",
+        "profiles": [],
         "teamBuff": {
           "kind": "laviscusOutrage",
           "outragePct": 120,
           "critDmgPerContributor": 1044
-        },
-        "profiles": []
+        }
       }
     ],
     "traits": [
@@ -3553,31 +3286,29 @@
     },
     "abilities": [
       {
-        "id": "lucien_active_1",
-        "name": "Active 1",
+        "id": "lucien_black_rage",
+        "name": "Black Rage",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "lucien_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "lucien_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "lucien_visions_of_heresy",
+        "name": "Visions of Heresy",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "lucien_active_2"
+        "profiles": [
+          {
+            "label": "Visions of Heresy — Bolter",
+            "damageType": "bolter",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1690,
+            "kind": "ability",
+            "abilityId": "lucien_visions_of_heresy"
+          }
+        ],
+        "trigger": {
+          "kind": "afterOwnNormalAttack"
         }
       }
     ],
@@ -3611,7 +3342,31 @@
       "pierceOverride": 0.4,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "lucius_lash_of_torment",
+        "name": "Lash of Torment",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Lash of Torment — Eviscerate",
+            "damageType": "eviscerating",
+            "hits": 6,
+            "damageFactor": 1,
+            "preArmorAddFlat": 610,
+            "kind": "ability",
+            "abilityId": "lucius_lash_of_torment"
+          }
+        ]
+      },
+      {
+        "id": "lucius_armour_of_shrieking_souls",
+        "name": "Armour of Shrieking Souls",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "thrill seekers",
       "parry"
@@ -3643,32 +3398,27 @@
     },
     "abilities": [
       {
-        "id": "macer_active_1",
-        "name": "Active 1",
+        "id": "macer_jakhal_stimms",
+        "name": "Jakhal Stimms",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "macer_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Jakhal Stimms — Physical",
+            "damageType": "physical",
+            "hits": 4,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1690,
+            "kind": "ability",
+            "abilityId": "macer_jakhal_stimms"
+          }
+        ]
       },
       {
-        "id": "macer_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "macer_active_2"
-        }
+        "id": "macer_skullsmasher",
+        "name": "Skullsmasher",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -3704,36 +3454,21 @@
       "label": "Ranged",
       "damageType": "molecular",
       "hits": 2,
+      "pierceOverride": 0.6,
       "kind": "ranged"
     },
     "abilities": [
       {
-        "id": "makhotep_active_1",
-        "name": "Active 1",
+        "id": "makhotep_adaptive_strategy",
+        "name": "Adaptive Strategy",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "makhotep_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "makhotep_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 16,
-          "kind": "ability",
-          "abilityId": "makhotep_active_2"
-        }
+        "id": "makhotep_relentless_march",
+        "name": "Relentless March",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -3767,32 +3502,37 @@
     },
     "abilities": [
       {
-        "id": "maladus_active_1",
-        "name": "Active 1",
+        "id": "maladus_flail_swing",
+        "name": "Flail Swing",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "maladus_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Flail Swing — Power",
+            "damageType": "power",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2659,
+            "kind": "ability",
+            "abilityId": "maladus_flail_swing"
+          }
+        ]
       },
       {
-        "id": "maladus_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "maladus_haze_of_corruption",
+        "name": "Haze of Corruption",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 51,
-          "kind": "ability",
-          "abilityId": "maladus_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Haze of Corruption — Toxic",
+            "damageType": "toxic",
+            "hits": 1,
+            "damageFactor": 1,
+            "kind": "ability",
+            "abilityId": "maladus_haze_of_corruption"
+          }
+        ]
       }
     ],
     "traits": [
@@ -3830,7 +3570,26 @@
       "hits": 3,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "malleus_malleus_rocket_launcher",
+        "name": "Malleus Rocket Barrage",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Malleus Rocket Barrage — Blast",
+            "damageType": "blast",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2438,
+            "kind": "ability",
+            "abilityId": "malleus_malleus_rocket_launcher"
+          }
+        ],
+        "cooldown": 1
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -3861,32 +3620,36 @@
     },
     "abilities": [
       {
-        "id": "mataneo_active_1",
-        "name": "Active 1",
+        "id": "mataneo_hammer_of_wrath",
+        "name": "Hammer of Wrath",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 32,
-          "kind": "ability",
-          "abilityId": "mataneo_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Hammer of Wrath — Power",
+            "damageType": "power",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1995,
+            "kind": "ability",
+            "abilityId": "mataneo_hammer_of_wrath"
+          },
+          {
+            "label": "Hammer of Wrath — Physical (component 2)",
+            "damageType": "physical",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1995,
+            "kind": "ability",
+            "abilityId": "mataneo_hammer_of_wrath"
+          }
+        ]
       },
       {
-        "id": "mataneo_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 40,
-          "kind": "ability",
-          "abilityId": "mataneo_active_2"
-        }
+        "id": "mataneo_aggressive_onslaught",
+        "name": "Aggressive Onslaught",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -3928,60 +3691,16 @@
     },
     "abilities": [
       {
-        "id": "mauganRa_active_1",
-        "name": "Active 1",
+        "id": "mauganRa_harvester_of_souls",
+        "name": "Harvester Of Souls",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 16,
-          "kind": "ability",
-          "abilityId": "mauganRa_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "mauganRa_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "mauganRa_active_2"
-        }
-      },
-      {
-        "id": "mauganRa_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "mauganRa_active_3"
-        }
-      },
-      {
-        "id": "mauganRa_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 13,
-          "kind": "ability",
-          "abilityId": "mauganRa_active_4"
-        }
+        "id": "mauganRa_inescapable_accuracy",
+        "name": "Inescapable Accuracy",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4023,18 +3742,27 @@
     },
     "abilities": [
       {
-        "id": "mephiston_active_1",
-        "name": "Active 1",
+        "id": "mephiston_the_quickening",
+        "name": "The Quickening",
         "kind": "active",
+        "profiles": []
+      },
+      {
+        "id": "mephiston_fury_of_the_ancients",
+        "name": "Fury of the Ancients",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 50,
-          "kind": "ability",
-          "abilityId": "mephiston_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Fury of the Ancients — Psychic",
+            "damageType": "psychic",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 388,
+            "kind": "ability",
+            "abilityId": "mephiston_fury_of_the_ancients"
+          }
+        ]
       }
     ],
     "traits": [
@@ -4076,32 +3804,38 @@
     },
     "abilities": [
       {
-        "id": "morvennVahl_active_1",
-        "name": "Active 1",
+        "id": "morvennVahl_sanctorum_missile",
+        "name": "Sanctorum Missile",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "morvennVahl_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Sanctorum Missile — Blast",
+            "damageType": "blast",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1995,
+            "kind": "ability",
+            "abilityId": "morvennVahl_sanctorum_missile"
+          }
+        ]
       },
       {
-        "id": "morvennVahl_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "morvennVahl_righteous_repugnance",
+        "name": "Righteous Repugnance",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 42,
-          "kind": "ability",
-          "abilityId": "morvennVahl_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Righteous Repugnance — Power",
+            "damageType": "power",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 776,
+            "kind": "ability",
+            "abilityId": "morvennVahl_righteous_repugnance"
+          }
+        ]
       }
     ],
     "traits": [
@@ -4144,46 +3878,27 @@
     },
     "abilities": [
       {
-        "id": "neurothrope_active_1",
-        "name": "Active 1",
+        "id": "neurothrope_spirit_leech",
+        "name": "Spirit Leech",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "neurothrope_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Spirit Leech — Psychic",
+            "damageType": "psychic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1441,
+            "kind": "ability",
+            "abilityId": "neurothrope_spirit_leech"
+          }
+        ]
       },
       {
-        "id": "neurothrope_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "neurothrope_active_2"
-        }
-      },
-      {
-        "id": "neurothrope_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "neurothrope_active_3"
-        }
+        "id": "neurothrope_neuroparasite",
+        "name": "Neuroparasite",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4220,18 +3935,16 @@
     },
     "abilities": [
       {
-        "id": "nicodemus_active_1",
-        "name": "Active 1",
+        "id": "nicodemus_blood_chalice",
+        "name": "Blood Chalice",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 50,
-          "kind": "ability",
-          "abilityId": "nicodemus_active_1"
-        }
+        "profiles": []
+      },
+      {
+        "id": "nicodemus_sanguinary_priest",
+        "name": "Sanguinary Priest",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4272,32 +3985,27 @@
     },
     "abilities": [
       {
-        "id": "njal_active_1",
-        "name": "Active 1",
+        "id": "njal_stormcaller",
+        "name": "Stormcaller",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 5,
-          "kind": "ability",
-          "abilityId": "njal_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Stormcaller — Psychic",
+            "damageType": "psychic",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 333,
+            "kind": "ability",
+            "abilityId": "njal_stormcaller"
+          }
+        ]
       },
       {
-        "id": "njal_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 7,
-          "kind": "ability",
-          "abilityId": "njal_active_2"
-        }
+        "id": "njal_lord_of_tempests",
+        "name": "Lord Of Tempests",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4332,46 +4040,16 @@
     },
     "abilities": [
       {
-        "id": "parasiteOfMortrex_active_1",
-        "name": "Active 1",
+        "id": "parasiteOfMortrex_it_itches",
+        "name": "It Itches!",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "toxic",
-          "hits": 1,
-          "damageFactor": 63,
-          "kind": "ability",
-          "abilityId": "parasiteOfMortrex_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "parasiteOfMortrex_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "toxic",
-          "hits": 1,
-          "damageFactor": 11,
-          "kind": "ability",
-          "abilityId": "parasiteOfMortrex_active_2"
-        }
-      },
-      {
-        "id": "parasiteOfMortrex_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "toxic",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "parasiteOfMortrex_active_3"
-        }
+        "id": "parasiteOfMortrex_barbed_ovipositor",
+        "name": "Barbed Ovipositor",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4405,18 +4083,27 @@
     },
     "abilities": [
       {
-        "id": "pestillian_active_1",
-        "name": "Active 1",
+        "id": "pestillian_foul_infusion",
+        "name": "Foul Infusion",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "toxic",
-          "hits": 1,
-          "damageFactor": 28,
-          "kind": "ability",
-          "abilityId": "pestillian_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Foul Infusion — Toxic",
+            "damageType": "toxic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1551,
+            "kind": "ability",
+            "abilityId": "pestillian_foul_infusion"
+          }
+        ]
+      },
+      {
+        "id": "pestillian_explosive_maladies",
+        "name": "Explosive Maladies",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4454,7 +4141,26 @@
       "hits": 2,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "plaguecrawler_entropy_cannons",
+        "name": "Entropy Cannons",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Entropy Cannons — Energy",
+            "damageType": "energy",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1745,
+            "kind": "ability",
+            "abilityId": "plaguecrawler_entropy_cannons"
+          }
+        ],
+        "cooldown": 0
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -4485,32 +4191,16 @@
     },
     "abilities": [
       {
-        "id": "ragnar_active_1",
-        "name": "Active 1",
+        "id": "ragnar_war_howl",
+        "name": "War Howl",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "ragnar_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "ragnar_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 16,
-          "kind": "ability",
-          "abilityId": "ragnar_active_2"
-        }
+        "id": "ragnar_saga_of_the_warrior_born",
+        "name": "Saga of the Warrior Born",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4552,60 +4242,27 @@
     },
     "abilities": [
       {
-        "id": "reVas_active_1",
-        "name": "Active 1",
+        "id": "reVas_early_warning_override",
+        "name": "Early Warning Override",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 40,
-          "kind": "ability",
-          "abilityId": "reVas_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "reVas_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "reVas_cyclic_ion_blaster",
+        "name": "Cyclic Ion Blaster",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 14,
-          "kind": "ability",
-          "abilityId": "reVas_active_2"
-        }
-      },
-      {
-        "id": "reVas_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "reVas_active_3"
-        }
-      },
-      {
-        "id": "reVas_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 26,
-          "kind": "ability",
-          "abilityId": "reVas_active_4"
-        }
+        "profiles": [
+          {
+            "label": "Cyclic Ion Blaster — Particle",
+            "damageType": "particle",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 416,
+            "kind": "ability",
+            "abilityId": "reVas_cyclic_ion_blaster"
+          }
+        ]
       }
     ],
     "traits": [
@@ -4648,46 +4305,27 @@
     },
     "abilities": [
       {
-        "id": "roswitha_active_1",
-        "name": "Active 1",
+        "id": "roswitha_brazier_of_holy_fire",
+        "name": "Brazier of Holy Fire",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 32,
-          "kind": "ability",
-          "abilityId": "roswitha_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Brazier of Holy Fire — Flame",
+            "damageType": "flame",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1940,
+            "kind": "ability",
+            "abilityId": "roswitha_brazier_of_holy_fire"
+          }
+        ]
       },
       {
-        "id": "roswitha_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 38,
-          "kind": "ability",
-          "abilityId": "roswitha_active_2"
-        }
-      },
-      {
-        "id": "roswitha_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 35,
-          "kind": "ability",
-          "abilityId": "roswitha_active_3"
-        }
+        "id": "roswitha_condemnor_stake",
+        "name": "Condemnor Stake",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4720,18 +4358,16 @@
     },
     "abilities": [
       {
-        "id": "rotbone_active_1",
-        "name": "Active 1",
+        "id": "rotbone_revitalizing_malignancy",
+        "name": "Revitalising Malignancy",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 35,
-          "kind": "ability",
-          "abilityId": "rotbone_active_1"
-        }
+        "profiles": []
+      },
+      {
+        "id": "rotbone_tainted_narthecium",
+        "name": "Tainted Narthecium",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4769,7 +4405,26 @@
       "hits": 2,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "rukkatrukk_squig_launchas",
+        "name": "Squig Launchas",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Squig Launchas — Physical",
+            "damageType": "physical",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2161,
+            "kind": "ability",
+            "abilityId": "rukkatrukk_squig_launchas"
+          }
+        ],
+        "cooldown": 1
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -4807,74 +4462,47 @@
     },
     "abilities": [
       {
-        "id": "sarquael_active_1",
-        "name": "Active 1",
+        "id": "sarquael_supercharge",
+        "name": "Supercharge",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "sarquael_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Supercharge — Plasma",
+            "damageType": "plasma",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2770,
+            "kind": "ability",
+            "abilityId": "sarquael_supercharge"
+          },
+          {
+            "label": "Supercharge — Plasma (component 2)",
+            "damageType": "plasma",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1828,
+            "kind": "ability",
+            "abilityId": "sarquael_supercharge"
+          }
+        ]
       },
       {
-        "id": "sarquael_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "sarquael_grim_retribution",
+        "name": "Grim Retribution",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 55,
-          "kind": "ability",
-          "abilityId": "sarquael_active_2"
-        }
-      },
-      {
-        "id": "sarquael_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "sarquael_active_3"
-        }
-      },
-      {
-        "id": "sarquael_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "sarquael_active_4"
-        }
-      },
-      {
-        "id": "sarquael_active_5",
-        "name": "Active 5",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 5",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "sarquael_active_5"
-        }
+        "profiles": [
+          {
+            "label": "Grim Retribution — Plasma",
+            "damageType": "plasma",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1828,
+            "kind": "ability",
+            "abilityId": "sarquael_grim_retribution"
+          }
+        ]
       }
     ],
     "traits": [
@@ -4916,18 +4544,28 @@
     },
     "abilities": [
       {
-        "id": "shadowsun_active_1",
-        "name": "Active 1",
+        "id": "shadowsun_exemplar_of_the_kauyon",
+        "name": "Exemplar of the Kauyon",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "blast",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "shadowsun_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Exemplar of the Kauyon — Blast",
+            "damageType": "blast",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1662,
+            "kind": "ability",
+            "abilityId": "shadowsun_exemplar_of_the_kauyon"
+          }
+        ],
+        "cooldown": 1
+      },
+      {
+        "id": "shadowsun_defender_of_the_greater_good",
+        "name": "Defender of the Greater Good",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -4968,7 +4606,31 @@
       "pierceOverride": 0.5,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "shiron_excruciating_frequencies",
+        "name": "Excruciating Frequencies",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Excruciating Frequencies — Blast",
+            "damageType": "blast",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2992,
+            "kind": "ability",
+            "abilityId": "shiron_excruciating_frequencies"
+          }
+        ]
+      },
+      {
+        "id": "shiron_terrifying_crescendo",
+        "name": "Terrifying Crescendo",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "thrill seekers",
       "heavy weapon",
@@ -5008,32 +4670,27 @@
     },
     "abilities": [
       {
-        "id": "shoSyl_active_1",
-        "name": "Active 1",
+        "id": "shoSyl_seeker_missile_frequency_lock",
+        "name": "Seeker Missile Frequency Lock",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "pulse",
-          "hits": 1,
-          "damageFactor": 75,
-          "kind": "ability",
-          "abilityId": "shoSyl_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Seeker Missile Frequency Lock — HeavyRound",
+            "damageType": "heavyRound",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 4432,
+            "kind": "ability",
+            "abilityId": "shoSyl_seeker_missile_frequency_lock"
+          }
+        ]
       },
       {
-        "id": "shoSyl_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "pulse",
-          "hits": 1,
-          "damageFactor": 85,
-          "kind": "ability",
-          "abilityId": "shoSyl_active_2"
-        }
+        "id": "shoSyl_mv71_sniper_drone_squad",
+        "name": "MV71 Sniper Drone Squad",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5074,32 +4731,27 @@
     },
     "abilities": [
       {
-        "id": "sibyll_active_1",
-        "name": "Active 1",
+        "id": "sibyll_psychic_maelstrom",
+        "name": "Psychic Maelstrom",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 34,
-          "kind": "ability",
-          "abilityId": "sibyll_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Psychic Maelstrom — Psychic",
+            "damageType": "psychic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1939,
+            "kind": "ability",
+            "abilityId": "sibyll_psychic_maelstrom"
+          }
+        ]
       },
       {
-        "id": "sibyll_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "sibyll_active_2"
-        }
+        "id": "sibyll_nightshroud",
+        "name": "Nightshroud",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5139,32 +4791,27 @@
     },
     "abilities": [
       {
-        "id": "snappawrecka_active_1",
-        "name": "Active 1",
+        "id": "snappawrecka_dakka_dakka_dakka",
+        "name": "Dakka! Dakka! Dakka!",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "snappawrecka_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Dakka! Dakka! Dakka! — Projectile",
+            "damageType": "projectile",
+            "hits": 6,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1247,
+            "kind": "ability",
+            "abilityId": "snappawrecka_dakka_dakka_dakka"
+          }
+        ]
       },
       {
-        "id": "snappawrecka_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "snappawrecka_active_2"
-        }
+        "id": "snappawrecka_power_trip",
+        "name": "Power Trip",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5200,32 +4847,27 @@
     },
     "abilities": [
       {
-        "id": "snotflogga_active_1",
-        "name": "Active 1",
+        "id": "snotflogga_get_em_runtz",
+        "name": "Get ’Em Runtz",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 65.5,
-          "kind": "ability",
-          "abilityId": "snotflogga_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "snotflogga_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "snotflogga_squig_hound",
+        "name": "Squig Hound",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 33,
-          "kind": "ability",
-          "abilityId": "snotflogga_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Squig Hound — Physical",
+            "damageType": "physical",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1662,
+            "kind": "ability",
+            "abilityId": "snotflogga_squig_hound"
+          }
+        ]
       }
     ],
     "traits": [
@@ -5264,7 +4906,31 @@
       "pierceOverride": 0.01,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sygex_sentinel_directives",
+        "name": "Sentinel Directives",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Sentinel Directives — Physical",
+            "damageType": "physical",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2992,
+            "kind": "ability",
+            "abilityId": "sygex_sentinel_directives"
+          }
+        ]
+      },
+      {
+        "id": "sygex_heavy_grav_cannon",
+        "name": "Heavy Grav-Cannon",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "mechanical",
       "heavy weapon",
@@ -5305,18 +4971,16 @@
     },
     "abilities": [
       {
-        "id": "tanGiDa_active_1",
-        "name": "Active 1",
+        "id": "tanGiDa_doctrina_imperatives",
+        "name": "Doctrina Imperatives",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 11,
-          "kind": "ability",
-          "abilityId": "tanGiDa_active_1"
-        }
+        "profiles": []
+      },
+      {
+        "id": "tanGiDa_control_edict",
+        "name": "Control Edict",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5349,46 +5013,28 @@
     },
     "abilities": [
       {
-        "id": "tanksmasha_active_1",
-        "name": "Active 1",
+        "id": "tanksmasha_unstoppable_momentum_reworked",
+        "name": "Unstoppable Momentum",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "tanksmasha_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Unstoppable Momentum — DirectDamage",
+            "damageType": "direct",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 748,
+            "kind": "ability",
+            "abilityId": "tanksmasha_unstoppable_momentum_reworked"
+          }
+        ],
+        "cooldown": 1
       },
       {
-        "id": "tanksmasha_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "tanksmasha_active_2"
-        }
-      },
-      {
-        "id": "tanksmasha_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 1,
-          "kind": "ability",
-          "abilityId": "tanksmasha_active_3"
-        }
+        "id": "tanksmasha_smasha_ead",
+        "name": "Smasha 'Ead",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5421,7 +5067,31 @@
       "pierceOverride": 0.8,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "tarvakh_murderous_swing",
+        "name": "Murderous Swing",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Murderous Swing — Piercing",
+            "damageType": "piercing",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2216,
+            "kind": "ability",
+            "abilityId": "tarvakh_murderous_swing"
+          }
+        ]
+      },
+      {
+        "id": "tarvakh_trophy_taker",
+        "name": "Trophy Taker",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "blessings of khorne",
       "rapid assault"
@@ -5460,32 +5130,27 @@
     },
     "abilities": [
       {
-        "id": "thaddeus_active_1",
-        "name": "Active 1",
+        "id": "thaddeus_basilisk_barrage",
+        "name": "Basilisk Barrage",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "las",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "thaddeus_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Basilisk Barrage — Blast",
+            "damageType": "blast",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1718,
+            "kind": "ability",
+            "abilityId": "thaddeus_basilisk_barrage"
+          }
+        ]
       },
       {
-        "id": "thaddeus_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "las",
-          "hits": 1,
-          "damageFactor": 32,
-          "kind": "ability",
-          "abilityId": "thaddeus_active_2"
-        }
+        "id": "thaddeus_spotter_reworked",
+        "name": "Spotter",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5526,32 +5191,16 @@
     },
     "abilities": [
       {
-        "id": "thaumachus_active_1",
-        "name": "Active 1",
+        "id": "thaumachus_attempted_possession",
+        "name": "Attempted Possession",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 80,
-          "kind": "ability",
-          "abilityId": "thaumachus_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "thaumachus_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 55,
-          "kind": "ability",
-          "abilityId": "thaumachus_active_2"
-        }
+        "id": "thaumachus_arcane_shield",
+        "name": "Arcane Shield",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5586,74 +5235,27 @@
     },
     "abilities": [
       {
-        "id": "thePatermine_active_1",
-        "name": "Active 1",
+        "id": "thePatermine_might_from_below",
+        "name": "Might From Below",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "thePatermine_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Might From Below — Psychic",
+            "damageType": "psychic",
+            "hits": 5,
+            "damageFactor": 1,
+            "preArmorAddFlat": 610,
+            "kind": "ability",
+            "abilityId": "thePatermine_might_from_below"
+          }
+        ]
       },
       {
-        "id": "thePatermine_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "thePatermine_active_2"
-        }
-      },
-      {
-        "id": "thePatermine_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "thePatermine_active_3"
-        }
-      },
-      {
-        "id": "thePatermine_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 21,
-          "kind": "ability",
-          "abilityId": "thePatermine_active_4"
-        }
-      },
-      {
-        "id": "thePatermine_active_5",
-        "name": "Active 5",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 5",
-          "damageType": "eviscerating",
-          "hits": 1,
-          "damageFactor": 12,
-          "kind": "ability",
-          "abilityId": "thePatermine_active_5"
-        }
+        "id": "thePatermine_cosmic_horror",
+        "name": "Cosmic Horror",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5689,32 +5291,16 @@
     },
     "abilities": [
       {
-        "id": "thoread_active_1",
-        "name": "Active 1",
+        "id": "thoread_unbreakable_duty",
+        "name": "Unbreakable Duty",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 100,
-          "kind": "ability",
-          "abilityId": "thoread_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "thoread_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "thoread_active_2"
-        }
+        "id": "thoread_astartes_banner",
+        "name": "Astartes Banner",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5755,32 +5341,38 @@
     },
     "abilities": [
       {
-        "id": "thutmose_active_1",
-        "name": "Active 1",
+        "id": "thutmose_harbinger_of_destruction",
+        "name": "Harbinger of Destruction",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 24,
-          "kind": "ability",
-          "abilityId": "thutmose_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Harbinger of Destruction — DirectDamage",
+            "damageType": "direct",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1939,
+            "kind": "ability",
+            "abilityId": "thutmose_harbinger_of_destruction"
+          }
+        ]
       },
       {
-        "id": "thutmose_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "thutmose_living_lightning",
+        "name": "Living Lightning",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "plasma",
-          "hits": 1,
-          "damageFactor": 28,
-          "kind": "ability",
-          "abilityId": "thutmose_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Living Lightning — DirectDamage",
+            "damageType": "direct",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1496,
+            "kind": "ability",
+            "abilityId": "thutmose_living_lightning"
+          }
+        ]
       }
     ],
     "traits": [
@@ -5822,46 +5414,27 @@
     },
     "abilities": [
       {
-        "id": "tigurius_active_1",
-        "name": "Active 1",
+        "id": "tigurius_storm_of_wrath",
+        "name": "Storm Of Wrath",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "tigurius_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Storm Of Wrath — Psychic",
+            "damageType": "psychic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1524,
+            "kind": "ability",
+            "abilityId": "tigurius_storm_of_wrath"
+          }
+        ]
       },
       {
-        "id": "tigurius_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "tigurius_active_2"
-        }
-      },
-      {
-        "id": "tigurius_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 3,
-          "kind": "ability",
-          "abilityId": "tigurius_active_3"
-        }
+        "id": "tigurius_psychic_fortress",
+        "name": "Psychic Fortress",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5894,74 +5467,36 @@
     },
     "abilities": [
       {
-        "id": "titus_active_1",
-        "name": "Active 1",
+        "id": "titus_tactical_precision",
+        "name": "Tactical Precision",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 40,
-          "kind": "ability",
-          "abilityId": "titus_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Tactical Precision — Bolter",
+            "damageType": "bolter",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2493,
+            "kind": "ability",
+            "abilityId": "titus_tactical_precision"
+          },
+          {
+            "label": "Tactical Precision — Chain (component 2)",
+            "damageType": "chain",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1690,
+            "kind": "ability",
+            "abilityId": "titus_tactical_precision"
+          }
+        ]
       },
       {
-        "id": "titus_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 50,
-          "kind": "ability",
-          "abilityId": "titus_active_2"
-        }
-      },
-      {
-        "id": "titus_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "titus_active_3"
-        }
-      },
-      {
-        "id": "titus_active_4",
-        "name": "Active 4",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 4",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "titus_active_4"
-        }
-      },
-      {
-        "id": "titus_active_5",
-        "name": "Active 5",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 5",
-          "damageType": "chain",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "titus_active_5"
-        }
+        "id": "titus_fuelled_by_fury",
+        "name": "Fuelled by Fury",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -5995,32 +5530,27 @@
     },
     "abilities": [
       {
-        "id": "tjark_active_1",
-        "name": "Active 1",
+        "id": "tjark_grapnel_launcher",
+        "name": "Grapnel Launcher",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 27,
-          "kind": "ability",
-          "abilityId": "tjark_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Grapnel Launcher — Physical",
+            "damageType": "physical",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1801,
+            "kind": "ability",
+            "abilityId": "tjark_grapnel_launcher"
+          }
+        ]
       },
       {
-        "id": "tjark_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 38,
-          "kind": "ability",
-          "abilityId": "tjark_active_2"
-        }
+        "id": "tjark_hunters_beyond_death",
+        "name": "Hunters Beyond Death",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6061,32 +5591,27 @@
     },
     "abilities": [
       {
-        "id": "toth_active_1",
-        "name": "Active 1",
+        "id": "toth_hellfyre_missile_rack",
+        "name": "Hellfyre Missile Rack",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "toth_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Hellfyre Missile Rack — HeavyRound",
+            "damageType": "heavyRound",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1939,
+            "kind": "ability",
+            "abilityId": "toth_hellfyre_missile_rack"
+          }
+        ]
       },
       {
-        "id": "toth_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 40,
-          "kind": "ability",
-          "abilityId": "toth_active_2"
-        }
+        "id": "toth_time_flux",
+        "name": "Time Flux",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6125,7 +5650,6 @@
         "name": "Moment Shackle",
         "kind": "active",
         "curveId": "abilityFactor",
-        "cooldown": 3,
         "profiles": [
           {
             "label": "Moment Shackle — Bolter (reactive)",
@@ -6135,19 +5659,20 @@
             "kind": "ability",
             "abilityId": "trajann_moment_shackle"
           }
-        ]
+        ],
+        "cooldown": 3
       },
       {
         "id": "trajann_legendary_commander",
         "name": "Legendary Commander",
         "kind": "passive",
         "curveId": "abilityFactor",
+        "profiles": [],
         "teamBuff": {
           "kind": "trajannLegendaryCommander",
           "flatDamage": 1436,
           "extraHitsAdjacentToSelf": 2
-        },
-        "profiles": []
+        }
       }
     ],
     "traits": [
@@ -6185,7 +5710,26 @@
       "hits": 2,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "tsonji_heavy_rail_rifle",
+        "name": "Heavy Rail Rifle",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Heavy Rail Rifle — Piercing",
+            "damageType": "piercing",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 3047,
+            "kind": "ability",
+            "abilityId": "tsonji_heavy_rail_rifle"
+          }
+        ],
+        "cooldown": 1
+      }
+    ],
     "traits": [
       "machine of war"
     ],
@@ -6223,32 +5767,56 @@
     },
     "abilities": [
       {
-        "id": "typhus_active_1",
-        "name": "Active 1",
+        "id": "typhus_plague_wind",
+        "name": "Plague Wind",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 36,
-          "kind": "ability",
-          "abilityId": "typhus_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Plague Wind — Psychic",
+            "damageType": "psychic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2244,
+            "kind": "ability",
+            "abilityId": "typhus_plague_wind"
+          },
+          {
+            "label": "Plague Wind — Psychic (component 2)",
+            "damageType": "psychic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1690,
+            "kind": "ability",
+            "abilityId": "typhus_plague_wind"
+          },
+          {
+            "label": "Plague Wind — Psychic (component 3)",
+            "damageType": "psychic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1247,
+            "kind": "ability",
+            "abilityId": "typhus_plague_wind"
+          }
+        ]
       },
       {
-        "id": "typhus_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "typhus_destroyer_hive",
+        "name": "Destroyer Hive",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "typhus_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Destroyer Hive — DirectDamage",
+            "damageType": "direct",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 831,
+            "kind": "ability",
+            "abilityId": "typhus_destroyer_hive"
+          }
+        ]
       }
     ],
     "traits": [
@@ -6284,32 +5852,36 @@
     },
     "abilities": [
       {
-        "id": "tyrantGuard_active_1",
-        "name": "Active 1",
+        "id": "tyrantGuard_crushing_claws",
+        "name": "Crushing Claws",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 15,
-          "kind": "ability",
-          "abilityId": "tyrantGuard_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Crushing Claws — Piercing",
+            "damageType": "piercing",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 970,
+            "kind": "ability",
+            "abilityId": "tyrantGuard_crushing_claws"
+          },
+          {
+            "label": "Crushing Claws — Physical (component 2)",
+            "damageType": "physical",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 970,
+            "kind": "ability",
+            "abilityId": "tyrantGuard_crushing_claws"
+          }
+        ]
       },
       {
-        "id": "tyrantGuard_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "piercing",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "tyrantGuard_active_2"
-        }
+        "id": "tyrantGuard_guardian_organism",
+        "name": "Guardian Organism",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6348,7 +5920,43 @@
       "pierceOverride": 0.2,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "tyrith_vigilance_eternal",
+        "name": "Vigilance Eternal",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Vigilance Eternal — Power",
+            "damageType": "power",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1441,
+            "kind": "ability",
+            "abilityId": "tyrith_vigilance_eternal"
+          }
+        ],
+        "cooldown": 2
+      },
+      {
+        "id": "tyrith_unwavering_sentinel",
+        "name": "Unwavering Sentinel",
+        "kind": "passive",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Unwavering Sentinel — Bolter",
+            "damageType": "bolter",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1441,
+            "kind": "ability",
+            "abilityId": "tyrith_unwavering_sentinel"
+          }
+        ]
+      }
+    ],
     "traits": [
       "martial katah",
       "resilient"
@@ -6380,32 +5988,38 @@
     },
     "abilities": [
       {
-        "id": "ulf_active_1",
-        "name": "Active 1",
+        "id": "ulf_great_frost_axe",
+        "name": "Great Frost Axe",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "ulf_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Great Frost Axe — Piercing",
+            "damageType": "piercing",
+            "hits": 4,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1247,
+            "kind": "ability",
+            "abilityId": "ulf_great_frost_axe"
+          }
+        ]
       },
       {
-        "id": "ulf_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "ulf_savage_killer",
+        "name": "Savage Killer",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "ulf_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Savage Killer — Power",
+            "damageType": "power",
+            "hits": 5,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1524,
+            "kind": "ability",
+            "abilityId": "ulf_savage_killer"
+          }
+        ]
       }
     ],
     "traits": [
@@ -6444,7 +6058,31 @@
       "pierceOverride": 0.3,
       "kind": "ranged"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "uthar_ancestral_fortune",
+        "name": "Ancestral Fortune",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Ancestral Fortune — Plasma",
+            "damageType": "plasma",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1136,
+            "kind": "ability",
+            "abilityId": "uthar_ancestral_fortune"
+          }
+        ]
+      },
+      {
+        "id": "uthar_grim_efficiency",
+        "name": "Grim Efficiency",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "prioritised efficiency",
       "resilient"
@@ -6483,32 +6121,38 @@
     },
     "abilities": [
       {
-        "id": "vindicta_active_1",
-        "name": "Active 1",
+        "id": "vindicta_armorium_cherub",
+        "name": "Armorium Cherub",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "vindicta_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Armorium Cherub — Flame",
+            "damageType": "flame",
+            "hits": 4,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1247,
+            "kind": "ability",
+            "abilityId": "vindicta_armorium_cherub"
+          }
+        ]
       },
       {
-        "id": "vindicta_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "vindicta_fire_of_absolution",
+        "name": "Fire of Absolution",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 25,
-          "kind": "ability",
-          "abilityId": "vindicta_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Fire of Absolution — Flame",
+            "damageType": "flame",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1109,
+            "kind": "ability",
+            "abilityId": "vindicta_fire_of_absolution"
+          }
+        ]
       }
     ],
     "traits": [
@@ -6544,36 +6188,32 @@
       "label": "Ranged",
       "damageType": "molecular",
       "hits": 1,
+      "pierceOverride": 0.6,
       "kind": "ranged"
     },
     "abilities": [
       {
-        "id": "vitruvius_active_1",
-        "name": "Active 1",
+        "id": "vitruvius_rad_bombardment",
+        "name": "Rad-Bombardment",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 45,
-          "kind": "ability",
-          "abilityId": "vitruvius_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Rad-Bombardment — Toxic",
+            "damageType": "toxic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2770,
+            "kind": "ability",
+            "abilityId": "vitruvius_rad_bombardment"
+          }
+        ]
       },
       {
-        "id": "vitruvius_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 55,
-          "kind": "ability",
-          "abilityId": "vitruvius_active_2"
-        }
+        "id": "vitruvius_master_annihilator",
+        "name": "Master Annihilator",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6614,32 +6254,56 @@
     },
     "abilities": [
       {
-        "id": "volk_active_1",
-        "name": "Active 1",
+        "id": "volk_frenzied_firing",
+        "name": "Frenzied Firing",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 23,
-          "kind": "ability",
-          "abilityId": "volk_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Frenzied Firing — HeavyRound",
+            "damageType": "heavyRound",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1247,
+            "kind": "ability",
+            "abilityId": "volk_frenzied_firing"
+          }
+        ]
       },
       {
-        "id": "volk_active_2",
-        "name": "Active 2",
-        "kind": "active",
+        "id": "volk_fleshmetal_guns",
+        "name": "Fleshmetal Guns",
+        "kind": "passive",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "volk_active_2"
-        }
+        "profiles": [
+          {
+            "label": "Fleshmetal Guns — Melta",
+            "damageType": "melta",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 693,
+            "kind": "ability",
+            "abilityId": "volk_fleshmetal_guns"
+          },
+          {
+            "label": "Fleshmetal Guns — Flame (component 2)",
+            "damageType": "flame",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 554,
+            "kind": "ability",
+            "abilityId": "volk_fleshmetal_guns"
+          },
+          {
+            "label": "Fleshmetal Guns — HeavyRound (component 3)",
+            "damageType": "heavyRound",
+            "hits": 2,
+            "damageFactor": 1,
+            "preArmorAddFlat": 499,
+            "kind": "ability",
+            "abilityId": "volk_fleshmetal_guns"
+          }
+        ]
       }
     ],
     "traits": [
@@ -6674,7 +6338,31 @@
       "pierceOverride": 0.4,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "vynn_graviton_rifle",
+        "name": "Graviton Rifle",
+        "kind": "active",
+        "curveId": "abilityFactor",
+        "profiles": [
+          {
+            "label": "Graviton Rifle — Physical",
+            "damageType": "physical",
+            "hits": 3,
+            "damageFactor": 1,
+            "preArmorAddFlat": 1690,
+            "kind": "ability",
+            "abilityId": "vynn_graviton_rifle"
+          }
+        ]
+      },
+      {
+        "id": "vynn_ecog_support",
+        "name": "E-COG-Support",
+        "kind": "passive",
+        "profiles": []
+      }
+    ],
     "traits": [
       "prioritised efficiency",
       "mechanic"
@@ -6706,46 +6394,16 @@
     },
     "abilities": [
       {
-        "id": "wingedPrime_active_1",
-        "name": "Active 1",
+        "id": "wingedPrime_alpha_warrior",
+        "name": "Alpha Warrior",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 80,
-          "kind": "ability",
-          "abilityId": "wingedPrime_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "wingedPrime_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 30,
-          "kind": "ability",
-          "abilityId": "wingedPrime_active_2"
-        }
-      },
-      {
-        "id": "wingedPrime_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "bio",
-          "hits": 1,
-          "damageFactor": 16,
-          "kind": "ability",
-          "abilityId": "wingedPrime_active_3"
-        }
+        "id": "wingedPrime_synaptic_linchpin",
+        "name": "Synaptic Linchpin",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6780,32 +6438,27 @@
     },
     "abilities": [
       {
-        "id": "wrask_active_1",
-        "name": "Active 1",
+        "id": "wrask_bloody_fury",
+        "name": "Bloody Fury",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 35,
-          "kind": "ability",
-          "abilityId": "wrask_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Bloody Fury — Chain",
+            "damageType": "chain",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 2133,
+            "kind": "ability",
+            "abilityId": "wrask_bloody_fury"
+          }
+        ]
       },
       {
-        "id": "wrask_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "flame",
-          "hits": 1,
-          "damageFactor": 42,
-          "kind": "ability",
-          "abilityId": "wrask_active_2"
-        }
+        "id": "wrask_wrathful_devotion",
+        "name": "Wrathful Devotion",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6849,18 +6502,16 @@
     },
     "abilities": [
       {
-        "id": "xybia_active_1",
-        "name": "Active 1",
+        "id": "xybia_mind_control",
+        "name": "Mind Control",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "psychic",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "xybia_active_1"
-        }
+        "profiles": []
+      },
+      {
+        "id": "xybia_spiritual_leader",
+        "name": "Spiritual Leader",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6901,46 +6552,16 @@
     },
     "abilities": [
       {
-        "id": "yarrick_active_1",
-        "name": "Active 1",
+        "id": "yarrick_send_in_the_next_wave",
+        "name": "Send In The Next Wave",
         "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 40,
-          "kind": "ability",
-          "abilityId": "yarrick_active_1"
-        }
+        "profiles": []
       },
       {
-        "id": "yarrick_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 24,
-          "kind": "ability",
-          "abilityId": "yarrick_active_2"
-        }
-      },
-      {
-        "id": "yarrick_active_3",
-        "name": "Active 3",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 3",
-          "damageType": "power",
-          "hits": 1,
-          "damageFactor": 8,
-          "kind": "ability",
-          "abilityId": "yarrick_active_3"
-        }
+        "id": "yarrick_summary_execution",
+        "name": "Summary Execution",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -6980,32 +6601,27 @@
     },
     "abilities": [
       {
-        "id": "yazaghor_active_1",
-        "name": "Active 1",
+        "id": "yazaghor_sorcerous_facade",
+        "name": "Sorcerous Facade",
         "kind": "active",
         "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 1",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 10,
-          "kind": "ability",
-          "abilityId": "yazaghor_active_1"
-        }
+        "profiles": [
+          {
+            "label": "Sorcerous Facade — Psychic",
+            "damageType": "psychic",
+            "hits": 1,
+            "damageFactor": 1,
+            "preArmorAddFlat": 832,
+            "kind": "ability",
+            "abilityId": "yazaghor_sorcerous_facade"
+          }
+        ]
       },
       {
-        "id": "yazaghor_active_2",
-        "name": "Active 2",
-        "kind": "active",
-        "curveId": "abilityFactor",
-        "profile": {
-          "label": "Active 2",
-          "damageType": "physical",
-          "hits": 1,
-          "damageFactor": 20,
-          "kind": "ability",
-          "abilityId": "yazaghor_active_2"
-        }
+        "id": "yazaghor_reality_unbound",
+        "name": "Reality Unbound",
+        "kind": "passive",
+        "profiles": []
       }
     ],
     "traits": [
@@ -7036,7 +6652,15 @@
       "hits": 3,
       "kind": "melee"
     },
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "zkar_aether_stride",
+        "name": "Aether Stride",
+        "kind": "active",
+        "profiles": [],
+        "cooldown": 1
+      }
+    ],
     "traits": [
       "machine of war"
     ],
