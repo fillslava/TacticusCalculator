@@ -7,7 +7,6 @@ export type DamageType =
   | 'energy'
   | 'eviscerating'
   | 'flame'
-  | 'gauss'
   | 'heavyRound'
   | 'las'
   | 'melta'
@@ -22,6 +21,10 @@ export type DamageType =
   | 'pulse'
   | 'toxic';
 
+// Per tacticus.wiki.gg's Damage_Types_and_Pierce_Ratio page. Gauss and
+// Enmitic were merged into Molecular in July 2023 (all at 60%). The catalog
+// no longer carries 'gauss' — the four Necron profiles that used it have
+// been renamed to 'molecular' and their redundant pierceOverride=0.6 dropped.
 export const PIERCE_RATIOS: Record<DamageType, number> = {
   bio: 0.3,
   blast: 0.15,
@@ -31,7 +34,6 @@ export const PIERCE_RATIOS: Record<DamageType, number> = {
   energy: 0.3,
   eviscerating: 0.5,
   flame: 0.25,
-  gauss: 0.3,
   heavyRound: 0.55,
   las: 0.1,
   melta: 0.75,

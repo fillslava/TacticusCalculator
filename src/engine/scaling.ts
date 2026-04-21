@@ -87,9 +87,11 @@ export function applyEquipmentMods(base: BaseStats, mods: ItemStatMods[]): BaseS
     blockChance += m.blockChance ?? 0;
     blockDamage += m.blockDamage ?? 0;
   }
+  // NOTE: armorPct removed — zero scraped equipment entries ever used it. If
+  // future catalog data includes percent-armor mods, re-add both the field
+  // (types.ts, schema.ts) and the multiplier here.
   for (const m of mods) {
     if (m.damagePct) damage *= 1 + m.damagePct;
-    if (m.armorPct) armor *= 1 + m.armorPct;
     if (m.hpPct) hp *= 1 + m.hpPct;
   }
 

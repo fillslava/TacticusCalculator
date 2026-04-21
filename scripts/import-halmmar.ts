@@ -70,7 +70,8 @@ const TYPE_MAP: Record<string, string> = {
   blast: 'blast',
   eviscerating: 'eviscerating',
   molecular: 'molecular',
-  gauss: 'gauss',
+  // Legacy 'gauss' was merged into 'molecular' in July 2023.
+  gauss: 'molecular',
   heavy: 'heavyRound',
   heavyround: 'heavyRound',
   'heavy_round': 'heavyRound',

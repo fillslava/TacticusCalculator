@@ -2,8 +2,12 @@ import { describe, it, expect } from 'vitest';
 import { PIERCE_RATIOS, pierceOf, ALL_DAMAGE_TYPES } from '../../src/engine/dmgTypes';
 
 describe('PIERCE_RATIOS', () => {
-  it('covers 22 damage types (21 from wiki + gauss observed in data)', () => {
-    expect(ALL_DAMAGE_TYPES).toHaveLength(22);
+  it('covers 21 damage types (legacy gauss collapsed into molecular)', () => {
+    expect(ALL_DAMAGE_TYPES).toHaveLength(21);
+  });
+
+  it('molecular uses 60% pierce (gauss → molecular merger)', () => {
+    expect(PIERCE_RATIOS.molecular).toBe(0.6);
   });
 
   it('has psychic and direct at 1.0', () => {

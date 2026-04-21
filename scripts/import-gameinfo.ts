@@ -194,7 +194,8 @@ const DAMAGE_PROFILE_MAP: Record<string, string> = {
   Energy: 'energy',
   Eviscerate: 'eviscerating',
   Flame: 'flame',
-  Gauss: 'gauss',
+  // Legacy 'Gauss' was merged into 'molecular' in July 2023.
+  Gauss: 'molecular',
   HeavyRound: 'heavyRound',
   Las: 'las',
   Melta: 'melta',

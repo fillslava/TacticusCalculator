@@ -2827,16 +2827,14 @@
     },
     "melee": {
       "label": "Melee",
-      "damageType": "gauss",
+      "damageType": "molecular",
       "hits": 6,
-      "pierceOverride": 0.6,
       "kind": "melee"
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "gauss",
+      "damageType": "molecular",
       "hits": 6,
-      "pierceOverride": 0.6,
       "kind": "ranged"
     },
     "abilities": [
@@ -3704,9 +3702,8 @@
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "gauss",
+      "damageType": "molecular",
       "hits": 2,
-      "pierceOverride": 0.6,
       "kind": "ranged"
     },
     "abilities": [
@@ -6545,9 +6542,8 @@
     },
     "ranged": {
       "label": "Ranged",
-      "damageType": "gauss",
+      "damageType": "molecular",
       "hits": 1,
-      "pierceOverride": 0.6,
       "kind": "ranged"
     },
     "abilities": [

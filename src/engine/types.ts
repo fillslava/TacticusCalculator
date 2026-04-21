@@ -43,7 +43,6 @@ export interface ItemStatMods {
   damageFlat?: number;
   damagePct?: number;
   armorFlat?: number;
-  armorPct?: number;
   hpFlat?: number;
   hpPct?: number;
   critChance?: number;
@@ -63,7 +62,6 @@ export const ITEM_STAT_KEYS: (keyof ItemStatMods)[] = [
   'damageFlat',
   'damagePct',
   'armorFlat',
-  'armorPct',
   'hpFlat',
   'hpPct',
   'critChance',
@@ -331,6 +329,19 @@ export interface TargetResolvedStats {
   armor: number;
   hp: number;
   shield: number;
+  /**
+   * Target's block chance (0..1). Chain-rolled per-hit per the HDTW wiki:
+   * P(n consecutive blocks) = blockChance^n. Bosses have 0 by default; a
+   * trait like Daemon layers +25% on top via `onBlock` phase modifier.
+   */
+  blockChance: number;
+  /**
+   * Flat damage amount a successful block subtracts from the hit. Per wiki:
+   * "Blocks are able to reduce damage dealt to 0" — the reduction is a plain
+   * subtract floored at 0, NOT a percent or a cap. Applies to HP damage only;
+   * block rolls against shields are cosmetic (damage is not reduced vs shield).
+   */
+  blockDamage: number;
   traits: TraitId[];
   damageCaps?: { base?: number; preArmor?: number; finalHit?: number };
 }

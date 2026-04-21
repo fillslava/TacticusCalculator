@@ -1,6 +1,8 @@
 import { damageAfterArmor } from './armor';
 import { varianceBand } from './variance';
 import { critProbabilityAtHit, clamp01 } from './crit';
+import { applyBlockToBand, blendBands, blockProbabilityAtHit } from './block';
+import type { DamageBand } from './block';
 import { pierceOf } from './dmgTypes';
 import {
   applyStarAndRank,
@@ -53,10 +55,14 @@ function resolveTargetStats(target: Target): TargetResolvedStats {
     const idx = target.stageIndex ?? 0;
     const stage: BossStage =
       target.source.stages[Math.min(idx, target.source.stages.length - 1)];
+    // Bosses don't carry block stats in the scraped catalog (BossStage has no
+    // block fields). Traits like Daemon layer block on via onBlock modifier.
     return {
       armor: target.statOverrides?.armor ?? stage.armor,
       hp: target.currentHp ?? target.statOverrides?.hp ?? stage.hp,
       shield: target.currentShield ?? stage.shield ?? 0,
+      blockChance: 0,
+      blockDamage: 0,
       traits: [...stage.traits, ...(target.activeDebuffs?.traits ?? [])],
       damageCaps: stage.damageCapsByStage,
     };
@@ -66,6 +72,8 @@ function resolveTargetStats(target: Target): TargetResolvedStats {
     armor: target.statOverrides?.armor ?? cs.baseStats.armor,
     hp: target.currentHp ?? target.statOverrides?.hp ?? cs.baseStats.hp,
     shield: target.currentShield ?? 0,
+    blockChance: cs.baseStats.blockChance ?? 0,
+    blockDamage: cs.baseStats.blockDamage ?? 0,
     traits: [...cs.traits, ...(target.activeDebuffs?.traits ?? [])],
   };
 }
@@ -136,11 +144,12 @@ function buildInitialFrame(attacker: Attacker, target: Target, ctx: AttackContex
   };
 }
 
-function perHitDamage(
-  baseDamage: number,
-  isCrit: boolean,
-  frame: Frame,
-): { expected: number; min: number; max: number } {
+interface PerHitBands {
+  preArmor: DamageBand;
+  postArmor: DamageBand;
+}
+
+function perHitDamage(baseDamage: number, isCrit: boolean, frame: Frame): PerHitBands {
   // Per HDTW wiki step 1: "Damage value" = the per-hit damage written on the
   // ability description (i.e. baseDamage × damageFactor × abilityMul).
   // Crit replaces that per-hit value with (Damage + Crit Damage). So the
@@ -153,31 +162,65 @@ function perHitDamage(
   const effective = effectiveBeforeCrit + critBonus + frame.preArmorFlat;
   const effectiveMul = effective * frame.preArmorMultiplier;
 
-  let capped = effectiveMul;
+  let preArmorCapped = effectiveMul;
   if (frame.profile.capAt === 'preArmor' && frame.cap !== undefined) {
-    capped = Math.min(capped, frame.cap);
+    preArmorCapped = Math.min(preArmorCapped, frame.cap);
   }
 
-  const band = varianceBand(capped);
+  const band = varianceBand(preArmorCapped);
+  const preArmorBand: DamageBand = { expected: band.mid, min: band.low, max: band.high };
+
   const passes = isCrit ? frame.armorPassesOnCrit : frame.armorPasses;
-  const lo = damageAfterArmor(band.low, frame.target.armor, frame.pierce, passes);
-  const mid = damageAfterArmor(band.mid, frame.target.armor, frame.pierce, passes);
-  const hi = damageAfterArmor(band.high, frame.target.armor, frame.pierce, passes);
-
-  let eMul = frame.postArmorMultiplier;
-  const eLo = lo * eMul;
-  const eMid = mid * eMul;
-  const eHi = hi * eMul;
-
-  let expected = eMid;
-  let min = eLo;
-  let max = eHi;
+  const postMul = frame.postArmorMultiplier;
+  const armored = (v: number) =>
+    damageAfterArmor(v, frame.target.armor, frame.pierce, passes) * postMul;
+  let postArmorBand: DamageBand = {
+    expected: armored(band.mid),
+    min: armored(band.low),
+    max: armored(band.high),
+  };
   if (frame.profile.capAt === 'finalHit' && frame.cap !== undefined) {
-    expected = Math.min(expected, frame.cap);
-    min = Math.min(min, frame.cap);
-    max = Math.min(max, frame.cap);
+    postArmorBand = {
+      expected: Math.min(postArmorBand.expected, frame.cap),
+      min: Math.min(postArmorBand.min, frame.cap),
+      max: Math.min(postArmorBand.max, frame.cap),
+    };
   }
-  return { expected, min, max };
+  return { preArmor: preArmorBand, postArmor: postArmorBand };
+}
+
+/**
+ * Armor-reduce a pre-armor damage band. Used to apply armor to shield-overflow
+ * damage, which the wiki states "is treated as a new attack and goes through
+ * the damage calculation, skipping the variance roll" — so we reuse the
+ * variance-less per-hit expected/min/max values directly.
+ *
+ * Simplification: always uses non-crit armorPasses even when the overflow
+ * originated from a crit-blended expectation. Matters only for traits that
+ * change armor passes on crit (e.g. Gravis), where overflow into HP might be
+ * slightly over- or under-penetrated.
+ */
+function armorReduceBand(band: DamageBand, frame: Frame): DamageBand {
+  const reduce = (v: number) =>
+    damageAfterArmor(v, frame.target.armor, frame.pierce, frame.armorPasses) *
+    frame.postArmorMultiplier;
+  return {
+    expected: reduce(band.expected),
+    min: reduce(band.min),
+    max: reduce(band.max),
+  };
+}
+
+function subtractShield(band: DamageBand, shieldRemaining: number): {
+  toShield: DamageBand;
+  overflow: DamageBand;
+} {
+  const eat = (v: number) => Math.min(v, shieldRemaining);
+  const rest = (v: number) => Math.max(0, v - shieldRemaining);
+  return {
+    toShield: { expected: eat(band.expected), min: eat(band.min), max: eat(band.max) },
+    overflow: { expected: rest(band.expected), min: rest(band.min), max: rest(band.max) },
+  };
 }
 
 export function resolveAttack(
@@ -199,32 +242,64 @@ export function resolveAttack(
   let totalExpected = 0;
   let totalMin = 0;
   let totalMax = 0;
+  let totalHpDamage = 0;
 
   const hits = Math.max(1, Math.floor(frame.profile.hits));
   const pCritBase = clamp01(frame.critChance);
+  const pBlockBase = clamp01(frame.target.blockChance);
+  const blockDamage = Math.max(0, frame.target.blockDamage);
+
+  // Shield & HP are consumed as hits resolve. Per HDTW_Shields, damage applied
+  // to shields skips armor (shield has 0 armor) and block rolls are cosmetic
+  // vs shields. Overflow from a shield-breaking hit is treated as a fresh
+  // attack through armor/block — variance is NOT re-rolled (we're in
+  // expected mode anyway). Block chain probability p^n advances independently
+  // of shield routing.
+  let shieldRemaining = frame.target.shield;
+  const hp = frame.target.hp;
 
   for (let n = 1; n <= hits; n++) {
     const pCrit = critProbabilityAtHit(pCritBase, n);
+    const pBlock = blockProbabilityAtHit(pBlockBase, n);
     const crit = perHitDamage(baseDamage, true, frame);
     const nonCrit = perHitDamage(baseDamage, false, frame);
-    const expected = crit.expected * pCrit + nonCrit.expected * (1 - pCrit);
-    // Range must respect the actual crit probability. With pCrit=0 the hit
-    // cannot crit, so reporting crit.max as the max artificially inflates
-    // the envelope; with pCrit=1 the hit must crit, so nonCrit.min is
-    // unreachable. Interpolate the bounds accordingly.
-    const min = pCrit >= 1 ? crit.min : nonCrit.min;
-    const max = pCrit <= 0 ? nonCrit.max : crit.max;
-    totalExpected += expected;
-    totalMin += min;
-    totalMax += max;
-    perHit.push({ hitIndex: n, pCrit, expected, min, max });
+
+    // Crit-blended pre- and post-armor bands.
+    const preArmor = blendBands(crit.preArmor, nonCrit.preArmor, pCrit);
+    const postArmor = blendBands(crit.postArmor, nonCrit.postArmor, pCrit);
+
+    let shieldBand: DamageBand = { expected: 0, min: 0, max: 0 };
+    let hpBand: DamageBand = { expected: 0, min: 0, max: 0 };
+
+    if (shieldRemaining > 0) {
+      // Shield eats pre-armor damage up to its remaining HP; block roll still
+      // happens (for chain accounting) but doesn't reduce the number that
+      // lands on shield.
+      const split = subtractShield(preArmor, shieldRemaining);
+      shieldBand = split.toShield;
+      shieldRemaining = Math.max(0, shieldRemaining - split.toShield.expected);
+      if (split.overflow.max > 0 || split.overflow.expected > 0) {
+        const overflowArmored = armorReduceBand(split.overflow, frame);
+        hpBand = applyBlockToBand(overflowArmored, pBlock, blockDamage);
+      }
+    } else {
+      hpBand = applyBlockToBand(postArmor, pBlock, blockDamage);
+    }
+
+    const hitExpected = shieldBand.expected + hpBand.expected;
+    const hitMin = shieldBand.min + hpBand.min;
+    const hitMax = shieldBand.max + hpBand.max;
+
+    totalExpected += hitExpected;
+    totalMin += hitMin;
+    totalMax += hitMax;
+    totalHpDamage += hpBand.expected;
+
+    perHit.push({ hitIndex: n, pCrit, expected: hitExpected, min: hitMin, max: hitMax });
   }
 
   const critProbability = pCritBase;
-
-  const shield = frame.target.shield;
-  const hp = frame.target.hp;
-  const postShieldExpected = Math.max(0, totalExpected - shield);
+  const postShieldExpected = totalHpDamage;
   const postHpExpected = Math.max(0, hp - postShieldExpected);
 
   return {
@@ -235,7 +310,7 @@ export function resolveAttack(
     perHit,
     postShieldExpected,
     postHpExpected,
-    overkill: totalExpected > hp * 2,
+    overkill: totalHpDamage > hp * 2,
     cappedBy: frame.cappedBy,
     trace: frame.trace,
   };
