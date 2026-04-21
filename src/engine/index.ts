@@ -7,5 +7,6 @@ export * from './crit';
 export * from './modifiers';
 export * from './attack';
 export * from './rotation';
+export * from './team';
 export { registerBuiltinTraits } from './traits';
 import './traits';

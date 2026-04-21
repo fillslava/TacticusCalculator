@@ -319,6 +319,69 @@ export interface Rotation {
   turns: { attacks: AttackContext[]; buffs?: TurnBuff[] }[];
 }
 
+/**
+ * Position in a 5-member Guild Raid formation. Linear model — adjacency
+ * is `|Δposition| === 1`. Real Tacticus uses a hex-ish arrangement but
+ * the community UI (halmmar, tacticustable) treats it as linear, and
+ * the math simplifies cleanly.
+ */
+export type TeamPosition = 0 | 1 | 2 | 3 | 4;
+
+export interface TeamMember {
+  /** Slot id (not the catalog id). Lets the same catalog hero appear twice. */
+  id: string;
+  attacker: Attacker;
+  position: TeamPosition;
+}
+
+export interface TeamAction {
+  memberId: string;
+  attack: AttackContext;
+  /** Per-action turn buffs — merged with team-derived buffs at resolve time. */
+  buffs?: TurnBuff[];
+}
+
+export interface TeamTurn {
+  actions: TeamAction[];
+}
+
+export interface TeamRotation {
+  members: TeamMember[];
+  turns: TeamTurn[];
+}
+
+export interface MemberBreakdown {
+  memberId: string;
+  /** One per action that actually fired (skipped-on-cooldown actions omitted). */
+  perAction: { turnIdx: number; actionIdx: number; result: DamageBreakdown }[];
+  cooldownSkips: { turnIdx: number; abilityId: string }[];
+  /** Passive triggers that fired for this member. */
+  triggeredFires: { turnIdx: number; abilityId: string; profileIdx: number }[];
+}
+
+/** One team-buff modifier being applied to a member on a specific turn. */
+export interface TeamBuffApplication {
+  turnIdx: number;
+  /** Hero that carries the buff (the source of the aura). */
+  sourceMemberId: string;
+  kind: AbilityTeamBuff['kind'];
+  /** Member receiving the buff. */
+  appliedToMemberId: string;
+  /** Human-readable short description (for UI inspection). */
+  effect: string;
+}
+
+export interface TeamRotationBreakdown {
+  perMember: Record<string, MemberBreakdown>;
+  /** Sum of every member's per-turn damage, cumulative across turns. */
+  cumulativeTeamExpected: number[];
+  turnsToKill: number | 'unreachable';
+  /** Every team-buff application recorded for UI transparency. */
+  teamBuffApplications: TeamBuffApplication[];
+  /** Union of every member's cooldownSkips, for convenience. */
+  cooldownSkips: { turnIdx: number; memberId: string; abilityId: string }[];
+}
+
 export interface RotationBreakdown {
   perTurn: DamageBreakdown[];
   cumulativeExpected: number[];
