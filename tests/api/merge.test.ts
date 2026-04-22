@@ -101,15 +101,18 @@ describe('mergePlayerUnitWithCatalog', () => {
 });
 
 describe('resolveEquipment API id mapping', () => {
-  function catalogWithItems(ids: string[]): Catalog {
+  function catalogWithItems(
+    entries: (string | { id: string; rarity?: CatalogEquipmentSlot['rarity']; mods?: CatalogEquipmentSlot['mods']; level?: number })[],
+  ): Catalog {
     const c = makeMinimalCatalog();
-    for (const id of ids) {
-      c.equipment.set(id, {
+    for (const e of entries) {
+      const spec = typeof e === 'string' ? { id: e } : e;
+      c.equipment.set(spec.id, {
         slotId: 1,
-        id,
-        rarity: 'legendary',
-        level: 1,
-        mods: {},
+        id: spec.id,
+        rarity: spec.rarity ?? 'legendary',
+        level: spec.level ?? 1,
+        mods: spec.mods ?? {},
       });
     }
     return c;
@@ -133,7 +136,19 @@ describe('resolveEquipment API id mapping', () => {
     expect(hit?.id).toBe('block_booster_1_legendary_block_L2');
   });
 
-  it('falls back to legendary variant for mythic api ids', () => {
+  it('resolves mythic api ids to the mythic catalog entry when present', () => {
+    const cat = catalogWithItems([
+      { id: 'crit_20_mythic_crit-dmg_L2', rarity: 'mythic', level: 2, mods: { critDamage: 1934 } },
+      { id: 'crit_20_legendary_crit-dmg_L2' },
+    ]);
+    const hit = resolveEquipment('I_Crit_M006', 2, cat);
+    expect(hit?.id).toBe('crit_20_mythic_crit-dmg_L2');
+    expect(hit?.rarity).toBe('mythic');
+  });
+
+  it('falls back to legendary when a mythic catalog entry is missing', () => {
+    // No mythic entry — the legendary one must still be returned so the slot
+    // contributes stats instead of being dropped.
     const cat = catalogWithItems(['crit_20_legendary_crit-dmg_L2']);
     const hit = resolveEquipment('I_Crit_M006', 2, cat);
     expect(hit?.id).toBe('crit_20_legendary_crit-dmg_L2');

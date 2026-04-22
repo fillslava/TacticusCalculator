@@ -207,16 +207,14 @@ function canonicalCatalogId(
   level: number,
 ): string | null {
   const f = family.toLowerCase();
-  // Mythic has no catalog equivalent yet — fall back to legendary stats.
-  const effectiveRarity: Rarity = rarity === 'mythic' ? 'legendary' : rarity;
-  if (f === 'crit') return `crit_20_${effectiveRarity}_crit-dmg_L${level}`;
-  if (f === 'block') return `block_20_${effectiveRarity}_block_L${level}`;
+  if (f === 'crit') return `crit_20_${rarity}_crit-dmg_L${level}`;
+  if (f === 'block') return `block_20_${rarity}_block_L${level}`;
   if (f === 'booster_crit')
-    return `crit_booster_1_${effectiveRarity}_crit-dmg_L${level}`;
+    return `crit_booster_1_${rarity}_crit-dmg_L${level}`;
   if (f === 'booster_block')
-    return `block_booster_1_${effectiveRarity}_block_L${level}`;
+    return `block_booster_1_${rarity}_block_L${level}`;
   if (f === 'defensive')
-    return `defense_0_${effectiveRarity}_armour_L${level}`;
+    return `defense_0_${rarity}_armour_L${level}`;
   return null;
 }
 
@@ -244,6 +242,19 @@ export function resolveEquipment(
         canonicalId.replace(/_L\d+$/, '_L1'),
       );
       if (fallback) return fallback;
+      // Tier not yet in catalog (e.g. a mythic family we haven't generated):
+      // degrade to the next-lower tier so stats still contribute.
+      if (rarity === 'mythic') {
+        const legendaryId = canonicalCatalogId(family, 'legendary', apiLevel);
+        if (legendaryId) {
+          const legHit = catalog.equipment.get(legendaryId);
+          if (legHit) return legHit;
+          const legFallback = catalog.equipment.get(
+            legendaryId.replace(/_L\d+$/, '_L1'),
+          );
+          if (legFallback) return legFallback;
+        }
+      }
     }
   }
   const relicMatch = API_RELIC_PATTERN.exec(apiId);
