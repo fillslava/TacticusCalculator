@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   matchCatalogCharacter,
   mergePlayerUnitWithCatalog,
+  parseUnitAbilities,
   resolveEquipment,
 } from '../../src/api/merge';
 import { ApiPlayerResponseSchema } from '../../src/api/types';
@@ -56,6 +57,94 @@ describe('ApiPlayerResponseSchema', () => {
     const parsed = ApiPlayerResponseSchema.parse(sample);
     expect(parsed.player.units).toHaveLength(2);
     expect(parsed.player.units[0].id).toBe('calgar');
+  });
+});
+
+describe('parseUnitAbilities', () => {
+  function biovoreCatalog(): CatalogCharacter {
+    return {
+      id: 'biovore',
+      displayName: 'Biovore',
+      faction: 'Tyranids',
+      alliance: 'Xenos',
+      baseStats: {
+        damage: 0, armor: 0, hp: 0,
+        critChance: 0, critDamage: 0,
+        blockChance: 0, blockDamage: 0,
+        meleeHits: 1, rangedHits: 3,
+      },
+      melee: { label: 'Melee', damageType: 'power', hits: 1, kind: 'melee' },
+      abilities: [
+        { id: 'biovore_bio_minefield', name: 'Bio Minefield', kind: 'active', profiles: [] },
+        { id: 'biovore_spore_mines_launcher', name: 'Spore Mines Launcher', kind: 'active', profiles: [] },
+        { id: 'biovore_hyper_corrosive_acid', name: 'Hyper Corrosive Acid', kind: 'passive', profiles: [] },
+      ],
+      traits: [],
+      maxRarity: 'mythic',
+    };
+  }
+
+  it('remaps CamelCase API ability ids to the catalog snake_case ids', () => {
+    const source = biovoreCatalog();
+    const out = parseUnitAbilities(
+      {
+        id: 'tyranBiovore',
+        progressionIndex: 19,
+        xp: 0,
+        xpLevel: 1,
+        rank: 0,
+        items: [],
+        upgrades: [],
+        shards: 0,
+        abilities: [
+          { id: 'BioMinefield', level: 59 },
+          { id: 'SporeMineLauncher', level: 59 }, // API uses "Mine" singular, catalog "Mines" plural
+          { id: 'HyperCorrosiveAcid', level: 4 },
+        ],
+      },
+      source,
+    );
+    expect(out).toEqual([
+      { id: 'biovore_bio_minefield', level: 59, rarity: undefined, kind: 'active' },
+      { id: 'biovore_spore_mines_launcher', level: 59, rarity: undefined, kind: 'active' },
+      { id: 'biovore_hyper_corrosive_acid', level: 4, rarity: undefined, kind: 'passive' },
+    ]);
+  });
+
+  it('passes API ids through unchanged when no catalog source is provided', () => {
+    const out = parseUnitAbilities({
+      id: 'tyranBiovore',
+      progressionIndex: 0,
+      xp: 0,
+      xpLevel: 1,
+      rank: 0,
+      items: [],
+      upgrades: [],
+      shards: 0,
+      abilities: [{ id: 'BioMinefield', level: 59 }],
+    });
+    expect(out).toEqual([
+      { id: 'BioMinefield', level: 59, rarity: undefined, kind: undefined },
+    ]);
+  });
+
+  it('leaves unmatched ids untouched (no catalog entry for the ability)', () => {
+    const source = biovoreCatalog();
+    const out = parseUnitAbilities(
+      {
+        id: 'tyranBiovore',
+        progressionIndex: 0,
+        xp: 0,
+        xpLevel: 1,
+        rank: 0,
+        items: [],
+        upgrades: [],
+        shards: 0,
+        abilities: [{ id: 'SomeUnknownAbility', level: 10 }],
+      },
+      source,
+    );
+    expect(out[0].id).toBe('SomeUnknownAbility');
   });
 });
 

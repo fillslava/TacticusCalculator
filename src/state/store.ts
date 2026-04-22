@@ -227,6 +227,7 @@ function apiUnitToMemo(
   catalog = loadCatalog(),
   unknownItems?: Set<string>,
 ): UnitBuildMemo {
+  const source = matchCatalogCharacter(unit.id, catalog, unit.name);
   const rarity = apiUnitRarity(unit);
   const rarityMin = rarityToMinProgression(rarity);
   const progression = clampProgression(
@@ -267,7 +268,7 @@ function apiUnitToMemo(
     rank: Math.max(0, unit.rank ?? 0),
     xpLevel: Math.max(1, unit.xpLevel ?? 1),
     equipmentIds: slotIds,
-    abilityLevels: parseUnitAbilities(unit),
+    abilityLevels: parseUnitAbilities(unit, source),
     relicSlots: relicSlots.some((r) => r) ? relicSlots : undefined,
   };
 }

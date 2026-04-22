@@ -107,13 +107,89 @@ export interface AbilityLevelEntry {
   kind?: 'active' | 'passive';
 }
 
-export function parseUnitAbilities(unit: ApiUnit): AbilityLevelEntry[] {
+/**
+ * Convert the API's CamelCase ability ids to the catalog's
+ * `<charId>_snake_case_name` ids so downstream consumers (BuildEditor's
+ * `levelFor`, `team.ts` ability-level lookups, team-buff resolution) can
+ * match by id equality.
+ *
+ * API shape (observed from /api/v1/player):
+ *   { id: "BioMinefield", level: 59 }
+ *   { id: "HyperCorrosiveAcid", level: 4 }
+ *
+ * Catalog shape (characters.json):
+ *   { id: "biovore_bio_minefield", name: "Bio Minefield", kind: "active" }
+ *   { id: "biovore_hyper_corrosive_acid", name: "Hyper Corrosive Acid", kind: "passive" }
+ *
+ * When `source` is provided, we normalize every API id by:
+ *   1. CamelCase → snake_case
+ *   2. Matching catalog abilities whose id (stripped of its `<charId>_`
+ *      prefix) equals the snake_case form, OR whose `name` normalizes to
+ *      the same snake_case form.
+ * When no `source` is given we pass the ids through unchanged (backwards
+ * compatible for callers that don't have a catalog character handy).
+ */
+export function parseUnitAbilities(
+  unit: ApiUnit,
+  source?: CatalogCharacter,
+): AbilityLevelEntry[] {
   const out: AbilityLevelEntry[] = [];
   for (const raw of unit.abilities ?? []) {
     const entry = extractAbility(raw);
     if (entry) out.push(entry);
   }
-  return out;
+  if (!source?.abilities?.length) return out;
+  return out.map((e) => {
+    const hit = findCatalogAbility(e.id, source);
+    return hit
+      ? { ...e, id: hit.id, kind: hit.kind ?? e.kind }
+      : e;
+  });
+}
+
+function findCatalogAbility(
+  apiId: string,
+  source: CatalogCharacter,
+): { id: string; kind?: 'active' | 'passive' } | null {
+  // Exact match already — nothing to do.
+  const exact = source.abilities.find((ab) => ab.id === apiId);
+  if (exact) return { id: exact.id, kind: exact.kind };
+  const snake = camelToSnake(apiId);
+  const apiCanon = canonAbilityKey(snake);
+  for (const ab of source.abilities) {
+    if (!ab.id) continue;
+    const underscore = ab.id.indexOf('_');
+    const suffix = underscore >= 0 ? ab.id.slice(underscore + 1) : ab.id;
+    if (suffix === snake) return { id: ab.id, kind: ab.kind };
+    // Tolerate catalog/scrape inconsistencies (plural/singular differences,
+    // e.g. catalog "spore_mines_launcher" vs API "SporeMineLauncher").
+    if (canonAbilityKey(suffix) === apiCanon) return { id: ab.id, kind: ab.kind };
+    // Also try matching by normalized display name
+    // ("Hyper Corrosive Acid" → "hyper_corrosive_acid").
+    const nameSnake = ab.name
+      ? ab.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')
+      : '';
+    if (nameSnake && nameSnake === snake) return { id: ab.id, kind: ab.kind };
+    if (nameSnake && canonAbilityKey(nameSnake) === apiCanon) return { id: ab.id, kind: ab.kind };
+  }
+  return null;
+}
+
+function camelToSnake(s: string): string {
+  return s
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2') // ABCDef → ABC_Def
+    .replace(/([a-z0-9])([A-Z])/g, '$1_$2') // aB → a_B
+    .toLowerCase();
+}
+
+// Collapse per-word plurals and punctuation: `spore_mines_launcher` and
+// `spore_mine_launcher` both become `sporeminelauncher`. Used only as a
+// second-chance match when exact snake-case comparison fails.
+function canonAbilityKey(s: string): string {
+  return s
+    .split('_')
+    .map((w) => (w.length > 2 && w.endsWith('s') ? w.slice(0, -1) : w))
+    .join('');
 }
 
 function extractAbility(raw: ApiUnitAbility | unknown): AbilityLevelEntry | null {
@@ -346,7 +422,7 @@ export function mergePlayerUnitWithCatalog(
       rarity,
     },
     equipment,
-    abilityLevels: parseUnitAbilities(unit),
+    abilityLevels: parseUnitAbilities(unit, source),
   };
   return { attacker, unit };
 }
