@@ -137,6 +137,13 @@ const en: Dict = {
   'map.spawns.boss': 'Boss spawns',
   'map.phase3Description':
     'Read-only preview: terrain tiles and spawn markers. Click-to-move and scripted boss turns arrive in later phases.',
+  'map.startBattle': 'Start battle',
+  'map.endBattle': 'End battle',
+  'map.battleActive': 'Battle in progress',
+  'map.needTeam':
+    'Compose a Guild-Raid team and pick a target boss to start a battle.',
+  'map.phase4Note':
+    'Click a player unit to select. Click a green hex to queue a move, click a red-ringed enemy to queue an attack, then press End turn.',
 
   'team.composer.title': 'Team composition',
   'team.composer.description':

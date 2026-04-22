@@ -1,11 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useApp } from '../../state/store';
 import { useT } from '../../lib/i18n';
 import { loadMapCatalog } from '../../map/core/catalog';
 import type { MapDef } from '../../map/core/mapSchema';
+import { buildMapBattleFromTeam } from '../../map/battle/hydration';
+import { hexKey } from '../../map/core/hex';
+import type { Unit } from '../../map/battle/mapBattleState';
+import type { AttackKey } from '../../map/battle/playerTurn';
+import { ActionPanel } from '../components/map/ActionPanel';
 import { HexGrid } from '../components/map/HexGrid';
-import { UnitLayer } from '../components/map/UnitLayer';
+import { HighlightLayer } from '../components/map/HighlightLayer';
 import { HexEffectLayer } from '../components/map/HexEffectLayer';
+import { UnitLayer } from '../components/map/UnitLayer';
 import { MapCalibrator } from './MapCalibrator';
 
 /**
@@ -21,37 +27,151 @@ function isCalibratorMode(): boolean {
 /**
  * Top-level Map page — the hex-board sibling of SinglePage and TeamPage.
  *
- * Phase 3 scope (intentionally narrow):
- *   1. Present the map-catalog picker.
- *   2. Render the selected map: terrain grid (HexGrid) + spawn markers
- *      (UnitLayer reads `hexes[].spawn` when no live units are present) +
- *      hex-effect overlay (empty pre-battle).
- *   3. Expose a toolbar with turn counter and a placeholder mode toggle
- *      that later phases will wire up.
+ * Phase 4 scope:
+ *   1. Map-catalog picker (carry-over from Phase 3).
+ *   2. Static render path (HexGrid + UnitLayer showing spawn markers)
+ *      while no battle is live — keeps the map visible while the user
+ *      chooses a team elsewhere.
+ *   3. "Start battle" hydrates a `MapBattleState` from the current
+ *      Guild-Raid team + target, at which point the UI flips into
+ *      interactive mode: click-to-select, click-to-move, click-to-attack,
+ *      End turn → engine resolves the queued actions.
  *
- * No click-to-move, no click-to-attack, no boss AI, no trace export —
- * those land in Phases 4–6. The entire interactive surface is
- * deliberately read-only for now.
- *
- * The active `MapBattleState` is stored in `useApp((s) => s.map)` but is
- * null until Phase 4 adds a "Start battle" action. This page therefore
- * reads the map id from local component state (not persisted) and
- * derives everything from the static `MapDef`.
+ * The page intentionally owns all click wiring so HexGrid /
+ * HighlightLayer / UnitLayer stay presentation-only and reusable by the
+ * dev Calibrator. Store mutations happen inline here via useApp actions.
  */
 export function MapPage() {
   const t = useT();
   const battle = useApp((s) => s.map);
+  const setMap = useApp((s) => s.setMap);
+  const activeUnitId = useApp((s) => s.activeUnitId);
+  const setActiveUnit = useApp((s) => s.setActiveUnit);
+  const queuedActions = useApp((s) => s.queuedActions);
+  const queueAction = useApp((s) => s.queueAction);
+  const clearQueuedActions = useApp((s) => s.clearQueuedActions);
+  const lastTurnLog = useApp((s) => s.lastTurnLog);
+  const endPlayerTurn = useApp((s) => s.endPlayerTurn);
+
+  // Snapshot of the other store slices needed by the hydrator. Read as
+  // selectors so unrelated store churn doesn't rerender us.
+  const teamMembers = useApp((s) => s.team.members);
+  const unitBuilds = useApp((s) => s.unitBuilds);
+  const teamMemberOverrides = useApp((s) => s.teamMemberOverrides);
+  const fallbackBuild = useApp((s) => s.build);
+  const target = useApp((s) => s.target);
+
   const catalog = useMemo(() => loadMapCatalog(), []);
   const calibrator = useMemo(() => isCalibratorMode(), []);
 
-  // Default to the first map in the catalog. A "currentMapId" store slice
-  // is a Phase 4 concern (persist the user's last pick).
+  // Map-id is deliberately local state — not persisted. When a battle is
+  // active the battle's `map.id` wins over this local pick so the UI can
+  // never drift into "map X selected but battle on map Y".
   const [mapId, setMapId] = useState<string>(() => catalog.maps[0]?.id ?? '');
-  const map = catalog.mapById[mapId];
+  const currentMap = battle ? battle.map : catalog.mapById[mapId];
+
+  const activeUnit = useMemo<Unit | null>(() => {
+    if (!battle || !activeUnitId) return null;
+    return battle.units[activeUnitId] ?? null;
+  }, [battle, activeUnitId]);
+
+  const handleStartBattle = useCallback(() => {
+    const map = catalog.mapById[mapId];
+    if (!map) return;
+    const hydrated = buildMapBattleFromTeam({
+      map,
+      teamMembers,
+      unitBuilds,
+      teamMemberOverrides,
+      fallback: fallbackBuild,
+      target,
+    });
+    if (hydrated) setMap(hydrated);
+  }, [
+    catalog,
+    mapId,
+    teamMembers,
+    unitBuilds,
+    teamMemberOverrides,
+    fallbackBuild,
+    target,
+    setMap,
+  ]);
+
+  const handleEndBattle = useCallback(() => {
+    setMap(null);
+  }, [setMap]);
+
+  // Hex click: when a battle is live and a player unit owns the hex, set
+  // it as the active selection. (Enemy clicks route through
+  // HighlightLayer's `onAttackableClick` instead — HexGrid clicks are the
+  // "select/deselect" channel, not the "attack" channel.)
+  const handleHexClick = useCallback(
+    (coord: { q: number; r: number }) => {
+      if (!battle) return;
+      const key = hexKey(coord);
+      for (const u of Object.values(battle.units)) {
+        if (u.side !== 'player') continue;
+        if (u.currentHp <= 0) continue;
+        if (hexKey(u.position) !== key) continue;
+        setActiveUnit(u.id);
+        return;
+      }
+      // Clicked an empty hex — don't clear selection. The user may be
+      // lining up a move; let HighlightLayer's reachable polygons
+      // intercept reachable-hex clicks via their own onClick.
+    },
+    [battle, setActiveUnit],
+  );
+
+  const handleReachableClick = useCallback(
+    (coord: { q: number; r: number }) => {
+      if (!activeUnit) return;
+      queueAction({ kind: 'move', unitId: activeUnit.id, to: coord });
+    },
+    [activeUnit, queueAction],
+  );
+
+  const handleAttackableClick = useCallback(
+    (targetId: string) => {
+      if (!activeUnit) return;
+      const pickedKey = defaultAttackKey(activeUnit);
+      if (!pickedKey) return;
+      queueAction({
+        kind: 'attack',
+        attackerId: activeUnit.id,
+        targetId,
+        attackKey: pickedKey,
+      });
+    },
+    [activeUnit, queueAction],
+  );
+
+  const handlePickAttack = useCallback(
+    (key: AttackKey) => {
+      if (!activeUnit) return;
+      // Preset: next enemy click will use this attack key. For Phase 4 we
+      // keep it simple — the button doubles as "queue an attack against
+      // the first live enemy", since there's only one boss in hydration.
+      const firstEnemy = battle
+        ? Object.values(battle.units).find(
+            (u) => u.side === 'enemy' && u.currentHp > 0,
+          )
+        : null;
+      if (!firstEnemy) return;
+      queueAction({
+        kind: 'attack',
+        attackerId: activeUnit.id,
+        targetId: firstEnemy.id,
+        attackKey: key,
+      });
+    },
+    [activeUnit, battle, queueAction],
+  );
 
   if (calibrator) return <MapCalibrator />;
 
-  if (!map) {
+  if (!currentMap) {
     return (
       <section className="rounded border border-bg-subtle bg-bg-elevated p-4">
         <p className="text-sm text-slate-400">{t('map.empty')}</p>
@@ -64,15 +184,56 @@ export function MapPage() {
       <div className="flex flex-col gap-3">
         <MapToolbar
           maps={catalog.maps}
-          currentMapId={mapId}
+          currentMapId={currentMap.id}
           onPick={setMapId}
           turnIdx={battle?.turnIdx ?? 0}
+          battleActive={battle != null}
+          canStart={
+            teamMembers.some((m) => m.characterId) &&
+            currentMap.hexes.some((c) => c.spawn === 'player') &&
+            currentMap.hexes.some((c) => c.spawn === 'boss' || c.spawn === 'enemy')
+          }
+          onStartBattle={handleStartBattle}
+          onEndBattle={handleEndBattle}
         />
-        <MapCanvas map={map} />
+        <MapCanvas
+          map={currentMap}
+          onHexClick={battle ? handleHexClick : undefined}
+          onReachableClick={handleReachableClick}
+          onAttackableClick={handleAttackableClick}
+          activeUnit={activeUnit}
+        />
       </div>
-      <ActionPanel map={map} />
+      {battle ? (
+        <ActionPanel
+          battle={battle}
+          active={activeUnit}
+          queuedActions={queuedActions}
+          lastTurnLog={lastTurnLog}
+          onPickAttack={handlePickAttack}
+          onClearQueue={clearQueuedActions}
+          onEndTurn={endPlayerTurn}
+        />
+      ) : (
+        <StaticSummary map={currentMap} />
+      )}
     </div>
   );
+}
+
+/**
+ * Pick a default attack key when the user clicks an attackable enemy
+ * directly (without having picked a profile in ActionPanel). Prefers
+ * melee → ranged → first active ability to match the "just click the
+ * thing" mental model.
+ */
+function defaultAttackKey(unit: Unit): AttackKey | null {
+  if (unit.attacker.source.melee) return 'melee';
+  if (unit.attacker.source.ranged) return 'ranged';
+  const firstActive = unit.attacker.source.abilities.find(
+    (a) => a.kind === 'active' && a.profiles.length > 0,
+  );
+  return firstActive ? (`ability:${firstActive.id}` as AttackKey) : null;
 }
 
 function MapToolbar(props: {
@@ -80,6 +241,10 @@ function MapToolbar(props: {
   currentMapId: string;
   onPick: (id: string) => void;
   turnIdx: number;
+  battleActive: boolean;
+  canStart: boolean;
+  onStartBattle: () => void;
+  onEndBattle: () => void;
 }) {
   const t = useT();
   return (
@@ -91,7 +256,8 @@ function MapToolbar(props: {
         <select
           value={props.currentMapId}
           onChange={(e) => props.onPick(e.target.value)}
-          className="rounded border border-bg-subtle bg-bg-base px-2 py-1 text-sm"
+          disabled={props.battleActive}
+          className="rounded border border-bg-subtle bg-bg-base px-2 py-1 text-sm disabled:opacity-50"
         >
           {props.maps.map((m) => (
             <option key={m.id} value={m.id}>
@@ -100,21 +266,47 @@ function MapToolbar(props: {
           ))}
         </select>
       </label>
-      <div className="flex items-center gap-4 text-xs text-slate-400">
+      <div className="flex items-center gap-3 text-xs text-slate-400">
         <span>
           {t('map.turn')}: <span className="text-slate-200">{props.turnIdx}</span>
         </span>
-        <span className="rounded bg-bg-subtle px-2 py-1 uppercase tracking-wide">
-          {t('map.phase3Preview')}
-        </span>
+        {props.battleActive ? (
+          <>
+            <span className="rounded bg-bg-subtle px-2 py-1 uppercase tracking-wide text-accent">
+              {t('map.battleActive')}
+            </span>
+            <button
+              type="button"
+              onClick={props.onEndBattle}
+              className="rounded border border-bg-subtle bg-bg-base px-3 py-1 text-xs hover:border-accent hover:text-accent"
+            >
+              {t('map.endBattle')}
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            onClick={props.onStartBattle}
+            disabled={!props.canStart}
+            className="rounded bg-accent px-3 py-1 text-xs font-semibold text-black disabled:opacity-40"
+          >
+            {t('map.startBattle')}
+          </button>
+        )}
       </div>
     </header>
   );
 }
 
-function MapCanvas({ map }: { map: MapDef }) {
+function MapCanvas(props: {
+  map: MapDef;
+  onHexClick?: (coord: { q: number; r: number }) => void;
+  onReachableClick: (coord: { q: number; r: number }) => void;
+  onAttackableClick: (unitId: string) => void;
+  activeUnit: Unit | null;
+}) {
   const battle = useApp((s) => s.map);
-  const viewBox = `0 0 ${map.image.width} ${map.image.height}`;
+  const viewBox = `0 0 ${props.map.image.width} ${props.map.image.height}`;
 
   return (
     <div className="overflow-hidden rounded border border-bg-subtle bg-black/50">
@@ -122,38 +314,56 @@ function MapCanvas({ map }: { map: MapDef }) {
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
         className="block h-auto w-full"
-        style={{ aspectRatio: `${map.image.width} / ${map.image.height}` }}
+        style={{ aspectRatio: `${props.map.image.width} / ${props.map.image.height}` }}
       >
         {/* Background image when calibrated; otherwise a dark rectangle so
             the hex grid has clear contrast on the stub map. */}
-        {map.image.href && map.image.href !== 'placeholder.png' ? (
+        {props.map.image.href && props.map.image.href !== 'placeholder.png' ? (
           <image
-            href={`/maps/${map.image.href}`}
+            href={`/maps/${props.map.image.href}`}
             x={0}
             y={0}
-            width={map.image.width}
-            height={map.image.height}
+            width={props.map.image.width}
+            height={props.map.image.height}
             preserveAspectRatio="xMidYMid slice"
           />
         ) : (
           <rect
             x={0}
             y={0}
-            width={map.image.width}
-            height={map.image.height}
+            width={props.map.image.width}
+            height={props.map.image.height}
             fill="#1a1d24"
           />
         )}
-        <HexGrid map={map} />
-        <HexEffectLayer map={map} battle={battle} />
-        <UnitLayer map={map} units={battle ? Object.values(battle.units) : []} />
+        <HexGrid map={props.map} onHexClick={props.onHexClick} />
+        <HexEffectLayer map={props.map} battle={battle} />
+        {battle && props.activeUnit && (
+          <HighlightLayer
+            battle={battle}
+            active={props.activeUnit}
+            onReachableClick={props.onReachableClick}
+            onAttackableClick={props.onAttackableClick}
+          />
+        )}
+        <UnitLayer
+          map={props.map}
+          units={battle ? Object.values(battle.units) : []}
+        />
       </svg>
     </div>
   );
 }
 
-function ActionPanel({ map }: { map: MapDef }) {
+/**
+ * Pre-battle side panel — shown when `battle == null`. Mirrors the
+ * Phase-3 read-only summary so the map picker remains informative before
+ * the user clicks "Start battle".
+ */
+function StaticSummary({ map }: { map: MapDef }) {
   const t = useT();
+  const teamMembers = useApp((s) => s.team.members);
+  const populatedSlots = teamMembers.filter((m) => m.characterId).length;
   const spawns = {
     player: map.hexes.filter((c) => c.spawn === 'player').length,
     enemy: map.hexes.filter((c) => c.spawn === 'enemy').length,
@@ -175,7 +385,7 @@ function ActionPanel({ map }: { map: MapDef }) {
         <dd className="text-slate-200">{spawns.boss}</dd>
       </dl>
       <p className="text-xs leading-relaxed text-slate-400">
-        {t('map.phase3Description')}
+        {populatedSlots === 0 ? t('map.needTeam') : t('map.phase4Note')}
       </p>
     </aside>
   );

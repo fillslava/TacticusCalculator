@@ -24,6 +24,11 @@ import {
 } from '../api/merge';
 import { loadCatalog } from '../data/catalog';
 import type { MapBattleState } from '../map/battle/mapBattleState';
+import {
+  resolvePlayerTurn,
+  type PlayerAction,
+  type PlayerActionLog,
+} from '../map/battle/playerTurn';
 
 export interface RelicEquipmentMemo {
   id: string;
@@ -223,6 +228,39 @@ export interface AppState {
    */
   map: MapBattleState | null;
   setMap: (m: MapBattleState | null) => void;
+
+  /**
+   * Currently-selected unit on the map — the one whose movement /
+   * attack range the UI highlights. `null` means "no selection, show
+   * the base board". Cleared on map swap, on end-of-turn, or when the
+   * selected unit dies. Not persisted (mirrors `map`).
+   */
+  activeUnitId: string | null;
+  setActiveUnit: (id: string | null) => void;
+
+  /**
+   * Queued but uncommitted `PlayerAction`s for the current turn.
+   * Processed in order by `endPlayerTurn` → `resolvePlayerTurn`. Emptied
+   * when the turn resolves. The UI appends to this queue via
+   * `queueAction` as the user clicks through the board.
+   */
+  queuedActions: PlayerAction[];
+  queueAction: (action: PlayerAction) => void;
+  clearQueuedActions: () => void;
+
+  /**
+   * Log of the most recently resolved turn. The UI reads this to render
+   * the "what just happened" panel (damage breakdowns, move trails).
+   * Overwritten on every `endPlayerTurn` — we don't keep a scroll-back
+   * history at this phase (trace export is a Phase 6 deliverable).
+   */
+  lastTurnLog: PlayerActionLog[];
+  /**
+   * Process `queuedActions` against `map` and clear the queue. Requires
+   * `map !== null` — no-op otherwise. Delegates to `resolvePlayerTurn`
+   * for the actual mutation; this function just wires it into the store.
+   */
+  endPlayerTurn: () => void;
 }
 
 const initialBuild: BuildOverrides = {
@@ -566,11 +604,52 @@ export const useApp = create<AppState>()(
       setLanguage: (lang) => set({ language: lang }),
 
       map: null,
-      setMap: (m) => set({ map: m }),
+      setMap: (m) =>
+        set({
+          map: m,
+          // Swapping maps invalidates selection + queued work: a unit id
+          // from the old battle may not exist in the new one, and a half-
+          // queued attack wouldn't have coherent targets.
+          activeUnitId: null,
+          queuedActions: [],
+          lastTurnLog: [],
+        }),
+
+      activeUnitId: null,
+      setActiveUnit: (id) => set({ activeUnitId: id }),
+
+      queuedActions: [],
+      queueAction: (action) =>
+        set((s) => ({ queuedActions: [...s.queuedActions, action] })),
+      clearQueuedActions: () => set({ queuedActions: [] }),
+
+      lastTurnLog: [],
+      endPlayerTurn: () =>
+        set((s) => {
+          if (!s.map) return {};
+          const result = resolvePlayerTurn(s.map, s.queuedActions);
+          // Advance the map turn counter. Enemy turns (Phase 5) will
+          // bump it again at their end; for Phase 4 the counter ticks
+          // once per player turn so cooldown-window queries still work.
+          s.map.turnIdx += 1;
+          return {
+            queuedActions: [],
+            lastTurnLog: result.log,
+            // Force a React re-render by handing a new reference to
+            // consumers — `map` is a mutable object, so zustand's
+            // shallow-ref equality would otherwise skip the update.
+            map: { ...s.map },
+            // Drop selection if the active unit died this turn.
+            activeUnitId:
+              s.activeUnitId && s.map.units[s.activeUnitId]?.currentHp > 0
+                ? s.activeUnitId
+                : null,
+          };
+        }),
     }),
     {
       name: 'tacticus-calc-state',
-      version: 15,
+      version: 16,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -735,6 +814,14 @@ export function migratePersisted(persisted: any, fromVersion: number): any {
     if (p !== 'single' && p !== 'team' && p !== 'map') {
       persisted.page = 'single';
     }
+  }
+  if (fromVersion < 16) {
+    // v16 adds the Phase 4 player-turn slice: activeUnitId, queuedActions,
+    // lastTurnLog. None of these are persisted by design (they reference
+    // the non-persisted `map` slice), so the migration is a no-op —
+    // existing users automatically pick up the new defaults on first
+    // load. The version bump exists so storeMigration tests can assert
+    // that the migration function handled v15→v16 without throwing.
   }
   return persisted;
 }
