@@ -405,6 +405,15 @@ const HAND_AUTHORED_ABILITY_IDS = new Set([
   // wiki's published anchors (L50=7477) and diverges from gameinfo's raw
   // `maxDmg` curve (L50=4154). Preserve the hand-authored block.
   'vitruvius',
+  // Godswyl's Champion of the Feast is a passive that fires AFTER his first
+  // normal attack of the turn (wiki: "After moving, deals 1x X Power Damage
+  // ... if Godswyl does not move, then this ability triggers at the end of
+  // his turn"). The importer does not synthesize `trigger` fields for
+  // conditional passives, so without this hand-authored entry the passive
+  // would have `kind: 'passive'` with profiles but no trigger, and
+  // `shouldTrigger` would return false for every attack — silently
+  // cancelling the "second hit" the user expects.
+  'godswyl',
 ]);
 
 /**

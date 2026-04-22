@@ -2817,3 +2817,66 @@ describe('resolveTeamRotation — bookkeeping', () => {
     ]);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Godswyl — Champion of the Feast fires after his first normal attack each
+// turn (wiki: "After moving, deals 1x X Power Damage ... If Sword Brother
+// Godswyl does not move, then this ability triggers at the end of his turn").
+// User-visible behaviour: a "second hit" always lands with every turn.
+// ---------------------------------------------------------------------------
+
+describe('godswyl — Champion of the Feast fires after first attack', () => {
+  it('catalog entry has the afterOwnFirstAttackOfTurn trigger', () => {
+    // Guards against an importer regression that would wipe the trigger
+    // (see HAND_AUTHORED_ABILITY_IDS in scripts/import-gameinfo.ts).
+    const gw = getCharacter('godswyl');
+    expect(gw).toBeDefined();
+    const passive = gw!.abilities.find(
+      (a) => a.id === 'godswyl_champion_of_the_feast',
+    );
+    expect(passive).toBeDefined();
+    expect(passive!.kind).toBe('passive');
+    expect(passive!.trigger).toEqual({ kind: 'afterOwnFirstAttackOfTurn' });
+  });
+
+  it('passive fires after Godswyl\'s first melee attack of the turn', () => {
+    const gw = getCharacter('godswyl');
+    expect(gw).toBeDefined();
+    const rot: TeamRotation = {
+      members: [member('gw', gw!, 0)],
+      turns: [{ actions: [{ memberId: 'gw', attack: meleeAttack() }] }],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // 1 scheduled melee + 1 triggered Champion of the Feast = 2 entries.
+    expect(r.perMember['gw'].perAction).toHaveLength(2);
+    expect(r.perMember['gw'].triggeredFires).toEqual([
+      {
+        turnIdx: 0,
+        abilityId: 'godswyl_champion_of_the_feast',
+        profileIdx: 0,
+      },
+    ]);
+  });
+
+  it('passive fires exactly once per turn even with multiple scheduled actions', () => {
+    const gw = getCharacter('godswyl');
+    expect(gw).toBeDefined();
+    // Schedule two melees in one turn — only the first should trigger the
+    // passive (it's afterOwnFirstAttackOfTurn, not afterOwnNormalAttack).
+    const rot: TeamRotation = {
+      members: [member('gw', gw!, 0)],
+      turns: [
+        {
+          actions: [
+            { memberId: 'gw', attack: meleeAttack() },
+            { memberId: 'gw', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // 2 scheduled melees + 1 triggered passive = 3 entries.
+    expect(r.perMember['gw'].perAction).toHaveLength(3);
+    expect(r.perMember['gw'].triggeredFires).toHaveLength(1);
+  });
+});

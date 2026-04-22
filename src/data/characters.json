@@ -2428,7 +2428,10 @@
             "kind": "ability",
             "abilityId": "godswyl_champion_of_the_feast"
           }
-        ]
+        ],
+        "trigger": {
+          "kind": "afterOwnFirstAttackOfTurn"
+        }
       }
     ],
     "traits": [
