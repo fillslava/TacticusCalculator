@@ -37,7 +37,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Drach’nyen — Piercing",
+            "label": "Drach’nyen — piercing",
             "damageType": "piercing",
             "hits": 3,
             "damageFactor": 1,
@@ -199,7 +199,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Doom Siren — DirectDamage",
+            "label": "Doom Siren — direct",
             "damageType": "direct",
             "hits": 3,
             "damageFactor": 1,
@@ -252,7 +252,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Vexilla Magnifica — Physical",
+            "label": "Vexilla Magnifica — physical",
             "damageType": "physical",
             "hits": 1,
             "damageFactor": 1,
@@ -267,7 +267,145 @@
         "id": "aesoth_stand_vigil",
         "name": "Stand Vigil",
         "kind": "passive",
-        "profiles": []
+        "profiles": [],
+        "teamBuff": {
+          "kind": "aesothStandVigil",
+          "extraArmorByLevel": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            28,
+            31,
+            35,
+            39,
+            42,
+            46,
+            49,
+            53,
+            57,
+            60,
+            64,
+            68,
+            71,
+            75,
+            79,
+            82,
+            86,
+            91,
+            98,
+            106,
+            114,
+            123,
+            139,
+            156,
+            172,
+            189,
+            205,
+            222,
+            224,
+            227,
+            230,
+            234,
+            238,
+            242,
+            246,
+            251,
+            256,
+            261,
+            267,
+            273,
+            279,
+            285,
+            291
+          ],
+          "extraDmgPctByLevel": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            21,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25,
+            25
+          ],
+          "extendedRangeHexes": 2
+        }
       }
     ],
     "traits": [
@@ -308,7 +446,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Swooping Hawk — Piercing",
+            "label": "Swooping Hawk — piercing",
             "damageType": "piercing",
             "hits": 1,
             "damageFactor": 1,
@@ -368,7 +506,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Doombolt — Psychic",
+            "label": "Doombolt — psychic",
             "damageType": "psychic",
             "hits": 3,
             "damageFactor": 1,
@@ -518,7 +656,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Bringer of Despair — Power",
+            "label": "Bringer of Despair — power",
             "damageType": "power",
             "hits": 4,
             "damageFactor": 1,
@@ -586,7 +724,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Martial Apotheosis — Energy",
+            "label": "Martial Apotheosis — energy",
             "damageType": "energy",
             "hits": 2,
             "damageFactor": 1,
@@ -684,7 +822,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Foehammer — Power",
+            "label": "Foehammer — power",
             "damageType": "power",
             "hits": 1,
             "damageFactor": 1,
@@ -782,7 +920,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Talons Of The Emperor — Power",
+            "label": "Talons Of The Emperor — power",
             "damageType": "power",
             "hits": 1,
             "damageFactor": 1,
@@ -876,7 +1014,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Overwhelming Wrath — Eviscerate",
+            "label": "Overwhelming Wrath — eviscerating",
             "damageType": "eviscerating",
             "hits": 2,
             "damageFactor": 1,
@@ -940,7 +1078,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Dark Talon Strike — DirectDamage",
+            "label": "Dark Talon Strike — direct",
             "damageType": "direct",
             "hits": 1,
             "damageFactor": 1,
@@ -949,7 +1087,7 @@
             "abilityId": "azrael_dark_talon_strike"
           },
           {
-            "label": "Dark Talon Strike — Bolter (component 2)",
+            "label": "Dark Talon Strike — bolter #2",
             "damageType": "bolter",
             "hits": 6,
             "damageFactor": 1,
@@ -1047,7 +1185,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Plasma Cannon — Plasma",
+            "label": "Plasma Cannon — plasma",
             "damageType": "plasma",
             "hits": 3,
             "damageFactor": 1,
@@ -1186,7 +1324,12 @@
         "profiles": [],
         "teamBuff": {
           "kind": "biovoreMythicAcid",
-          "pctByStar": [10, 13, 17, 20]
+          "pctByStar": [
+            10,
+            13,
+            17,
+            20
+          ]
         }
       }
     ],
@@ -1233,7 +1376,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Fragstorm Grenade Launcher — Blast",
+            "label": "Fragstorm Grenade Launcher — blast",
             "damageType": "blast",
             "hits": 6,
             "damageFactor": 1,
@@ -1250,7 +1393,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Boltstorm — Bolter",
+            "label": "Boltstorm — bolter",
             "damageType": "bolter",
             "hits": 3,
             "damageFactor": 1,
@@ -1312,7 +1455,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Wireweave Net — Piercing",
+            "label": "Wireweave Net — piercing",
             "damageType": "piercing",
             "hits": 2,
             "damageFactor": 1,
@@ -1360,7 +1503,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Gauntlets of Ultramar — Bolter",
+            "label": "Gauntlets of Ultramar — bolter",
             "damageType": "bolter",
             "hits": 1,
             "damageFactor": 1,
@@ -1466,7 +1609,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Mortis Round — HeavyRound",
+            "label": "Mortis Round — heavyRound",
             "damageType": "heavyRound",
             "hits": 1,
             "damageFactor": 1,
@@ -1483,7 +1626,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Camo Cloak — Bolter",
+            "label": "Camo Cloak — bolter",
             "damageType": "bolter",
             "hits": 1,
             "damageFactor": 1,
@@ -1614,7 +1757,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Light of Sanguinius — Melta",
+            "label": "Light of Sanguinius — melta",
             "damageType": "melta",
             "hits": 5,
             "damageFactor": 1,
@@ -1722,7 +1865,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Fear of the Unseen — DirectDamage",
+            "label": "Fear of the Unseen — direct",
             "damageType": "direct",
             "hits": 3,
             "damageFactor": 1,
@@ -1784,7 +1927,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Leading the Charge — Power",
+            "label": "Leading the Charge — power",
             "damageType": "power",
             "hits": 3,
             "damageFactor": 1,
@@ -1887,7 +2030,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Chordclaw — DirectDamage",
+            "label": "Chordclaw — direct",
             "damageType": "direct",
             "hits": 4,
             "damageFactor": 1,
@@ -1896,7 +2039,7 @@
             "abilityId": "exitorRho_cord_claw"
           },
           {
-            "label": "Chordclaw — DirectDamage (component 2)",
+            "label": "Chordclaw — direct #2",
             "damageType": "direct",
             "hits": 2,
             "damageFactor": 1,
@@ -1913,7 +2056,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Optimised Gait — Energy",
+            "label": "Optimised Gait — energy",
             "damageType": "energy",
             "hits": 2,
             "damageFactor": 1,
@@ -1968,7 +2111,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Thrice-Blessed Conflagration — Flame",
+            "label": "Thrice-Blessed Conflagration — flame",
             "damageType": "flame",
             "hits": 1,
             "damageFactor": 1,
@@ -2068,7 +2211,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Calibanite Greatsword — Power",
+            "label": "Calibanite Greatsword — power",
             "damageType": "power",
             "hits": 1,
             "damageFactor": 1,
@@ -2127,7 +2270,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Hades Autocannons — Flame",
+            "label": "Hades Autocannons — flame",
             "damageType": "flame",
             "hits": 6,
             "damageFactor": 1,
@@ -2260,7 +2403,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Thunderous Assault — Power",
+            "label": "Thunderous Assault — power",
             "damageType": "power",
             "hits": 1,
             "damageFactor": 1,
@@ -2277,7 +2420,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Champion Of The Feast — Power",
+            "label": "Champion Of The Feast — power",
             "damageType": "power",
             "hits": 1,
             "damageFactor": 1,
@@ -2405,7 +2548,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Herald of the Apocalypse — Piercing",
+            "label": "Herald of the Apocalypse — piercing",
             "damageType": "piercing",
             "hits": 2,
             "damageFactor": 1,
@@ -2466,7 +2609,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Ecstatic Slaughter — Eviscerate",
+            "label": "Ecstatic Slaughter — eviscerating",
             "damageType": "eviscerating",
             "hits": 3,
             "damageFactor": 1,
@@ -2614,7 +2757,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Multi-Threat Eliminator — Gauss",
+            "label": "Multi-Threat Eliminator — molecular",
             "damageType": "molecular",
             "hits": 1,
             "damageFactor": 1,
@@ -2724,7 +2867,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Decoys and Misdirection — Blast",
+            "label": "Decoys and Misdirection — blast",
             "damageType": "blast",
             "hits": 1,
             "damageFactor": 1,
@@ -2820,7 +2963,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Martial Superiority — Power",
+            "label": "Martial Superiority — power",
             "damageType": "power",
             "hits": 2,
             "damageFactor": 1,
@@ -2869,7 +3012,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Silent Death — Piercing",
+            "label": "Silent Death — piercing",
             "damageType": "piercing",
             "hits": 3,
             "damageFactor": 1,
@@ -2929,7 +3072,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Heroic Fusillade — Projectile",
+            "label": "Heroic Fusillade — projectile",
             "damageType": "projectile",
             "hits": 6,
             "damageFactor": 1,
@@ -2946,7 +3089,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Hypersensory Abilities — Projectile",
+            "label": "Hypersensory Abilities — projectile",
             "damageType": "projectile",
             "hits": 3,
             "damageFactor": 1,
@@ -3172,7 +3315,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Frag Bomb — Blast",
+            "label": "Frag Bomb — blast",
             "damageType": "blast",
             "hits": 6,
             "damageFactor": 1,
@@ -3298,7 +3441,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Visions of Heresy — Bolter",
+            "label": "Visions of Heresy — bolter",
             "damageType": "bolter",
             "hits": 2,
             "damageFactor": 1,
@@ -3350,7 +3493,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Lash of Torment — Eviscerate",
+            "label": "Lash of Torment — eviscerating",
             "damageType": "eviscerating",
             "hits": 6,
             "damageFactor": 1,
@@ -3404,7 +3547,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Jakhal Stimms — Physical",
+            "label": "Jakhal Stimms — physical",
             "damageType": "physical",
             "hits": 4,
             "damageFactor": 1,
@@ -3508,7 +3651,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Flail Swing — Power",
+            "label": "Flail Swing — power",
             "damageType": "power",
             "hits": 3,
             "damageFactor": 1,
@@ -3525,7 +3668,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Haze of Corruption — Toxic",
+            "label": "Haze of Corruption — toxic",
             "damageType": "toxic",
             "hits": 1,
             "damageFactor": 1,
@@ -3578,7 +3721,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Malleus Rocket Barrage — Blast",
+            "label": "Malleus Rocket Barrage — blast",
             "damageType": "blast",
             "hits": 1,
             "damageFactor": 1,
@@ -3626,7 +3769,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Hammer of Wrath — Power",
+            "label": "Hammer of Wrath — power",
             "damageType": "power",
             "hits": 2,
             "damageFactor": 1,
@@ -3635,7 +3778,7 @@
             "abilityId": "mataneo_hammer_of_wrath"
           },
           {
-            "label": "Hammer of Wrath — Physical (component 2)",
+            "label": "Hammer of Wrath — physical #2",
             "damageType": "physical",
             "hits": 1,
             "damageFactor": 1,
@@ -3754,7 +3897,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Fury of the Ancients — Psychic",
+            "label": "Fury of the Ancients — psychic",
             "damageType": "psychic",
             "hits": 2,
             "damageFactor": 1,
@@ -3810,7 +3953,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Sanctorum Missile — Blast",
+            "label": "Sanctorum Missile — blast",
             "damageType": "blast",
             "hits": 2,
             "damageFactor": 1,
@@ -3827,7 +3970,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Righteous Repugnance — Power",
+            "label": "Righteous Repugnance — power",
             "damageType": "power",
             "hits": 3,
             "damageFactor": 1,
@@ -3884,7 +4027,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Spirit Leech — Psychic",
+            "label": "Spirit Leech — psychic",
             "damageType": "psychic",
             "hits": 1,
             "damageFactor": 1,
@@ -3991,7 +4134,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Stormcaller — Psychic",
+            "label": "Stormcaller — psychic",
             "damageType": "psychic",
             "hits": 3,
             "damageFactor": 1,
@@ -4089,7 +4232,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Foul Infusion — Toxic",
+            "label": "Foul Infusion — toxic",
             "damageType": "toxic",
             "hits": 1,
             "damageFactor": 1,
@@ -4149,7 +4292,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Entropy Cannons — Energy",
+            "label": "Entropy Cannons — energy",
             "damageType": "energy",
             "hits": 2,
             "damageFactor": 1,
@@ -4254,7 +4397,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Cyclic Ion Blaster — Particle",
+            "label": "Cyclic Ion Blaster — particle",
             "damageType": "particle",
             "hits": 3,
             "damageFactor": 1,
@@ -4311,7 +4454,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Brazier of Holy Fire — Flame",
+            "label": "Brazier of Holy Fire — flame",
             "damageType": "flame",
             "hits": 2,
             "damageFactor": 1,
@@ -4413,7 +4556,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Squig Launchas — Physical",
+            "label": "Squig Launchas — physical",
             "damageType": "physical",
             "hits": 3,
             "damageFactor": 1,
@@ -4468,7 +4611,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Supercharge — Plasma",
+            "label": "Supercharge — plasma",
             "damageType": "plasma",
             "hits": 1,
             "damageFactor": 1,
@@ -4477,7 +4620,7 @@
             "abilityId": "sarquael_supercharge"
           },
           {
-            "label": "Supercharge — Plasma (component 2)",
+            "label": "Supercharge — plasma #2",
             "damageType": "plasma",
             "hits": 1,
             "damageFactor": 1,
@@ -4494,7 +4637,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Grim Retribution — Plasma",
+            "label": "Grim Retribution — plasma",
             "damageType": "plasma",
             "hits": 1,
             "damageFactor": 1,
@@ -4550,7 +4693,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Exemplar of the Kauyon — Blast",
+            "label": "Exemplar of the Kauyon — blast",
             "damageType": "blast",
             "hits": 2,
             "damageFactor": 1,
@@ -4614,7 +4757,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Excruciating Frequencies — Blast",
+            "label": "Excruciating Frequencies — blast",
             "damageType": "blast",
             "hits": 1,
             "damageFactor": 1,
@@ -4676,7 +4819,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Seeker Missile Frequency Lock — HeavyRound",
+            "label": "Seeker Missile Frequency Lock — heavyRound",
             "damageType": "heavyRound",
             "hits": 1,
             "damageFactor": 1,
@@ -4737,7 +4880,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Psychic Maelstrom — Psychic",
+            "label": "Psychic Maelstrom — psychic",
             "damageType": "psychic",
             "hits": 1,
             "damageFactor": 1,
@@ -4797,7 +4940,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Dakka! Dakka! Dakka! — Projectile",
+            "label": "Dakka! Dakka! Dakka! — projectile",
             "damageType": "projectile",
             "hits": 6,
             "damageFactor": 1,
@@ -4859,7 +5002,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Squig Hound — Physical",
+            "label": "Squig Hound — physical",
             "damageType": "physical",
             "hits": 2,
             "damageFactor": 1,
@@ -4914,7 +5057,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Sentinel Directives — Physical",
+            "label": "Sentinel Directives — physical",
             "damageType": "physical",
             "hits": 1,
             "damageFactor": 1,
@@ -5019,7 +5162,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Unstoppable Momentum — DirectDamage",
+            "label": "Unstoppable Momentum — direct",
             "damageType": "direct",
             "hits": 1,
             "damageFactor": 1,
@@ -5075,7 +5218,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Murderous Swing — Piercing",
+            "label": "Murderous Swing — piercing",
             "damageType": "piercing",
             "hits": 1,
             "damageFactor": 1,
@@ -5136,7 +5279,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Basilisk Barrage — Blast",
+            "label": "Basilisk Barrage — blast",
             "damageType": "blast",
             "hits": 2,
             "damageFactor": 1,
@@ -5241,7 +5384,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Might From Below — Psychic",
+            "label": "Might From Below — psychic",
             "damageType": "psychic",
             "hits": 5,
             "damageFactor": 1,
@@ -5347,7 +5490,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Harbinger of Destruction — DirectDamage",
+            "label": "Harbinger of Destruction — direct",
             "damageType": "direct",
             "hits": 1,
             "damageFactor": 1,
@@ -5364,7 +5507,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Living Lightning — DirectDamage",
+            "label": "Living Lightning — direct",
             "damageType": "direct",
             "hits": 1,
             "damageFactor": 1,
@@ -5420,7 +5563,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Storm Of Wrath — Psychic",
+            "label": "Storm Of Wrath — psychic",
             "damageType": "psychic",
             "hits": 1,
             "damageFactor": 1,
@@ -5473,7 +5616,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Tactical Precision — Bolter",
+            "label": "Tactical Precision — bolter",
             "damageType": "bolter",
             "hits": 1,
             "damageFactor": 1,
@@ -5482,7 +5625,7 @@
             "abilityId": "titus_tactical_precision"
           },
           {
-            "label": "Tactical Precision — Chain (component 2)",
+            "label": "Tactical Precision — chain #2",
             "damageType": "chain",
             "hits": 3,
             "damageFactor": 1,
@@ -5536,7 +5679,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Grapnel Launcher — Physical",
+            "label": "Grapnel Launcher — physical",
             "damageType": "physical",
             "hits": 1,
             "damageFactor": 1,
@@ -5597,7 +5740,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Hellfyre Missile Rack — HeavyRound",
+            "label": "Hellfyre Missile Rack — heavyRound",
             "damageType": "heavyRound",
             "hits": 1,
             "damageFactor": 1,
@@ -5670,8 +5813,130 @@
         "profiles": [],
         "teamBuff": {
           "kind": "trajannLegendaryCommander",
-          "flatDamageByLevel": [2, 6, 9, 13, 16, 20, 23, 27, 31, 34, 38, 42, 45, 49, 53, 56, 60, 70, 80, 89, 99, 109, 119, 128, 138, 148, 166, 185, 203, 222, 240, 259, 277, 296, 314, 366, 418, 470, 523, 575, 627, 679, 731, 783, 835, 887, 940, 992, 1044, 1096, 1130, 1164, 1198, 1232, 1266, 1300, 1334, 1368, 1402, 1436],
-          "extraHitsByLevel": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+          "flatDamageByLevel": [
+            2,
+            6,
+            9,
+            13,
+            16,
+            20,
+            23,
+            27,
+            31,
+            34,
+            38,
+            42,
+            45,
+            49,
+            53,
+            56,
+            60,
+            70,
+            80,
+            89,
+            99,
+            109,
+            119,
+            128,
+            138,
+            148,
+            166,
+            185,
+            203,
+            222,
+            240,
+            259,
+            277,
+            296,
+            314,
+            366,
+            418,
+            470,
+            523,
+            575,
+            627,
+            679,
+            731,
+            783,
+            835,
+            887,
+            940,
+            992,
+            1044,
+            1096,
+            1130,
+            1164,
+            1198,
+            1232,
+            1266,
+            1300,
+            1334,
+            1368,
+            1402,
+            1436
+          ],
+          "extraHitsByLevel": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
         }
       }
     ],
@@ -5718,7 +5983,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Heavy Rail Rifle — Piercing",
+            "label": "Heavy Rail Rifle — piercing",
             "damageType": "piercing",
             "hits": 2,
             "damageFactor": 1,
@@ -5773,7 +6038,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Plague Wind — Psychic",
+            "label": "Plague Wind — psychic",
             "damageType": "psychic",
             "hits": 1,
             "damageFactor": 1,
@@ -5782,7 +6047,7 @@
             "abilityId": "typhus_plague_wind"
           },
           {
-            "label": "Plague Wind — Psychic (component 2)",
+            "label": "Plague Wind — psychic #2",
             "damageType": "psychic",
             "hits": 1,
             "damageFactor": 1,
@@ -5791,7 +6056,7 @@
             "abilityId": "typhus_plague_wind"
           },
           {
-            "label": "Plague Wind — Psychic (component 3)",
+            "label": "Plague Wind — psychic #3",
             "damageType": "psychic",
             "hits": 1,
             "damageFactor": 1,
@@ -5808,7 +6073,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Destroyer Hive — DirectDamage",
+            "label": "Destroyer Hive — direct",
             "damageType": "direct",
             "hits": 1,
             "damageFactor": 1,
@@ -5858,7 +6123,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Crushing Claws — Piercing",
+            "label": "Crushing Claws — piercing",
             "damageType": "piercing",
             "hits": 2,
             "damageFactor": 1,
@@ -5867,7 +6132,7 @@
             "abilityId": "tyrantGuard_crushing_claws"
           },
           {
-            "label": "Crushing Claws — Physical (component 2)",
+            "label": "Crushing Claws — physical #2",
             "damageType": "physical",
             "hits": 1,
             "damageFactor": 1,
@@ -5928,7 +6193,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Vigilance Eternal — Power",
+            "label": "Vigilance Eternal — power",
             "damageType": "power",
             "hits": 3,
             "damageFactor": 1,
@@ -5946,7 +6211,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Unwavering Sentinel — Bolter",
+            "label": "Unwavering Sentinel — bolter",
             "damageType": "bolter",
             "hits": 2,
             "damageFactor": 1,
@@ -5994,7 +6259,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Great Frost Axe — Piercing",
+            "label": "Great Frost Axe — piercing",
             "damageType": "piercing",
             "hits": 4,
             "damageFactor": 1,
@@ -6011,7 +6276,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Savage Killer — Power",
+            "label": "Savage Killer — power",
             "damageType": "power",
             "hits": 5,
             "damageFactor": 1,
@@ -6066,7 +6331,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Ancestral Fortune — Plasma",
+            "label": "Ancestral Fortune — plasma",
             "damageType": "plasma",
             "hits": 3,
             "damageFactor": 1,
@@ -6127,7 +6392,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Armorium Cherub — Flame",
+            "label": "Armorium Cherub — flame",
             "damageType": "flame",
             "hits": 4,
             "damageFactor": 1,
@@ -6144,7 +6409,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Fire of Absolution — Flame",
+            "label": "Fire of Absolution — flame",
             "damageType": "flame",
             "hits": 3,
             "damageFactor": 1,
@@ -6216,7 +6481,68 @@
         "profiles": [],
         "teamBuff": {
           "kind": "vitruviusMasterAnnihilator",
-          "capByLevel": [14, 39, 63, 88, 113, 138, 162, 187, 212, 237, 261, 286, 311, 336, 360, 385, 410, 477, 544, 610, 677, 744, 811, 877, 944, 1011, 1136, 1262, 1387, 1512, 1638, 1763, 1888, 2014, 2139, 2495, 2851, 3207, 3562, 3918, 4274, 4630, 4986, 5342, 5698, 6054, 6409, 6765, 7121, 7477, 7708, 7939, 8170, 8401, 8633, 8864, 9095, 9326, 9557, 9788]
+          "capByLevel": [
+            14,
+            39,
+            63,
+            88,
+            113,
+            138,
+            162,
+            187,
+            212,
+            237,
+            261,
+            286,
+            311,
+            336,
+            360,
+            385,
+            410,
+            477,
+            544,
+            610,
+            677,
+            744,
+            811,
+            877,
+            944,
+            1011,
+            1136,
+            1262,
+            1387,
+            1512,
+            1638,
+            1763,
+            1888,
+            2014,
+            2139,
+            2495,
+            2851,
+            3207,
+            3562,
+            3918,
+            4274,
+            4630,
+            4986,
+            5342,
+            5698,
+            6054,
+            6409,
+            6765,
+            7121,
+            7477,
+            7708,
+            7939,
+            8170,
+            8401,
+            8633,
+            8864,
+            9095,
+            9326,
+            9557,
+            9788
+          ]
         }
       }
     ],
@@ -6264,7 +6590,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Frenzied Firing — HeavyRound",
+            "label": "Frenzied Firing — heavyRound",
             "damageType": "heavyRound",
             "hits": 1,
             "damageFactor": 1,
@@ -6281,7 +6607,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Fleshmetal Guns — Melta",
+            "label": "Fleshmetal Guns — melta",
             "damageType": "melta",
             "hits": 2,
             "damageFactor": 1,
@@ -6290,7 +6616,7 @@
             "abilityId": "volk_fleshmetal_guns"
           },
           {
-            "label": "Fleshmetal Guns — Flame (component 2)",
+            "label": "Fleshmetal Guns — flame #2",
             "damageType": "flame",
             "hits": 2,
             "damageFactor": 1,
@@ -6299,7 +6625,7 @@
             "abilityId": "volk_fleshmetal_guns"
           },
           {
-            "label": "Fleshmetal Guns — HeavyRound (component 3)",
+            "label": "Fleshmetal Guns — heavyRound #3",
             "damageType": "heavyRound",
             "hits": 2,
             "damageFactor": 1,
@@ -6350,7 +6676,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Graviton Rifle — Physical",
+            "label": "Graviton Rifle — physical",
             "damageType": "physical",
             "hits": 3,
             "damageFactor": 1,
@@ -6448,7 +6774,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Bloody Fury — Chain",
+            "label": "Bloody Fury — chain",
             "damageType": "chain",
             "hits": 1,
             "damageFactor": 1,
@@ -6611,7 +6937,7 @@
         "curveId": "abilityFactor",
         "profiles": [
           {
-            "label": "Sorcerous Facade — Psychic",
+            "label": "Sorcerous Facade — psychic",
             "damageType": "psychic",
             "hits": 1,
             "damageFactor": 1,

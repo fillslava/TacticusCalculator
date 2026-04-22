@@ -211,6 +211,32 @@ export type AbilityTeamBuff =
        * against in-game preview fixtures is a follow-up.
        */
       capByLevel: number[];
+    }
+  | {
+      kind: 'aesothStandVigil';
+      /**
+       * Per-level extra Armour (X) applied to friendly units within range.
+       * The calculator models outgoing damage, not incoming, so this field
+       * is surfaced in TeamBuffApplication labels for UI transparency but
+       * does NOT produce a TurnBuff modifier (armor only affects the
+       * recipient's own defensive calc, which this tool doesn't simulate).
+       * Indexed by (level - 1); clamps past end.
+       */
+      extraArmorByLevel: number[];
+      /**
+       * Per-level extra damage % (Y) on attacks that are NOT normal attacks
+       * (i.e. abilities, including triggered-passive ability profiles). The
+       * base aura reaches 1 hex; when any friendly Adeptus Custodes has fired
+       * an active ability earlier this turn, the aura extends to
+       * `extendedRangeHexes` for the rest of the turn (wiki: "for 1 round").
+       * Indexed by (level - 1); clamps past end.
+       */
+      extraDmgPctByLevel: number[];
+      /**
+       * Hex range of the extended aura (2 per current wiki) — used only
+       * after a friendly Custodes active arms the extended range.
+       */
+      extendedRangeHexes: number;
     };
 
 export interface CatalogAbility {

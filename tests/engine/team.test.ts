@@ -2131,6 +2131,618 @@ describe('vitruviusMasterAnnihilator — marking + capped bonus hit', () => {
 });
 
 // ---------------------------------------------------------------------------
+// Aesoth Stand Vigil — positional +Y% damage on non-normal attacks with
+// Custodes-extended 2-hex range
+// ---------------------------------------------------------------------------
+
+/**
+ * Aesoth-shaped fixture for Stand Vigil tests. Passive holds the teamBuff;
+ * no profiles. Optional self-active so Aesoth herself can fire a Custodes
+ * active in tests that exercise the extended-range flag via her own ability.
+ * Scalar defaults keep star/level-agnostic tests terse; level-scaling tests
+ * pass their own per-level arrays.
+ */
+function aesothLike(
+  extraDmgPctByLevel: number | number[] = 20,
+  extraArmorByLevel: number | number[] = 4,
+  extendedRangeHexes = 2,
+  withActive = true,
+): CatalogCharacter {
+  const pct = Array.isArray(extraDmgPctByLevel)
+    ? extraDmgPctByLevel
+    : [extraDmgPctByLevel];
+  const armor = Array.isArray(extraArmorByLevel)
+    ? extraArmorByLevel
+    : [extraArmorByLevel];
+  const passive: CatalogAbility = {
+    id: 'aesoth_stand_vigil',
+    name: 'Stand Vigil',
+    kind: 'passive',
+    profiles: [],
+    teamBuff: {
+      kind: 'aesothStandVigil',
+      extraArmorByLevel: armor,
+      extraDmgPctByLevel: pct,
+      extendedRangeHexes,
+    },
+  };
+  const abilities: CatalogAbility[] = [passive];
+  if (withActive) {
+    abilities.push({
+      id: 'aesoth_vexilla_magnifica',
+      name: 'Vexilla Magnifica',
+      kind: 'active',
+      profiles: [
+        { label: 'Vexilla', damageType: 'power', hits: 1, kind: 'ability' },
+      ],
+      cooldown: 2,
+    });
+  }
+  return plainChar({
+    id: 'aesoth',
+    displayName: 'Aesoth',
+    faction: 'Adeptus Custodes',
+    alliance: 'Imperial',
+    abilities,
+  });
+}
+
+/** Plain ally carrying a single cheap active so it can fire an ability in
+ *  Stand Vigil tests without pulling in unrelated team-buff plumbing. */
+function activeAlly(id = 'ally', activeId = 'a_active'): CatalogCharacter {
+  return plainChar({
+    id,
+    abilities: [
+      {
+        id: activeId,
+        name: 'Active',
+        kind: 'active',
+        profiles: [
+          { label: 'A', damageType: 'power', hits: 1, kind: 'ability' },
+        ],
+        cooldown: 2,
+      },
+    ],
+  });
+}
+
+/** A Custodes-faction ally with an active — used to arm the extended-range
+ *  flag without being Aesoth herself. */
+function custodesActiveAlly(id = 'cust'): CatalogCharacter {
+  return plainChar({
+    id,
+    faction: 'Adeptus Custodes',
+    alliance: 'Imperial',
+    abilities: [
+      {
+        id: 'cust_active',
+        name: 'Custodes Active',
+        kind: 'active',
+        profiles: [
+          { label: 'CA', damageType: 'power', hits: 1, kind: 'ability' },
+        ],
+        cooldown: 2,
+      },
+    ],
+  });
+}
+
+/** A non-Custodes ally with an active — used to prove non-Custodes actives
+ *  do NOT arm the extended-range flag. */
+function nonCustodesActiveAlly(id = 'noncust'): CatalogCharacter {
+  return plainChar({
+    id,
+    faction: 'Space Marines',
+    alliance: 'Imperial',
+    abilities: [
+      {
+        id: 'nc_active',
+        name: 'Non-Custodes Active',
+        kind: 'active',
+        profiles: [
+          { label: 'NC', damageType: 'power', hits: 1, kind: 'ability' },
+        ],
+        cooldown: 2,
+      },
+    ],
+  });
+}
+
+describe('aesothStandVigil — positional +Y% damage on non-normal attacks', () => {
+  it('teammate at 1 hex firing an ability gets the Stand Vigil buff', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 1);
+    const rot: TeamRotation = {
+      members: [mAesoth, mAlly],
+      turns: [
+        {
+          actions: [
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+            // Aesoth melees to satisfy the `membersInRotation` presence gate.
+            // Her normal attack doesn't arm the Custodes flag or fire Stand
+            // Vigil derivation (handler gates on `kind === 'ability'`).
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(apps).toHaveLength(1);
+    expect(apps[0].sourceMemberId).toBe('aes');
+    expect(apps[0].appliedToMemberId).toBe('a');
+    expect(apps[0].effect).toContain('+20%');
+    expect(apps[0].effect).toContain('1-hex');
+    // Base range (no Custodes active fired) → no extended note.
+    expect(apps[0].effect).not.toContain('Custodes extended');
+  });
+
+  it('teammate at 2 hexes WITHOUT a Custodes active receives no buff', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 2);
+    const rot: TeamRotation = {
+      members: [mAesoth, mAlly],
+      turns: [
+        {
+          actions: [
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(apps).toEqual([]);
+  });
+
+  it('teammate at 2 hexes WITH a Custodes active earlier this turn gets extended-range buff', () => {
+    const mAesoth = member('aes', aesothLike(22, 10, 2, false), 0);
+    const mCust = member('c', custodesActiveAlly('cust_src'), 1);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 2);
+    const rot: TeamRotation = {
+      members: [mAesoth, mCust, mAlly],
+      turns: [
+        {
+          actions: [
+            // Custodes fires FIRST → arms extended-range flag.
+            { memberId: 'c', attack: abilityAttack('cust_active', 2) },
+            // Ally now at 2 hex but within extended 2-hex range.
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const allyApps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil' && a.appliedToMemberId === 'a',
+    );
+    expect(allyApps).toHaveLength(1);
+    expect(allyApps[0].effect).toContain('+22%');
+    expect(allyApps[0].effect).toContain('2-hex');
+    expect(allyApps[0].effect).toContain('Custodes extended');
+  });
+
+  it('non-normal gate: ally melee attack does NOT receive the buff', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    const mAlly = member('a', plainChar({ id: 'ally' }), 1);
+    const rot: TeamRotation = {
+      members: [mAesoth, mAlly],
+      turns: [
+        {
+          actions: [
+            { memberId: 'a', attack: meleeAttack() },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(apps).toEqual([]);
+  });
+
+  it('non-normal gate: ally ranged attack does NOT receive the buff', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    const mAlly = member('a', plainChar({ id: 'ally' }), 1);
+    const rangedAttack: AttackContext = {
+      profile: {
+        label: 'Ranged',
+        damageType: 'bolter',
+        hits: 2,
+        kind: 'ranged',
+      },
+      rngMode: 'expected',
+    };
+    const rot: TeamRotation = {
+      members: [mAesoth, mAlly],
+      turns: [
+        {
+          actions: [
+            { memberId: 'a', attack: rangedAttack },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(apps).toEqual([]);
+  });
+
+  it('Aesoth herself firing an ability does NOT receive her own buff (self-excluded)', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, true), 0);
+    const rot: TeamRotation = {
+      members: [mAesoth],
+      turns: [
+        {
+          actions: [
+            {
+              memberId: 'aes',
+              attack: abilityAttack('aesoth_vexilla_magnifica', 2),
+            },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(apps).toEqual([]);
+  });
+
+  it('MoW recipient at 1 hex IS eligible (wiki: "units", not "Characters")', () => {
+    // Aesoth in slot 4, MoW in slot 5 → |Δposition|=1.
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 4);
+    const mowSrc = plainChar({
+      id: 'mow',
+      traits: ['Machine of War'],
+      abilities: [
+        {
+          id: 'mow_active',
+          name: 'MoW Active',
+          kind: 'active',
+          profiles: [
+            { label: 'M', damageType: 'blast', hits: 1, kind: 'ability' },
+          ],
+          cooldown: 2,
+        },
+      ],
+    });
+    const mMow = member('mow', mowSrc, 5);
+    const rot: TeamRotation = {
+      members: [mAesoth, mMow],
+      turns: [
+        {
+          actions: [
+            { memberId: 'mow', attack: abilityAttack('mow_active', 2) },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(apps).toHaveLength(1);
+    expect(apps[0].appliedToMemberId).toBe('mow');
+  });
+
+  it('non-Custodes active does NOT extend the range (stays 1 hex)', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    const mNc = member('nc', nonCustodesActiveAlly('nc_src'), 1);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 2);
+    const rot: TeamRotation = {
+      members: [mAesoth, mNc, mAlly],
+      turns: [
+        {
+          actions: [
+            // Non-Custodes fires → flag must NOT arm.
+            { memberId: 'nc', attack: abilityAttack('nc_active', 2) },
+            // Ally still at 2 hex from Aesoth; base 1-hex range does not reach.
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const allyApps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil' && a.appliedToMemberId === 'a',
+    );
+    expect(allyApps).toEqual([]);
+  });
+
+  it('order-sensitive: ally acting BEFORE Custodes active uses base range (no extension yet)', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    // Custodes is far away (position 4) so Stand Vigil cannot self-apply to
+    // the Custodes-active action; we only want it as a trigger source.
+    const mCust = member('c', custodesActiveAlly('cust_src'), 4);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 2);
+    const rot: TeamRotation = {
+      members: [mAesoth, mCust, mAlly],
+      turns: [
+        {
+          actions: [
+            // Ally acts FIRST at 2 hex — flag not yet armed.
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+            // Custodes active fires after — arms too late for ally.
+            { memberId: 'c', attack: abilityAttack('cust_active', 2) },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const allyApps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil' && a.appliedToMemberId === 'a',
+    );
+    expect(allyApps).toEqual([]);
+  });
+
+  it('level scaling: higher passive level yields a higher % damage multiplier', () => {
+    const pctByLevel = [20, 22, 25];
+    const bigHitter = plainChar({
+      id: 'ally',
+      baseStats: {
+        damage: 1000,
+        armor: 0,
+        hp: 1000,
+        critChance: 0,
+        critDamage: 0,
+        blockChance: 0,
+        blockDamage: 0,
+        meleeHits: 1,
+        rangedHits: 1,
+      },
+      abilities: [
+        {
+          id: 'a_active',
+          name: 'Active',
+          kind: 'active',
+          profiles: [
+            { label: 'A', damageType: 'power', hits: 1, kind: 'ability' },
+          ],
+          cooldown: 2,
+        },
+      ],
+    });
+
+    const run = (passiveLevel: number) => {
+      const mAesoth = member(
+        'aes',
+        aesothLike(pctByLevel, 4, 2, false),
+        0,
+        'legendary',
+        0,
+        [{ id: 'aesoth_stand_vigil', level: passiveLevel }],
+      );
+      const mAlly = member('a', bigHitter, 1);
+      const rot: TeamRotation = {
+        members: [mAesoth, mAlly],
+        turns: [
+          {
+            actions: [
+              { memberId: 'a', attack: abilityAttack('a_active', 2) },
+              { memberId: 'aes', attack: meleeAttack() },
+            ],
+          },
+        ],
+      };
+      return resolveTeamRotation(rot, makeTarget());
+    };
+
+    const rLow = run(1); // pct=20
+    const rHigh = run(3); // pct=25
+
+    const allyLow = rLow.perMember['a'].perAction[0].result.expected;
+    const allyHigh = rHigh.perMember['a'].perAction[0].result.expected;
+    expect(allyHigh).toBeGreaterThan(allyLow);
+    // The damage multiplier ratio should match the %-bump ratio (1.25 / 1.20).
+    expect(allyHigh / allyLow).toBeCloseTo(1.25 / 1.2, 3);
+
+    // Effect-string level suffix reflects the passive level.
+    const appLow = rLow.teamBuffApplications.find(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    const appHigh = rHigh.teamBuffApplications.find(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(appLow?.effect).toContain('+20%');
+    expect(appLow?.effect).toContain('L1');
+    expect(appHigh?.effect).toContain('+25%');
+    expect(appHigh?.effect).toContain('L3');
+  });
+
+  it('Aesoth not scheduled anywhere in the rotation → no buff (membership gate)', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 1);
+    const rot: TeamRotation = {
+      // Aesoth carries the teamBuff but is NOT in any scheduled action.
+      members: [mAesoth, mAlly],
+      turns: [
+        {
+          actions: [
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil',
+    );
+    expect(apps).toEqual([]);
+  });
+
+  it('Aesoth firing her OWN Custodes active arms the flag for later allies this turn', () => {
+    // Aesoth's own active counts as a Custodes active → extends the aura for
+    // subsequent allies. She herself is still self-excluded from the buff.
+    const mAesoth = member('aes', aesothLike(20, 4, 2, true), 0);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 2);
+    const rot: TeamRotation = {
+      members: [mAesoth, mAlly],
+      turns: [
+        {
+          actions: [
+            {
+              memberId: 'aes',
+              attack: abilityAttack('aesoth_vexilla_magnifica', 2),
+            },
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const allyApps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil' && a.appliedToMemberId === 'a',
+    );
+    expect(allyApps).toHaveLength(1);
+    expect(allyApps[0].effect).toContain('2-hex');
+    expect(allyApps[0].effect).toContain('Custodes extended');
+    // Aesoth herself never appears as a recipient.
+    const selfApps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'aesothStandVigil' && a.appliedToMemberId === 'aes',
+    );
+    expect(selfApps).toEqual([]);
+  });
+
+  it('extended range does NOT carry across turns (turn-local "for 1 round")', () => {
+    const mAesoth = member('aes', aesothLike(20, 4, 2, false), 0);
+    const mCust = member('c', custodesActiveAlly('cust_src'), 4);
+    const mAlly = member('a', activeAlly('ally', 'a_active'), 2);
+    const rot: TeamRotation = {
+      members: [mAesoth, mCust, mAlly],
+      turns: [
+        // Turn 0: Custodes arms the flag; Aesoth melees to seat presence.
+        {
+          actions: [
+            { memberId: 'c', attack: abilityAttack('cust_active', 2) },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+        // Turn 1: ally at 2 hex fires without a new Custodes active. Flag
+        // reset → base range only → no buff.
+        {
+          actions: [
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const turn1Apps = r.teamBuffApplications.filter(
+      (a) =>
+        a.kind === 'aesothStandVigil' &&
+        a.appliedToMemberId === 'a' &&
+        a.turnIdx === 1,
+    );
+    expect(turn1Apps).toEqual([]);
+  });
+
+  it('damage multiplier is actually applied (expected damage grows by +Y%)', () => {
+    // With pct=50 and an all-zero defense target, the ally's ability damage
+    // under Stand Vigil must be 1.5× the damage without Stand Vigil.
+    const pct = 50;
+    const buildAlly = () =>
+      plainChar({
+        id: 'ally',
+        baseStats: {
+          damage: 1000,
+          armor: 0,
+          hp: 1000,
+          critChance: 0,
+          critDamage: 0,
+          blockChance: 0,
+          blockDamage: 0,
+          meleeHits: 1,
+          rangedHits: 1,
+        },
+        abilities: [
+          {
+            id: 'a_active',
+            name: 'Active',
+            kind: 'active',
+            profiles: [
+              {
+                label: 'A',
+                damageType: 'power',
+                hits: 1,
+                kind: 'ability',
+              },
+            ],
+            cooldown: 2,
+          },
+        ],
+      });
+
+    // With Aesoth present (adjacent).
+    const mAesoth = member('aes', aesothLike(pct, 4, 2, false), 0);
+    const mAllyBuffed = member('a', buildAlly(), 1);
+    const rotBuffed: TeamRotation = {
+      members: [mAesoth, mAllyBuffed],
+      turns: [
+        {
+          actions: [
+            { memberId: 'a', attack: abilityAttack('a_active', 2) },
+            { memberId: 'aes', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const rBuffed = resolveTeamRotation(rotBuffed, makeTarget());
+    const buffedDmg = rBuffed.perMember['a'].perAction[0].result.expected;
+
+    // Without Aesoth (solo).
+    const mAllySolo = member('a', buildAlly(), 1);
+    const rotSolo: TeamRotation = {
+      members: [mAllySolo],
+      turns: [
+        { actions: [{ memberId: 'a', attack: abilityAttack('a_active', 2) }] },
+      ],
+    };
+    const rSolo = resolveTeamRotation(rotSolo, makeTarget());
+    const soloDmg = rSolo.perMember['a'].perAction[0].result.expected;
+
+    expect(buffedDmg / soloDmg).toBeCloseTo(1 + pct / 100, 3);
+  });
+
+  it('catalog Aesoth Stand Vigil hits the wiki anchor values', () => {
+    // Wiki anchors (https://tacticus.wiki.gg/wiki/Aesoth):
+    //   extraArmourByLevel: L1=4, L50=222, L65=291
+    //   extraDmgPctByLevel: L1=20, L36=25
+    //   extendedRangeHexes: 2
+    // If this fails, the catalog drifted from the wiki spec.
+    const aes = getCharacter('aesoth');
+    expect(aes).toBeDefined();
+    const passive = aes!.abilities.find(
+      (a) => a.teamBuff?.kind === 'aesothStandVigil',
+    );
+    expect(passive).toBeDefined();
+    const buff = passive!.teamBuff;
+    if (buff?.kind !== 'aesothStandVigil') throw new Error('wrong kind');
+    expect(buff.extraArmorByLevel[0]).toBe(4);
+    expect(buff.extraArmorByLevel[49]).toBe(222);
+    expect(buff.extraArmorByLevel[64]).toBe(291);
+    expect(buff.extraDmgPctByLevel[0]).toBe(20);
+    expect(buff.extraDmgPctByLevel[35]).toBe(25);
+    expect(buff.extendedRangeHexes).toBe(2);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Team-level state bookkeeping
 // ---------------------------------------------------------------------------
 

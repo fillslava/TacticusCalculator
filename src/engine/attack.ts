@@ -99,10 +99,26 @@ function buildInitialFrame(attacker: Attacker, target: Target, ctx: AttackContex
     // Kharn's "Kill! Maim! Burn!" Piercing) use the raw level-1-rank-0 base
     // damage stat, combined only with damageFactor and the ability-level ×
     // rarity multiplier. `resolveAttackerStats` has already multiplied by
-    // statFactor for normal attacks, so we revert that here for abilities
-    // only. Crit chance, crit damage, and traits stay scaled — they
-    // participate in the ability damage formula unchanged.
-    a = { ...a, damage: attacker.source.baseStats.damage };
+    // statFactor and folded equipment into `a.damage` for the normal-attack
+    // path, so we revert to the raw base here. Crit chance, crit damage, and
+    // traits stay scaled — they participate in the ability damage formula
+    // unchanged.
+    //
+    // activeBuffs.damageFlat / damageMultipliers are re-applied AFTER the
+    // reset because team auras (e.g. Aesoth Stand Vigil's "+Y% damage on
+    // non-normal attacks", Trajann's "+X damage from any attack") must
+    // affect ability damage per wiki mechanics. The ability-specific rule
+    // is that stars/rank and equipment don't apply — runtime team buffs
+    // still do.
+    let abilityDamage = attacker.source.baseStats.damage;
+    const buffs = attacker.activeBuffs;
+    if (buffs) {
+      abilityDamage += buffs.damageFlat ?? 0;
+      for (const m of buffs.damageMultipliers ?? []) {
+        abilityDamage *= m;
+      }
+    }
+    a = { ...a, damage: abilityDamage };
   }
 
   const sf = statFactor(attacker.progression.stars, attacker.progression.rank);

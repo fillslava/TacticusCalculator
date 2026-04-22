@@ -103,6 +103,18 @@ export const AbilityTeamBuffSchema = z.union([
     kind: z.literal('vitruviusMasterAnnihilator'),
     capByLevel: z.array(z.number()).min(1),
   }),
+  z.object({
+    kind: z.literal('aesothStandVigil'),
+    /** Per-level extra armour (X). Wiki anchors: L1=4, L50=222, L65=291.
+     *  Not applied as a damage-calc modifier (armor is defensive); surfaced
+     *  in TeamBuffApplication for UI transparency only. */
+    extraArmorByLevel: z.array(z.number()).min(1),
+    /** Per-level non-normal damage bonus % (Y). Wiki anchors: L1..L8=20,
+     *  L9..L17=21, L18..L26=22, L27..L35=23, L36+=25. */
+    extraDmgPctByLevel: z.array(z.number()).min(1),
+    /** Extended aura hex range when a friendly Custodes fires an active. */
+    extendedRangeHexes: z.number().int().min(1),
+  }),
 ]);
 
 /**

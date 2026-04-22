@@ -401,6 +401,10 @@ const HAND_AUTHORED_ABILITY_IDS = new Set([
   'gulgortz',
   'trajann',
   'biovore',
+  // Vitruvius's Master Annihilator `capByLevel` is hand-curated against the
+  // wiki's published anchors (L50=7477) and diverges from gameinfo's raw
+  // `maxDmg` curve (L50=4154). Preserve the hand-authored block.
+  'vitruvius',
 ]);
 
 /**
@@ -493,6 +497,27 @@ const TEAM_BUFF_BUILDERS: Record<string, (a: GameInfoAbility) => AbilityTeamBuff
       extraHitsByLevel: hits,
     };
   },
+  StandVigil: (a) => {
+    // gameinfo `variables`: extraArmor[] (X, per level) + extraDmgPct[] (Y%,
+    // per level). `constants.range` = extended hex range when a friendly
+    // Custodes fires an active (2 per current wiki). Fall back to a single-
+    // entry placeholder when variables are missing — engine clamps past-end.
+    const armor = numArrayRounded(a, 'extraArmor') ?? [0];
+    const dmgPct = numArrayRounded(a, 'extraDmgPct') ?? [0];
+    const rangeRaw = a.constants?.range;
+    const range = rangeRaw !== undefined ? Number(rangeRaw) : 2;
+    return {
+      kind: 'aesothStandVigil',
+      extraArmorByLevel: armor,
+      extraDmgPctByLevel: dmgPct,
+      extendedRangeHexes: Number.isFinite(range) && range >= 1 ? range : 2,
+    };
+  },
+  // Vitruvius's MasterAnnihilator `capByLevel` intentionally has NO builder
+  // here — the gameinfo `maxDmg` curve (4154 @ L50) diverges sharply from
+  // the wiki's published anchors (7477 @ L50). The hand-authored values are
+  // the source of truth; Vitruvius is listed under `HAND_AUTHORED_ABILITY_IDS`
+  // so the importer preserves his ability block instead of overriding it.
 };
 
 /**

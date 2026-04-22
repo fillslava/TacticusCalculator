@@ -75,10 +75,24 @@
  *    contribute one +1 hit; the tightest cap is kept (see
  *    `rotation.ts::applyBonusHits`).
  *
+ *  - `aesothStandVigil`: a positional aura that grants +Y% damage on
+ *    non-normal attacks (abilities, including triggered-passive ability
+ *    profiles) to friendly units within 1 hex of an Aesoth-teamBuff
+ *    carrier. When any friendly Adeptus Custodes resolves an `active`
+ *    ability this turn, the aura extends to `extendedRangeHexes` hexes
+ *    for the rest of the turn (wiki: "for 1 round"). Aesoth herself is
+ *    excluded — "friendly surrounding units" means other friendlies, not
+ *    the source. MoW recipients ARE eligible (wiki says "units", not
+ *    "Characters"). The passive also grants +X Armour to affected allies,
+ *    but armor is a defensive stat and the calculator models outgoing
+ *    damage only — the armor component is surfaced in the applications
+ *    sink for UI transparency and nothing more.
+ *
  * Intentionally NOT modelled yet: aura persistence across turns for
  * Laviscus/Trajann (Vitruvius now persists; others still recompute per-turn),
- * multi-target spore mines, non-adjacency aura shapes, conditional-on-
- * stance/traits buffs. Those land when hand-authoring surfaces the need.
+ * multi-target spore mines, non-adjacency aura shapes (other than
+ * Stand Vigil's 1-hex/2-hex positional aura), conditional-on-stance/traits
+ * buffs. Those land when hand-authoring surfaces the need.
  */
 import { resolveAttack } from './attack';
 import { progressionPositionFromStarLevel } from './progression';
@@ -268,6 +282,14 @@ interface TurnState {
    * sporeMineDamagedTarget is true.
    */
   biovoreAcidPct: Record<string, number>;
+  /**
+   * True once any friendly Adeptus Custodes has resolved an `active`
+   * ability this turn. Arms the extended (2-hex) range of Aesoth's
+   * Stand Vigil aura for the rest of the turn (wiki: "for 1 round").
+   * Resets each turn loop. Order-sensitive within a turn — allies that
+   * acted BEFORE the Custodes active still see only the 1-hex base aura.
+   */
+  custodesActiveFiredThisTurn: boolean;
 }
 
 /**
@@ -303,6 +325,7 @@ function initTurnState(): TurnState {
     memberNonNormalAttackHappened: {},
     sporeMineDamagedTarget: false,
     biovoreAcidPct: {},
+    custodesActiveFiredThisTurn: false,
   };
 }
 
@@ -557,6 +580,46 @@ function deriveTeamBuffs(
     }
   }
 
+  // ------ 7) Aesoth Stand Vigil: +Y% damage on non-normal attacks from
+  //        friendly units within 1 hex of Aesoth (or within
+  //        `extendedRangeHexes` when a friendly Custodes has resolved an
+  //        active earlier this turn). Self-excluded — "friendly surrounding
+  //        units" means other friendlies, not Aesoth herself. MoW recipients
+  //        are eligible (wiki says "friendly units", not "friendly
+  //        Characters"). Armor component of the aura (+X Armour) is
+  //        surfaced in the applications sink as metadata only: the
+  //        calculator models outgoing damage, so a recipient's armor bonus
+  //        has no effect on the numbers we compute here.
+  if (currentProfile.kind === 'ability') {
+    for (const other of team) {
+      if (other.id === member.id) continue;
+      const sv = teamBuffOf(other, 'aesothStandVigil');
+      if (!sv) continue;
+      if (!battle.membersInRotation.has(other.id)) continue;
+      const range = turn.custodesActiveFiredThisTurn ? sv.extendedRangeHexes : 1;
+      const dist = Math.abs(member.position - other.position);
+      if (dist > range) continue;
+      const level = resolveTeamBuffLevel(other, 'aesothStandVigil');
+      const pct = atLevel(sv.extraDmgPctByLevel, level);
+      const armor = atLevel(sv.extraArmorByLevel, level);
+      if (pct > 0) {
+        buffs.push({
+          id: `stand-vigil:${other.id}`,
+          name: 'Stand Vigil',
+          damageMultiplier: 1 + pct / 100,
+        });
+      }
+      const extendedNote = turn.custodesActiveFiredThisTurn ? ', Custodes extended' : '';
+      appsSink.push({
+        turnIdx,
+        sourceMemberId: other.id,
+        kind: 'aesothStandVigil',
+        appliedToMemberId: member.id,
+        effect: `+${pct}% dmg on non-normal (+${armor} armour, L${level}, ${dist}-hex${extendedNote})`,
+      });
+    }
+  }
+
   return buffs;
 }
 
@@ -629,6 +692,23 @@ function updateTurnStateAfterAction(
     !isMachineOfWar(actor.attacker.source)
   ) {
     turn.friendlyActiveFiredThisTurn = true;
+  }
+
+  // Aesoth Stand Vigil extended-range trigger: a friendly ADEPTUS CUSTODES
+  // firing an active ability extends the Stand Vigil aura from 1 hex to
+  // `extendedRangeHexes` (2 per wiki) for the rest of the turn. Wiki:
+  // "If a friendly Adeptus Custodes uses an Active Ability, Stand Vigil
+  // affects all other friendly units within 2 hexes for 1 round." Other
+  // factions' actives do NOT arm this extension. No MoW gate needed — no
+  // Adeptus-Custodes-faction MoWs exist, and a Custodes MoW active would
+  // presumably arm the trigger anyway (wiki says nothing narrower than
+  // "Adeptus Custodes"), so the check is just the faction match.
+  if (
+    attack.profile.kind === 'ability' &&
+    isAbilityActive(actor.attacker, attack.profile.abilityId) &&
+    actor.attacker.source.faction === 'Adeptus Custodes'
+  ) {
+    turn.custodesActiveFiredThisTurn = true;
   }
 
   // Trajann extra-hits gate: record this member as having performed a
