@@ -162,6 +162,22 @@ const en: Dict = {
   'team.result.unreachable': '∞',
   'team.result.triggeredFires': 'triggered passives',
   'team.result.turn': 'Turn',
+
+  'team.training.toggle': 'Train this member',
+  'team.training.active': 'Training active',
+  'team.training.reset': 'Reset to baseline',
+  'team.training.progression': 'Rarity / Stars',
+  'team.training.rank': 'Rank',
+  'team.training.xpLevel': 'XP Level',
+  'team.training.abilityLevels': 'Ability levels',
+  'team.training.baselineTag': 'baseline',
+  'team.training.trainedTag': 'trained',
+  'team.training.deltaColumn': '+damage (training)',
+  'team.training.teamDelta': 'Team uplift from training',
+  'team.training.teamDeltaNone':
+    'Enable training on at least one slot to see uplift here.',
+  'team.training.description':
+    'Simulate training — stars, rank, XP, ability levels. Baseline stays sourced from your API data.',
 };
 
 const ru: Dict = {

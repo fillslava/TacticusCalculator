@@ -116,6 +116,38 @@ export interface TeamState {
   turns: TeamTurnState[];
 }
 
+/**
+ * Per-slot "training simulator" overrides for the Team calculator.
+ *
+ * Motivation: the baseline {@link UnitBuildMemo} reflects what the player
+ * actually owns (synced from the API). When the player asks "what if I
+ * train member X up to Mythic 3★ with Legendary Commander at L60?", they
+ * want to see the damage impact without mutating their real build — and
+ * without leaking "sim" progression back into the single-attacker view.
+ *
+ * These overrides stack on top of the baseline: each field is independently
+ * optional. `undefined` means "use the baseline memo value"; a concrete
+ * number/array means "use this instead". This partial-override shape lets
+ * the UI offer per-axis toggles without forcing the player to opt into
+ * every stat.
+ *
+ * Keyed by `slotId` (not `characterId`) so two simultaneous slots pointing
+ * at the same character (rare, but possible if a future mode allows it)
+ * can carry independent sim settings, and so that the composition-oriented
+ * Team view doesn't leak overrides into other workflows.
+ *
+ * Lifecycle rule: when the character in a slot changes (or the slot is
+ * cleared), that slot's override is wiped in `setTeamMember` — old
+ * ability-level entries would refer to abilities the new character doesn't
+ * have, so preserving them across swaps would produce silently-inert data.
+ */
+export interface TeamMemberOverride {
+  progression?: number;
+  rank?: number;
+  xpLevel?: number;
+  abilityLevels?: AbilityLevel[];
+}
+
 export interface Credentials {
   apiKey: string;
   snowprintId: string;
@@ -163,6 +195,17 @@ export interface AppState {
     patch: Partial<TeamActionState>,
   ) => void;
   removeTeamAction: (turnIdx: number, actionIdx: number) => void;
+
+  /** Per-slot progression overrides for the Team training simulator. See
+   *  {@link TeamMemberOverride}. */
+  teamMemberOverrides: Record<string, TeamMemberOverride>;
+  setTeamMemberOverride: (
+    slotId: string,
+    patch: Partial<TeamMemberOverride>,
+  ) => void;
+  /** Remove every override field for the given slot — the slot reverts to
+   *  its pure baseline (API memo / fallback build) on the next render. */
+  clearTeamMemberOverride: (slotId: string) => void;
 
   importError: string | null;
   setImportError: (e: string | null) => void;
@@ -408,14 +451,28 @@ export const useApp = create<AppState>()(
 
       team: initialTeam(),
       setTeamMember: (slotId, characterId) =>
-        set((s) => ({
-          team: {
-            ...s.team,
-            members: s.team.members.map((m) =>
-              m.slotId === slotId ? { ...m, characterId } : m,
-            ),
-          },
-        })),
+        set((s) => {
+          // Clear stale overrides when the slot's character changes — old
+          // ability-level entries would reference abilities the new
+          // character doesn't have, producing silently-inert data. Only
+          // clear when the character actually swapped (same-character
+          // reselect is a no-op so we don't nuke the user's in-flight
+          // edits on a dropdown jiggle).
+          const prev = s.team.members.find((m) => m.slotId === slotId);
+          const nextOverrides = { ...s.teamMemberOverrides };
+          if (prev?.characterId !== characterId) {
+            delete nextOverrides[slotId];
+          }
+          return {
+            team: {
+              ...s.team,
+              members: s.team.members.map((m) =>
+                m.slotId === slotId ? { ...m, characterId } : m,
+              ),
+            },
+            teamMemberOverrides: nextOverrides,
+          };
+        }),
       setTeamRotation: (turns) =>
         set((s) => ({ team: { ...s.team, turns } })),
       addTeamTurn: () =>
@@ -463,6 +520,34 @@ export const useApp = create<AppState>()(
           return { team: { ...s.team, turns } };
         }),
 
+      teamMemberOverrides: {},
+      setTeamMemberOverride: (slotId, patch) =>
+        set((s) => {
+          const prev = s.teamMemberOverrides[slotId] ?? {};
+          const next: TeamMemberOverride = { ...prev, ...patch };
+          // Drop any keys that were explicitly patched to `undefined` —
+          // keeps the object small and makes "is this slot trained?" a
+          // simple Object.keys(override).length check downstream.
+          for (const k of Object.keys(next) as (keyof TeamMemberOverride)[]) {
+            if (next[k] === undefined) delete next[k];
+          }
+          if (Object.keys(next).length === 0) {
+            const remaining = { ...s.teamMemberOverrides };
+            delete remaining[slotId];
+            return { teamMemberOverrides: remaining };
+          }
+          return {
+            teamMemberOverrides: { ...s.teamMemberOverrides, [slotId]: next },
+          };
+        }),
+      clearTeamMemberOverride: (slotId) =>
+        set((s) => {
+          if (!s.teamMemberOverrides[slotId]) return {};
+          const remaining = { ...s.teamMemberOverrides };
+          delete remaining[slotId];
+          return { teamMemberOverrides: remaining };
+        }),
+
       importError: null,
       setImportError: (e) => set({ importError: e }),
 
@@ -471,7 +556,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 13,
+      version: 14,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -484,6 +569,7 @@ export const useApp = create<AppState>()(
         language: s.language,
         page: s.page,
         team: s.team,
+        teamMemberOverrides: s.teamMemberOverrides,
       }),
       migrate: (persisted: any, fromVersion: number) => {
         if (!persisted) return persisted;
@@ -601,6 +687,14 @@ export const useApp = create<AppState>()(
             }
           } else {
             persisted.team = initialTeam();
+          }
+        }
+        if (fromVersion < 14) {
+          // v14 adds per-slot team-member overrides for the training
+          // simulator. Default to an empty map — existing users see no
+          // behaviour change until they touch a slider.
+          if (!persisted.teamMemberOverrides) {
+            persisted.teamMemberOverrides = {};
           }
         }
         return persisted;

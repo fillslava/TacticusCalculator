@@ -27,6 +27,7 @@ import type {
   UnitBuildMemo,
   BuildOverrides,
   TeamMemberState,
+  TeamMemberOverride,
   TeamTurnState,
   TargetState,
 } from '../../state/store';
@@ -93,20 +94,39 @@ function extraStatsSlot(
 }
 
 /**
- * Build an {@link Attacker} for a team slot. Priority:
- *  1. owned-hero memo — stars, rank, xpLevel, equipment from API sync
- *  2. fallback: the single-attacker BuildOverrides (so unowned heroes
- *     inherit whatever the player last configured). Equipment slots stay
- *     empty in this case to avoid copying the wrong-faction gear.
+ * Build an {@link Attacker} for a team slot. Resolution order (each field
+ * independently): `override` → `memo` → `fallback` (single-attacker build).
+ *
+ *  - `memo` is the API-sourced baseline — stars, rank, xpLevel, equipment
+ *    synced from /player.
+ *  - `override` is the Team-mode "training simulator" patch: per-slot
+ *    what-if values the user can dial in to preview damage uplift without
+ *    mutating the real build. Any fields the user didn't touch fall
+ *    through to the memo.
+ *  - `fallback` covers unowned heroes (no memo): progression/rank/xpLevel
+ *    inherit whatever the player last configured in the single-attacker
+ *    editor. Equipment slots stay empty for unowned heroes to avoid
+ *    copying wrong-faction gear.
+ *
+ * Equipment is intentionally NOT overridable — it's a separate economy
+ * axis (need specific-faction gear drops) and the training simulator
+ * focuses on progression/skills, which cost training tokens instead.
  */
 function buildAttacker(
   char: CatalogCharacter,
   memo: UnitBuildMemo | undefined,
+  override: TeamMemberOverride | undefined,
   fallback: BuildOverrides,
 ): Attacker {
-  const progression = memo?.progression ?? fallback.progression;
-  const rank = memo?.rank ?? fallback.rank;
-  const xpLevel = memo?.xpLevel ?? fallback.xpLevel;
+  const baseProgression = memo?.progression ?? fallback.progression;
+  const baseRank = memo?.rank ?? fallback.rank;
+  const baseXpLevel = memo?.xpLevel ?? fallback.xpLevel;
+  const baseAbilityLevels = memo?.abilityLevels;
+
+  const progression = override?.progression ?? baseProgression;
+  const rank = override?.rank ?? baseRank;
+  const xpLevel = override?.xpLevel ?? baseXpLevel;
+  const abilityLevels = override?.abilityLevels ?? baseAbilityLevels;
   const equipmentIds = memo?.equipmentIds ?? [];
 
   const equipment: CatalogEquipmentSlot[] = equipmentIds
@@ -124,7 +144,7 @@ function buildAttacker(
       rarity: progressionToRarity(progression),
     },
     equipment,
-    abilityLevels: memo?.abilityLevels,
+    abilityLevels,
   };
 }
 
@@ -178,6 +198,7 @@ function buildTeamRotation(
   turns: TeamTurnState[],
   unitBuilds: Record<string, UnitBuildMemo>,
   fallback: BuildOverrides,
+  overrides: Record<string, TeamMemberOverride>,
 ): TeamRotation | null {
   const teamMembers: TeamMember[] = [];
   const slotToMemberId: Record<string, string> = {};
@@ -187,7 +208,12 @@ function buildTeamRotation(
     if (!m.characterId) continue;
     const char = getCharacter(m.characterId);
     if (!char) continue;
-    const attacker = buildAttacker(char, unitBuilds[m.characterId], fallback);
+    const attacker = buildAttacker(
+      char,
+      unitBuilds[m.characterId],
+      overrides[m.slotId],
+      fallback,
+    );
     teamMembers.push({
       id: m.slotId,
       attacker,
@@ -222,13 +248,45 @@ function buildTeamRotation(
 export interface TeamDamageResultData {
   rotation: TeamRotation;
   target: Target;
-  /** Raw engine output with per-member breakdowns, cumulative team damage,
-   *  turns-to-kill, every applied team buff, and cooldown skips. */
+  /** Raw engine output (with any training-simulator overrides applied) —
+   *  per-member breakdowns, cumulative team damage, turns-to-kill, every
+   *  applied team buff, and cooldown skips. */
   result: ReturnType<typeof resolveTeamRotation>;
+  /**
+   * Baseline run (WITHOUT training overrides) — same rotation + target,
+   * but every slot uses pure API-sourced memo values. Populated only when
+   * at least one slot has an active override; `null` otherwise.
+   *
+   * The UI diffs `result` against `baseline` to surface "+X damage from
+   * training" both per-member and team-wide. If no slot has an override,
+   * there's nothing to compare and we skip the second pass entirely (the
+   * engine work isn't free — a 5-turn team rotation has many trigger re-
+   * derivations; doing twice the work for every render is wasteful).
+   */
+  baseline: ReturnType<typeof resolveTeamRotation> | null;
   /** Human-friendly per-slot action context for the result panel — maps
    *  each TeamMember.id to the catalog character so the UI can show
    *  display names without re-fetching. */
   charById: Record<string, CatalogCharacter>;
+}
+
+/** True when at least one slot has any override field set. Gates the
+ *  "run the rotation twice to compute training uplift" fast-path in
+ *  {@link useTeamDamage}. */
+function anyOverridesActive(
+  overrides: Record<string, TeamMemberOverride>,
+): boolean {
+  for (const slotId of Object.keys(overrides)) {
+    const ov = overrides[slotId];
+    if (!ov) continue;
+    if (ov.progression !== undefined) return true;
+    if (ov.rank !== undefined) return true;
+    if (ov.xpLevel !== undefined) return true;
+    if (ov.abilityLevels !== undefined && ov.abilityLevels.length > 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 export function useTeamDamage(): TeamDamageResultData | null {
@@ -236,6 +294,7 @@ export function useTeamDamage(): TeamDamageResultData | null {
   const target = useApp((s) => s.target);
   const unitBuilds = useApp((s) => s.unitBuilds);
   const build = useApp((s) => s.build);
+  const teamMemberOverrides = useApp((s) => s.teamMemberOverrides);
 
   return useMemo(() => {
     const targetResolved = buildTargetResolved(target);
@@ -245,6 +304,7 @@ export function useTeamDamage(): TeamDamageResultData | null {
       team.turns,
       unitBuilds,
       build,
+      teamMemberOverrides,
     );
     if (!rotation) return null;
 
@@ -254,6 +314,26 @@ export function useTeamDamage(): TeamDamageResultData | null {
     }
 
     const result = resolveTeamRotation(rotation, targetResolved);
-    return { rotation, target: targetResolved, result, charById };
-  }, [team, target, unitBuilds, build]);
+
+    // Run a second pass without overrides ONLY when at least one slot is
+    // actively trained — otherwise baseline == result and we'd waste
+    // engine cycles doing the same work twice. The baseline rotation
+    // reuses the exact same target + action sequence; the only thing that
+    // differs is each member's Attacker (progression/rank/xpLevel/abilityLevels).
+    let baseline: ReturnType<typeof resolveTeamRotation> | null = null;
+    if (anyOverridesActive(teamMemberOverrides)) {
+      const baselineRotation = buildTeamRotation(
+        team.members,
+        team.turns,
+        unitBuilds,
+        build,
+        {}, // no overrides → pure baseline
+      );
+      if (baselineRotation) {
+        baseline = resolveTeamRotation(baselineRotation, targetResolved);
+      }
+    }
+
+    return { rotation, target: targetResolved, result, baseline, charById };
+  }, [team, target, unitBuilds, build, teamMemberOverrides]);
 }

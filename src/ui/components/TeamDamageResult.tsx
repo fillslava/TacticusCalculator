@@ -23,8 +23,13 @@ export function TeamDamageResult() {
     );
   }
 
-  const { result, charById, rotation } = data;
+  const { result, baseline, charById, rotation } = data;
   const totalExpected = result.cumulativeTeamExpected.at(-1) ?? 0;
+  const baselineTotal = baseline
+    ? (baseline.cumulativeTeamExpected.at(-1) ?? 0)
+    : null;
+  const teamDelta =
+    baselineTotal !== null ? totalExpected - baselineTotal : null;
   const turnCount = rotation.turns.length;
 
   const perMemberTotals = useMemo(() => {
@@ -34,6 +39,17 @@ export function TeamDamageResult() {
         (s, a) => s + a.result.expected,
         0,
       ) ?? 0;
+      // Baseline total for the same member — null when no training is
+      // active. Uses the same id (slotId) because `buildTeamRotation`
+      // keeps it stable across the two passes.
+      const baselineBreakdown = baseline?.perMember[m.id];
+      const baselineTotal = baselineBreakdown
+        ? baselineBreakdown.perAction.reduce(
+            (s, a) => s + a.result.expected,
+            0,
+          )
+        : null;
+      const delta = baselineTotal !== null ? total - baselineTotal : null;
       const firedCount = breakdown?.perAction.length ?? 0;
       const triggered = breakdown?.triggeredFires.length ?? 0;
       const skipped = breakdown?.cooldownSkips.length ?? 0;
@@ -42,6 +58,8 @@ export function TeamDamageResult() {
         position: m.position,
         displayName: charById[m.id]?.displayName ?? m.id,
         total,
+        baselineTotal,
+        delta,
         firedCount,
         triggered,
         skipped,
@@ -49,7 +67,7 @@ export function TeamDamageResult() {
     });
     rows.sort((a, b) => b.total - a.total);
     return rows;
-  }, [result, rotation, charById]);
+  }, [result, baseline, rotation, charById]);
 
   const perTurnExpected = useMemo(() => {
     const arr: number[] = [];
@@ -82,6 +100,35 @@ export function TeamDamageResult() {
             </span>{' '}
             <span className="text-slate-600">/ {turnCount}</span>
           </div>
+          {teamDelta !== null && baselineTotal !== null && (
+            <div className="mt-2 rounded border border-emerald-900/60 bg-emerald-950/30 px-2 py-1 text-xs">
+              <div className="uppercase tracking-wide text-emerald-400/80">
+                {t('team.training.teamDelta')}
+              </div>
+              <div className="mt-0.5 flex items-baseline gap-2">
+                <span
+                  className={`font-mono text-lg ${
+                    teamDelta >= 0 ? 'text-emerald-300' : 'text-rose-300'
+                  }`}
+                >
+                  {teamDelta >= 0 ? '+' : ''}
+                  {Math.round(teamDelta).toLocaleString()}
+                </span>
+                {baselineTotal > 0 && (
+                  <span className="font-mono text-slate-500">
+                    ({teamDelta >= 0 ? '+' : ''}
+                    {((teamDelta / baselineTotal) * 100).toFixed(1)}%)
+                  </span>
+                )}
+              </div>
+              <div className="text-[10px] text-slate-500">
+                {t('team.training.baselineTag')}{' '}
+                {Math.round(baselineTotal).toLocaleString()} →{' '}
+                {t('team.training.trainedTag')}{' '}
+                {Math.round(totalExpected).toLocaleString()}
+              </div>
+            </div>
+          )}
         </div>
 
         <div>
@@ -112,25 +159,50 @@ export function TeamDamageResult() {
           {t('team.result.perMember')}
         </h3>
         <ul className="mt-1 flex flex-col gap-1">
-          {perMemberTotals.map((row) => (
-            <li
-              key={row.memberId}
-              className="flex items-center gap-2 rounded bg-bg-base px-2 py-1 text-sm"
-            >
-              <span className="w-10 font-mono text-xs text-slate-500">
-                {row.position === 5 ? 'MoW' : `S${row.position + 1}`}
-              </span>
-              <span className="flex-1">{row.displayName}</span>
-              <span className="font-mono">
-                {Math.round(row.total).toLocaleString()}
-              </span>
-              <span className="w-28 text-right text-[11px] text-slate-500">
-                {row.firedCount} fired
-                {row.triggered > 0 ? ` · ${row.triggered} trig` : ''}
-                {row.skipped > 0 ? ` · ${row.skipped} cd` : ''}
-              </span>
-            </li>
-          ))}
+          {perMemberTotals.map((row) => {
+            const deltaActive = row.delta !== null && row.delta !== 0;
+            return (
+              <li
+                key={row.memberId}
+                className="flex items-center gap-2 rounded bg-bg-base px-2 py-1 text-sm"
+              >
+                <span className="w-10 font-mono text-xs text-slate-500">
+                  {row.position === 5 ? 'MoW' : `S${row.position + 1}`}
+                </span>
+                <span className="flex-1">{row.displayName}</span>
+                <span className="font-mono">
+                  {Math.round(row.total).toLocaleString()}
+                </span>
+                {/* Per-member training delta — hidden when no override is
+                    active for this slot (row.delta === null or 0). Kept
+                    visually aligned so rows without a delta don't jump
+                    around when a sibling gains training. */}
+                <span
+                  className={`w-20 text-right font-mono text-[11px] ${
+                    deltaActive
+                      ? row.delta! > 0
+                        ? 'text-emerald-300'
+                        : 'text-rose-300'
+                      : 'text-transparent'
+                  }`}
+                  title={
+                    row.baselineTotal !== null
+                      ? `baseline ${Math.round(row.baselineTotal).toLocaleString()}`
+                      : undefined
+                  }
+                >
+                  {deltaActive
+                    ? `${row.delta! > 0 ? '+' : ''}${Math.round(row.delta!).toLocaleString()}`
+                    : '+0'}
+                </span>
+                <span className="w-28 text-right text-[11px] text-slate-500">
+                  {row.firedCount} fired
+                  {row.triggered > 0 ? ` · ${row.triggered} trig` : ''}
+                  {row.skipped > 0 ? ` · ${row.skipped} cd` : ''}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
