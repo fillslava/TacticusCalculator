@@ -121,6 +121,44 @@ const en: Dict = {
   'note.assumptions.trigger.targetTrait': 'target trait',
   'note.assumptions.scaling.per': 'per',
   'note.assumptions.guildRaidOnly': 'Guild Raid only',
+
+  'page.single': 'Single attacker',
+  'page.team': 'Team (Guild Raid)',
+
+  'team.composer.title': 'Team composition',
+  'team.composer.description':
+    'Five linear slots (left to right). Adjacency uses |Δposition|=1. Empty slots are skipped when the rotation runs.',
+  'team.composer.slot': 'Slot',
+  'team.composer.pickHero': '— empty —',
+  'team.composer.unowned': '(using default build)',
+  'team.composer.owned': '(owned)',
+  'team.composer.alliance': 'alliance',
+  'team.composer.faction': 'faction',
+  'team.composer.rarity': 'rarity',
+  'team.composer.position': 'position',
+
+  'team.rotation.title': 'Team rotation',
+  'team.rotation.description':
+    'Order matters — Laviscus Outrage and Trajann/Biovore triggers depend on who acts first within each turn.',
+  'team.rotation.turn': 'Turn',
+  'team.rotation.addAction': '+ add action',
+  'team.rotation.addTurn': '+ add turn',
+  'team.rotation.noActions': 'No actions scheduled for this turn.',
+  'team.rotation.pickMember': '— pick member —',
+
+  'team.result.title': 'Team damage',
+  'team.result.teamTotal': 'Team total',
+  'team.result.turnsToKill': 'Turns to kill',
+  'team.result.perMember': 'Per member',
+  'team.result.perTurnTeam': 'Per turn (team)',
+  'team.result.cooldownSkips': 'Cooldown skips',
+  'team.result.buffApplications': 'Team-buff applications',
+  'team.result.noRotation':
+    'Compose a team and schedule at least one action to see damage.',
+  'team.result.noTarget': 'Pick a target boss or enter custom stats.',
+  'team.result.unreachable': '∞',
+  'team.result.triggeredFires': 'triggered passives',
+  'team.result.turn': 'Turn',
 };
 
 const ru: Dict = {

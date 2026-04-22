@@ -6,11 +6,17 @@ import { DamageResult } from './ui/components/DamageResult';
 import { CharacterComparison } from './ui/components/CharacterComparison';
 import { SyncReport } from './ui/components/SyncReport';
 import { LanguageSelector } from './ui/components/LanguageSelector';
+import { TeamComposer } from './ui/components/TeamComposer';
+import { TeamRotationEditor } from './ui/components/TeamRotationEditor';
+import { TeamDamageResult } from './ui/components/TeamDamageResult';
+import { useApp } from './state/store';
 import { useT } from './lib/i18n';
 import './engine/traits';
 
 export function App() {
   const t = useT();
+  const page = useApp((s) => s.page);
+  const setPage = useApp((s) => s.setPage);
   return (
     <main className="mx-auto min-h-screen max-w-6xl p-4 md:p-8">
       <header className="mb-6 flex items-baseline justify-between gap-4">
@@ -26,6 +32,27 @@ export function App() {
         </div>
       </header>
 
+      <nav className="mb-4 flex gap-1 border-b border-bg-subtle text-sm">
+        <PageTab
+          active={page === 'single'}
+          onClick={() => setPage('single')}
+          label={t('page.single')}
+        />
+        <PageTab
+          active={page === 'team'}
+          onClick={() => setPage('team')}
+          label={t('page.team')}
+        />
+      </nav>
+
+      {page === 'single' ? <SinglePage /> : <TeamPage />}
+    </main>
+  );
+}
+
+function SinglePage() {
+  return (
+    <>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="flex flex-col gap-4">
           <ImportBar />
@@ -42,6 +69,43 @@ export function App() {
       <div className="mt-4">
         <CharacterComparison />
       </div>
-    </main>
+    </>
+  );
+}
+
+function TeamPage() {
+  return (
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-4">
+        <ImportBar />
+        <TeamComposer />
+        <TargetEditor />
+      </div>
+      <div className="flex flex-col gap-4">
+        <TeamRotationEditor />
+        <TeamDamageResult />
+      </div>
+    </div>
+  );
+}
+
+function PageTab({
+  active,
+  onClick,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+}) {
+  const base =
+    'rounded-t border-b-2 px-4 py-2 transition-colors';
+  const cls = active
+    ? `${base} border-accent text-accent`
+    : `${base} border-transparent text-slate-400 hover:text-slate-200`;
+  return (
+    <button type="button" onClick={onClick} className={cls}>
+      {label}
+    </button>
   );
 }

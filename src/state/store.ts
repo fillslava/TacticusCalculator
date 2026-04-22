@@ -73,6 +73,38 @@ export interface RotationTurn {
   buffs: TurnBuff[];
 }
 
+/** Which top-level view is visible: the single-attacker calculator or the
+ *  five-member Guild-Raid team calculator. Persisted so a reload keeps the
+ *  user on the same page. */
+export type AppPage = 'single' | 'team';
+
+/** A slot in the linear Guild-Raid formation. `characterId=null` means the
+ *  slot is empty and will be skipped when building the engine rotation. */
+export interface TeamMemberState {
+  slotId: string;
+  position: 0 | 1 | 2 | 3 | 4;
+  characterId: string | null;
+}
+
+/** One scheduled action within a team turn. `memberSlotId` references a
+ *  `TeamMemberState.slotId`; if the slot is empty when the engine runs,
+ *  the action is silently skipped. `attackKey` follows the same
+ *  `melee` / `ranged` / `ability:<id>` convention as single-attacker
+ *  rotations. */
+export interface TeamActionState {
+  memberSlotId: string;
+  attackKey: string;
+}
+
+export interface TeamTurnState {
+  actions: TeamActionState[];
+}
+
+export interface TeamState {
+  members: TeamMemberState[];
+  turns: TeamTurnState[];
+}
+
 export interface Credentials {
   apiKey: string;
   snowprintId: string;
@@ -105,6 +137,22 @@ export interface AppState {
   addTurn: (attackKey: string) => void;
   removeTurn: (index: number) => void;
 
+  page: AppPage;
+  setPage: (page: AppPage) => void;
+
+  team: TeamState;
+  setTeamMember: (slotId: string, characterId: string | null) => void;
+  setTeamRotation: (turns: TeamTurnState[]) => void;
+  addTeamTurn: () => void;
+  removeTeamTurn: (index: number) => void;
+  addTeamAction: (turnIdx: number, memberSlotId: string, attackKey: string) => void;
+  updateTeamAction: (
+    turnIdx: number,
+    actionIdx: number,
+    patch: Partial<TeamActionState>,
+  ) => void;
+  removeTeamAction: (turnIdx: number, actionIdx: number) => void;
+
   importError: string | null;
   setImportError: (e: string | null) => void;
 
@@ -134,6 +182,17 @@ const initialTarget: TargetState = {
   bossId: null,
   stageIndex: 0,
 };
+
+function initialTeam(): TeamState {
+  return {
+    members: [0, 1, 2, 3, 4].map((i) => ({
+      slotId: `m${i}`,
+      position: i as 0 | 1 | 2 | 3 | 4,
+      characterId: null,
+    })),
+    turns: [{ actions: [] }],
+  };
+}
 
 function slotIndex(slotId: string): number {
   if (slotId === 'Slot1') return 0;
@@ -323,6 +382,66 @@ export const useApp = create<AppState>()(
       removeTurn: (index) =>
         set((s) => ({ rotation: s.rotation.filter((_, i) => i !== index) })),
 
+      page: 'single',
+      setPage: (page) => set({ page }),
+
+      team: initialTeam(),
+      setTeamMember: (slotId, characterId) =>
+        set((s) => ({
+          team: {
+            ...s.team,
+            members: s.team.members.map((m) =>
+              m.slotId === slotId ? { ...m, characterId } : m,
+            ),
+          },
+        })),
+      setTeamRotation: (turns) =>
+        set((s) => ({ team: { ...s.team, turns } })),
+      addTeamTurn: () =>
+        set((s) => ({
+          team: { ...s.team, turns: [...s.team.turns, { actions: [] }] },
+        })),
+      removeTeamTurn: (index) =>
+        set((s) => ({
+          team: {
+            ...s.team,
+            turns: s.team.turns.filter((_, i) => i !== index),
+          },
+        })),
+      addTeamAction: (turnIdx, memberSlotId, attackKey) =>
+        set((s) => {
+          const turns = s.team.turns.map((t, i) =>
+            i === turnIdx
+              ? { ...t, actions: [...t.actions, { memberSlotId, attackKey }] }
+              : t,
+          );
+          return { team: { ...s.team, turns } };
+        }),
+      updateTeamAction: (turnIdx, actionIdx, patch) =>
+        set((s) => {
+          const turns = s.team.turns.map((t, i) => {
+            if (i !== turnIdx) return t;
+            return {
+              ...t,
+              actions: t.actions.map((a, j) =>
+                j === actionIdx ? { ...a, ...patch } : a,
+              ),
+            };
+          });
+          return { team: { ...s.team, turns } };
+        }),
+      removeTeamAction: (turnIdx, actionIdx) =>
+        set((s) => {
+          const turns = s.team.turns.map((t, i) => {
+            if (i !== turnIdx) return t;
+            return {
+              ...t,
+              actions: t.actions.filter((_, j) => j !== actionIdx),
+            };
+          });
+          return { team: { ...s.team, turns } };
+        }),
+
       importError: null,
       setImportError: (e) => set({ importError: e }),
 
@@ -331,7 +450,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 11,
+      version: 12,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -342,6 +461,8 @@ export const useApp = create<AppState>()(
         ownedCatalogIds: s.ownedCatalogIds,
         syncReport: s.syncReport,
         language: s.language,
+        page: s.page,
+        team: s.team,
       }),
       migrate: (persisted: any, fromVersion: number) => {
         if (!persisted) return persisted;
@@ -429,6 +550,13 @@ export const useApp = create<AppState>()(
         if (fromVersion < 11) {
           // v11 adds `language` — initialize from browser if absent.
           if (!persisted.language) persisted.language = detectDefaultLang();
+        }
+        if (fromVersion < 12) {
+          // v12 adds `page` + `team` for the Guild-Raid team calculator.
+          // Default to 'single' so existing users land on their familiar
+          // calculator view, and seed an empty 5-slot team.
+          if (!persisted.page) persisted.page = 'single';
+          if (!persisted.team) persisted.team = initialTeam();
         }
         return persisted;
       },
