@@ -202,6 +202,16 @@ interface TurnState {
 interface BattleState {
   /** Memberids of Vitruvius-teamBuff carriers whose mark is active. */
   vitruviusMarkedSources: Set<string>;
+  /**
+   * Memberids of every team member who has scheduled at least one
+   * action so far in the battle (any turn, any action kind). Populated
+   * in `updateTurnStateAfterAction`. Gates team buffs whose carrier
+   * must be present/active for the buff to apply — e.g. Trajann's
+   * Legendary Commander stops granting +flat / +hits when Trajann has
+   * not yet taken a turn (stand-in for "Trajann is dead / not on the
+   * board yet").
+   */
+  membersWhoActed: Set<string>;
 }
 
 function initTurnState(): TurnState {
@@ -216,7 +226,10 @@ function initTurnState(): TurnState {
 }
 
 function initBattleState(): BattleState {
-  return { vitruviusMarkedSources: new Set() };
+  return {
+    vitruviusMarkedSources: new Set(),
+    membersWhoActed: new Set(),
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -304,11 +317,16 @@ function deriveTeamBuffs(
   // ------ 3) Trajann LegendaryCommander: flat damage to the target when a
   //        friendly has already fired an active this turn. Applies to EVERY
   //        team member's attacks against the enemy (not just the Shield
-  //        Host ally that fired the active).
+  //        Host ally that fired the active). Additionally: Trajann must
+  //        himself have been active in the battle (`membersWhoActed`
+  //        gate) — if he's on the team but the rotation never schedules
+  //        him, he doesn't grant the buff. Mirrors how Biovore and
+  //        Laviscus self-gate on having fired.
   if (turn.friendlyActiveFiredThisTurn) {
     for (const other of team) {
       const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
       if (!cmdr) continue;
+      if (!battle.membersWhoActed.has(other.id)) continue;
       buffs.push({
         id: `trajann-flat:${other.id}`,
         name: 'Legendary Commander (flat)',
@@ -342,6 +360,7 @@ function deriveTeamBuffs(
       const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
       if (!cmdr) continue;
       if (cmdr.extraHitsAdjacentToSelf <= 0) continue;
+      if (!battle.membersWhoActed.has(other.id)) continue;
       buffs.push({
         id: `trajann-hits:${other.id}`,
         name: 'Legendary Commander (hits)',
@@ -461,6 +480,11 @@ function updateTurnStateAfterAction(
   turn: TurnState,
   battle: BattleState,
 ): void {
+  // Mark the actor as present in the battle. Any team member whose id
+  // never lands here is absent for buff purposes (the rotation never
+  // scheduled an action for them), which gates e.g. Trajann's auras.
+  battle.membersWhoActed.add(actor.id);
+
   // Laviscus outrage contributions: any friendly that ISN'T Laviscus,
   // whose attack is non-psychic, contributes their MAX per-hit value to
   // each Laviscus's Outrage ledger. Per-contributor we keep the maximum
