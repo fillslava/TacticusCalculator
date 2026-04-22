@@ -80,6 +80,48 @@ export function applyPierceBuffs(
   return { ...profile, pierceOverride: next };
 }
 
+/**
+ * Fold every buff's `hitsDelta` into the profile's hit count. Unlike
+ * `applyBonusHits`, this is **not** STMA-gated — a tall-grass -2 applies
+ * on every profile of a multi-profile ability, not just the first. The
+ * cumulative delta is added to `profile.hits` and the result is clamped
+ * at `>= 1` (tall grass wiki: "ranged attacks have -2 hits, minimum 1").
+ *
+ * Attack-kind filtering honors `hitsDeltaOn` (default 'all'):
+ *   - 'all':     every profile
+ *   - 'first':   only on the first turn of the rotation (rare; symmetric
+ *                with the existing `bonusHitsOn: 'first'` semantics)
+ *   - 'normal':  melee or ranged profiles only
+ *   - 'ability': ability profiles only
+ *
+ * Returns the input profile unchanged when no matching buffs contribute.
+ */
+export function applyHitsDelta(
+  profile: AttackProfile,
+  buffs: TurnBuff[] | undefined,
+  isFirstTurn: boolean,
+): AttackProfile {
+  if (!buffs || buffs.length === 0) return profile;
+  const kind = profile.kind;
+  const isNormal = kind === 'melee' || kind === 'ranged';
+  const isAbility = kind === 'ability';
+  let delta = 0;
+  for (const b of buffs) {
+    const d = b.hitsDelta;
+    if (!d) continue;
+    const trigger = b.hitsDeltaOn ?? 'all';
+    const match =
+      trigger === 'all' ||
+      (trigger === 'first' && isFirstTurn) ||
+      (trigger === 'normal' && isNormal) ||
+      (trigger === 'ability' && isAbility);
+    if (!match) continue;
+    delta += d;
+  }
+  if (delta === 0) return profile;
+  return { ...profile, hits: Math.max(1, profile.hits + delta) };
+}
+
 export function applyBonusHits(
   profile: AttackProfile,
   buffs: TurnBuff[] | undefined,
@@ -212,10 +254,17 @@ export function resolveRotation(
       const scaleMul = scalingMultiplier(matchedAbility, state);
       const scaled = applyScaling(ctx.profile, scaleMul);
 
-      // 3. Apply per-turn bonus hits and resolve.
+      // 3. Apply per-turn bonus hits and hitsDelta, then resolve. Order:
+      //    bonusHits first (STMA gated) → hitsDelta second (applies on
+      //    every profile). Tall-grass -2 floors at 1 even after Vitruvius
+      //    adds its +1.
       const adjusted: AttackContext = {
         ...ctx,
-        profile: applyBonusHits(scaled, turn.buffs, turnIdx === 0),
+        profile: applyHitsDelta(
+          applyBonusHits(scaled, turn.buffs, turnIdx === 0),
+          turn.buffs,
+          turnIdx === 0,
+        ),
       };
       runAttack(adjusted);
 
@@ -237,7 +286,11 @@ export function resolveRotation(
           // hits only to the first profile per STMA rule.
           const tagged = isMultiProfile ? { ...p, abilityProfileIdx: profileIdx } : p;
           const passiveCtx: AttackContext = {
-            profile: applyBonusHits(tagged, turn.buffs, turnIdx === 0),
+            profile: applyHitsDelta(
+              applyBonusHits(tagged, turn.buffs, turnIdx === 0),
+              turn.buffs,
+              turnIdx === 0,
+            ),
             rngMode: ctx.rngMode,
           };
           runAttack(passiveCtx);

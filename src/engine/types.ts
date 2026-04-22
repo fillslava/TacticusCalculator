@@ -394,6 +394,18 @@ export interface TurnBuff {
    */
   pierceAdd?: number;
   /**
+   * Additive delta to the profile's hit count. Unlike `bonusHits` (which
+   * is STMA-gated — only the first profile of a multi-profile ability
+   * claims the extra), `hitsDelta` applies to every profile it matches.
+   * Designed for map-mode terrain that reduces hits regardless of STMA
+   * (tall grass: -2 ranged hits, floored at 1). Positive values are
+   * also permitted. Attack-kind gating honors `hitsDeltaOn` (default
+   * 'all'). The final hit count after all deltas clamps to `>= 1`.
+   */
+  hitsDelta?: number;
+  /** Which attack kinds the `hitsDelta` targets. Defaults to 'all'. */
+  hitsDeltaOn?: BonusHitTrigger;
+  /**
    * Calibration coefficient from the source preset. When present, the UI
    * auto-recomputes `damageFlat` whenever level or rarity changes.
    */

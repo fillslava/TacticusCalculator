@@ -122,7 +122,7 @@
  */
 import { resolveAttack } from './attack';
 import { progressionPositionFromStarLevel } from './progression';
-import { applyBonusHits, applyPierceBuffs, applyTurnBuffs } from './rotation';
+import { applyBonusHits, applyHitsDelta, applyPierceBuffs, applyTurnBuffs } from './rotation';
 import {
   abilityFor,
   applyScaling,
@@ -325,7 +325,7 @@ interface TurnState {
  * turn-local flags (Laviscus, Trajann, Biovore) still reset cleanly each
  * turn loop.
  */
-interface BattleState {
+export interface BattleState {
   /**
    * Target trait list resolved once at battle start. Cached here so
    * positional team buffs with trait gates (Helbrecht's Destroy the Witch
@@ -376,7 +376,7 @@ function initTurnState(): TurnState {
   };
 }
 
-function initBattleState(rotation: TeamRotation, target: Target): BattleState {
+export function initBattleState(rotation: TeamRotation, target: Target): BattleState {
   // `membersInRotation` captures every member that the rotation schedules
   // for at least one action anywhere. Computed once up front (not
   // turn-by-turn) so Trajann's buff does NOT depend on whether his action
@@ -947,6 +947,20 @@ function isAbilityActive(attacker: Attacker, abilityId: string | undefined): boo
 export function resolveTeamRotation(
   rotation: TeamRotation,
   target: Target,
+  /**
+   * Optional pre-existing `BattleState` to thread across multiple
+   * `resolveTeamRotation` invocations. Used by map mode to carry
+   * Vitruvius marks, Helbrecht Crusade windows, and `membersInRotation`
+   * across per-turn rotations synthesized one hex-turn at a time.
+   *
+   * Semantics: when provided, the engine MUTATES this state in place
+   * (sets `vitruviusMarkedSources`, `helbrechtCrusadeActiveUntil`). Caller
+   * owns the reference — passing the same object on the next call
+   * continues from where the previous call left off. When omitted, a
+   * fresh state is built from the supplied rotation/target (pre-existing
+   * single-battle behavior unchanged).
+   */
+  preExistingBattleState?: BattleState,
 ): TeamRotationBreakdown {
   const memberById: Record<string, TeamMember> = {};
   const perMember: Record<string, MemberBreakdown> = {};
@@ -965,7 +979,7 @@ export function resolveTeamRotation(
   const teamBuffApplications: TeamBuffApplication[] = [];
   const teamCooldownSkips: { turnIdx: number; memberId: string; abilityId: string }[] = [];
   const cumulativeTeamExpected: number[] = [];
-  const battleState = initBattleState(rotation, target);
+  const battleState = preExistingBattleState ?? initBattleState(rotation, target);
   let cumulative = 0;
   let remainingShield = target.currentShield ?? 0;
   let remainingHp = target.currentHp ?? resolveBaseHp(target);
@@ -1009,11 +1023,16 @@ export function resolveTeamRotation(
       const scaledProfile = applyScaling(action.attack.profile, scaleMul);
 
       // 4. Bonus hits (per-turn buffs) — applied after scaling so extra
-      //    hits resolve with the scaled profile. Pierce buffs (Helbrecht
-      //    Crusade of Wrath) fold into the profile's pierceOverride via a
-      //    separate pass so stacking across multiple buffs is additive.
+      //    hits resolve with the scaled profile. `applyHitsDelta` runs
+      //    after `applyBonusHits` so map-mode hit-count reductions
+      //    (tall grass -2 ranged) apply on every profile, independent
+      //    of the STMA rule that limits `bonusHits` to the first
+      //    profile. Pierce buffs (Helbrecht Crusade of Wrath) fold
+      //    into the profile's pierceOverride via a separate pass so
+      //    stacking across multiple buffs is additive.
       const withBonusHits = applyBonusHits(scaledProfile, combinedBuffs, turnIdx === 0);
-      const adjustedProfile = applyPierceBuffs(withBonusHits, combinedBuffs);
+      const withHitsDelta = applyHitsDelta(withBonusHits, combinedBuffs, turnIdx === 0);
+      const adjustedProfile = applyPierceBuffs(withHitsDelta, combinedBuffs);
       const adjustedCtx: AttackContext = { ...action.attack, profile: adjustedProfile };
 
       // 5. Resolve attack; drain shield/HP. `runAttack` takes the attacker
@@ -1130,8 +1149,13 @@ export function resolveTeamRotation(
             passiveCombinedBuffs,
             turnIdx === 0,
           );
-          const passiveProfile = applyPierceBuffs(
+          const passiveProfileWithDelta = applyHitsDelta(
             passiveProfileHits,
+            passiveCombinedBuffs,
+            turnIdx === 0,
+          );
+          const passiveProfile = applyPierceBuffs(
+            passiveProfileWithDelta,
             passiveCombinedBuffs,
           );
           const passiveCtx: AttackContext = {
