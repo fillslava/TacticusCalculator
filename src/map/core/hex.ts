@@ -197,7 +197,9 @@ export function hexRound(frac: HexFrac): Hex {
   } else {
     rz = -rx - ry;
   }
-  // axial: q = x, r = z
+  // axial: q = x, r = z. The `+ 0` normalizes IEEE-754 signed zero
+  // (e.g. `-0 - 0 === -0`) so callers doing `toEqual({q:0,r:0})` don't
+  // see a phantom `-0` drift through `pixelToHex` at the origin hex.
   void ry;
-  return { q: rx, r: rz };
+  return { q: rx + 0, r: rz + 0 };
 }

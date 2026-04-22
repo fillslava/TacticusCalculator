@@ -9,6 +9,7 @@ import { LanguageSelector } from './ui/components/LanguageSelector';
 import { TeamComposer } from './ui/components/TeamComposer';
 import { TeamRotationEditor } from './ui/components/TeamRotationEditor';
 import { TeamDamageResult } from './ui/components/TeamDamageResult';
+import { MapPage } from './ui/pages/MapPage';
 import { useApp } from './state/store';
 import { useT } from './lib/i18n';
 import './engine/traits';
@@ -43,9 +44,20 @@ export function App() {
           onClick={() => setPage('team')}
           label={t('page.team')}
         />
+        <PageTab
+          active={page === 'map'}
+          onClick={() => setPage('map')}
+          label={t('page.map')}
+        />
       </nav>
 
-      {page === 'single' ? <SinglePage /> : <TeamPage />}
+      {page === 'single' ? (
+        <SinglePage />
+      ) : page === 'team' ? (
+        <TeamPage />
+      ) : (
+        <MapPage />
+      )}
     </main>
   );
 }

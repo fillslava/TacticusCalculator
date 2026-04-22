@@ -23,6 +23,7 @@ import {
   resolveEquipment,
 } from '../api/merge';
 import { loadCatalog } from '../data/catalog';
+import type { MapBattleState } from '../map/battle/mapBattleState';
 
 export interface RelicEquipmentMemo {
   id: string;
@@ -74,10 +75,10 @@ export interface RotationTurn {
   buffs: TurnBuff[];
 }
 
-/** Which top-level view is visible: the single-attacker calculator or the
- *  five-member Guild-Raid team calculator. Persisted so a reload keeps the
- *  user on the same page. */
-export type AppPage = 'single' | 'team';
+/** Which top-level view is visible: the single-attacker calculator, the
+ *  five-member Guild-Raid team calculator, or the hex-map battle sim.
+ *  Persisted so a reload keeps the user on the same page. */
+export type AppPage = 'single' | 'team' | 'map';
 
 /** Role the slot plays in the Guild-Raid formation. `hero` = one of the
  *  five character slots; `mow` = the single Machine-of-War slot. The
@@ -212,6 +213,16 @@ export interface AppState {
 
   language: Lang;
   setLanguage: (lang: Lang) => void;
+
+  /**
+   * Active hex-map battle. Deliberately NOT persisted: `MapBattleState`
+   * carries non-JSON-safe values (Sets inside `battleState`) and a
+   * mid-fight snapshot is too stateful to restore cleanly after a tab
+   * reload. The store slice exists so the Map page can drive battles
+   * through the same `useApp` pipeline as the other tabs.
+   */
+  map: MapBattleState | null;
+  setMap: (m: MapBattleState | null) => void;
 }
 
 const initialBuild: BuildOverrides = {
@@ -553,10 +564,13 @@ export const useApp = create<AppState>()(
 
       language: detectDefaultLang(),
       setLanguage: (lang) => set({ language: lang }),
+
+      map: null,
+      setMap: (m) => set({ map: m }),
     }),
     {
       name: 'tacticus-calc-state',
-      version: 14,
+      version: 15,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -571,137 +585,159 @@ export const useApp = create<AppState>()(
         team: s.team,
         teamMemberOverrides: s.teamMemberOverrides,
       }),
-      migrate: (persisted: any, fromVersion: number) => {
-        if (!persisted) return persisted;
-        if (fromVersion < 2 && Array.isArray(persisted.rotation)) {
-          persisted.rotation = persisted.rotation.map((t: any) => ({
-            attackKey: t?.attackKey ?? 'melee',
-            buffs: Array.isArray(t?.buffs) ? t.buffs : [],
-          }));
-        }
-        if (fromVersion < 3 && persisted.build) {
-          const b = persisted.build;
-          if (typeof b.progression !== 'number') {
-            const rarity = typeof b.rarity === 'string' ? b.rarity : 'legendary';
-            const base = rarityToMinProgression(rarity as any);
-            const stars = typeof b.stars === 'number' ? b.stars : 0;
-            b.progression = base + Math.max(0, Math.min(2, stars));
-          }
-          delete b.stars;
-          delete b.rarity;
-        }
-        if (fromVersion < 4) {
-          persisted.unitBuilds = persisted.unitBuilds ?? {};
-          persisted.ownedCatalogIds = persisted.ownedCatalogIds ?? [];
-        }
-        if (fromVersion < 5) {
-          // v5 adds syncReport, abilityLevels, relicSlots; clear stale player
-          // data so matchCatalogCharacter runs again with new aliases +
-          // relic detection.
-          persisted.syncReport = null;
-          persisted.ownedCatalogIds = [];
-          persisted.unitBuilds = {};
-          persisted.player = null;
-        }
-        if (fromVersion < 6) {
-          // v6 changes STEPS_PER_RARITY.common from 2 to 3, shifting
-          // progression indices. Safest to resync from API.
-          persisted.syncReport = null;
-          persisted.ownedCatalogIds = [];
-          persisted.unitBuilds = {};
-          persisted.player = null;
-          if (persisted.build) {
-            persisted.build.progression = rarityToMinProgression('legendary') + 2;
-          }
-        }
-        if (fromVersion < 7) {
-          // v7 subtracts 1 from API rank (was 1-indexed, treated as 0-indexed).
-          // Clear cached unitBuilds so resync applies the offset.
-          persisted.syncReport = null;
-          persisted.ownedCatalogIds = [];
-          persisted.unitBuilds = {};
-          persisted.player = null;
-        }
-        if (fromVersion < 8) {
-          // v8 adds API item id mapping (I_Crit_Lxxx → canonical catalog id).
-          // Force resync so equipment resolves to real stat-contributing items.
-          persisted.syncReport = null;
-          persisted.ownedCatalogIds = [];
-          persisted.unitBuilds = {};
-          persisted.player = null;
-        }
-        if (fromVersion < 9) {
-          // v9 rewires buff presets to gameinfo damage tables and fixes the
-          // rarity ability multiplier step (0.2 → 0.1, so mythic = 1.5x not
-          // 2.0x). Old persisted buffs still hold pre-computed damageFlat
-          // values. Clear rotation buffs so re-adding presets pulls the
-          // corrected numbers.
-          if (Array.isArray(persisted.rotation)) {
-            persisted.rotation = persisted.rotation.map((t: any) => ({
-              ...t,
-              buffs: [],
-            }));
-          }
-        }
-        if (fromVersion < 10) {
-          // v10 removes the (apiRank - 1) offset (API rank is 0-indexed
-          // directly: rank 18 = Mythic I, rank 19 = Mythic II) and derives
-          // rarity from progressionIndex since /player doesn't return a
-          // rarity field. Clear unit caches so they re-merge with the fixed
-          // conversion.
-          persisted.syncReport = null;
-          persisted.ownedCatalogIds = [];
-          persisted.unitBuilds = {};
-          persisted.player = null;
-        }
-        if (fromVersion < 11) {
-          // v11 adds `language` — initialize from browser if absent.
-          if (!persisted.language) persisted.language = detectDefaultLang();
-        }
-        if (fromVersion < 12) {
-          // v12 adds `page` + `team` for the Guild-Raid team calculator.
-          // Default to 'single' so existing users land on their familiar
-          // calculator view, and seed an empty 5-slot team.
-          if (!persisted.page) persisted.page = 'single';
-          if (!persisted.team) persisted.team = initialTeam();
-        }
-        if (fromVersion < 13) {
-          // v13 adds the MoW (Machine of War) 6th slot and the `kind` tag on
-          // every member so the composer can filter dropdowns by role. Mutate
-          // the existing team in place to preserve whatever the user already
-          // picked in hero slots 0..4.
-          if (persisted.team && Array.isArray(persisted.team.members)) {
-            const members = persisted.team.members as Array<
-              Record<string, unknown>
-            >;
-            for (const m of members) {
-              if (!m.kind) m.kind = 'hero';
-            }
-            if (!members.some((m) => m.kind === 'mow')) {
-              members.push({
-                slotId: MOW_SLOT_ID,
-                position: 5,
-                characterId: null,
-                kind: 'mow',
-              });
-            }
-          } else {
-            persisted.team = initialTeam();
-          }
-        }
-        if (fromVersion < 14) {
-          // v14 adds per-slot team-member overrides for the training
-          // simulator. Default to an empty map — existing users see no
-          // behaviour change until they touch a slider.
-          if (!persisted.teamMemberOverrides) {
-            persisted.teamMemberOverrides = {};
-          }
-        }
-        return persisted;
-      },
+      migrate: (persisted, fromVersion) =>
+        migratePersisted(persisted, fromVersion),
     },
   ),
 );
+
+/**
+ * Exported for tests. Mutates `persisted` in place (following the zustand
+ * convention) and returns the same reference.
+ *
+ * Kept separate from the store config so migrations are testable without
+ * having to instantiate a browser storage shim.
+ */
+export function migratePersisted(persisted: any, fromVersion: number): any {
+  if (!persisted) return persisted;
+  if (fromVersion < 2 && Array.isArray(persisted.rotation)) {
+    persisted.rotation = persisted.rotation.map((t: any) => ({
+      attackKey: t?.attackKey ?? 'melee',
+      buffs: Array.isArray(t?.buffs) ? t.buffs : [],
+    }));
+  }
+  if (fromVersion < 3 && persisted.build) {
+    const b = persisted.build;
+    if (typeof b.progression !== 'number') {
+      const rarity = typeof b.rarity === 'string' ? b.rarity : 'legendary';
+      const base = rarityToMinProgression(rarity as any);
+      const stars = typeof b.stars === 'number' ? b.stars : 0;
+      b.progression = base + Math.max(0, Math.min(2, stars));
+    }
+    delete b.stars;
+    delete b.rarity;
+  }
+  if (fromVersion < 4) {
+    persisted.unitBuilds = persisted.unitBuilds ?? {};
+    persisted.ownedCatalogIds = persisted.ownedCatalogIds ?? [];
+  }
+  if (fromVersion < 5) {
+    // v5 adds syncReport, abilityLevels, relicSlots; clear stale player
+    // data so matchCatalogCharacter runs again with new aliases +
+    // relic detection.
+    persisted.syncReport = null;
+    persisted.ownedCatalogIds = [];
+    persisted.unitBuilds = {};
+    persisted.player = null;
+  }
+  if (fromVersion < 6) {
+    // v6 changes STEPS_PER_RARITY.common from 2 to 3, shifting
+    // progression indices. Safest to resync from API.
+    persisted.syncReport = null;
+    persisted.ownedCatalogIds = [];
+    persisted.unitBuilds = {};
+    persisted.player = null;
+    if (persisted.build) {
+      persisted.build.progression = rarityToMinProgression('legendary') + 2;
+    }
+  }
+  if (fromVersion < 7) {
+    // v7 subtracts 1 from API rank (was 1-indexed, treated as 0-indexed).
+    // Clear cached unitBuilds so resync applies the offset.
+    persisted.syncReport = null;
+    persisted.ownedCatalogIds = [];
+    persisted.unitBuilds = {};
+    persisted.player = null;
+  }
+  if (fromVersion < 8) {
+    // v8 adds API item id mapping (I_Crit_Lxxx → canonical catalog id).
+    // Force resync so equipment resolves to real stat-contributing items.
+    persisted.syncReport = null;
+    persisted.ownedCatalogIds = [];
+    persisted.unitBuilds = {};
+    persisted.player = null;
+  }
+  if (fromVersion < 9) {
+    // v9 rewires buff presets to gameinfo damage tables and fixes the
+    // rarity ability multiplier step (0.2 → 0.1, so mythic = 1.5x not
+    // 2.0x). Old persisted buffs still hold pre-computed damageFlat
+    // values. Clear rotation buffs so re-adding presets pulls the
+    // corrected numbers.
+    if (Array.isArray(persisted.rotation)) {
+      persisted.rotation = persisted.rotation.map((t: any) => ({
+        ...t,
+        buffs: [],
+      }));
+    }
+  }
+  if (fromVersion < 10) {
+    // v10 removes the (apiRank - 1) offset (API rank is 0-indexed
+    // directly: rank 18 = Mythic I, rank 19 = Mythic II) and derives
+    // rarity from progressionIndex since /player doesn't return a
+    // rarity field. Clear unit caches so they re-merge with the fixed
+    // conversion.
+    persisted.syncReport = null;
+    persisted.ownedCatalogIds = [];
+    persisted.unitBuilds = {};
+    persisted.player = null;
+  }
+  if (fromVersion < 11) {
+    // v11 adds `language` — initialize from browser if absent.
+    if (!persisted.language) persisted.language = detectDefaultLang();
+  }
+  if (fromVersion < 12) {
+    // v12 adds `page` + `team` for the Guild-Raid team calculator.
+    // Default to 'single' so existing users land on their familiar
+    // calculator view, and seed an empty 5-slot team.
+    if (!persisted.page) persisted.page = 'single';
+    if (!persisted.team) persisted.team = initialTeam();
+  }
+  if (fromVersion < 13) {
+    // v13 adds the MoW (Machine of War) 6th slot and the `kind` tag on
+    // every member so the composer can filter dropdowns by role. Mutate
+    // the existing team in place to preserve whatever the user already
+    // picked in hero slots 0..4.
+    if (persisted.team && Array.isArray(persisted.team.members)) {
+      const members = persisted.team.members as Array<
+        Record<string, unknown>
+      >;
+      for (const m of members) {
+        if (!m.kind) m.kind = 'hero';
+      }
+      if (!members.some((m) => m.kind === 'mow')) {
+        members.push({
+          slotId: MOW_SLOT_ID,
+          position: 5,
+          characterId: null,
+          kind: 'mow',
+        });
+      }
+    } else {
+      persisted.team = initialTeam();
+    }
+  }
+  if (fromVersion < 14) {
+    // v14 adds per-slot team-member overrides for the training
+    // simulator. Default to an empty map — existing users see no
+    // behaviour change until they touch a slider.
+    if (!persisted.teamMemberOverrides) {
+      persisted.teamMemberOverrides = {};
+    }
+  }
+  if (fromVersion < 15) {
+    // v15 adds the 'map' page value to the AppPage union. The union
+    // now accepts 'single' | 'team' | 'map'. Old persisted values
+    // ('single' | 'team') remain valid, but any unexpected value
+    // coerces back to 'single' so a stale tab can't put a user into
+    // an invalid view. `map: MapBattleState | null` is intentionally
+    // NOT persisted — see the AppState comment.
+    const p = persisted.page;
+    if (p !== 'single' && p !== 'team' && p !== 'map') {
+      persisted.page = 'single';
+    }
+  }
+  return persisted;
+}
 
 export function apiUnitFromPlayer(
   player: ApiPlayer | null,

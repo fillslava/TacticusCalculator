@@ -139,6 +139,9 @@ export type TerrainDef = z.infer<typeof TerrainDefSchema>;
 // Map definition
 // ────────────────────────────────────────────────────────────────────
 
+export const MapOrientationSchema = z.enum(['pointy', 'flat']);
+export type MapOrientation = z.infer<typeof MapOrientationSchema>;
+
 export const HexCellSchema = z.object({
   q: z.number().int(),
   r: z.number().int(),
@@ -165,7 +168,7 @@ export const MapDefSchema = z.object({
   }),
   /** Outer radius of a hex in source-image pixels. */
   hexSizePx: z.number().positive(),
-  orientation: z.enum(['pointy', 'flat']),
+  orientation: MapOrientationSchema,
   hexes: z.array(HexCellSchema),
   bossScriptId: z.string().optional(),
 });

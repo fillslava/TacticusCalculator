@@ -124,6 +124,19 @@ const en: Dict = {
 
   'page.single': 'Single attacker',
   'page.team': 'Team (Guild Raid)',
+  'page.map': 'Map',
+
+  'map.empty': 'No maps in catalog.',
+  'map.pickMap': 'Map',
+  'map.turn': 'Turn',
+  'map.phase3Preview': 'Preview',
+  'map.hexes': 'Hexes',
+  'map.orientation': 'Orientation',
+  'map.spawns.player': 'Player spawns',
+  'map.spawns.enemy': 'Enemy spawns',
+  'map.spawns.boss': 'Boss spawns',
+  'map.phase3Description':
+    'Read-only preview: terrain tiles and spawn markers. Click-to-move and scripted boss turns arrive in later phases.',
 
   'team.composer.title': 'Team composition',
   'team.composer.description':
