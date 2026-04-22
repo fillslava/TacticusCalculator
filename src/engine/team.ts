@@ -68,7 +68,7 @@
  * stance/traits buffs. Those land when hand-authoring surfaces the need.
  */
 import { resolveAttack } from './attack';
-import { progressionPositionInRarity } from './progression';
+import { progressionPositionFromStarLevel } from './progression';
 import { applyBonusHits, applyTurnBuffs } from './rotation';
 import {
   abilityFor,
@@ -376,7 +376,10 @@ function deriveTeamBuffs(
         name: 'Mythic Acid',
         damageMultiplier: 1 + pct / 100,
       });
-      const starPos = progressionPositionInRarity(other.attacker.progression.stars);
+      const starPos = progressionPositionFromStarLevel(
+        other.attacker.progression.stars,
+        other.attacker.progression.rarity,
+      );
       appsSink.push({
         turnIdx,
         sourceMemberId: other.id,
@@ -405,7 +408,10 @@ function deriveTeamBuffs(
       const anni = teamBuffOf(other, 'vitruviusMasterAnnihilator');
       if (!anni) continue;
       // Resolve cap from the passive's ability-level entry; fall back to
-      // level 1 when the attacker has no explicit ability-level data.
+      // the attacker's xpLevel when no explicit per-ability entry exists
+      // (matches BuildEditor's `defaultLevel={build.xpLevel}` convention).
+      // Final fallback is 1. Unowned heroes never have abilityLevels
+      // populated, so xpLevel is the best available proxy.
       const passiveAbility = findAbilityWithTeamBuff(
         other.attacker.source,
         'vitruviusMasterAnnihilator',
@@ -414,7 +420,10 @@ function deriveTeamBuffs(
       const lvlEntry = passiveId
         ? other.attacker.abilityLevels?.find((a) => a.id === passiveId)
         : undefined;
-      const level = Math.max(1, lvlEntry?.level ?? 1);
+      const level = Math.max(
+        1,
+        lvlEntry?.level ?? other.attacker.progression.xpLevel ?? 1,
+      );
       const cap = anni.capByLevel[
         Math.min(level - 1, anni.capByLevel.length - 1)
       ];
@@ -522,7 +531,13 @@ function updateTurnStateAfterAction(
   ) {
     const pos = Math.max(
       0,
-      Math.min(bio.pctByStar.length - 1, progressionPositionInRarity(actor.attacker.progression.stars)),
+      Math.min(
+        bio.pctByStar.length - 1,
+        progressionPositionFromStarLevel(
+          actor.attacker.progression.stars,
+          actor.attacker.progression.rarity,
+        ),
+      ),
     );
     const pct = bio.pctByStar[pos];
     turn.sporeMineDamagedTarget = true;

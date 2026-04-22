@@ -53,6 +53,32 @@ export function progressionPositionInRarity(p: number): number {
   return c - CUMULATIVE_START[r];
 }
 
+/**
+ * Given an Attacker's `progression.stars` (which is a cumulative star level
+ * across all rarities, e.g. 14 for Mythic 4★) and its `progression.rarity`,
+ * return the 0-indexed position WITHIN that rarity (e.g. 3 for Mythic 4★).
+ *
+ * The engine stores `stars` as a starLevel, not a progression ordinal, so
+ * callers that need "which star tier within the current rarity" (team buffs
+ * like Biovore Mythic Acid's pctByStar) must use this, not
+ * `progressionPositionInRarity(stars)` directly.
+ *
+ * Robust to starLevel/rarity mismatches (e.g. starLevel=0 with rarity=mythic):
+ * the result is clamped to [0, stepsInRarity-1].
+ */
+export function progressionPositionFromStarLevel(
+  stars: number,
+  rarity: Rarity,
+): number {
+  const rarityIdx = RARITY_ORDER.indexOf(rarity);
+  if (rarityIdx < 0) return 0;
+  // starLevel at the bottom of this rarity (e.g. Mythic 1★ is starLevel 11).
+  const minStarLevel = progressionToStarLevel(CUMULATIVE_START[rarityIdx]);
+  const maxPos = STEPS_PER_RARITY[rarity] - 1;
+  const pos = Math.max(0, stars) - minStarLevel;
+  return Math.max(0, Math.min(maxPos, pos));
+}
+
 export function rarityToMinProgression(r: Rarity): number {
   const idx = RARITY_ORDER.indexOf(r);
   return idx < 0 ? 0 : CUMULATIVE_START[idx];

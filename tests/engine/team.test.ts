@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { getCharacter } from '../../src/data/catalog';
 import { resolveTeamRotation } from '../../src/engine/team';
 import '../../src/engine/traits';
 import type {
@@ -1126,12 +1127,14 @@ describe('biovoreMythicAcid — order-sensitive Mythic-tier bonus', () => {
   });
 
   it('star-scales: pctByStar[0]=10 at Mythic 1★ vs pctByStar[3]=20 at Mythic 4★', () => {
-    // Pass progression ordinals that map into the Mythic rarity:
-    //   Mythic 1★ = position 0 → pctByStar[0] = 10 → 1.10x
-    //   Mythic 4★ = position 3 → pctByStar[3] = 20 → 1.20x
-    // We use the helper's cumulative offsets: Mythic starts at 16, 4★ is 19.
-    const MYTHIC_1_STAR = 16;
-    const MYTHIC_4_STAR = 19;
+    // `progression.stars` is a cumulative starLevel across rarities, not a
+    // progression ordinal. Mythic runs through starLevels 11..14 (visible
+    // 12..15★), mapping to position 0..3 within Mythic via
+    // `progressionPositionFromStarLevel`. So:
+    //   Mythic 1★ = starLevel 11 → position 0 → pctByStar[0] = 10 → 1.10x
+    //   Mythic 4★ = starLevel 14 → position 3 → pctByStar[3] = 20 → 1.20x
+    const MYTHIC_1_STAR = 11;
+    const MYTHIC_4_STAR = 14;
     const scaled = [10, 13, 17, 20];
     const ally = () => member('m', plainChar({ id: 'myth', maxRarity: 'mythic' }), 1, 'mythic');
 
@@ -1300,6 +1303,82 @@ describe('vitruviusMasterAnnihilator — marking + capped bonus hit', () => {
     const allyHigh = rHigh.perMember['a'].perAction[0].result.expected;
     // Cap difference should show up as a damage delta of (2500 - 500) = 2000.
     expect(allyHigh - allyLow).toBeCloseTo(2000, 0);
+  });
+
+  it('catalog Vitruvius capByLevel hits the wiki anchor values', () => {
+    // Wiki anchors (top-of-rarity caps from https://tacticus.wiki.gg/wiki/Vitruvius):
+    //   Common L8=187, Uncommon L17=410, Rare L26=1011, Epic L35=2139,
+    //   Legendary L50=7477, Mythic L60=9788.
+    // If this fails, the catalog value drifted from the wiki spec.
+    const vit = getCharacter('vitruvius');
+    expect(vit).toBeDefined();
+    const passive = vit!.abilities.find(
+      (a) => a.teamBuff?.kind === 'vitruviusMasterAnnihilator',
+    );
+    expect(passive).toBeDefined();
+    const caps = passive!.teamBuff!.kind === 'vitruviusMasterAnnihilator'
+      ? passive!.teamBuff!.capByLevel
+      : [];
+    expect(caps[7]).toBe(187);
+    expect(caps[16]).toBe(410);
+    expect(caps[25]).toBe(1011);
+    expect(caps[34]).toBe(2139);
+    expect(caps[49]).toBe(7477);
+    expect(caps[59]).toBe(9788);
+  });
+
+  it('falls back to xpLevel when abilityLevels is missing (unowned heroes)', () => {
+    // Regression: user reports "everybody is capped at 500" because the
+    // engine was hard-coding level 1 for unowned Vitruvius. The UI default
+    // for a missing per-ability entry is xpLevel, so the engine should
+    // match. Here xpLevel implicitly stays at 1 (makeAttacker default) so
+    // cap[0]=100; bumping xpLevel to the 3rd index should pick cap[2]=900.
+    const caps = [100, 500, 900, 1500];
+    const bigHitter = plainChar({
+      id: 'big',
+      baseStats: {
+        damage: 100000, armor: 0, hp: 1000,
+        critChance: 0, critDamage: 0, blockChance: 0, blockDamage: 0,
+        meleeHits: 1, rangedHits: 1,
+      },
+      melee: { label: 'Melee', damageType: 'power', hits: 1, kind: 'melee' },
+    });
+    const bigMelee: AttackContext = {
+      profile: { label: 'Melee', damageType: 'power', hits: 1, kind: 'melee' },
+      rngMode: 'expected',
+    };
+    // Build Vitruvius with xpLevel=3 but NO abilityLevels entry for the
+    // passive — engine should read xpLevel and land on cap[2] = 900.
+    const vit: TeamMember = {
+      id: 'v',
+      position: 0,
+      attacker: {
+        source: vitruviusLike(caps),
+        progression: { stars: 0, rank: 0, xpLevel: 3, rarity: 'mythic' },
+        equipment: [],
+        // abilityLevels intentionally omitted
+      },
+    };
+    const mAlly = member('a', bigHitter, 1, 'mythic');
+    const rot: TeamRotation = {
+      members: [vit, mAlly],
+      turns: [
+        {
+          actions: [
+            { memberId: 'v', attack: meleeAttack() },
+            { memberId: 'a', attack: bigMelee },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'vitruviusMasterAnnihilator' && a.appliedToMemberId === 'a',
+    );
+    expect(apps.length).toBe(1);
+    // Effect string includes "L3" — meaning the engine picked xpLevel=3.
+    expect(apps[0].effect).toContain('L3');
+    expect(apps[0].effect).toContain('900');
   });
 });
 

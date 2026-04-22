@@ -4,6 +4,7 @@ import {
   STEPS_PER_RARITY,
   clampProgression,
   progressionLabel,
+  progressionPositionFromStarLevel,
   progressionToRarity,
   progressionToRarityIndex,
   progressionToStarLevel,
@@ -79,5 +80,22 @@ describe('progression', () => {
     expect(progressionLabel(0)).toContain('common');
     expect(progressionLabel(19)).toContain('mythic');
     expect(progressionLabel(19)).toContain('☠');
+  });
+
+  it('progressionPositionFromStarLevel recovers position within rarity from (starLevel, rarity)', () => {
+    // Mythic runs through starLevels 11..14 (visible 12..15★), each being
+    // 1..4★ within the Mythic rarity.
+    expect(progressionPositionFromStarLevel(11, 'mythic')).toBe(0);
+    expect(progressionPositionFromStarLevel(12, 'mythic')).toBe(1);
+    expect(progressionPositionFromStarLevel(13, 'mythic')).toBe(2);
+    expect(progressionPositionFromStarLevel(14, 'mythic')).toBe(3);
+    // Legendary runs through starLevels 8..11 (visible 9..12★).
+    expect(progressionPositionFromStarLevel(8, 'legendary')).toBe(0);
+    expect(progressionPositionFromStarLevel(11, 'legendary')).toBe(3);
+    // Common runs through starLevels 0..2.
+    expect(progressionPositionFromStarLevel(0, 'common')).toBe(0);
+    expect(progressionPositionFromStarLevel(2, 'common')).toBe(2);
+    // Negative/out-of-range clamps.
+    expect(progressionPositionFromStarLevel(-1, 'mythic')).toBe(0);
   });
 });
