@@ -1,0 +1,70 @@
+[
+  {
+    "id": "normal",
+    "displayName": "Normal",
+    "blocksMove": false,
+    "blocksLoS": false
+  },
+  {
+    "id": "highGround",
+    "displayName": "High Ground",
+    "blocksMove": false,
+    "blocksLoS": false,
+    "onAttackFromDamageMultiplier": 1.5
+  },
+  {
+    "id": "lowGround",
+    "displayName": "Low Ground",
+    "blocksMove": false,
+    "blocksLoS": false
+  },
+  {
+    "id": "razorWire",
+    "displayName": "Razor Wire",
+    "blocksMove": false,
+    "blocksLoS": false,
+    "blocksMoveUnlessTrait": ["flying", "vehicle"],
+    "onOccupyEffect": "fire"
+  },
+  {
+    "id": "tallGrass",
+    "displayName": "Tall Grass",
+    "blocksMove": false,
+    "blocksLoS": true,
+    "rangedHitsDelta": -2
+  },
+  {
+    "id": "trenches",
+    "displayName": "Trenches",
+    "blocksMove": false,
+    "blocksLoS": false,
+    "crossingBorderDefenseMultiplier": 0.5
+  },
+  {
+    "id": "ice",
+    "displayName": "Ice",
+    "blocksMove": false,
+    "blocksLoS": false,
+    "onOccupyEffect": "ice"
+  },
+  {
+    "id": "brokenIce",
+    "displayName": "Broken Ice",
+    "blocksMove": true,
+    "blocksMoveUnlessTrait": ["flying"],
+    "blocksLoS": false
+  },
+  {
+    "id": "bridge",
+    "displayName": "Bridge",
+    "blocksMove": false,
+    "blocksLoS": false
+  },
+  {
+    "id": "impassable",
+    "displayName": "Impassable",
+    "blocksMove": true,
+    "blocksMoveUnlessTrait": ["flying"],
+    "blocksLoS": true
+  }
+]

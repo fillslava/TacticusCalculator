@@ -1,0 +1,61 @@
+[
+  {
+    "id": "contamination",
+    "displayName": "Contamination",
+    "durationTurns": 2,
+    "affects": "any",
+    "source": "ability",
+    "modifier": {
+      "kind": "armorDelta",
+      "pct": -0.3
+    }
+  },
+  {
+    "id": "despoiledGround",
+    "displayName": "Despoiled Ground",
+    "durationTurns": 2,
+    "affects": "any",
+    "source": "ability",
+    "modifier": {
+      "kind": "factionDamageDelta",
+      "alliance": "imperial",
+      "pct": 0.2
+    }
+  },
+  {
+    "id": "fire",
+    "displayName": "Fire",
+    "durationTurns": 2,
+    "affects": "any",
+    "source": "terrain",
+    "modifier": {
+      "kind": "dotOfMaxHpPct",
+      "pct": 0.2,
+      "damageType": "flame"
+    }
+  },
+  {
+    "id": "ice",
+    "displayName": "Ice",
+    "durationTurns": 2,
+    "affects": "any",
+    "source": "terrain",
+    "modifier": {
+      "kind": "critDamageDelta",
+      "pct": 0.25
+    }
+  },
+  {
+    "id": "sporeMine",
+    "displayName": "Spore Mine",
+    "durationTurns": 3,
+    "affects": "enemy",
+    "source": "ability",
+    "modifier": {
+      "kind": "flatDamageOnEnter",
+      "damage": 150,
+      "damageType": "bio",
+      "oneShot": true
+    }
+  }
+]

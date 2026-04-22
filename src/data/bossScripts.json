@@ -1,0 +1,14 @@
+[
+  {
+    "id": "avatar_khaine_default",
+    "displayName": "Avatar of Khaine (scripted)",
+    "targetPolicy": "preferSummonsThenWeakest",
+    "turns": [
+      { "kind": "ability", "abilityId": "wailing_doom_strikes" },
+      { "kind": "ability", "abilityId": "wailing_doom_sweeps" },
+      { "kind": "ability", "abilityId": "wrath_of_khaine_unleashed" },
+      { "kind": "normal" }
+    ],
+    "repeatsFrom": 0
+  }
+]
