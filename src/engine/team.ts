@@ -25,23 +25,27 @@
  *    to his own Outrage. Order-sensitive — allies who act after Laviscus
  *    don't count.
  *
- *  - `trajannLegendaryCommander`: enemies receive +`flatDamage` from any
- *    attack while they are adjacent to a friendly that has used an
- *    active ability earlier this turn. Per the wiki, the trigger is
- *    explicitly "a Character uses an active" — MoWs firing actives do
- *    NOT arm it (gated by `isMachineOfWar`). For single-boss Guild Raid
- *    we treat the boss as always-adjacent to every team member, so the
- *    position filter collapses to "a friendly Character fired an active
- *    earlier this turn". Additionally, if the affected enemy is also
- *    adjacent to Trajann (again: always true in single-boss MVP if
- *    Trajann is on the team), friendly Characters score
- *    +`extraHitsAdjacentToSelf` additional hits on their FIRST attack
- *    that is not a normal attack (i.e. first ability attack) against
- *    that enemy this turn. Per-member: each friendly gets the bonus
- *    exactly once, on their first non-normal attack after the trigger
- *    has fired. Trajann himself must also have taken at least one
- *    action earlier in the battle (`membersWhoActed` gate) or no buff
- *    applies — this captures "Trajann is dead / not on the board".
+ *  - `trajannLegendaryCommander`: enemies receive +X damage (per-level
+ *    `flatDamageByLevel`) from any attack while they are adjacent to a
+ *    friendly that has used an active ability earlier this turn. Per the
+ *    wiki, the trigger is explicitly "a Character uses an active" — MoWs
+ *    firing actives do NOT arm it (gated by `isMachineOfWar`). For single-
+ *    boss Guild Raid we treat the boss as always-adjacent to every team
+ *    member, so the position filter collapses to "a friendly Character
+ *    fired an active earlier this turn". Additionally, if the affected
+ *    enemy is also adjacent to Trajann (again: always true in single-boss
+ *    MVP if Trajann is on the team), friendly Characters score +Y
+ *    additional hits (per-level `extraHitsByLevel`) on their FIRST attack
+ *    that is not a normal attack (i.e. first ability attack OR first
+ *    triggered-passive ability profile) against that enemy this turn.
+ *    Per-member: each friendly Character gets the bonus exactly once, on
+ *    their first non-normal attack after the trigger has fired. MoW allies
+ *    do NOT receive the +Y hits (recipient gate on `isMachineOfWar`).
+ *    Trajann himself must also have taken at least one action earlier in
+ *    the battle (`membersWhoActed` gate) or no buff applies — this
+ *    captures "Trajann is dead / not on the board". The per-level tables
+ *    are indexed via the Trajann Legendary Commander passive's level
+ *    (abilityLevels entry → xpLevel → 1 fallback).
  *
  *  - `biovoreMythicAcid`: once a Biovore-teamBuff carrier fires an ability
  *    that damages the target this turn, subsequent attacks that turn from
@@ -147,12 +151,62 @@ function teamBuffOf<K extends AbilityTeamBuff['kind']>(
  * this same rule to keep MoW entries out of hero slots; the engine uses it
  * to gate mechanics that explicitly target "Characters" (heroes) only —
  * e.g. Trajann's Legendary Commander is armed by a Character's active, not
- * a MoW's.
+ * a MoW's; and only Character recipients gain the +Y extra-hits clause.
  */
 function isMachineOfWar(src: CatalogCharacter): boolean {
   return (src.traits ?? []).some(
     (trait) => trait.toLowerCase() === 'machine of war',
   );
+}
+
+/**
+ * Resolve the level that drives a team-buff carrier's per-level table.
+ * Priority: explicit `abilityLevels` entry for the given passive id →
+ * fallback to `progression.xpLevel` → final fallback 1. This mirrors the
+ * Vitruvius Master Annihilator resolution (which handles unowned-hero
+ * catalog entries where per-ability levels aren't populated).
+ */
+function resolveTeamBuffLevel(
+  member: TeamMember,
+  buffKind: AbilityTeamBuff['kind'],
+): number {
+  const ability = findAbilityWithTeamBuff(member.attacker.source, buffKind);
+  const passiveId = ability?.id;
+  const lvlEntry = passiveId
+    ? member.attacker.abilityLevels?.find((a) => a.id === passiveId)
+    : undefined;
+  return Math.max(
+    1,
+    lvlEntry?.level ?? member.attacker.progression.xpLevel ?? 1,
+  );
+}
+
+/** Pick the level-indexed value from a per-level array, clamping to its
+ *  last entry for levels past the end. */
+function atLevel<T>(arr: readonly T[], level: number): T {
+  const idx = Math.max(0, Math.min(arr.length - 1, level - 1));
+  return arr[idx];
+}
+
+/** Resolve Trajann's per-level flat damage (X) and the level used to pick
+ *  it. Split out so both the buffs-array push and the applications-sink
+ *  label read the same numbers. */
+function trajannFlat(
+  other: TeamMember,
+  cmdr: AbilityTeamBuff & { kind: 'trajannLegendaryCommander' },
+): { flat: number; level: number } {
+  const level = resolveTeamBuffLevel(other, 'trajannLegendaryCommander');
+  return { flat: atLevel(cmdr.flatDamageByLevel, level), level };
+}
+
+/** Resolve Trajann's per-level extra hits (Y) and the level used to pick
+ *  it. Returns 0 hits when the table is empty (no-op). */
+function trajannHits(
+  other: TeamMember,
+  cmdr: AbilityTeamBuff & { kind: 'trajannLegendaryCommander' },
+): { hits: number; level: number } {
+  const level = resolveTeamBuffLevel(other, 'trajannLegendaryCommander');
+  return { hits: atLevel(cmdr.extraHitsByLevel, level), level };
 }
 
 /** Find an ability carrying a specific teamBuff kind on a catalog character. */
@@ -335,56 +389,67 @@ function deriveTeamBuffs(
   }
 
   // ------ 3) Trajann LegendaryCommander: flat damage to the target when a
-  //        friendly has already fired an active this turn. Applies to EVERY
-  //        team member's attacks against the enemy (not just the Shield
-  //        Host ally that fired the active). Additionally: Trajann must
-  //        himself have been active in the battle (`membersWhoActed`
-  //        gate) — if he's on the team but the rotation never schedules
-  //        him, he doesn't grant the buff. Mirrors how Biovore and
-  //        Laviscus self-gate on having fired.
+  //        friendly Character has fired an active earlier this turn. Applies
+  //        to EVERY team member's attacks against the enemy (Characters and
+  //        MoWs alike — the flat-damage clause is not restricted to
+  //        Characters, only the trigger and the extra-hits clause are).
+  //        Additionally: Trajann must himself have been active in the
+  //        battle (`membersWhoActed` gate) — if he's on the team but the
+  //        rotation never schedules him, he doesn't grant the buff.
+  //        Mirrors how Biovore and Laviscus self-gate on having fired.
   if (turn.friendlyActiveFiredThisTurn) {
     for (const other of team) {
       const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
       if (!cmdr) continue;
       if (!battle.membersWhoActed.has(other.id)) continue;
+      const { flat, level } = trajannFlat(other, cmdr);
       buffs.push({
         id: `trajann-flat:${other.id}`,
         name: 'Legendary Commander (flat)',
-        damageFlat: cmdr.flatDamage,
+        damageFlat: flat,
       });
       appsSink.push({
         turnIdx,
         sourceMemberId: other.id,
         kind: 'trajannLegendaryCommander',
         appliedToMemberId: member.id,
-        effect: `+${cmdr.flatDamage} flat dmg (friendly active fired)`,
+        effect: `+${flat} flat dmg (L${level}, friendly active fired)`,
       });
     }
   }
 
-  // ------ 4) Trajann LegendaryCommander: extra hits on the attacker's
-  //        FIRST non-normal (ability) attack this turn, once the flat-
-  //        damage trigger has fired AND Trajann is on the team. Gated on:
-  //          - a friendly fired an active earlier this turn (trigger)
-  //          - current action is an ability (first non-normal attack)
-  //          - this member hasn't yet resolved a non-normal attack this turn
-  //        The per-member `memberNonNormalAttackHappened` flag is set in
-  //        `updateTurnStateAfterAction` AFTER this action resolves, so the
-  //        first ability gets the bonus and later abilities do not.
+  // ------ 4) Trajann LegendaryCommander: extra hits on a friendly
+  //        Character's FIRST non-normal attack this turn, once the flat-
+  //        damage trigger has fired AND Trajann has acted in the battle.
+  //        Gated on:
+  //          - a friendly Character fired an active earlier this turn
+  //            (arms `friendlyActiveFiredThisTurn`, MoW actives don't arm)
+  //          - current action/passive-profile is an ability (a "not normal
+  //            attack" in wiki terms)
+  //          - this member hasn't yet resolved a non-normal attack this
+  //            turn (per-member `memberNonNormalAttackHappened` ledger)
+  //          - THIS MEMBER is itself a Character (MoWs don't receive the
+  //            extra hits — wiki specifies "friendly Characters score Y")
+  //        The ledger is updated right before passive triggers run (so
+  //        passives re-deriving buffs don't double-dip), and also in
+  //        `updateTurnStateAfterAction` as a belt-and-suspenders for the
+  //        scheduled-action path.
   if (
     turn.friendlyActiveFiredThisTurn &&
     currentProfile.kind === 'ability' &&
-    !turn.memberNonNormalAttackHappened[member.id]
+    !turn.memberNonNormalAttackHappened[member.id] &&
+    !isMachineOfWar(member.attacker.source)
   ) {
     for (const other of team) {
       const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
       if (!cmdr) continue;
-      if (cmdr.extraHitsAdjacentToSelf <= 0) continue;
       if (!battle.membersWhoActed.has(other.id)) continue;
+      const { hits, level } = trajannHits(other, cmdr);
+      if (hits <= 0) continue;
       buffs.push({
         id: `trajann-hits:${other.id}`,
         name: 'Legendary Commander (hits)',
-        bonusHits: cmdr.extraHitsAdjacentToSelf,
+        bonusHits: hits,
         bonusHitsOn: 'ability',
       });
       appsSink.push({
@@ -392,7 +457,7 @@ function deriveTeamBuffs(
         sourceMemberId: other.id,
         kind: 'trajannLegendaryCommander',
         appliedToMemberId: member.id,
-        effect: `+${cmdr.extraHitsAdjacentToSelf} hits on first ability (Trajann)`,
+        effect: `+${hits} hits on first ability (L${level}, Trajann)`,
       });
     }
   }
@@ -447,25 +512,12 @@ function deriveTeamBuffs(
       const anni = teamBuffOf(other, 'vitruviusMasterAnnihilator');
       if (!anni) continue;
       // Resolve cap from the passive's ability-level entry; fall back to
-      // the attacker's xpLevel when no explicit per-ability entry exists
-      // (matches BuildEditor's `defaultLevel={build.xpLevel}` convention).
-      // Final fallback is 1. Unowned heroes never have abilityLevels
-      // populated, so xpLevel is the best available proxy.
-      const passiveAbility = findAbilityWithTeamBuff(
-        other.attacker.source,
-        'vitruviusMasterAnnihilator',
-      );
-      const passiveId = passiveAbility?.id;
-      const lvlEntry = passiveId
-        ? other.attacker.abilityLevels?.find((a) => a.id === passiveId)
-        : undefined;
-      const level = Math.max(
-        1,
-        lvlEntry?.level ?? other.attacker.progression.xpLevel ?? 1,
-      );
-      const cap = anni.capByLevel[
-        Math.min(level - 1, anni.capByLevel.length - 1)
-      ];
+      // xpLevel when no explicit per-ability entry exists (matches
+      // BuildEditor's `defaultLevel={build.xpLevel}` convention). Final
+      // fallback is 1. Unowned heroes never have abilityLevels populated,
+      // so xpLevel is the best available proxy.
+      const level = resolveTeamBuffLevel(other, 'vitruviusMasterAnnihilator');
+      const cap = atLevel(anni.capByLevel, level);
       buffs.push({
         id: `master-annihilator:${other.id}`,
         name: 'Master Annihilator',
@@ -629,10 +681,17 @@ function isAbilityActive(attacker: Attacker, abilityId: string | undefined): boo
  *     c. Apply scaling + bonus hits (same as single-attacker rotation).
  *     d. Resolve attack, drain shield/HP, record per-member entry.
  *     e. Stamp cooldown on the actor's state.
- *     f. Fire matching passives on the actor — each profile consumes the
- *        same shield/HP pool.
- *     g. Update turn-local reactive flags (outrage contributors,
+ *     f. Update turn-local reactive flags (outrage contributors,
  *        friendly-active-fired, member-non-normal-happened, spore-mine).
+ *        This happens BEFORE triggered passives fire so they see the
+ *        scheduled action's effects in turnState (e.g. Trajann's trigger
+ *        armed by the scheduled active, applying to its triggered
+ *        passives on the same action).
+ *     g. Fire matching passives on the actor — each profile re-derives
+ *        team buffs against the updated turnState and consumes the same
+ *        shield/HP pool. Passive profiles update the per-member
+ *        first-non-normal ledger inline so later profiles within the
+ *        same trigger don't double-dip Trajann's once-per-turn +Y hits.
  *  2. End of turn: tick each member's cooldowns; advance turnsAttacked.
  *  3. Record cumulative team total.
  */
@@ -705,14 +764,19 @@ export function resolveTeamRotation(
       const adjustedProfile = applyBonusHits(scaledProfile, combinedBuffs, turnIdx === 0);
       const adjustedCtx: AttackContext = { ...action.attack, profile: adjustedProfile };
 
-      // 5. Resolve attack; drain shield/HP.
-      const runAttack = (ctx: AttackContext) => {
+      // 5. Resolve attack; drain shield/HP. `runAttack` takes the attacker
+      //    as a parameter so step 8 (passive triggers) can resolve passive
+      //    profiles against a freshly-buffed attacker per profile — which
+      //    matters when Trajann's +Y hits (or other re-derived team buffs)
+      //    should land on a triggered passive even though the scheduled
+      //    action's buffs didn't include them.
+      const runAttack = (atk: Attacker, ctx: AttackContext) => {
         const stepTarget: Target = {
           ...target,
           currentShield: remainingShield,
           currentHp: remainingHp,
         };
-        const result = resolveAttack(buffedAttacker, stepTarget, ctx);
+        const result = resolveAttack(atk, stepTarget, ctx);
         let dmgLeft = result.expected;
         if (remainingShield > 0) {
           const absorbed = Math.min(remainingShield, dmgLeft);
@@ -724,7 +788,7 @@ export function resolveTeamRotation(
         return result;
       };
 
-      const result = runAttack(adjustedCtx);
+      const result = runAttack(buffedAttacker, adjustedCtx);
       perMember[action.memberId].perAction.push({
         turnIdx,
         actionIdx,
@@ -734,7 +798,42 @@ export function resolveTeamRotation(
       // 6. Stamp cooldown on the actor.
       stampCooldown(buffedAttacker, action.attack.profile, state);
 
-      // 7. Passive triggers on the actor.
+      // 7. Update reactive flags for the scheduled action BEFORE triggered
+      //    passives fire. Ordering rationale:
+      //      - A Character-active arms Trajann's trigger via
+      //        `friendlyActiveFiredThisTurn`. Triggered passives on the SAME
+      //        turn must see the trigger armed so they can claim +X flat /
+      //        +Y hits (the user's explicit report: "When second hit from
+      //        passive of Kariyan, Ghulgortz, Kharn or even Abbadon is on i
+      //        dont see feedback that they get buff of extra 2 (Y) hits").
+      //      - A non-normal scheduled action consumes this member's
+      //        first-non-normal slot; a triggered ability-kind passive
+      //        profile in the same action should NOT re-claim +Y hits.
+      //      - Laviscus's Outrage ledger reflects the scheduled attack's
+      //        max hit; triggered passives on the same actor still don't
+      //        feed Outrage (they're the SAME actor).
+      //    The scheduled action itself resolved at step 5 with the buffs
+      //    derived at step 2 (pre-update), so moving this update up does
+      //    NOT retroactively buff the scheduled attack.
+      updateTurnStateAfterAction(
+        member,
+        action.attack,
+        result,
+        rotation.members,
+        turnState,
+        battleState,
+      );
+
+      // 8. Passive triggers on the actor. Each passive profile RE-DERIVES
+      //    its own team buffs — the scheduled action's `combinedBuffs` may
+      //    not include Trajann's +Y hits (the scheduled was a normal
+      //    attack, so its derive saw `currentProfile.kind === 'melee'` and
+      //    skipped the +Y buff) while the triggered passive IS an ability
+      //    and should pick up +Y hits as the member's first non-normal.
+      //    Re-derivation also handles the +X flat clause newly armed by
+      //    the scheduled action (the scheduled action itself doesn't get
+      //    +X, per wiki wording "has used", but the triggered passive
+      //    fires after `friendlyActiveFiredThisTurn` is set at step 7).
       for (const passive of buffedAttacker.source.abilities) {
         const fire = shouldTrigger(passive, {
           profile: action.attack.profile,
@@ -743,11 +842,46 @@ export function resolveTeamRotation(
         });
         if (!fire) continue;
         passive.profiles.forEach((p, profileIdx) => {
+          // Re-derive team buffs AS IF this passive profile were the
+          // currently-resolving attack. Picks up Trajann +Y hits on first
+          // non-normal per member, Vitruvius marked-target cap, Biovore
+          // Mythic Acid if this passive's actor is Mythic, etc.
+          const passiveTeamBuffs = deriveTeamBuffs(
+            member,
+            rotation.members,
+            p,
+            turnState,
+            battleState,
+            turnIdx,
+            teamBuffApplications,
+          );
+          const passiveCombinedBuffs: TurnBuff[] = [
+            ...(action.buffs ?? []),
+            ...passiveTeamBuffs,
+          ];
+          const passiveBuffedAttacker = applyTurnBuffs(
+            member.attacker,
+            passiveCombinedBuffs,
+          );
+          const passiveProfile = applyBonusHits(
+            p,
+            passiveCombinedBuffs,
+            turnIdx === 0,
+          );
           const passiveCtx: AttackContext = {
-            profile: applyBonusHits(p, combinedBuffs, turnIdx === 0),
+            profile: passiveProfile,
             rngMode: action.attack.rngMode,
           };
-          const passiveResult = runAttack(passiveCtx);
+          const passiveResult = runAttack(passiveBuffedAttacker, passiveCtx);
+          // Mark the per-member "first non-normal of turn" ledger so any
+          // subsequent passive profile (same passive's later profiles or a
+          // later-iterated passive) doesn't re-claim Trajann's +Y hits.
+          // Mirrors what updateTurnStateAfterAction does for scheduled
+          // abilities; here we update inline because the passive-profile
+          // loop happens AFTER the outer update call.
+          if (p.kind === 'ability') {
+            turnState.memberNonNormalAttackHappened[action.memberId] = true;
+          }
           perMember[action.memberId].perAction.push({
             turnIdx,
             actionIdx,
@@ -760,21 +894,6 @@ export function resolveTeamRotation(
           });
         });
       }
-
-      // 8. Update reactive flags AFTER resolving, so order-sensitive buffs
-      //    (outrage contributions, spore-mine-hit) don't apply to the
-      //    triggering action itself. The resolved scheduled-attack result
-      //    feeds per-hit data to Laviscus's Outrage ledger; triggered
-      //    passives don't feed Outrage (they're not "friendly attacks"
-      //    in the normal sense).
-      updateTurnStateAfterAction(
-        member,
-        action.attack,
-        result,
-        rotation.members,
-        turnState,
-        battleState,
-      );
 
       isFirstAttackOfTurn[action.memberId] = false;
     });

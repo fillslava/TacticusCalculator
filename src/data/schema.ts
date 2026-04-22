@@ -84,8 +84,16 @@ export const AbilityTeamBuffSchema = z.union([
   }),
   z.object({
     kind: z.literal('trajannLegendaryCommander'),
-    flatDamage: z.number(),
-    extraHitsAdjacentToSelf: z.number().int(),
+    /** Per-level flat damage (X). Indexed by (level-1). Levels past the
+     *  array length clamp to the last entry. Wiki anchors:
+     *    L8=27, L17=60, L26=148, L35=314, L50=1096, L60=1436. */
+    flatDamageByLevel: z.array(z.number()).min(1),
+    /** Per-level extra hits (Y) on the first not-normal attack against an
+     *  enemy adjacent to Trajann. Wiki anchors:
+     *    L1..L26 = 1, L27+ = 2 (matches the Epic-rarity jump on the wiki's
+     *    interactive scaler, with the documented top-of-rarity values
+     *    Epic L35=2, Legendary L50=2, Mythic L60=2). */
+    extraHitsByLevel: z.array(z.number().int()).min(1),
   }),
   z.object({
     kind: z.literal('biovoreMythicAcid'),

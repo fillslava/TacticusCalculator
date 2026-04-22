@@ -140,22 +140,30 @@ export type AbilityTeamBuff =
   | {
       kind: 'trajannLegendaryCommander';
       /**
-       * Enemies receive +flatDamage from *any* attack while they are
-       * adjacent to a friendly unit that has used an active ability
-       * earlier this turn. In single-boss Guild Raid the boss is treated
-       * as always-adjacent to every team member, so the gate reduces to
-       * "any friendly fired an active earlier this turn".
+       * Per-level flat damage bonus (X on the wiki). Enemies receive +X
+       * damage from *any* attack while they are adjacent to a friendly
+       * Character that has used an active ability earlier this turn. In
+       * single-boss Guild Raid the boss is treated as always-adjacent to
+       * every team member, so the gate reduces to "a friendly Character
+       * fired an active earlier this turn AND Trajann has taken at
+       * least one action". Indexed by (level - 1); levels past the array
+       * length clamp to the last entry. The level that drives this is
+       * Trajann's Legendary Commander passive level (with xpLevel fall-
+       * back for unowned heroes, matching Vitruvius).
        */
-      flatDamage: number;
+      flatDamageByLevel: number[];
       /**
-       * If the affected enemy is also adjacent to Trajann, friendly
-       * Characters score +extraHitsAdjacentToSelf additional hits on
-       * their FIRST attack that is not a normal attack (i.e. first
-       * ability attack) against that enemy this turn. In single-boss
+       * Per-level extra-hits bonus (Y on the wiki). If the affected enemy
+       * is also adjacent to Trajann, friendly Characters score +Y
+       * additional hits on their FIRST attack that is not a normal
+       * attack (i.e. first ability attack OR first triggered-passive
+       * ability profile) against that enemy this turn. In single-boss
        * Guild Raid, "adjacent to Trajann" is assumed whenever Trajann is
-       * on the team.
+       * on the team. MoW allies do NOT receive this bonus — the passive
+       * specifies "friendly Characters". Indexed identically to
+       * `flatDamageByLevel`.
        */
-      extraHitsAdjacentToSelf: number;
+      extraHitsByLevel: number[];
     }
   | {
       kind: 'biovoreMythicAcid';

@@ -425,10 +425,15 @@ function atLevel(arr: number[] | null, level = REFERENCE_LEVEL_INDEX): number | 
   return arr[Math.min(level, arr.length - 1)] ?? null;
 }
 
-function numAtLevel(a: GameInfoAbility, key: string, level = REFERENCE_LEVEL_INDEX): number | null {
+/**
+ * Returns the full per-level curve for a variable, rounded to integers. Used
+ * by teamBuff builders that need every level's value (e.g. Trajann's
+ * `flatDamageByLevel`). Returns null when the gameinfo variable is missing or
+ * not an array of numbers — callers fall back to a hand-authored default.
+ */
+function numArrayRounded(a: GameInfoAbility, key: string): number[] | null {
   const arr = numArray(a.variables?.[key]);
-  const v = atLevel(arr, level);
-  return v === null ? null : Math.round(v);
+  return arr === null ? null : arr.map((n) => Math.round(n));
 }
 
 /**
@@ -474,11 +479,20 @@ const TEAM_BUFF_BUILDERS: Record<string, (a: GameInfoAbility) => AbilityTeamBuff
     outragePctOfOutrage: 120,
     critDmgPerChaosContributor: 1044,
   }),
-  LegendaryCommander: (a) => ({
-    kind: 'trajannLegendaryCommander',
-    flatDamage: numAtLevel(a, 'extraDmg') ?? 0,
-    extraHitsAdjacentToSelf: numAtLevel(a, 'nrOfHits') ?? 2,
-  }),
+  LegendaryCommander: (a) => {
+    // Per-level curves: gameinfo exposes `extraDmg` (X) and `nrOfHits` (Y)
+    // as arrays indexed by level-1. Fall back to a single-entry placeholder
+    // when gameinfo drops the variable; the engine clamps past-end indices
+    // to the last entry, so a single-entry array still resolves correctly
+    // for every level.
+    const flats = numArrayRounded(a, 'extraDmg') ?? [0];
+    const hits = numArrayRounded(a, 'nrOfHits') ?? [2];
+    return {
+      kind: 'trajannLegendaryCommander',
+      flatDamageByLevel: flats,
+      extraHitsByLevel: hits,
+    };
+  },
 };
 
 /**

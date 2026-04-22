@@ -135,10 +135,23 @@ function laviscusLike(
   });
 }
 
+/**
+ * Trajann-shaped fixture. Accepts either a scalar (uniform across all levels)
+ * or a full per-level array. Scalars expand to a single-entry array so tests
+ * that don't care about level scaling remain terse. Tests that exercise
+ * level-scaling pass an explicit array and pair it with an `abilityLevels`
+ * entry when constructing the member.
+ */
 function trajannLike(
-  flatDamage = 1000,
-  extraHitsAdjacentToSelf = 2,
+  flatDamageByLevel: number | number[] = 1000,
+  extraHitsByLevel: number | number[] = 2,
 ): CatalogCharacter {
+  const flats = Array.isArray(flatDamageByLevel)
+    ? flatDamageByLevel
+    : [flatDamageByLevel];
+  const hits = Array.isArray(extraHitsByLevel)
+    ? extraHitsByLevel
+    : [extraHitsByLevel];
   const passive: CatalogAbility = {
     id: 'trajann_lc',
     name: 'Legendary Commander',
@@ -146,8 +159,8 @@ function trajannLike(
     profiles: [],
     teamBuff: {
       kind: 'trajannLegendaryCommander',
-      flatDamage,
-      extraHitsAdjacentToSelf,
+      flatDamageByLevel: flats,
+      extraHitsByLevel: hits,
     },
   };
   return plainChar({
@@ -1256,6 +1269,464 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     );
     expect(flatApp).toBeDefined();
     expect(flatApp?.effect).toMatch(/\+1000 flat dmg/);
+  });
+
+  // -------- Level scaling (flatDamageByLevel / extraHitsByLevel) --------
+
+  it('flatDamageByLevel picks the per-level value from the passive\'s ability level', () => {
+    // Trajann at L50 uses flatDamageByLevel[49] = 1096 (wiki anchor for
+    // Legendary cap). Bumping the passive's abilityLevels entry to 60
+    // clamps to flatDamageByLevel[59] = 1436 (Mythic cap).
+    const flatCurve = [
+      // Only the indices we care about need accurate values; fill the rest
+      // so the array is long enough. 60 entries.
+      ...Array.from({ length: 49 }, (_, i) => 100 + i * 10), // L1..L49 placeholders
+      1096, // L50
+      ...Array.from({ length: 9 }, (_, i) => 1100 + i * 10), // L51..L59
+      1436, // L60
+    ];
+    expect(flatCurve).toHaveLength(60);
+    expect(flatCurve[49]).toBe(1096);
+    expect(flatCurve[59]).toBe(1436);
+
+    const makeTra = (passiveLevel: number) =>
+      member(
+        'tra',
+        trajannLike(flatCurve, [0]), // extraHits 0 to isolate flat-damage side
+        0,
+        'legendary',
+        0,
+        [{ id: 'trajann_lc', level: passiveLevel }],
+      );
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 2);
+
+    const runAt = (passiveLevel: number) => {
+      const rot: TeamRotation = {
+        members: [makeTra(passiveLevel), mCaster, mAttacker],
+        turns: [
+          {
+            actions: [
+              { memberId: 'tra', attack: meleeAttack() },
+              { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+              { memberId: 'x', attack: meleeAttack() },
+            ],
+          },
+        ],
+      };
+      return resolveTeamRotation(rot, makeTarget());
+    };
+
+    const r50 = runAt(50);
+    const r60 = runAt(60);
+    const flat50 = r50.teamBuffApplications.find(
+      (a) => a.kind === 'trajannLegendaryCommander' && a.appliedToMemberId === 'x',
+    );
+    const flat60 = r60.teamBuffApplications.find(
+      (a) => a.kind === 'trajannLegendaryCommander' && a.appliedToMemberId === 'x',
+    );
+    expect(flat50?.effect).toMatch(/\+1096 flat dmg/);
+    expect(flat50?.effect).toContain('L50');
+    expect(flat60?.effect).toMatch(/\+1436 flat dmg/);
+    expect(flat60?.effect).toContain('L60');
+  });
+
+  it('extraHitsByLevel scales with level (L1 = 1 hit, L27 = 2 hits)', () => {
+    // Real Trajann curve: L1..L26 grant +1 hit, L27+ grant +2 hits. Use a
+    // synthetic curve that mirrors the rarity-tier jump exactly.
+    const hitsCurve = [
+      ...Array.from({ length: 26 }, () => 1), // L1..L26 = 1
+      ...Array.from({ length: 34 }, () => 2), // L27..L60 = 2
+    ];
+    expect(hitsCurve[0]).toBe(1);
+    expect(hitsCurve[25]).toBe(1);
+    expect(hitsCurve[26]).toBe(2);
+    expect(hitsCurve[59]).toBe(2);
+
+    const xSrc = plainChar({
+      id: 'x',
+      abilities: [
+        {
+          id: 'x_active',
+          name: 'X Active',
+          kind: 'active',
+          profiles: [{ label: 'X', damageType: 'power', hits: 1, kind: 'ability' }],
+          cooldown: 3,
+        },
+      ],
+    });
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mAttacker = member('x', xSrc, 2);
+
+    const runAt = (passiveLevel: number) => {
+      const mTra = member(
+        'tra',
+        trajannLike([0], hitsCurve), // flat 0 to isolate hits side
+        0,
+        'legendary',
+        0,
+        [{ id: 'trajann_lc', level: passiveLevel }],
+      );
+      const rot: TeamRotation = {
+        members: [mTra, mCaster, mAttacker],
+        turns: [
+          {
+            actions: [
+              { memberId: 'tra', attack: meleeAttack() },
+              { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+              { memberId: 'x', attack: abilityAttack('x_active', 3) },
+            ],
+          },
+        ],
+      };
+      return resolveTeamRotation(rot, makeTarget());
+    };
+
+    const rLow = runAt(1);   // +1 hit curve entry
+    const rHigh = runAt(27); // +2 hit curve entry
+
+    const hitsLow = rLow.teamBuffApplications.find(
+      (a) =>
+        a.kind === 'trajannLegendaryCommander' &&
+        a.appliedToMemberId === 'x' &&
+        /hits on first ability/.test(a.effect),
+    );
+    const hitsHigh = rHigh.teamBuffApplications.find(
+      (a) =>
+        a.kind === 'trajannLegendaryCommander' &&
+        a.appliedToMemberId === 'x' &&
+        /hits on first ability/.test(a.effect),
+    );
+    expect(hitsLow?.effect).toMatch(/\+1 hits on first ability/);
+    expect(hitsLow?.effect).toContain('L1');
+    expect(hitsHigh?.effect).toMatch(/\+2 hits on first ability/);
+    expect(hitsHigh?.effect).toContain('L27');
+  });
+
+  it('falls back to xpLevel when trajann_lc abilityLevels entry is missing', () => {
+    // Mirrors the Vitruvius Master Annihilator fallback: when an unowned
+    // Trajann has no abilityLevels entry, the engine should fall back to
+    // xpLevel. Matches the UI's `defaultLevel={build.xpLevel}` convention.
+    const flatCurve = [100, 200, 300, 400, 500]; // L1..L5
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 2);
+    // Build Trajann with xpLevel=3 but NO abilityLevels entry → engine
+    // should land on flatCurve[2] = 300 and emit "L3" in the effect string.
+    const mTra: TeamMember = {
+      id: 'tra',
+      position: 0,
+      attacker: {
+        source: trajannLike(flatCurve, [0]),
+        progression: { stars: 0, rank: 0, xpLevel: 3, rarity: 'legendary' },
+        equipment: [],
+      },
+    };
+
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'tra', attack: meleeAttack() },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'x', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const flatApp = r.teamBuffApplications.find(
+      (a) => a.kind === 'trajannLegendaryCommander' && a.appliedToMemberId === 'x',
+    );
+    expect(flatApp).toBeDefined();
+    expect(flatApp?.effect).toMatch(/\+300 flat dmg/);
+    expect(flatApp?.effect).toContain('L3');
+  });
+
+  // -------- MoW recipient gate for extra-hits --------
+
+  it('MoW ally does NOT receive +Y extra hits (only friendly Characters do)', () => {
+    // Wiki: "friendly Characters score Y additional hits". A MoW ally firing
+    // an ability after the trigger is armed should NOT get +Y hits even
+    // though the flat-damage clause still applies to them (flat-dmg has no
+    // Character-only recipient gate — only the trigger-arming side does).
+    const mowSrc = plainChar({
+      id: 'mow_attacker',
+      traits: ['machine of war'],
+      abilities: [
+        {
+          id: 'mow_active_attacker',
+          name: 'MoW Attacker Active',
+          kind: 'active',
+          profiles: [
+            { label: 'MA', damageType: 'power', hits: 1, kind: 'ability' },
+          ],
+          cooldown: 3,
+        },
+      ],
+    });
+    const mTra = member('tra', trajannLike([1000], [2]), 0);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mMow = member('mw', mowSrc, 5);
+
+    // Trajann melees (membersWhoActed), caster fires active (trigger armed),
+    // MoW fires its active. MoW should NOT get +Y hits, but SHOULD get the
+    // +X flat damage (the recipient gate only applies to the hits clause).
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mMow],
+      turns: [
+        {
+          actions: [
+            { memberId: 'tra', attack: meleeAttack() },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'mw', attack: abilityAttack('mow_active_attacker', 3) },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // Flat-damage buff IS recorded for MoW (no recipient gate on flat-dmg).
+    const flatApp = r.teamBuffApplications.find(
+      (a) =>
+        a.kind === 'trajannLegendaryCommander' &&
+        a.appliedToMemberId === 'mw' &&
+        /flat dmg/.test(a.effect),
+    );
+    expect(flatApp).toBeDefined();
+    // Extra-hits buff NOT recorded for MoW.
+    expect(
+      r.teamBuffApplications.filter(
+        (a) =>
+          a.kind === 'trajannLegendaryCommander' &&
+          a.appliedToMemberId === 'mw' &&
+          /hits on first ability/.test(a.effect),
+      ),
+    ).toEqual([]);
+  });
+
+  // -------- Triggered-passive re-derivation --------
+
+  it('triggered passive ability profile receives +Y hits on its FIRST non-normal attack', () => {
+    // Regression for user report: "When second hit from passive of Kariyan,
+    // Ghulgortz, Kharn or even Abbadon is on i dont see feedback that they
+    // get buff of extra 2 (Y) hits to their first not normal attack."
+    //
+    // Setup: Trajann present, ally fires active (trigger armed), Kariyan-
+    // like attacker schedules a melee that triggers a passive with an
+    // ability-kind profile. The triggered passive should pick up +Y hits
+    // even though the scheduled melee (normal attack) didn't carry the
+    // bonus — re-derivation per passive profile is what makes this work.
+    const kariyanPassive: CatalogAbility = {
+      id: 'kariyan_loc',
+      name: 'Legacy of Combat',
+      kind: 'passive',
+      profiles: [
+        {
+          label: 'LoC',
+          damageType: 'piercing',
+          hits: 1,
+          kind: 'ability',
+          abilityId: 'kariyan_loc',
+        },
+      ],
+      trigger: { kind: 'afterOwnFirstAttackOfTurn' },
+    };
+    const kariyanSrc = plainChar({
+      id: 'kariyan',
+      abilities: [kariyanPassive],
+    });
+    const mTra = member('tra', trajannLike([0], [2]), 0); // flat=0 isolates hits side
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mKar = member('k', kariyanSrc, 2);
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mKar],
+      turns: [
+        {
+          actions: [
+            { memberId: 'tra', attack: meleeAttack() },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'k', attack: meleeAttack() }, // triggers Kariyan's passive
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // Application recorded against Kariyan for the triggered passive.
+    const hitsApp = r.teamBuffApplications.find(
+      (a) =>
+        a.appliedToMemberId === 'k' &&
+        a.kind === 'trajannLegendaryCommander' &&
+        /hits on first ability/.test(a.effect),
+    );
+    expect(hitsApp).toBeDefined();
+    expect(hitsApp?.effect).toMatch(/\+2 hits on first ability/);
+    // The triggered-passive fire record lists the Kariyan Legacy of Combat
+    // profile so the UI can cross-reference the application to the fire.
+    expect(r.perMember['k'].triggeredFires).toEqual([
+      { turnIdx: 0, abilityId: 'kariyan_loc', profileIdx: 0 },
+    ]);
+  });
+
+  it('triggered passive with TWO ability profiles gets +Y hits only on the FIRST profile', () => {
+    // Regression guard: the +Y hits bonus is per-member-per-turn, not per
+    // profile. A passive with multiple ability profiles should see the
+    // FIRST profile get +Y hits and subsequent profiles get 0 extra hits.
+    const twoProfilePassive: CatalogAbility = {
+      id: 'two_part_trigger',
+      name: 'Two Part',
+      kind: 'passive',
+      profiles: [
+        {
+          label: 'P1',
+          damageType: 'piercing',
+          hits: 1,
+          kind: 'ability',
+          abilityId: 'two_part_trigger',
+        },
+        {
+          label: 'P2',
+          damageType: 'power',
+          hits: 1,
+          kind: 'ability',
+          abilityId: 'two_part_trigger',
+        },
+      ],
+      trigger: { kind: 'afterOwnFirstAttackOfTurn' },
+    };
+    const src = plainChar({ id: 'k2', abilities: [twoProfilePassive] });
+    const mTra = member('tra', trajannLike([0], [2]), 0);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mK = member('k', src, 2);
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mK],
+      turns: [
+        {
+          actions: [
+            { memberId: 'tra', attack: meleeAttack() },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'k', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // Exactly one +Y hits application for k (on the first profile).
+    const hitsApps = r.teamBuffApplications.filter(
+      (a) =>
+        a.appliedToMemberId === 'k' &&
+        a.kind === 'trajannLegendaryCommander' &&
+        /hits on first ability/.test(a.effect),
+    );
+    expect(hitsApps).toHaveLength(1);
+  });
+
+  it('triggered passive does NOT get +Y hits if the scheduled action (ability) already consumed it', () => {
+    // If the scheduled action is an ability AND it's the first non-normal
+    // for this member, it consumes the +Y hits bonus. A passive triggered
+    // off the scheduled action should NOT re-claim the bonus.
+    //
+    // To reproduce: schedule an ability on 'k' that carries a passive which
+    // triggers `afterOwnFirstAttackOfTurn`. The scheduled ability gets +Y
+    // hits (first non-normal, armed earlier by caster); the passive fires
+    // afterwards and must NOT get +Y hits too.
+    const src = plainChar({
+      id: 'k3',
+      abilities: [
+        {
+          id: 'k3_active',
+          name: 'K3 Active',
+          kind: 'active',
+          profiles: [
+            { label: 'A', damageType: 'power', hits: 1, kind: 'ability' },
+          ],
+          cooldown: 3,
+        },
+        {
+          id: 'k3_passive',
+          name: 'K3 Passive',
+          kind: 'passive',
+          profiles: [
+            {
+              label: 'P',
+              damageType: 'piercing',
+              hits: 1,
+              kind: 'ability',
+              abilityId: 'k3_passive',
+            },
+          ],
+          trigger: { kind: 'afterOwnFirstAttackOfTurn' },
+        },
+      ],
+    });
+    // Caster fires first (arms trigger), THEN k3 fires active (consumes +Y
+    // on ability), then k3's passive triggers (should NOT re-claim +Y).
+    const mTra = member('tra', trajannLike([0], [2]), 0);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mK = member('k', src, 2);
+    const rot: TeamRotation = {
+      members: [mTra, mCaster, mK],
+      turns: [
+        {
+          actions: [
+            { memberId: 'tra', attack: meleeAttack() },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'k', attack: abilityAttack('k3_active', 3) },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    // Exactly one +Y hits application for k — on the scheduled ability, NOT
+    // on the triggered passive.
+    const hitsApps = r.teamBuffApplications.filter(
+      (a) =>
+        a.appliedToMemberId === 'k' &&
+        a.kind === 'trajannLegendaryCommander' &&
+        /hits on first ability/.test(a.effect),
+    );
+    expect(hitsApps).toHaveLength(1);
+  });
+
+  // -------- Catalog alignment --------
+
+  it('catalog Trajann flatDamageByLevel matches wiki anchors (L50=1096, L60=1436)', () => {
+    // If this fails, the Trajann catalog drifted from the wiki spec. Anchors
+    // from https://tacticus.wiki.gg/wiki/Trajann:
+    //   L8=27 (Common cap), L17=60 (Uncommon cap), L26=148 (Rare cap),
+    //   L35=314 (Epic cap), L50=1096 (Legendary cap), L60=1436 (Mythic cap).
+    const tra = getCharacter('trajann');
+    expect(tra).toBeDefined();
+    const passive = tra!.abilities.find(
+      (a) => a.teamBuff?.kind === 'trajannLegendaryCommander',
+    );
+    expect(passive).toBeDefined();
+    const flats =
+      passive!.teamBuff!.kind === 'trajannLegendaryCommander'
+        ? passive!.teamBuff!.flatDamageByLevel
+        : [];
+    expect(flats[7]).toBe(27);
+    expect(flats[16]).toBe(60);
+    expect(flats[25]).toBe(148);
+    expect(flats[34]).toBe(314);
+    expect(flats[49]).toBe(1096);
+    expect(flats[59]).toBe(1436);
+  });
+
+  it('catalog Trajann extraHitsByLevel jumps from 1 to 2 at L27 (Epic-rarity tier)', () => {
+    // Wiki anchor: L1..L26 = +1 hit, L27+ = +2 hits. Matches the Epic-rarity
+    // jump on the wiki's interactive scaler.
+    const tra = getCharacter('trajann');
+    const passive = tra!.abilities.find(
+      (a) => a.teamBuff?.kind === 'trajannLegendaryCommander',
+    );
+    const hits =
+      passive!.teamBuff!.kind === 'trajannLegendaryCommander'
+        ? passive!.teamBuff!.extraHitsByLevel
+        : [];
+    expect(hits[0]).toBe(1);
+    expect(hits[25]).toBe(1);
+    expect(hits[26]).toBe(2);
+    expect(hits[59]).toBe(2);
   });
 });
 
