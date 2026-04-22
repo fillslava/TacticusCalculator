@@ -1,0 +1,6 @@
+{
+  "$schema": "./ingame-preview-cases.schema.md",
+  "version": 1,
+  "description": "In-game damage-preview calibration fixtures. Each case asserts that for a given hero build + target + attack, the engine's `expected` damage matches the number shown in the in-game preview screen within a small tolerance. Populate from screenshots: hero name + rarity/star/rank/level/equipment/ability levels + target boss & stage + the `expected` hovered preview value.",
+  "cases": []
+}
