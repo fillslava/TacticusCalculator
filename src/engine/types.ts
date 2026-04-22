@@ -348,7 +348,13 @@ export interface Rotation {
  * the community UI (halmmar, tacticustable) treats it as linear, and
  * the math simplifies cleanly.
  */
-export type TeamPosition = 0 | 1 | 2 | 3 | 4;
+/**
+ * Guild Raid team positions: 0..4 are the five hero slots in the linear
+ * formation; 5 is the Machine of War slot. Adjacency is |Δposition|=1 —
+ * the MoW is adjacent to hero slot 4 (and to the boss, which the single-boss
+ * MVP still treats as adjacent to every team member).
+ */
+export type TeamPosition = 0 | 1 | 2 | 3 | 4 | 5;
 
 export interface TeamMember {
   /** Slot id (not the catalog id). Lets the same catalog hero appear twice. */

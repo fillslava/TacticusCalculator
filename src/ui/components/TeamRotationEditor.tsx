@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useApp } from '../../state/store';
 import { useT } from '../../lib/i18n';
 import { getCharacter } from '../../data/catalog';
-import type { CatalogCharacter } from '../../engine/types';
+import type { CatalogCharacter, TeamPosition } from '../../engine/types';
 
 /**
  * Team rotation editor — ordered list of turns, each containing ordered
@@ -21,20 +21,33 @@ export function TeamRotationEditor() {
   const removeTeamAction = useApp((s) => s.removeTeamAction);
   const t = useT();
 
-  /** Members with a resolvable catalog entry, in position order. */
+  /** Members with a resolvable catalog entry, in position order. The `kind`
+   *  flag carries through so the UI can render the MoW slot as "MoW" rather
+   *  than "S6". */
   const populatedMembers = useMemo(() => {
     return team.members
       .filter((m) => m.characterId)
       .map((m) => ({
         slotId: m.slotId,
         position: m.position,
+        kind: m.kind,
         character: getCharacter(m.characterId!),
       }))
       .filter(
-        (m): m is { slotId: string; position: 0 | 1 | 2 | 3 | 4; character: CatalogCharacter } =>
-          Boolean(m.character),
+        (m): m is {
+          slotId: string;
+          position: TeamPosition;
+          kind: 'hero' | 'mow';
+          character: CatalogCharacter;
+        } => Boolean(m.character),
       );
   }, [team.members]);
+
+  /** Short label used in the action picker ("S1"..."S5" for heroes, "MoW"
+   *  for the Machine-of-War slot). */
+  function slotLabel(m: { position: TeamPosition; kind: 'hero' | 'mow' }): string {
+    return m.kind === 'mow' ? 'MoW' : `S${m.position + 1}`;
+  }
 
   /**
    * Expand a catalog character into selectable attack keys. Mirrors
@@ -140,7 +153,7 @@ export function TeamRotationEditor() {
                       >
                         {populatedMembers.map((m) => (
                           <option key={m.slotId} value={m.slotId}>
-                            S{m.position + 1} · {m.character.displayName}
+                            {slotLabel(m)} · {m.character.displayName}
                           </option>
                         ))}
                       </select>

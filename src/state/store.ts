@@ -8,6 +8,7 @@ import type {
   CatalogEquipmentSlot,
   ItemStatMods,
   Target,
+  TeamPosition,
   TurnBuff,
 } from '../engine/types';
 import type { ApiPlayer, ApiUnit } from '../api/types';
@@ -78,12 +79,22 @@ export interface RotationTurn {
  *  user on the same page. */
 export type AppPage = 'single' | 'team';
 
+/** Role the slot plays in the Guild-Raid formation. `hero` = one of the
+ *  five character slots; `mow` = the single Machine-of-War slot. The
+ *  TeamComposer filters dropdowns by this field so MoW-trait catalog entries
+ *  only show up in the MoW slot (and hero-trait catalog entries only show
+ *  up in hero slots). The engine itself treats both uniformly — `kind` is
+ *  purely store/UI metadata. */
+export type TeamMemberKind = 'hero' | 'mow';
+
 /** A slot in the linear Guild-Raid formation. `characterId=null` means the
- *  slot is empty and will be skipped when building the engine rotation. */
+ *  slot is empty and will be skipped when building the engine rotation.
+ *  Positions 0..4 are the five hero slots; position 5 is the MoW slot. */
 export interface TeamMemberState {
   slotId: string;
-  position: 0 | 1 | 2 | 3 | 4;
+  position: TeamPosition;
   characterId: string | null;
+  kind: TeamMemberKind;
 }
 
 /** One scheduled action within a team turn. `memberSlotId` references a
@@ -183,15 +194,24 @@ const initialTarget: TargetState = {
   stageIndex: 0,
 };
 
+/** Canonical slotId for the MoW slot — referenced by the migration so an
+ *  older persisted team (5 heroes) can gain the MoW slot deterministically. */
+export const MOW_SLOT_ID = 'mow';
+
 function initialTeam(): TeamState {
-  return {
-    members: [0, 1, 2, 3, 4].map((i) => ({
-      slotId: `m${i}`,
-      position: i as 0 | 1 | 2 | 3 | 4,
-      characterId: null,
-    })),
-    turns: [{ actions: [] }],
+  const heroes: TeamMemberState[] = [0, 1, 2, 3, 4].map((i) => ({
+    slotId: `m${i}`,
+    position: i as TeamPosition,
+    characterId: null,
+    kind: 'hero',
+  }));
+  const mow: TeamMemberState = {
+    slotId: MOW_SLOT_ID,
+    position: 5,
+    characterId: null,
+    kind: 'mow',
   };
+  return { members: [...heroes, mow], turns: [{ actions: [] }] };
 }
 
 function slotIndex(slotId: string): number {
@@ -450,7 +470,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 12,
+      version: 13,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -557,6 +577,30 @@ export const useApp = create<AppState>()(
           // calculator view, and seed an empty 5-slot team.
           if (!persisted.page) persisted.page = 'single';
           if (!persisted.team) persisted.team = initialTeam();
+        }
+        if (fromVersion < 13) {
+          // v13 adds the MoW (Machine of War) 6th slot and the `kind` tag on
+          // every member so the composer can filter dropdowns by role. Mutate
+          // the existing team in place to preserve whatever the user already
+          // picked in hero slots 0..4.
+          if (persisted.team && Array.isArray(persisted.team.members)) {
+            const members = persisted.team.members as Array<
+              Record<string, unknown>
+            >;
+            for (const m of members) {
+              if (!m.kind) m.kind = 'hero';
+            }
+            if (!members.some((m) => m.kind === 'mow')) {
+              members.push({
+                slotId: MOW_SLOT_ID,
+                position: 5,
+                characterId: null,
+                kind: 'mow',
+              });
+            }
+          } else {
+            persisted.team = initialTeam();
+          }
         }
         return persisted;
       },

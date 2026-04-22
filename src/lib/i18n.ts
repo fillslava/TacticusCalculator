@@ -127,9 +127,12 @@ const en: Dict = {
 
   'team.composer.title': 'Team composition',
   'team.composer.description':
-    'Five linear slots (left to right). Adjacency uses |Δposition|=1. Empty slots are skipped when the rotation runs.',
+    'Five hero slots + one Machine-of-War slot (left to right). Adjacency uses |Δposition|=1. Empty slots are skipped when the rotation runs.',
   'team.composer.slot': 'Slot',
+  'team.composer.mow': 'MoW',
+  'team.composer.mowSectionTitle': 'Machine of War',
   'team.composer.pickHero': '— empty —',
+  'team.composer.pickMow': '— no MoW —',
   'team.composer.unowned': '(using default build)',
   'team.composer.owned': '(owned)',
   'team.composer.alliance': 'alliance',

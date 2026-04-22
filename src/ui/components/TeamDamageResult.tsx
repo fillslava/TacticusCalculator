@@ -117,8 +117,8 @@ export function TeamDamageResult() {
               key={row.memberId}
               className="flex items-center gap-2 rounded bg-bg-base px-2 py-1 text-sm"
             >
-              <span className="w-8 font-mono text-xs text-slate-500">
-                S{row.position + 1}
+              <span className="w-10 font-mono text-xs text-slate-500">
+                {row.position === 5 ? 'MoW' : `S${row.position + 1}`}
               </span>
               <span className="flex-1">{row.displayName}</span>
               <span className="font-mono">
