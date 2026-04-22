@@ -248,6 +248,16 @@ export function resolveAttack(
   const pCritBase = clamp01(frame.critChance);
   const pBlockBase = clamp01(frame.target.blockChance);
   const blockDamage = Math.max(0, frame.target.blockDamage);
+  // Bonus-hit cap window: the trailing `bonusHitCount` hits get clamped to
+  // `bonusHitCap` on both pre-armor (so shield consumption can't exceed the
+  // cap) and post-armor (so HP damage can't exceed it either). See
+  // AttackProfile.bonusHitCount docs for provenance (Vitruvius-style).
+  const bonusHitCount = Math.max(0, frame.profile.bonusHitCount ?? 0);
+  const bonusHitCap = frame.profile.bonusHitCap;
+  const firstBonusHitIdx =
+    bonusHitCount > 0 && bonusHitCap !== undefined
+      ? hits - bonusHitCount + 1
+      : Infinity;
 
   // Shield & HP are consumed as hits resolve. Per HDTW_Shields, damage applied
   // to shields skips armor (shield has 0 armor) and block rolls are cosmetic
@@ -265,8 +275,25 @@ export function resolveAttack(
     const nonCrit = perHitDamage(baseDamage, false, frame);
 
     // Crit-blended pre- and post-armor bands.
-    const preArmor = blendBands(crit.preArmor, nonCrit.preArmor, pCrit);
-    const postArmor = blendBands(crit.postArmor, nonCrit.postArmor, pCrit);
+    let preArmor = blendBands(crit.preArmor, nonCrit.preArmor, pCrit);
+    let postArmor = blendBands(crit.postArmor, nonCrit.postArmor, pCrit);
+
+    // Vitruvius-style bonus-hit cap: clamp both pre-armor and post-armor
+    // bands independently so shield consumption and HP damage each respect
+    // the ceiling. Applied only to hits n >= firstBonusHitIdx; base hits
+    // are unchanged.
+    if (bonusHitCap !== undefined && n >= firstBonusHitIdx) {
+      preArmor = {
+        expected: Math.min(preArmor.expected, bonusHitCap),
+        min: Math.min(preArmor.min, bonusHitCap),
+        max: Math.min(preArmor.max, bonusHitCap),
+      };
+      postArmor = {
+        expected: Math.min(postArmor.expected, bonusHitCap),
+        min: Math.min(postArmor.min, bonusHitCap),
+        max: Math.min(postArmor.max, bonusHitCap),
+      };
+    }
 
     let shieldBand: DamageBand = { expected: 0, min: 0, max: 0 };
     let hpBand: DamageBand = { expected: 0, min: 0, max: 0 };

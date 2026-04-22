@@ -37,6 +37,17 @@ export interface AttackProfile {
   abilityId?: string;
   cooldown?: number;
   ignoresCrit?: boolean;
+  /**
+   * Per-hit cap applied to the trailing `bonusHitCount` hits of this profile.
+   * Used by Vitruvius's Master Annihilator: the extra hit granted by a
+   * marked target has its own max-damage ceiling, distinct from the
+   * profile-wide `cap`. Capping happens on both the pre-armor and post-armor
+   * bands so shield consumption and HP damage both respect it.
+   *
+   * Non-bonus hits (indices `1..hits - bonusHitCount`) are unaffected.
+   */
+  bonusHitCount?: number;
+  bonusHitCap?: number;
 }
 
 export interface ItemStatMods {
@@ -148,9 +159,35 @@ export type AbilityTeamBuff =
     }
   | {
       kind: 'biovoreMythicAcid';
-      /** % damage bonus granted to Mythic-tier allies after a Spore Mine
-       *  damages the same target. */
-      pct: number;
+      /**
+       * % damage bonus granted to Mythic-tier allies after Biovore damages
+       * the target this turn. Indexed by Biovore's position within the
+       * Mythic rarity (`progressionPositionInRarity` → 0..3 for Mythic 1★..4★).
+       * Biovore itself must be Mythic for the buff to fire at all; Legendary
+       * or lower Biovore yields no team bonus regardless of this table.
+       *
+       * Typical curve: [10, 13, 17, 20] for Mythic 1★..4★ — calibration
+       * pending against in-game fixtures.
+       */
+      pctByStar: number[];
+    }
+  | {
+      kind: 'vitruviusMasterAnnihilator';
+      /**
+       * Per-passive-level cap on the bonus hit granted to friendly non-psychic
+       * attacks against the enemy Vitruvius has marked. Indexed by the
+       * `vitruvius_master_annihilator` passive's xpLevel (`abilityLevels`
+       * entry), clamped to the array length.
+       *
+       * The mark lasts the entire battle in the single-boss MVP (there's only
+       * one target, so the "attacks a different unit" reset clause never
+       * fires). Wiki wording: "This additional hit can deal a maximum of X
+       * Damage." Psychic attacks don't score the extra hit.
+       *
+       * Placeholder linear curve: 500 → 5000 over levels 1..50. Calibration
+       * against in-game preview fixtures is a follow-up.
+       */
+      capByLevel: number[];
     };
 
 export interface CatalogAbility {
@@ -254,6 +291,12 @@ export interface TurnBuff {
   traits?: TraitId[];
   bonusHits?: number;
   bonusHitsOn?: BonusHitTrigger;
+  /**
+   * If set, the extra hits added by this buff are capped at `bonusHitCap`
+   * damage each (both pre- and post-armor bands are clamped). Used for
+   * Vitruvius's Master Annihilator.
+   */
+  bonusHitCap?: number;
   /**
    * Calibration coefficient from the source preset. When present, the UI
    * auto-recomputes `damageFlat` whenever level or rarity changes.

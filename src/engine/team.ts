@@ -38,18 +38,37 @@
  *    Per-member: each friendly gets the bonus exactly once, on their
  *    first non-normal attack after the trigger has fired.
  *
- *  - `biovoreMythicAcid`: once Biovore's Spore-Mine ability damages the
- *    target during a turn, subsequent attacks that turn from Mythic-tier
- *    allies get `+pct%` damage. Ability identified by `teamBuff.kind` on
- *    the profile's ability — no hard-coded id matching. Ordering-
- *    sensitive: spore mine must fire before the Mythic ally attacks.
+ *  - `biovoreMythicAcid`: once a Biovore-teamBuff carrier fires an ability
+ *    that damages the target this turn, subsequent attacks that turn from
+ *    Mythic-tier allies get `+pctByStar[pos]%` damage where `pos` is
+ *    Biovore's position within the Mythic rarity (`progressionPositionInRarity`
+ *    → 0..3 for Mythic 1★..4★). Biovore HIMSELF must be Mythic for the
+ *    passive to activate — lower-rarity Biovores produce no bonus even
+ *    though they carry the teamBuff. The effect is detected by teamBuff
+ *    presence on the actor, not by specific ability id, so both
+ *    `biovore_spore_mines_launcher` and `biovore_bio_minefield` trigger it.
+ *    Biovore does not buff himself. Ordering-sensitive: Biovore's damaging
+ *    action must resolve before the Mythic ally attacks.
  *
- * Intentionally NOT modelled yet: aura persistence across turns (we
- * recompute per-turn), multi-target spore mines, non-adjacency aura
- * shapes, conditional-on-stance/traits buffs. Those land when Phase 3
- * hand-authoring surfaces the need.
+ *  - `vitruviusMasterAnnihilator`: when a Vitruvius-teamBuff carrier performs
+ *    a normal (melee/ranged) attack that damages the target, the target is
+ *    MARKED for the rest of the battle. Subsequent friendly non-psychic
+ *    attacks against the marked target score +1 additional hit, capped at
+ *    `capByLevel[level-1]` damage each (pre- and post-armor bands both
+ *    clamped so shield and HP each respect the cap). The mark persists
+ *    across turns — state lives at battle level, not turn level. In the
+ *    single-boss MVP the "attacks a different unit" clause that would clear
+ *    the mark never fires. Multiple Vitruviuses on the same team each
+ *    contribute one +1 hit; the tightest cap is kept (see
+ *    `rotation.ts::applyBonusHits`).
+ *
+ * Intentionally NOT modelled yet: aura persistence across turns for
+ * Laviscus/Trajann (Vitruvius now persists; others still recompute per-turn),
+ * multi-target spore mines, non-adjacency aura shapes, conditional-on-
+ * stance/traits buffs. Those land when hand-authoring surfaces the need.
  */
 import { resolveAttack } from './attack';
+import { progressionPositionInRarity } from './progression';
 import { applyBonusHits, applyTurnBuffs } from './rotation';
 import {
   abilityFor,
@@ -164,6 +183,25 @@ interface TurnState {
    * turn. Gates biovoreMythicAcid for Mythic allies that act afterward.
    */
   sporeMineDamagedTarget: boolean;
+  /**
+   * Per-Biovore: which of their `pctByStar` bonuses applies this turn,
+   * resolved from their own Mythic star position when the spore mine hits.
+   * Indexed by Biovore's memberId. Read by `deriveTeamBuffs` when
+   * sporeMineDamagedTarget is true.
+   */
+  biovoreAcidPct: Record<string, number>;
+}
+
+/**
+ * Battle-level state — threaded across turns. Currently only holds
+ * Vitruvius's mark (persists once set because the single-boss MVP never
+ * sees him attack a different target). Cleanly separate from TurnState so
+ * turn-local flags (Laviscus, Trajann, Biovore) still reset cleanly each
+ * turn loop.
+ */
+interface BattleState {
+  /** Memberids of Vitruvius-teamBuff carriers whose mark is active. */
+  vitruviusMarkedSources: Set<string>;
 }
 
 function initTurnState(): TurnState {
@@ -173,7 +211,12 @@ function initTurnState(): TurnState {
     friendlyActiveFiredThisTurn: false,
     memberNonNormalAttackHappened: {},
     sporeMineDamagedTarget: false,
+    biovoreAcidPct: {},
   };
+}
+
+function initBattleState(): BattleState {
+  return { vitruviusMarkedSources: new Set() };
 }
 
 // ---------------------------------------------------------------------------
@@ -193,6 +236,7 @@ function deriveTeamBuffs(
   team: TeamMember[],
   currentProfile: AttackProfile,
   turn: TurnState,
+  battle: BattleState,
   turnIdx: number,
   appsSink: TeamBuffApplication[],
 ): TurnBuff[] {
@@ -314,24 +358,79 @@ function deriveTeamBuffs(
     }
   }
 
-  // ------ 5) Biovore Mythic Acid: once Spore Mine has hit the target,
-  //        Mythic-tier allies get +pct% damage.
+  // ------ 5) Biovore Mythic Acid: once Biovore's ability has damaged the
+  //        target this turn, Mythic-tier allies get a star-scaled damage %
+  //        bonus. Biovore himself must be Mythic for the passive to have
+  //        activated in the first place — the `biovoreAcidPct` ledger is
+  //        populated only when the carrier is Mythic (see
+  //        updateTurnStateAfterAction). Biovore does not self-buff.
   if (turn.sporeMineDamagedTarget && member.attacker.progression.rarity === 'mythic') {
     for (const other of team) {
       if (other.id === member.id) continue;
       const bio = teamBuffOf(other, 'biovoreMythicAcid');
       if (!bio) continue;
+      const pct = turn.biovoreAcidPct[other.id];
+      if (pct === undefined || pct <= 0) continue;
       buffs.push({
         id: `mythic-acid:${other.id}`,
         name: 'Mythic Acid',
-        damageMultiplier: 1 + bio.pct / 100,
+        damageMultiplier: 1 + pct / 100,
       });
+      const starPos = progressionPositionInRarity(other.attacker.progression.stars);
       appsSink.push({
         turnIdx,
         sourceMemberId: other.id,
         kind: 'biovoreMythicAcid',
         appliedToMemberId: member.id,
-        effect: `+${bio.pct}% damage (Spore Mine hit target)`,
+        effect: `+${pct}% damage (Biovore Mythic ${starPos + 1}★ hit target)`,
+      });
+    }
+  }
+
+  // ------ 6) Vitruvius Master Annihilator: once Vitruvius has marked the
+  //        target with a normal attack (this turn or an earlier one), every
+  //        friendly non-psychic attack against the target scores +1 hit,
+  //        capped at `capByLevel[passiveLevel-1]` damage. Multiple
+  //        Vitruviuses stack to +N hits; the tightest cap wins (see
+  //        applyBonusHits). Psychic attacks are excluded by the damage-type
+  //        check here — they still attack normally, they just don't add a
+  //        hit. Vitruvius HIMSELF qualifies as a friendly unit, so his
+  //        subsequent attacks after the marking attack also get the bonus.
+  if (
+    battle.vitruviusMarkedSources.size > 0 &&
+    currentProfile.damageType !== 'psychic'
+  ) {
+    for (const other of team) {
+      if (!battle.vitruviusMarkedSources.has(other.id)) continue;
+      const anni = teamBuffOf(other, 'vitruviusMasterAnnihilator');
+      if (!anni) continue;
+      // Resolve cap from the passive's ability-level entry; fall back to
+      // level 1 when the attacker has no explicit ability-level data.
+      const passiveAbility = findAbilityWithTeamBuff(
+        other.attacker.source,
+        'vitruviusMasterAnnihilator',
+      );
+      const passiveId = passiveAbility?.id;
+      const lvlEntry = passiveId
+        ? other.attacker.abilityLevels?.find((a) => a.id === passiveId)
+        : undefined;
+      const level = Math.max(1, lvlEntry?.level ?? 1);
+      const cap = anni.capByLevel[
+        Math.min(level - 1, anni.capByLevel.length - 1)
+      ];
+      buffs.push({
+        id: `master-annihilator:${other.id}`,
+        name: 'Master Annihilator',
+        bonusHits: 1,
+        bonusHitsOn: 'all',
+        bonusHitCap: cap,
+      });
+      appsSink.push({
+        turnIdx,
+        sourceMemberId: other.id,
+        kind: 'vitruviusMasterAnnihilator',
+        appliedToMemberId: member.id,
+        effect: `+1 hit capped at ${cap} (Vitruvius marked, L${level})`,
       });
     }
   }
@@ -343,13 +442,15 @@ function deriveTeamBuffs(
 // Reactive state updates (post-action)
 // ---------------------------------------------------------------------------
 
-/** After an action resolves, update the turn-local reactive flags. */
+/** After an action resolves, update the turn-local AND battle-level
+ *  reactive flags. */
 function updateTurnStateAfterAction(
   actor: TeamMember,
   attack: AttackContext,
   result: DamageBreakdown,
   team: TeamMember[],
   turn: TurnState,
+  battle: BattleState,
 ): void {
   // Laviscus outrage contributions: any friendly that ISN'T Laviscus,
   // whose attack is non-psychic, contributes their MAX per-hit value to
@@ -406,12 +507,39 @@ function updateTurnStateAfterAction(
     turn.memberNonNormalAttackHappened[actor.id] = true;
   }
 
-  // Biovore: did this action fire the Mythic-Acid-carrier ability?
-  if (attack.profile.kind === 'ability' && attack.profile.abilityId) {
-    const bioAbility = findAbilityWithTeamBuff(actor.attacker.source, 'biovoreMythicAcid');
-    if (bioAbility && bioAbility.id === attack.profile.abilityId) {
-      turn.sporeMineDamagedTarget = true;
-    }
+  // Biovore Mythic Acid: the teamBuff lives on a passive in the catalog
+  // (no profiles of its own), so matching by `abilityId` — as an older
+  // version did — never fires. Instead: the carrier is the actor, the
+  // action is any ability that actually damaged the target, AND the
+  // carrier must be Mythic themselves. Biovore's own star position within
+  // Mythic (0..3) chooses which `pctByStar` entry applies this turn.
+  const bio = teamBuffOf(actor, 'biovoreMythicAcid');
+  if (
+    bio &&
+    actor.attacker.progression.rarity === 'mythic' &&
+    attack.profile.kind === 'ability' &&
+    result.expected > 0
+  ) {
+    const pos = Math.max(
+      0,
+      Math.min(bio.pctByStar.length - 1, progressionPositionInRarity(actor.attacker.progression.stars)),
+    );
+    const pct = bio.pctByStar[pos];
+    turn.sporeMineDamagedTarget = true;
+    turn.biovoreAcidPct[actor.id] = pct;
+  }
+
+  // Vitruvius Master Annihilator: a normal (melee/ranged) attack by the
+  // carrier that actually damages the target MARKS that target. In the
+  // single-boss MVP the mark persists for the rest of the battle — the
+  // "attacks a different unit" clause that clears it never fires here.
+  const anni = teamBuffOf(actor, 'vitruviusMasterAnnihilator');
+  if (
+    anni &&
+    (attack.profile.kind === 'melee' || attack.profile.kind === 'ranged') &&
+    result.expected > 0
+  ) {
+    battle.vitruviusMarkedSources.add(actor.id);
   }
 }
 
@@ -466,6 +594,7 @@ export function resolveTeamRotation(
   const teamBuffApplications: TeamBuffApplication[] = [];
   const teamCooldownSkips: { turnIdx: number; memberId: string; abilityId: string }[] = [];
   const cumulativeTeamExpected: number[] = [];
+  const battleState = initBattleState();
   let cumulative = 0;
   let remainingShield = target.currentShield ?? 0;
   let remainingHp = target.currentHp ?? resolveBaseHp(target);
@@ -496,6 +625,7 @@ export function resolveTeamRotation(
         rotation.members,
         action.attack.profile,
         turnState,
+        battleState,
         turnIdx,
         teamBuffApplications,
       );
@@ -574,7 +704,14 @@ export function resolveTeamRotation(
       //    feeds per-hit data to Laviscus's Outrage ledger; triggered
       //    passives don't feed Outrage (they're not "friendly attacks"
       //    in the normal sense).
-      updateTurnStateAfterAction(member, action.attack, result, rotation.members, turnState);
+      updateTurnStateAfterAction(
+        member,
+        action.attack,
+        result,
+        rotation.members,
+        turnState,
+        battleState,
+      );
 
       isFirstAttackOfTurn[action.memberId] = false;
     });

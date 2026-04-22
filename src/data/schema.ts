@@ -59,6 +59,8 @@ export const AttackProfileSchema = z.object({
   abilityId: z.string().optional(),
   cooldown: z.number().int().optional(),
   ignoresCrit: z.boolean().optional(),
+  bonusHitCount: z.number().int().optional(),
+  bonusHitCap: z.number().optional(),
 });
 
 export const AbilityTriggerSchema = z.union([
@@ -87,7 +89,11 @@ export const AbilityTeamBuffSchema = z.union([
   }),
   z.object({
     kind: z.literal('biovoreMythicAcid'),
-    pct: z.number(),
+    pctByStar: z.array(z.number()).min(1),
+  }),
+  z.object({
+    kind: z.literal('vitruviusMasterAnnihilator'),
+    capByLevel: z.array(z.number()).min(1),
   }),
 ]);
 

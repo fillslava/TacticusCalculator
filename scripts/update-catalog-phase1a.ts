@@ -351,7 +351,9 @@ replace('biovore', (c) => ({
       kind: 'passive',
       teamBuff: {
         kind: 'biovoreMythicAcid',
-        pct: 20, // 14 stars — default upper bound
+        // Star-scaled: Mythic 1★ → Mythic 4★. Placeholder curve, calibrate
+        // against in-game preview.
+        pctByStar: [10, 13, 17, 20],
       },
       profiles: [],
     },

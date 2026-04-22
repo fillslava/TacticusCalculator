@@ -51,6 +51,8 @@ export function applyBonusHits(
 ): AttackProfile {
   if (!buffs || buffs.length === 0) return profile;
   let extra = 0;
+  let cappedExtra = 0;
+  let minCap = Infinity;
   const kind = profile.kind;
   const isNormal = kind === 'melee' || kind === 'ranged';
   const isAbility = kind === 'ability';
@@ -63,10 +65,30 @@ export function applyBonusHits(
       (trigger === 'first' && isFirstTurn) ||
       (trigger === 'normal' && isNormal) ||
       (trigger === 'ability' && isAbility);
-    if (match) extra += n;
+    if (!match) continue;
+    extra += n;
+    // If this buff caps its bonus hits (Vitruvius Master Annihilator), track
+    // the tightest cap across all contributing buffs. Multiple capped buffs
+    // stacking is a degenerate case — we keep the smallest cap so no bonus
+    // hit exceeds any single cap claim.
+    if (b.bonusHitCap !== undefined) {
+      cappedExtra += n;
+      if (b.bonusHitCap < minCap) minCap = b.bonusHitCap;
+    }
   }
   if (extra === 0) return profile;
-  return { ...profile, hits: Math.max(1, profile.hits + extra) };
+  const out: AttackProfile = {
+    ...profile,
+    hits: Math.max(1, profile.hits + extra),
+  };
+  if (cappedExtra > 0) {
+    out.bonusHitCount = (profile.bonusHitCount ?? 0) + cappedExtra;
+    out.bonusHitCap =
+      profile.bonusHitCap !== undefined
+        ? Math.min(profile.bonusHitCap, minCap)
+        : minCap;
+  }
+  return out;
 }
 
 /**

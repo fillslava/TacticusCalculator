@@ -1186,7 +1186,7 @@
         "profiles": [],
         "teamBuff": {
           "kind": "biovoreMythicAcid",
-          "pct": 20
+          "pctByStar": [10, 13, 17, 20]
         }
       }
     ],
@@ -6213,7 +6213,11 @@
         "id": "vitruvius_master_annihilator",
         "name": "Master Annihilator",
         "kind": "passive",
-        "profiles": []
+        "profiles": [],
+        "teamBuff": {
+          "kind": "vitruviusMasterAnnihilator",
+          "capByLevel": [500, 592, 684, 776, 867, 959, 1051, 1143, 1235, 1327, 1418, 1510, 1602, 1694, 1786, 1878, 1969, 2061, 2153, 2245, 2337, 2429, 2520, 2612, 2704, 2796, 2888, 2980, 3071, 3163, 3255, 3347, 3439, 3531, 3622, 3714, 3806, 3898, 3990, 4082, 4173, 4265, 4357, 4449, 4541, 4633, 4724, 4816, 4908, 5000]
+        }
       }
     ],
     "traits": [

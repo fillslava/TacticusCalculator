@@ -59,11 +59,14 @@ function plainChar(overrides: Partial<CatalogCharacter> = {}): CatalogCharacter 
 function makeAttacker(
   src: CatalogCharacter,
   rarity: Rarity = 'legendary',
+  stars = 0,
+  abilityLevels?: { id: string; level: number }[],
 ): Attacker {
   return {
     source: src,
-    progression: { stars: 0, rank: 0, xpLevel: 1, rarity },
+    progression: { stars, rank: 0, xpLevel: 1, rarity },
     equipment: [],
+    abilityLevels,
   };
 }
 
@@ -72,8 +75,14 @@ function member(
   src: CatalogCharacter,
   position: TeamPosition,
   rarity: Rarity = 'legendary',
+  stars = 0,
+  abilityLevels?: { id: string; level: number }[],
 ): TeamMember {
-  return { id, attacker: makeAttacker(src, rarity), position };
+  return {
+    id,
+    attacker: makeAttacker(src, rarity, stars, abilityLevels),
+    position,
+  };
 }
 
 function meleeAttack(): AttackContext {
@@ -149,7 +158,25 @@ function trajannLike(
   });
 }
 
-function biovoreLike(pct = 20): CatalogCharacter {
+/**
+ * Default to a uniform pctByStar array so existing star-agnostic tests keep
+ * working regardless of Biovore's progression ordinal. Explicit star-scaling
+ * tests pass their own array.
+ *
+ * Real catalogs put the teamBuff on a PASSIVE with no profiles — the engine
+ * must not match by abilityId. This fixture mirrors that shape to catch
+ * future regressions. The Spore Mine attack is a separate active with no
+ * teamBuff.
+ */
+function biovoreLike(pct: number | number[] = 20): CatalogCharacter {
+  const pctByStar = Array.isArray(pct) ? pct : [pct, pct, pct, pct];
+  const passive: CatalogAbility = {
+    id: 'biovore_hyper_corrosive_acid',
+    name: 'Hyper-Corrosive Acid',
+    kind: 'passive',
+    profiles: [],
+    teamBuff: { kind: 'biovoreMythicAcid', pctByStar },
+  };
   const active: CatalogAbility = {
     id: 'biovore_spore_mine',
     name: 'Spore Mine',
@@ -158,7 +185,6 @@ function biovoreLike(pct = 20): CatalogCharacter {
       { label: 'Spore', damageType: 'toxic', hits: 1, kind: 'ability' },
     ],
     cooldown: 2,
-    teamBuff: { kind: 'biovoreMythicAcid', pct },
   };
   return plainChar({
     id: 'biovore',
@@ -166,7 +192,29 @@ function biovoreLike(pct = 20): CatalogCharacter {
     faction: 'Tyranids',
     alliance: 'Xenos',
     maxRarity: 'mythic',
-    abilities: [active],
+    abilities: [passive, active],
+  });
+}
+
+/**
+ * Vitruvius-shaped fixture for the Master Annihilator tests. Passive holds
+ * the teamBuff; no profiles. `capByLevel` defaults to a flat 1000 so every
+ * level resolves to the same cap in tests that don't exercise leveling.
+ */
+function vitruviusLike(capByLevel: number[] = [1000, 1000, 1000]): CatalogCharacter {
+  const passive: CatalogAbility = {
+    id: 'vitruvius_master_annihilator',
+    name: 'Master Annihilator',
+    kind: 'passive',
+    profiles: [],
+    teamBuff: { kind: 'vitruviusMasterAnnihilator', capByLevel },
+  };
+  return plainChar({
+    id: 'vitruvius',
+    displayName: 'Vitruvius',
+    faction: 'Adeptus Custodes',
+    alliance: 'Imperial',
+    abilities: [passive],
   });
 }
 
@@ -1025,6 +1073,233 @@ describe('biovoreMythicAcid — order-sensitive Mythic-tier bonus', () => {
         (a) => a.kind === 'biovoreMythicAcid' && a.appliedToMemberId === 'leg',
       ),
     ).toEqual([]);
+  });
+
+  it('Legendary Biovore does NOT activate Mythic Acid even though he carries the teamBuff', () => {
+    // User spec: "If hero is Mythic then buff applies. Biovore needs to be
+    // Mythic as well." A non-Mythic Biovore firing his ability is inert.
+    const mBio = member('bio', biovoreLike(50), 0, 'legendary');
+    const mMyth = member('m', plainChar({ id: 'myth', maxRarity: 'mythic' }), 1, 'mythic');
+    const rot: TeamRotation = {
+      members: [mBio, mMyth],
+      turns: [
+        {
+          actions: [
+            { memberId: 'bio', attack: abilityAttack('biovore_spore_mine', 99) },
+            { memberId: 'm', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    expect(
+      r.teamBuffApplications.filter(
+        (a) => a.kind === 'biovoreMythicAcid' && a.appliedToMemberId === 'm',
+      ),
+    ).toEqual([]);
+  });
+
+  it('fires even when the teamBuff lives on a passive that has no own profiles', () => {
+    // Regression guard: the real catalog shape puts the teamBuff on a
+    // passive (profiles: []), and the ability the user fires is a separate
+    // active whose id does NOT match the passive. The engine must detect
+    // the teamBuff by actor identity + ability-kind, not by ability-id.
+    const mBio = member('bio', biovoreLike(50), 0, 'mythic');
+    const mMyth = member('m', plainChar({ id: 'myth', maxRarity: 'mythic' }), 1, 'mythic');
+    const rot: TeamRotation = {
+      members: [mBio, mMyth],
+      turns: [
+        {
+          actions: [
+            // Use an arbitrary active id unrelated to the teamBuff passive.
+            { memberId: 'bio', attack: abilityAttack('biovore_spore_mine', 99) },
+            { memberId: 'm', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'biovoreMythicAcid' && a.appliedToMemberId === 'm',
+    );
+    expect(apps.length).toBe(1);
+  });
+
+  it('star-scales: pctByStar[0]=10 at Mythic 1★ vs pctByStar[3]=20 at Mythic 4★', () => {
+    // Pass progression ordinals that map into the Mythic rarity:
+    //   Mythic 1★ = position 0 → pctByStar[0] = 10 → 1.10x
+    //   Mythic 4★ = position 3 → pctByStar[3] = 20 → 1.20x
+    // We use the helper's cumulative offsets: Mythic starts at 16, 4★ is 19.
+    const MYTHIC_1_STAR = 16;
+    const MYTHIC_4_STAR = 19;
+    const scaled = [10, 13, 17, 20];
+    const ally = () => member('m', plainChar({ id: 'myth', maxRarity: 'mythic' }), 1, 'mythic');
+
+    const mBioLow = member('bio', biovoreLike(scaled), 0, 'mythic', MYTHIC_1_STAR);
+    const mBioHigh = member('bio', biovoreLike(scaled), 0, 'mythic', MYTHIC_4_STAR);
+
+    const rot = (bio: TeamMember) => ({
+      members: [bio, ally()],
+      turns: [
+        {
+          actions: [
+            { memberId: 'm', attack: meleeAttack() },
+            { memberId: 'bio', attack: abilityAttack('biovore_spore_mine', 99) },
+            { memberId: 'm', attack: meleeAttack() },
+          ],
+        },
+      ],
+    });
+
+    const rLow = resolveTeamRotation(rot(mBioLow), makeTarget());
+    const rHigh = resolveTeamRotation(rot(mBioHigh), makeTarget());
+    const ratioLow = rLow.perMember['m'].perAction[1].result.expected /
+      rLow.perMember['m'].perAction[0].result.expected;
+    const ratioHigh = rHigh.perMember['m'].perAction[1].result.expected /
+      rHigh.perMember['m'].perAction[0].result.expected;
+    expect(ratioLow).toBeCloseTo(1.1, 2);
+    expect(ratioHigh).toBeCloseTo(1.2, 2);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Vitruvius Master Annihilator
+// ---------------------------------------------------------------------------
+
+describe('vitruviusMasterAnnihilator — marking + capped bonus hit', () => {
+  it('mark is set only after a normal attack; first ally attack BEFORE mark gets no bonus', () => {
+    const mVit = member('v', vitruviusLike([500, 500, 500]), 0, 'mythic');
+    const mAlly = member('a', plainChar({ id: 'ally2' }), 1, 'mythic');
+    const rot: TeamRotation = {
+      members: [mVit, mAlly],
+      turns: [
+        {
+          actions: [
+            // Ally attacks FIRST — no mark yet.
+            { memberId: 'a', attack: meleeAttack() },
+            // Vitruvius normal attack marks the boss.
+            { memberId: 'v', attack: meleeAttack() },
+            // Ally's second attack is after the mark — should gain +1 hit.
+            { memberId: 'a', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const allyResults = r.perMember['a'].perAction;
+    expect(allyResults).toHaveLength(2);
+    // Pre-mark vs post-mark: post-mark should be strictly greater.
+    expect(allyResults[1].result.expected).toBeGreaterThan(
+      allyResults[0].result.expected,
+    );
+  });
+
+  it('mark persists across turns (battle-level state, not turn-level)', () => {
+    const mVit = member('v', vitruviusLike([500, 500, 500]), 0, 'mythic');
+    const mAlly = member('a', plainChar({ id: 'ally2' }), 1, 'mythic');
+    const rot: TeamRotation = {
+      members: [mVit, mAlly],
+      turns: [
+        // Turn 1 — Vitruvius marks.
+        { actions: [{ memberId: 'v', attack: meleeAttack() }] },
+        // Turn 2 — ally should still benefit from the persistent mark.
+        { actions: [{ memberId: 'a', attack: meleeAttack() }] },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'vitruviusMasterAnnihilator' && a.turnIdx === 1,
+    );
+    expect(apps.length).toBe(1);
+    expect(apps[0].appliedToMemberId).toBe('a');
+  });
+
+  it('psychic attacks do NOT receive the bonus hit', () => {
+    const mVit = member('v', vitruviusLike([500, 500, 500]), 0, 'mythic');
+    const psychicAlly = plainChar({
+      id: 'psyker',
+      melee: { label: 'Mind', damageType: 'psychic', hits: 2, kind: 'melee' },
+    });
+    const mAlly = member('a', psychicAlly, 1, 'mythic');
+    const psychicAttack: AttackContext = {
+      profile: { label: 'Mind', damageType: 'psychic', hits: 2, kind: 'melee' },
+      rngMode: 'expected',
+    };
+    const rot: TeamRotation = {
+      members: [mVit, mAlly],
+      turns: [
+        {
+          actions: [
+            { memberId: 'v', attack: meleeAttack() },
+            { memberId: 'a', attack: psychicAttack },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'vitruviusMasterAnnihilator' && a.appliedToMemberId === 'a',
+    );
+    expect(apps).toEqual([]);
+  });
+
+  it('capByLevel clamps bonus-hit damage (level selects cap)', () => {
+    // Use an ally whose damage is large enough to blow past a small cap.
+    // Two Vitruvius levels produce two caps; we verify the damage delta
+    // between capped and uncapped matches (cap_high - cap_low).
+    const bigHitter = plainChar({
+      id: 'big',
+      baseStats: {
+        damage: 100000,
+        armor: 0,
+        hp: 1000,
+        critChance: 0,
+        critDamage: 0,
+        blockChance: 0,
+        blockDamage: 0,
+        meleeHits: 1,
+        rangedHits: 1,
+      },
+      melee: { label: 'Melee', damageType: 'power', hits: 1, kind: 'melee' },
+    });
+    const bigMelee: AttackContext = {
+      profile: { label: 'Melee', damageType: 'power', hits: 1, kind: 'melee' },
+      rngMode: 'expected',
+    };
+    const vitCaps = [500, 2500];
+    const passiveId = 'vitruvius_master_annihilator';
+
+    const run = (level: number) => {
+      const mVit = member(
+        'v',
+        vitruviusLike(vitCaps),
+        0,
+        'mythic',
+        0,
+        [{ id: passiveId, level }],
+      );
+      const mAlly = member('a', bigHitter, 1, 'mythic');
+      const rot: TeamRotation = {
+        members: [mVit, mAlly],
+        turns: [
+          {
+            actions: [
+              { memberId: 'v', attack: meleeAttack() },
+              { memberId: 'a', attack: bigMelee },
+            ],
+          },
+        ],
+      };
+      return resolveTeamRotation(rot, makeTarget());
+    };
+
+    const rLow = run(1); // cap 500
+    const rHigh = run(2); // cap 2500
+
+    const allyLow = rLow.perMember['a'].perAction[0].result.expected;
+    const allyHigh = rHigh.perMember['a'].perAction[0].result.expected;
+    // Cap difference should show up as a damage delta of (2500 - 500) = 2000.
+    expect(allyHigh - allyLow).toBeCloseTo(2000, 0);
   });
 });
 
