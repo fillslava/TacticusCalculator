@@ -36,8 +36,13 @@ function attackContextsFor(
     const id = key.slice('ability:'.length);
     const ability = char.abilities.find((a) => a.id === id);
     if (!ability) return [];
-    return ability.profiles.map<AttackContext>((profile) => ({
-      profile,
+    // Stamp `abilityProfileIdx` on multi-profile abilities so the engine's
+    // applyBonusHits can enforce the wiki STMA rule (extra hits only on
+    // the first profile to hit the target). Single-profile abilities are
+    // left untagged (undefined ≡ 0 ≡ "first profile").
+    const isMulti = ability.profiles.length > 1;
+    return ability.profiles.map<AttackContext>((profile, idx) => ({
+      profile: isMulti ? { ...profile, abilityProfileIdx: idx } : profile,
       rngMode: 'expected',
     }));
   }

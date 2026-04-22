@@ -50,6 +50,11 @@ export function applyBonusHits(
   isFirstTurn: boolean,
 ): AttackProfile {
   if (!buffs || buffs.length === 0) return profile;
+  // Wiki STMA rule: extra hits apply only to the FIRST attack of a
+  // multi-profile ability that hits a target. Subsequent profiles
+  // (abilityProfileIdx > 0) receive no bonus-hit additions. See
+  // `AttackProfile.abilityProfileIdx` for the stamping contract.
+  if ((profile.abilityProfileIdx ?? 0) > 0) return profile;
   let extra = 0;
   let cappedExtra = 0;
   let minCap = Infinity;
@@ -189,9 +194,14 @@ export function resolveRotation(
           targetTraits: collectTargetTraits(target),
         });
         if (!shouldFire) continue;
+        const isMultiProfile = passive.profiles.length > 1;
         passive.profiles.forEach((p, profileIdx) => {
+          // Stamp abilityProfileIdx on multi-profile triggered passives
+          // (e.g. Volk Fleshmetal Guns) so applyBonusHits applies bonus
+          // hits only to the first profile per STMA rule.
+          const tagged = isMultiProfile ? { ...p, abilityProfileIdx: profileIdx } : p;
           const passiveCtx: AttackContext = {
-            profile: applyBonusHits(p, turn.buffs, turnIdx === 0),
+            profile: applyBonusHits(tagged, turn.buffs, turnIdx === 0),
             rngMode: ctx.rngMode,
           };
           runAttack(passiveCtx);

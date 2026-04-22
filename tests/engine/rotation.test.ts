@@ -451,6 +451,114 @@ describe('resolveRotation — passive trigger auto-fire', () => {
     expect(r.perTurn).toHaveLength(4);
     expect(r.triggeredFires.map((f) => f.profileIdx)).toEqual([0, 1, 2]);
   });
+
+  // Wiki STMA rule: for a multi-profile triggered passive (e.g. Volk
+  // Fleshmetal Guns), a bonus-hit buff must only add hits to the FIRST
+  // profile. See https://tacticus.wiki.gg/wiki/HDTW_AddHits.
+  it('STMA: multi-profile triggered passive receives bonus hits only on first profile', () => {
+    const passive: CatalogAbility = {
+      id: 'volkLike',
+      name: 'Volk-like Multi',
+      kind: 'passive',
+      profiles: [
+        { label: 'A', damageType: 'power', hits: 1, kind: 'ability' },
+        { label: 'B', damageType: 'piercing', hits: 1, kind: 'ability' },
+        { label: 'C', damageType: 'plasma', hits: 1, kind: 'ability' },
+      ],
+      trigger: { kind: 'afterOwnNormalAttack' },
+    };
+    const a = makeAttacker([passive]);
+    const rot: Rotation = {
+      turns: [
+        {
+          attacks: [melee()],
+          // 'all'-trigger buff would apply to every profile without the STMA
+          // gate; the engine must restrict it to profileIdx === 0.
+          buffs: [
+            { id: 'vitruviusLike', name: 'Mark', bonusHits: 1, bonusHitsOn: 'all' },
+          ],
+        },
+      ],
+    };
+    const r = resolveRotation(a, makeTarget(), rot);
+    // 1 scheduled melee + 3 triggered passive profiles = 4 entries.
+    expect(r.perTurn).toHaveLength(4);
+    // Scheduled melee (hits=2) + 'all' bonus (+1) = 3 per-hit rows.
+    expect(r.perTurn[0].perHit).toHaveLength(3);
+    // First passive profile: 1 base + 1 bonus = 2 rows.
+    expect(r.perTurn[1].perHit).toHaveLength(2);
+    // Subsequent passive profiles: STMA — 1 base + 0 bonus = 1 row each.
+    expect(r.perTurn[2].perHit).toHaveLength(1);
+    expect(r.perTurn[3].perHit).toHaveLength(1);
+  });
+
+  // Kharn-style: UI fans "Kill! Maim! Burn!" out into 3 scheduled contexts
+  // (Piercing, Eviscerating, Plasma), stamping abilityProfileIdx on each.
+  // The engine's scheduled-action path must honour the STMA rule, so a
+  // +1 Vitruvius-style buff lands only on the first.
+  it('STMA: multi-profile scheduled ability receives bonus hits only on first profile', () => {
+    const a = makeAttacker();
+    const mkCtx = (
+      label: string,
+      hits: number,
+      idx: number,
+    ): AttackContext => ({
+      profile: {
+        label,
+        damageType: 'power',
+        hits,
+        kind: 'ability',
+        abilityId: 'kmb',
+        abilityProfileIdx: idx,
+      },
+      rngMode: 'expected',
+    });
+    const rot: Rotation = {
+      turns: [
+        {
+          attacks: [mkCtx('Piercing', 1, 0), mkCtx('Eviscerating', 6, 1), mkCtx('Plasma', 1, 2)],
+          buffs: [
+            { id: 'mark', name: 'Mark', bonusHits: 1, bonusHitsOn: 'all' },
+          ],
+        },
+      ],
+    };
+    const r = resolveRotation(a, makeTarget(), rot);
+    expect(r.perTurn).toHaveLength(3);
+    // Profile 0: 1 base + 1 bonus = 2.
+    expect(r.perTurn[0].perHit).toHaveLength(2);
+    // Profiles 1, 2: STMA → no bonus.
+    expect(r.perTurn[1].perHit).toHaveLength(6);
+    expect(r.perTurn[2].perHit).toHaveLength(1);
+  });
+
+  it('STMA: single-profile triggered passive still receives bonus hits (regression)', () => {
+    const passive: CatalogAbility = {
+      id: 'singleLike',
+      name: 'Single-profile passive',
+      kind: 'passive',
+      profiles: [
+        { label: 'A', damageType: 'power', hits: 1, kind: 'ability' },
+      ],
+      trigger: { kind: 'afterOwnNormalAttack' },
+    };
+    const a = makeAttacker([passive]);
+    const rot: Rotation = {
+      turns: [
+        {
+          attacks: [melee()],
+          buffs: [
+            { id: 'all', name: 'All', bonusHits: 1, bonusHitsOn: 'all' },
+          ],
+        },
+      ],
+    };
+    const r = resolveRotation(a, makeTarget(), rot);
+    // 1 scheduled + 1 triggered = 2 entries.
+    expect(r.perTurn).toHaveLength(2);
+    // Single-profile passive still gets the bonus hit.
+    expect(r.perTurn[1].perHit).toHaveLength(2);
+  });
 });
 
 describe('resolveRotation — cooldowns', () => {

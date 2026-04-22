@@ -48,6 +48,21 @@ export interface AttackProfile {
    */
   bonusHitCount?: number;
   bonusHitCap?: number;
+  /**
+   * Runtime tag (not a catalog field): zero-based index of this profile
+   * within the parent multi-profile ability. Stamped when:
+   *   - the UI fans a multi-profile active out into one AttackContext per
+   *     profile (useDamage.ts / useTeamDamage.ts `attackContextsFor`);
+   *   - the engine iterates `passive.profiles` inside a triggered-passive
+   *     loop (rotation.ts and team.ts passive-trigger sections).
+   * `applyBonusHits` reads this to enforce the wiki Single-Target
+   * Multi-Attack (STMA) rule: extra hits (Vitruvius mark, Trajann +Y,
+   * Astartes Banner, etc.) apply only to the FIRST profile that hits the
+   * target. Undefined / 0 means "first profile or a plain single-profile
+   * attack" and is treated identically. Values > 0 mean "subsequent profile
+   * of the same multi-attack ability" and receive no bonus-hit additions.
+   */
+  abilityProfileIdx?: number;
 }
 
 export interface ItemStatMods {

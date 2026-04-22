@@ -49,4 +49,57 @@ describe('applyBonusHits', () => {
     ];
     expect(applyBonusHits(profile('melee', 1), buffs, true).hits).toBe(4);
   });
+
+  // Wiki STMA rule: extra hits apply only to the FIRST attack of a
+  // multi-profile ability that hits a target. Subsequent profiles (index > 0)
+  // receive NO bonus hits — no matter the trigger kind. See
+  // https://tacticus.wiki.gg/wiki/HDTW_AddHits.
+  describe('STMA (Single-Target Multi-Attack) rule', () => {
+    it('first profile of a multi-profile ability gets bonus hits', () => {
+      const p: AttackProfile = { ...profile('ability', 6), abilityProfileIdx: 0 };
+      const b = [buff({ bonusHits: 1, bonusHitsOn: 'all' })];
+      expect(applyBonusHits(p, b, false).hits).toBe(7);
+    });
+
+    it('second profile of a multi-profile ability is unchanged', () => {
+      const p: AttackProfile = { ...profile('ability', 6), abilityProfileIdx: 1 };
+      const b = [buff({ bonusHits: 1, bonusHitsOn: 'all' })];
+      expect(applyBonusHits(p, b, false)).toBe(p);
+    });
+
+    it('third profile of a multi-profile ability is unchanged', () => {
+      const p: AttackProfile = { ...profile('ability', 1), abilityProfileIdx: 2 };
+      const b = [buff({ bonusHits: 1, bonusHitsOn: 'all' })];
+      expect(applyBonusHits(p, b, false)).toBe(p);
+    });
+
+    it('subsequent profile with Vitruvius cap (bonusHitCap) is unchanged', () => {
+      const p: AttackProfile = { ...profile('ability', 6), abilityProfileIdx: 1 };
+      const b = [buff({ bonusHits: 1, bonusHitsOn: 'all', bonusHitCap: 100_000 })];
+      const out = applyBonusHits(p, b, false);
+      expect(out).toBe(p);
+      expect(out.bonusHitCount).toBeUndefined();
+      expect(out.bonusHitCap).toBeUndefined();
+    });
+
+    it('undefined abilityProfileIdx is treated as first profile', () => {
+      const p = profile('ability', 6);
+      const b = [buff({ bonusHits: 1, bonusHitsOn: 'all' })];
+      expect(applyBonusHits(p, b, false).hits).toBe(7);
+    });
+
+    it('single-profile ability with undefined idx still receives bonus hits (regression)', () => {
+      const p = profile('ability', 1);
+      const b = [buff({ bonusHits: 2, bonusHitsOn: 'ability' })];
+      expect(applyBonusHits(p, b, false).hits).toBe(3);
+    });
+
+    it('STMA applies even to trigger=ability buffs (Trajann +Y on KMB)', () => {
+      const first: AttackProfile = { ...profile('ability', 6), abilityProfileIdx: 0 };
+      const second: AttackProfile = { ...profile('ability', 6), abilityProfileIdx: 1 };
+      const b = [buff({ bonusHits: 2, bonusHitsOn: 'ability' })];
+      expect(applyBonusHits(first, b, false).hits).toBe(8);
+      expect(applyBonusHits(second, b, false)).toBe(second);
+    });
+  });
 });

@@ -863,7 +863,16 @@ export function resolveTeamRotation(
           targetTraits: collectTargetTraits(target),
         });
         if (!fire) continue;
+        // Stamp `abilityProfileIdx` on multi-profile triggered passives
+        // (e.g. Volk Fleshmetal Guns) so applyBonusHits enforces the
+        // wiki STMA rule: bonus hits only on the first profile to hit
+        // the target. Single-profile passives stay untagged
+        // (undefined ≡ 0 ≡ "first profile").
+        const isMultiProfile = passive.profiles.length > 1;
         passive.profiles.forEach((p, profileIdx) => {
+          const taggedProfile = isMultiProfile
+            ? { ...p, abilityProfileIdx: profileIdx }
+            : p;
           // Re-derive team buffs AS IF this passive profile were the
           // currently-resolving attack. Picks up Trajann +Y hits on first
           // non-normal per member, Vitruvius marked-target cap, Biovore
@@ -871,7 +880,7 @@ export function resolveTeamRotation(
           const passiveTeamBuffs = deriveTeamBuffs(
             member,
             rotation.members,
-            p,
+            taggedProfile,
             turnState,
             battleState,
             turnIdx,
@@ -886,7 +895,7 @@ export function resolveTeamRotation(
             passiveCombinedBuffs,
           );
           const passiveProfile = applyBonusHits(
-            p,
+            taggedProfile,
             passiveCombinedBuffs,
             turnIdx === 0,
           );

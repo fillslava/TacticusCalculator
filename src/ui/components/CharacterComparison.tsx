@@ -127,8 +127,12 @@ export function CharacterComparison() {
         },
         equipment: [],
       };
-      const ctxs: AttackContext[] = profiles.map((profile) => ({
-        profile,
+      // Stamp `abilityProfileIdx` on multi-profile abilities so
+      // applyBonusHits enforces the STMA rule (bonus hits on first
+      // profile only). See AttackProfile.abilityProfileIdx.
+      const isMulti = profiles.length > 1;
+      const ctxs: AttackContext[] = profiles.map((profile, idx) => ({
+        profile: isMulti ? { ...profile, abilityProfileIdx: idx } : profile,
         rngMode: 'expected',
       }));
       const r = resolveRotation(attacker, t, { turns: [{ attacks: ctxs, buffs: turnBuffs }] });
