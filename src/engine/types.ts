@@ -237,6 +237,43 @@ export type AbilityTeamBuff =
        * after a friendly Custodes active arms the extended range.
        */
       extendedRangeHexes: number;
+    }
+  | {
+      /**
+       * High Marshal Helbrecht's Crusade of Wrath active. When the carrier
+       * fires the active on turn N, every friendly unit within
+       * `rangeHexes` (hex distance) — Helbrecht himself included, since
+       * distance 0 ≤ 2 satisfies "within 2 hexes" — receives on melee
+       * attacks:
+       *   • +`damageFlatByLevel[level-1]` flat damage
+       *   • +`piercePctByLevel[level-1]`% additive pierce ratio
+       * for turns [N, N + `durationTurns` - 1]. The wiki wording "for this
+       * round and the next" maps to `durationTurns = 2`.
+       *
+       * Order-sensitive within turn N (the buff arms only after Helbrecht's
+       * active resolves); all of turn N+1 receives it unconditionally.
+       * Indexed by (level - 1); clamps past end.
+       */
+      kind: 'helbrechtCrusadeOfWrath';
+      damageFlatByLevel: number[];
+      piercePctByLevel: number[];
+      durationTurns: number;
+      rangeHexes: number;
+    }
+  | {
+      /**
+       * High Marshal Helbrecht's Destroy the Witch passive. Pure positional
+       * aura — no trigger required. Helbrecht himself and friendlies within
+       * `rangeHexes` (1 hex: adjacent + self) gain
+       * +`damageFlatByLevel[level-1]` flat damage on MELEE attacks when the
+       * target carries the `requiresTargetTrait` trait ('psyker'). The
+       * +1 Movement component of the passive is irrelevant to the damage
+       * calculator and is omitted.
+       */
+      kind: 'helbrechtDestroyTheWitch';
+      damageFlatByLevel: number[];
+      rangeHexes: number;
+      requiresTargetTrait: string;
     };
 
 export interface CatalogAbility {
@@ -346,6 +383,16 @@ export interface TurnBuff {
    * Vitruvius's Master Annihilator.
    */
   bonusHitCap?: number;
+  /**
+   * Additive pierce-ratio delta (e.g. 0.22 = +22% pierce). Stacks across
+   * buffs by addition; the resulting pierce ratio clamps to `[0, 1]`.
+   * Introduced for Helbrecht's Crusade of Wrath "+Y% pierce ratio in
+   * melee" clause. Attack-kind gating (melee-only, ability-only, etc.) is
+   * performed at derivation site — the buff is only emitted when the
+   * current profile qualifies, mirroring how `damageFlat` / `damageMultiplier`
+   * filtering is handled for Trajann and Aesoth.
+   */
+  pierceAdd?: number;
   /**
    * Calibration coefficient from the source preset. When present, the UI
    * auto-recomputes `damageFlat` whenever level or rarity changes.

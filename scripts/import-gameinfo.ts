@@ -414,6 +414,13 @@ const HAND_AUTHORED_ABILITY_IDS = new Set([
   // `shouldTrigger` would return false for every attack — silently
   // cancelling the "second hit" the user expects.
   'godswyl',
+  // Helbrecht carries two positional team buffs: Crusade of Wrath (active)
+  // grants +flat damage and +pierce to melee attacks of friendlies within
+  // 2 hexes for this turn + next; Destroy the Witch (passive) grants +flat
+  // melee damage to Helbrecht and adjacent friendlies when the target is a
+  // Psyker. The importer synthesizes neither positional team buffs nor
+  // trait-gated auras, so hand-authored.
+  'helbrecht',
 ]);
 
 /**

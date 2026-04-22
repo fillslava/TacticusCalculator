@@ -2880,3 +2880,363 @@ describe('godswyl — Champion of the Feast fires after first attack', () => {
     expect(r.perMember['gw'].triggeredFires).toHaveLength(1);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Helbrecht — positional team buffs
+// ---------------------------------------------------------------------------
+
+/** Builds a Helbrecht-shaped fixture with parametrized per-level tables so
+ *  tests can dial values to known constants without worrying about the real
+ *  wiki-interpolated curve. Both buff kinds default to single-entry arrays
+ *  that resolve to the same value regardless of the carrier's xpLevel. */
+function helbrechtLike(opts: {
+  crusadeDamageFlat?: number | number[];
+  crusadePiercePct?: number | number[];
+  crusadeDurationTurns?: number;
+  crusadeRangeHexes?: number;
+  witchDamageFlat?: number | number[];
+  witchRangeHexes?: number;
+  witchRequiresTargetTrait?: string;
+} = {}): CatalogCharacter {
+  const crusadeDmg = Array.isArray(opts.crusadeDamageFlat)
+    ? opts.crusadeDamageFlat
+    : [opts.crusadeDamageFlat ?? 500];
+  const crusadePierce = Array.isArray(opts.crusadePiercePct)
+    ? opts.crusadePiercePct
+    : [opts.crusadePiercePct ?? 25];
+  const witchDmg = Array.isArray(opts.witchDamageFlat)
+    ? opts.witchDamageFlat
+    : [opts.witchDamageFlat ?? 1500];
+  const crusade: CatalogAbility = {
+    id: 'helbrecht_crusade_of_wrath',
+    name: 'Crusade Of Wrath',
+    kind: 'active',
+    profiles: [{ label: 'CoW', damageType: 'power', hits: 1, kind: 'ability' }],
+    cooldown: 3,
+    teamBuff: {
+      kind: 'helbrechtCrusadeOfWrath',
+      damageFlatByLevel: crusadeDmg,
+      piercePctByLevel: crusadePierce,
+      durationTurns: opts.crusadeDurationTurns ?? 2,
+      rangeHexes: opts.crusadeRangeHexes ?? 2,
+    },
+  };
+  const witch: CatalogAbility = {
+    id: 'helbrecht_destroy_the_witch',
+    name: 'Destroy The Witch',
+    kind: 'passive',
+    profiles: [],
+    teamBuff: {
+      kind: 'helbrechtDestroyTheWitch',
+      damageFlatByLevel: witchDmg,
+      rangeHexes: opts.witchRangeHexes ?? 1,
+      requiresTargetTrait: opts.witchRequiresTargetTrait ?? 'psyker',
+    },
+  };
+  return plainChar({
+    id: 'helbrecht',
+    displayName: 'Helbrecht',
+    faction: 'Black Templars',
+    alliance: 'Imperial',
+    abilities: [crusade, witch],
+  });
+}
+
+/** Zero-armor boss carrying the Psyker trait so Destroy the Witch activates. */
+function psykerBoss(): Target {
+  return {
+    source: {
+      id: 'psyker',
+      displayName: 'Psyker Boss',
+      stages: [
+        { name: 'only', hp: 10_000_000, armor: 0, traits: ['psyker'] },
+      ],
+    },
+    stageIndex: 0,
+  };
+}
+
+describe('helbrechtDestroyTheWitch — positional +flat melee vs Psykers', () => {
+  it('catalog entry carries the passive with the expected shape', () => {
+    const hb = getCharacter('helbrecht');
+    expect(hb).toBeDefined();
+    const passive = hb!.abilities.find(
+      (a) => a.id === 'helbrecht_destroy_the_witch',
+    );
+    expect(passive).toBeDefined();
+    expect(passive!.kind).toBe('passive');
+    expect(passive!.teamBuff?.kind).toBe('helbrechtDestroyTheWitch');
+    const tb = passive!.teamBuff as Extract<
+      NonNullable<typeof passive>['teamBuff'],
+      { kind: 'helbrechtDestroyTheWitch' }
+    >;
+    expect(tb.rangeHexes).toBe(1);
+    expect(tb.requiresTargetTrait).toBe('psyker');
+    expect(tb.damageFlatByLevel.length).toBeGreaterThanOrEqual(50);
+  });
+
+  it('buffs Helbrecht himself on melee vs Psyker (self-included)', () => {
+    const hb = helbrechtLike({ witchDamageFlat: 1000 });
+    const rot: TeamRotation = {
+      members: [member('h', hb, 0)],
+      turns: [{ actions: [{ memberId: 'h', attack: meleeAttack() }] }],
+    };
+    const withWitch = resolveTeamRotation(rot, psykerBoss());
+    const baseline = resolveTeamRotation(rot, makeTarget());
+    // Psyker target → Destroy the Witch fires → +1000 flat per hit × 2 hits.
+    expect(withWitch.perMember['h'].perAction[0].result.expected).toBeGreaterThan(
+      baseline.perMember['h'].perAction[0].result.expected,
+    );
+    expect(
+      withWitch.teamBuffApplications.some(
+        (a) =>
+          a.kind === 'helbrechtDestroyTheWitch' &&
+          a.sourceMemberId === 'h' &&
+          a.appliedToMemberId === 'h',
+      ),
+    ).toBe(true);
+  });
+
+  it('buffs adjacent friendly (|Δpos|=1) but NOT a 2-hex-away friendly', () => {
+    const hb = helbrechtLike({ witchDamageFlat: 1000 });
+    const ally = plainChar({ id: 'ally' });
+    const rot: TeamRotation = {
+      members: [
+        member('h', hb, 0),
+        member('adj', ally, 1), // |Δ|=1 → within range
+        member('far', ally, 2), // |Δ|=2 → out of range
+      ],
+      turns: [
+        {
+          actions: [
+            { memberId: 'adj', attack: meleeAttack() },
+            { memberId: 'far', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, psykerBoss());
+    const apps = r.teamBuffApplications.filter(
+      (a) => a.kind === 'helbrechtDestroyTheWitch',
+    );
+    const appliedIds = apps.map((a) => a.appliedToMemberId);
+    expect(appliedIds).toContain('adj');
+    expect(appliedIds).not.toContain('far');
+  });
+
+  it('does NOT apply when target lacks the Psyker trait', () => {
+    const hb = helbrechtLike({ witchDamageFlat: 1000 });
+    const rot: TeamRotation = {
+      members: [member('h', hb, 0)],
+      turns: [{ actions: [{ memberId: 'h', attack: meleeAttack() }] }],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    expect(
+      r.teamBuffApplications.some((a) => a.kind === 'helbrechtDestroyTheWitch'),
+    ).toBe(false);
+  });
+
+  it('does NOT apply to a ranged attack even against a Psyker target', () => {
+    const hb = helbrechtLike({ witchDamageFlat: 1000 });
+    const rangedAtk: AttackContext = {
+      profile: { label: 'Ranged', damageType: 'bolter', hits: 2, kind: 'ranged' },
+      rngMode: 'expected',
+    };
+    const rot: TeamRotation = {
+      members: [member('h', hb, 0)],
+      turns: [{ actions: [{ memberId: 'h', attack: rangedAtk }] }],
+    };
+    const r = resolveTeamRotation(rot, psykerBoss());
+    expect(
+      r.teamBuffApplications.some((a) => a.kind === 'helbrechtDestroyTheWitch'),
+    ).toBe(false);
+  });
+});
+
+describe('helbrechtCrusadeOfWrath — active-armed 2-hex melee aura', () => {
+  it('catalog entry carries the active with the expected shape', () => {
+    const hb = getCharacter('helbrecht');
+    expect(hb).toBeDefined();
+    const active = hb!.abilities.find(
+      (a) => a.id === 'helbrecht_crusade_of_wrath',
+    );
+    expect(active).toBeDefined();
+    expect(active!.kind).toBe('active');
+    expect(active!.teamBuff?.kind).toBe('helbrechtCrusadeOfWrath');
+    const tb = active!.teamBuff as Extract<
+      NonNullable<typeof active>['teamBuff'],
+      { kind: 'helbrechtCrusadeOfWrath' }
+    >;
+    expect(tb.rangeHexes).toBe(2);
+    expect(tb.durationTurns).toBe(2);
+    expect(tb.damageFlatByLevel.length).toBeGreaterThanOrEqual(50);
+    expect(tb.piercePctByLevel.length).toBe(tb.damageFlatByLevel.length);
+  });
+
+  it('aura does NOT apply before Helbrecht fires Crusade (order-sensitive on turn N)', () => {
+    const hb = helbrechtLike({ crusadeDamageFlat: 1000, crusadePiercePct: 0 });
+    const ally = plainChar({ id: 'ally' });
+    // Ally attacks BEFORE Helbrecht on turn 0 — aura not yet armed.
+    const rot: TeamRotation = {
+      members: [member('h', hb, 0), member('ally', ally, 1)],
+      turns: [
+        {
+          actions: [
+            { memberId: 'ally', attack: meleeAttack() },
+            {
+              memberId: 'h',
+              attack: abilityAttack('helbrecht_crusade_of_wrath', 3),
+            },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const appsTurn0 = r.teamBuffApplications.filter(
+      (a) =>
+        a.kind === 'helbrechtCrusadeOfWrath' &&
+        a.turnIdx === 0 &&
+        a.appliedToMemberId === 'ally',
+    );
+    expect(appsTurn0).toHaveLength(0);
+  });
+
+  it('aura applies to adjacent ally AFTER Helbrecht fires Crusade, and persists on turn N+1', () => {
+    const hb = helbrechtLike({ crusadeDamageFlat: 1000, crusadePiercePct: 0 });
+    const ally = plainChar({ id: 'ally' });
+    const rot: TeamRotation = {
+      members: [member('h', hb, 0), member('ally', ally, 1)],
+      turns: [
+        {
+          actions: [
+            {
+              memberId: 'h',
+              attack: abilityAttack('helbrecht_crusade_of_wrath', 3),
+            },
+            { memberId: 'ally', attack: meleeAttack() },
+          ],
+        },
+        // Turn 1 — Crusade still active (durationTurns=2). Ally's melee
+        // should receive the buff even though Helbrecht doesn't re-fire.
+        { actions: [{ memberId: 'ally', attack: meleeAttack() }] },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const t0 = r.teamBuffApplications.filter(
+      (a) =>
+        a.kind === 'helbrechtCrusadeOfWrath' &&
+        a.turnIdx === 0 &&
+        a.appliedToMemberId === 'ally',
+    );
+    const t1 = r.teamBuffApplications.filter(
+      (a) =>
+        a.kind === 'helbrechtCrusadeOfWrath' &&
+        a.turnIdx === 1 &&
+        a.appliedToMemberId === 'ally',
+    );
+    expect(t0.length).toBeGreaterThan(0);
+    expect(t1.length).toBeGreaterThan(0);
+  });
+
+  it('aura expires on turn N+2 (default durationTurns=2 covers N and N+1 only)', () => {
+    const hb = helbrechtLike({ crusadeDamageFlat: 1000, crusadePiercePct: 0 });
+    const ally = plainChar({ id: 'ally' });
+    const rot: TeamRotation = {
+      members: [member('h', hb, 0), member('ally', ally, 1)],
+      turns: [
+        {
+          actions: [
+            {
+              memberId: 'h',
+              attack: abilityAttack('helbrecht_crusade_of_wrath', 3),
+            },
+          ],
+        },
+        { actions: [{ memberId: 'ally', attack: meleeAttack() }] }, // covered
+        { actions: [{ memberId: 'ally', attack: meleeAttack() }] }, // past window
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const t2 = r.teamBuffApplications.filter(
+      (a) =>
+        a.kind === 'helbrechtCrusadeOfWrath' &&
+        a.turnIdx === 2 &&
+        a.appliedToMemberId === 'ally',
+    );
+    expect(t2).toHaveLength(0);
+  });
+
+  it('buffs friendlies within 2 hexes but not position 3', () => {
+    const hb = helbrechtLike({ crusadeDamageFlat: 1000, crusadePiercePct: 0 });
+    const ally = plainChar({ id: 'ally' });
+    const rot: TeamRotation = {
+      members: [
+        member('h', hb, 0),
+        member('p2', ally, 2), // |Δ|=2 → within range
+        member('p3', ally, 3), // |Δ|=3 → out of range
+      ],
+      turns: [
+        {
+          actions: [
+            {
+              memberId: 'h',
+              attack: abilityAttack('helbrecht_crusade_of_wrath', 3),
+            },
+          ],
+        },
+        {
+          actions: [
+            { memberId: 'p2', attack: meleeAttack() },
+            { memberId: 'p3', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const t1 = r.teamBuffApplications.filter(
+      (a) => a.kind === 'helbrechtCrusadeOfWrath' && a.turnIdx === 1,
+    );
+    const appliedIds = t1.map((a) => a.appliedToMemberId);
+    expect(appliedIds).toContain('p2');
+    expect(appliedIds).not.toContain('p3');
+  });
+
+  it('pierce buff additively modifies profile pierceOverride (stacking into damage via armor)', () => {
+    // Armor-heavy boss so pierce matters: raw damage - armor floor is
+    // overridden by (damage * pierceOverride) when pierce wins.
+    // Baseline: melee ally with no pierce vs 200-armor boss → big armor hit.
+    // With Crusade pierce (+40%), pierce multiplies the through-damage.
+    const hb = helbrechtLike({ crusadeDamageFlat: 0, crusadePiercePct: 40 });
+    const ally = plainChar({ id: 'ally' });
+    const armoredBoss: CatalogBoss = {
+      id: 'armored',
+      displayName: 'Armored',
+      stages: [{ name: 'only', hp: 10_000_000, armor: 200, traits: [] }],
+    };
+    const target: Target = { source: armoredBoss, stageIndex: 0 };
+    const withCrusade: TeamRotation = {
+      members: [member('h', hb, 0), member('ally', ally, 1)],
+      turns: [
+        {
+          actions: [
+            {
+              memberId: 'h',
+              attack: abilityAttack('helbrecht_crusade_of_wrath', 3),
+            },
+            { memberId: 'ally', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    // Baseline rotation — same ally attack, no Helbrecht.
+    const baseline: TeamRotation = {
+      members: [member('ally', ally, 1)],
+      turns: [{ actions: [{ memberId: 'ally', attack: meleeAttack() }] }],
+    };
+    const rCow = resolveTeamRotation(withCrusade, target);
+    const rBase = resolveTeamRotation(baseline, target);
+    expect(rCow.perMember['ally'].perAction[0].result.expected).toBeGreaterThan(
+      rBase.perMember['ally'].perAction[0].result.expected,
+    );
+  });
+});

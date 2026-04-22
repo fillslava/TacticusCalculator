@@ -1,4 +1,5 @@
 import { resolveAttack } from './attack';
+import { pierceOf } from './dmgTypes';
 import {
   abilityFor,
   applyScaling,
@@ -42,6 +43,41 @@ export function applyTurnBuffs(attacker: Attacker, buffs: TurnBuff[] | undefined
     if (b.traits) merged.traits!.push(...b.traits);
   }
   return { ...attacker, activeBuffs: merged };
+}
+
+/**
+ * Fold every buff's `pierceAdd` into the profile's `pierceOverride`. Pierce
+ * is a profile-level stat (consumed by `damageAfterArmor`), so we mutate the
+ * profile rather than routing through ModifierStack. Stacks additively
+ * across buffs and clamps to `[0, 1]`.
+ *
+ * Attack-kind gating (melee-only, ability-only) is handled at derivation
+ * site — `deriveTeamBuffs` only emits a `pierceAdd` buff when the current
+ * profile matches the buff's attack-kind filter, mirroring how damageFlat
+ * is handled for Aesoth/Trajann. By the time buffs reach this function,
+ * every pierceAdd entry is already qualified for the profile.
+ *
+ * Returns the unmodified profile when no buffs contribute pierce.
+ */
+export function applyPierceBuffs(
+  profile: AttackProfile,
+  buffs: TurnBuff[] | undefined,
+): AttackProfile {
+  if (!buffs || buffs.length === 0) return profile;
+  let add = 0;
+  for (const b of buffs) {
+    if (b.pierceAdd) add += b.pierceAdd;
+  }
+  if (add === 0) return profile;
+  // When the profile has no explicit `pierceOverride`, the engine falls
+  // back to the damage-type's default pierce ratio (see dmgTypes.ts). We
+  // must add relative to that default, not zero — otherwise buffing power
+  // (default 0.4) by +0.4 would produce pierce=0.4 instead of 0.8,
+  // silently CANCELING the buff for any unmodified profile.
+  const base = profile.pierceOverride ?? pierceOf(profile.damageType);
+  const next = Math.max(0, Math.min(1, base + add));
+  if (next === base) return profile;
+  return { ...profile, pierceOverride: next };
 }
 
 export function applyBonusHits(

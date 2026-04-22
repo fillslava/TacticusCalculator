@@ -115,6 +115,30 @@ export const AbilityTeamBuffSchema = z.union([
     /** Extended aura hex range when a friendly Custodes fires an active. */
     extendedRangeHexes: z.number().int().min(1),
   }),
+  z.object({
+    kind: z.literal('helbrechtCrusadeOfWrath'),
+    /** Per-level flat melee damage bonus (X). Wiki anchors:
+     *    L8=12, L17=28, L26=67, L35=142, L50=499, L60=652. */
+    damageFlatByLevel: z.array(z.number()).min(1),
+    /** Per-level additive pierce % (Y) on melee attacks. Wiki anchors:
+     *    L8=17, L17=18, L26=20, L35=22, L50=24, L60=24. */
+    piercePctByLevel: z.array(z.number()).min(1),
+    /** Aura duration (rounds). Wiki: "this round and the next" → 2. */
+    durationTurns: z.number().int().min(1),
+    /** Hex range for the aura. Wiki: "within 2 hexes" → 2. */
+    rangeHexes: z.number().int().min(1),
+  }),
+  z.object({
+    kind: z.literal('helbrechtDestroyTheWitch'),
+    /** Per-level flat melee damage bonus against the gated trait. Wiki
+     *  anchors: L8=37, L50=1496, L60=1958. */
+    damageFlatByLevel: z.array(z.number()).min(1),
+    /** Hex range for the aura. Wiki: "This unit and friendly adjacent
+     *  units" → 1 (self + adjacent). */
+    rangeHexes: z.number().int().min(1),
+    /** Target trait gate. Wiki: "against Psykers" → 'psyker'. */
+    requiresTargetTrait: z.string(),
+  }),
 ]);
 
 /**

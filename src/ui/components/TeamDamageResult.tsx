@@ -245,8 +245,9 @@ export function TeamDamageResult() {
         )}
         {showBuffs && result.teamBuffApplications.length === 0 && (
           <p className="mt-1 text-[11px] italic text-slate-500">
-            (no team-buff triggers — add Laviscus, Trajann, Biovore, or
-            Vitruvius and schedule their enabling attacks)
+            (no team-buff triggers — add Laviscus, Trajann, Biovore,
+            Vitruvius, Aesoth, or Helbrecht and schedule their enabling
+            attacks)
           </p>
         )}
       </div>

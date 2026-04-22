@@ -88,6 +88,32 @@
  *    damage only — the armor component is surfaced in the applications
  *    sink for UI transparency and nothing more.
  *
+ *  - `helbrechtCrusadeOfWrath`: an active ability that arms a positional
+ *    damage + pierce aura on every MELEE attack from friendlies within
+ *    `rangeHexes` (2 per wiki) of Helbrecht — self-included (distance 0
+ *    satisfies "within 2 hexes"). Once Helbrecht's active resolves on
+ *    turn N, the aura persists through turn N + `durationTurns` - 1
+ *    (durationTurns=2 maps to "for this round and the next"). State
+ *    lives at battle level (`helbrechtCrusadeActiveUntil` keyed by
+ *    Helbrecht memberId). Order-sensitive within turn N: friendlies that
+ *    attacked BEFORE Helbrecht's active don't get the buff; on turn N+1
+ *    the buff is unconditional. The wiki's "regardless of damage type"
+ *    clause is irrelevant here — we gate on kind=melee, which already
+ *    covers both power and bolter melee profiles.
+ *
+ *  - `helbrechtDestroyTheWitch`: a pure positional passive. Helbrecht and
+ *    friendlies within `rangeHexes` (1 per wiki: self + adjacent) gain
+ *    +flat damage on MELEE attacks when the target carries the
+ *    `requiresTargetTrait` trait ('psyker'). No activation required; the
+ *    aura is always-on. The +1 Movement component of the passive is
+ *    irrelevant to the damage calculator and is omitted.
+ *
+ * Positional auras (Helbrecht, Aesoth) intentionally filter by hex
+ * distance rather than buffing the entire team. This maps the in-game
+ * adjacency model — a linear 5-slot formation where `|Δposition|` is the
+ * hex distance — and naturally limits "range" effects to 2-3 teammates
+ * instead of all five.
+ *
  * Intentionally NOT modelled yet: aura persistence across turns for
  * Laviscus/Trajann (Vitruvius now persists; others still recompute per-turn),
  * multi-target spore mines, non-adjacency aura shapes (other than
@@ -96,7 +122,7 @@
  */
 import { resolveAttack } from './attack';
 import { progressionPositionFromStarLevel } from './progression';
-import { applyBonusHits, applyTurnBuffs } from './rotation';
+import { applyBonusHits, applyPierceBuffs, applyTurnBuffs } from './rotation';
 import {
   abilityFor,
   applyScaling,
@@ -300,6 +326,14 @@ interface TurnState {
  * turn loop.
  */
 interface BattleState {
+  /**
+   * Target trait list resolved once at battle start. Cached here so
+   * positional team buffs with trait gates (Helbrecht's Destroy the Witch
+   * requires the target to carry 'psyker') don't re-resolve stage traits
+   * for every derivation call. The single-boss MVP keeps target traits
+   * static across the battle, so caching is safe.
+   */
+  targetTraits: TraitId[];
   /** Memberids of Vitruvius-teamBuff carriers whose mark is active. */
   vitruviusMarkedSources: Set<string>;
   /**
@@ -315,6 +349,19 @@ interface BattleState {
    * whether his action resolved before the attack being buffed.
    */
   membersInRotation: Set<string>;
+  /**
+   * Per-Helbrecht: the last turn index (inclusive) through which his
+   * Crusade of Wrath aura applies, once his active has fired. Map key is
+   * Helbrecht's memberId. Absent key means "Crusade has not fired yet" —
+   * no aura. When Helbrecht fires Crusade on turn N, we set the entry to
+   * `N + durationTurns - 1` so the aura covers turn N and N+1 by default
+   * ("this round and the next"). Subsequent firings extend the window if
+   * they land later (cooldown permitting).
+   *
+   * Order-sensitive within turn N (the aura arms AFTER Helbrecht's active
+   * resolves), unconditionally present on all of turn N+1.
+   */
+  helbrechtCrusadeActiveUntil: Record<string, number>;
 }
 
 function initTurnState(): TurnState {
@@ -329,7 +376,7 @@ function initTurnState(): TurnState {
   };
 }
 
-function initBattleState(rotation: TeamRotation): BattleState {
+function initBattleState(rotation: TeamRotation, target: Target): BattleState {
   // `membersInRotation` captures every member that the rotation schedules
   // for at least one action anywhere. Computed once up front (not
   // turn-by-turn) so Trajann's buff does NOT depend on whether his action
@@ -342,8 +389,10 @@ function initBattleState(rotation: TeamRotation): BattleState {
     }
   }
   return {
+    targetTraits: collectTargetTraits(target),
     vitruviusMarkedSources: new Set(),
     membersInRotation,
+    helbrechtCrusadeActiveUntil: {},
   };
 }
 
@@ -620,6 +669,83 @@ function deriveTeamBuffs(
     }
   }
 
+  // ------ 8) Helbrecht Crusade of Wrath: +flat damage and +% pierce on
+  //        MELEE attacks for friendlies within `rangeHexes` of Helbrecht,
+  //        active for `durationTurns` turns starting when Helbrecht fires
+  //        the active. Self-included (distance 0 ≤ 2 satisfies "within 2
+  //        hexes"). Gated by `battle.helbrechtCrusadeActiveUntil[helbId] >=
+  //        turnIdx` — the map is populated only after Helbrecht's active
+  //        resolves (see updateTurnStateAfterAction), so turn-N attacks
+  //        before his active don't benefit.
+  if (currentProfile.kind === 'melee') {
+    for (const other of team) {
+      const cow = teamBuffOf(other, 'helbrechtCrusadeOfWrath');
+      if (!cow) continue;
+      const activeUntil = battle.helbrechtCrusadeActiveUntil[other.id];
+      if (activeUntil === undefined || activeUntil < turnIdx) continue;
+      if (Math.abs(member.position - other.position) > cow.rangeHexes) continue;
+      const level = resolveTeamBuffLevel(other, 'helbrechtCrusadeOfWrath');
+      const flat = atLevel(cow.damageFlatByLevel, level);
+      const piercePct = atLevel(cow.piercePctByLevel, level);
+      if (flat > 0) {
+        buffs.push({
+          id: `crusade-flat:${other.id}`,
+          name: 'Crusade of Wrath (flat)',
+          damageFlat: flat,
+        });
+      }
+      if (piercePct > 0) {
+        buffs.push({
+          id: `crusade-pierce:${other.id}`,
+          name: 'Crusade of Wrath (pierce)',
+          pierceAdd: piercePct / 100,
+        });
+      }
+      appsSink.push({
+        turnIdx,
+        sourceMemberId: other.id,
+        kind: 'helbrechtCrusadeOfWrath',
+        appliedToMemberId: member.id,
+        effect: `+${flat} flat, +${piercePct}% pierce on melee (L${level}, |Δpos|=${Math.abs(member.position - other.position)}, until T${activeUntil + 1})`,
+      });
+    }
+  }
+
+  // ------ 9) Helbrecht Destroy the Witch: +flat damage on MELEE attacks
+  //        for Helbrecht + friendlies within `rangeHexes` (1 = self +
+  //        adjacent) when the target has the configured trait ('psyker').
+  //        Pure positional passive — no trigger required, no turn-state
+  //        dependence. Self-included (distance 0 ≤ 1 satisfies "within 1
+  //        hex" and the wiki explicitly says "This unit and friendly
+  //        adjacent units").
+  if (currentProfile.kind === 'melee') {
+    const targetTraits = battle.targetTraits;
+    for (const other of team) {
+      const dtw = teamBuffOf(other, 'helbrechtDestroyTheWitch');
+      if (!dtw) continue;
+      if (Math.abs(member.position - other.position) > dtw.rangeHexes) continue;
+      const hasTrait = targetTraits.some(
+        (t) => t.toLowerCase() === dtw.requiresTargetTrait.toLowerCase(),
+      );
+      if (!hasTrait) continue;
+      const level = resolveTeamBuffLevel(other, 'helbrechtDestroyTheWitch');
+      const flat = atLevel(dtw.damageFlatByLevel, level);
+      if (flat <= 0) continue;
+      buffs.push({
+        id: `destroy-witch:${other.id}`,
+        name: 'Destroy the Witch',
+        damageFlat: flat,
+      });
+      appsSink.push({
+        turnIdx,
+        sourceMemberId: other.id,
+        kind: 'helbrechtDestroyTheWitch',
+        appliedToMemberId: member.id,
+        effect: `+${flat} flat melee vs ${dtw.requiresTargetTrait} (L${level}, |Δpos|=${Math.abs(member.position - other.position)})`,
+      });
+    }
+  }
+
   return buffs;
 }
 
@@ -636,6 +762,7 @@ function updateTurnStateAfterAction(
   team: TeamMember[],
   turn: TurnState,
   battle: BattleState,
+  turnIdx: number,
 ): void {
   // Note: battle-level presence (`membersInRotation`) is populated once
   // in `initBattleState` from the rotation's scheduled actions. It is
@@ -709,6 +836,26 @@ function updateTurnStateAfterAction(
     actor.attacker.source.faction === 'Adeptus Custodes'
   ) {
     turn.custodesActiveFiredThisTurn = true;
+  }
+
+  // Helbrecht Crusade of Wrath arming: when THIS actor is a Helbrecht and
+  // he just fired his Crusade active, set the aura's "active until" turn
+  // to `turnIdx + durationTurns - 1`. This covers turn N (rest-of-turn,
+  // since we write the state AFTER Helbrecht's action resolves) and all
+  // of turn N+1 for the default `durationTurns: 2`. Re-firing later
+  // (cooldown permitting) extends the window rather than truncating.
+  const cow = teamBuffOf(actor, 'helbrechtCrusadeOfWrath');
+  if (
+    cow &&
+    attack.profile.kind === 'ability' &&
+    attack.profile.abilityId &&
+    findAbilityWithTeamBuff(actor.attacker.source, 'helbrechtCrusadeOfWrath')
+      ?.id === attack.profile.abilityId
+  ) {
+    const until = turnIdx + Math.max(1, cow.durationTurns) - 1;
+    const prev = battle.helbrechtCrusadeActiveUntil[actor.id];
+    battle.helbrechtCrusadeActiveUntil[actor.id] =
+      prev !== undefined && prev > until ? prev : until;
   }
 
   // Trajann extra-hits gate: record this member as having performed a
@@ -818,7 +965,7 @@ export function resolveTeamRotation(
   const teamBuffApplications: TeamBuffApplication[] = [];
   const teamCooldownSkips: { turnIdx: number; memberId: string; abilityId: string }[] = [];
   const cumulativeTeamExpected: number[] = [];
-  const battleState = initBattleState(rotation);
+  const battleState = initBattleState(rotation, target);
   let cumulative = 0;
   let remainingShield = target.currentShield ?? 0;
   let remainingHp = target.currentHp ?? resolveBaseHp(target);
@@ -862,8 +1009,11 @@ export function resolveTeamRotation(
       const scaledProfile = applyScaling(action.attack.profile, scaleMul);
 
       // 4. Bonus hits (per-turn buffs) — applied after scaling so extra
-      //    hits resolve with the scaled profile.
-      const adjustedProfile = applyBonusHits(scaledProfile, combinedBuffs, turnIdx === 0);
+      //    hits resolve with the scaled profile. Pierce buffs (Helbrecht
+      //    Crusade of Wrath) fold into the profile's pierceOverride via a
+      //    separate pass so stacking across multiple buffs is additive.
+      const withBonusHits = applyBonusHits(scaledProfile, combinedBuffs, turnIdx === 0);
+      const adjustedProfile = applyPierceBuffs(withBonusHits, combinedBuffs);
       const adjustedCtx: AttackContext = { ...action.attack, profile: adjustedProfile };
 
       // 5. Resolve attack; drain shield/HP. `runAttack` takes the attacker
@@ -924,6 +1074,7 @@ export function resolveTeamRotation(
         rotation.members,
         turnState,
         battleState,
+        turnIdx,
       );
 
       // 8. Passive triggers on the actor. Each passive profile RE-DERIVES
@@ -974,10 +1125,14 @@ export function resolveTeamRotation(
             member.attacker,
             passiveCombinedBuffs,
           );
-          const passiveProfile = applyBonusHits(
+          const passiveProfileHits = applyBonusHits(
             taggedProfile,
             passiveCombinedBuffs,
             turnIdx === 0,
+          );
+          const passiveProfile = applyPierceBuffs(
+            passiveProfileHits,
+            passiveCombinedBuffs,
           );
           const passiveCtx: AttackContext = {
             profile: passiveProfile,
