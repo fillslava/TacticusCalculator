@@ -27,16 +27,21 @@
  *
  *  - `trajannLegendaryCommander`: enemies receive +`flatDamage` from any
  *    attack while they are adjacent to a friendly that has used an
- *    active ability earlier this turn. For single-boss Guild Raid we
- *    treat the boss as always-adjacent to every team member, so the
- *    gate collapses to "any friendly fired an active earlier this
- *    turn". Additionally, if the affected enemy is also adjacent to
- *    Trajann (again: always true in single-boss MVP if Trajann is on
- *    the team), friendly Characters score +`extraHitsAdjacentToSelf`
- *    additional hits on their FIRST attack that is not a normal
- *    attack (i.e. first ability attack) against that enemy this turn.
- *    Per-member: each friendly gets the bonus exactly once, on their
- *    first non-normal attack after the trigger has fired.
+ *    active ability earlier this turn. Per the wiki, the trigger is
+ *    explicitly "a Character uses an active" — MoWs firing actives do
+ *    NOT arm it (gated by `isMachineOfWar`). For single-boss Guild Raid
+ *    we treat the boss as always-adjacent to every team member, so the
+ *    position filter collapses to "a friendly Character fired an active
+ *    earlier this turn". Additionally, if the affected enemy is also
+ *    adjacent to Trajann (again: always true in single-boss MVP if
+ *    Trajann is on the team), friendly Characters score
+ *    +`extraHitsAdjacentToSelf` additional hits on their FIRST attack
+ *    that is not a normal attack (i.e. first ability attack) against
+ *    that enemy this turn. Per-member: each friendly gets the bonus
+ *    exactly once, on their first non-normal attack after the trigger
+ *    has fired. Trajann himself must also have taken at least one
+ *    action earlier in the battle (`membersWhoActed` gate) or no buff
+ *    applies — this captures "Trajann is dead / not on the board".
  *
  *  - `biovoreMythicAcid`: once a Biovore-teamBuff carrier fires an ability
  *    that damages the target this turn, subsequent attacks that turn from
@@ -133,6 +138,21 @@ function teamBuffOf<K extends AbilityTeamBuff['kind']>(
     }
   }
   return undefined;
+}
+
+/**
+ * Machine-of-War detection. The catalog tags MoW units (Biovore, Exorcist,
+ * Galatian, Forgefiend, Plagueburst Crawler, Malleus, Rukkatrukk, Tson'ji,
+ * Z'Kar, …) with the lowercase trait `machine of war`. TeamComposer uses
+ * this same rule to keep MoW entries out of hero slots; the engine uses it
+ * to gate mechanics that explicitly target "Characters" (heroes) only —
+ * e.g. Trajann's Legendary Commander is armed by a Character's active, not
+ * a MoW's.
+ */
+function isMachineOfWar(src: CatalogCharacter): boolean {
+  return (src.traits ?? []).some(
+    (trait) => trait.toLowerCase() === 'machine of war',
+  );
 }
 
 /** Find an ability carrying a specific teamBuff kind on a catalog character. */
@@ -522,13 +542,17 @@ function updateTurnStateAfterAction(
     }
   }
 
-  // Trajann flat-damage trigger: ANY friendly firing an active ability
-  // this turn arms the flag (no Shield Host gate — in original mechanic
-  // the filter is target-adjacency, which single-boss MVP treats as
-  // always true).
+  // Trajann flat-damage trigger: a friendly CHARACTER firing an active
+  // ability this turn arms the flag. Trajann's passive description
+  // specifically says "after a Character uses an active" — MoWs firing
+  // actives (Biovore's Spore Mines, Exorcist's Salvo, etc.) do NOT arm
+  // the trigger, even though they are technically active abilities. The
+  // target-adjacency filter is still collapsed to a team-wide boolean in
+  // the single-boss MVP (no Shield Host gate).
   if (
     attack.profile.kind === 'ability' &&
-    isAbilityActive(actor.attacker, attack.profile.abilityId)
+    isAbilityActive(actor.attacker, attack.profile.abilityId) &&
+    !isMachineOfWar(actor.attacker.source)
   ) {
     turn.friendlyActiveFiredThisTurn = true;
   }

@@ -1166,6 +1166,97 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     expect(apps).toHaveLength(1);
     expect(apps[0].turnIdx).toBe(1);
   });
+
+  // -------- Character-only active gate --------
+
+  it('MoW firing an active does NOT arm Trajann\'s trigger (Characters only)', () => {
+    // Trajann's passive text is "after a Character uses an active" — MoWs
+    // fire "active" abilities too (Biovore's Spore Mines, Exorcist's Salvo,
+    // etc.) but they don't count. Set up a MoW-only active-firing situation
+    // where the only ally to use an ability is a MoW; x should get NO buff.
+    const mowSrc = plainChar({
+      id: 'mow_char',
+      traits: ['machine of war'],
+      abilities: [
+        {
+          id: 'mow_active',
+          name: 'MoW Active',
+          kind: 'active',
+          profiles: [{ label: 'MA', damageType: 'power', hits: 1, kind: 'ability' }],
+          cooldown: 2,
+        },
+      ],
+    });
+    const mTra = member('tra', trajannLike(1000, 2), 0);
+    const mMow = member('mw', mowSrc, 5);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 1);
+
+    const rot: TeamRotation = {
+      members: [mTra, mMow, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'tra', attack: meleeAttack() },
+            { memberId: 'mw', attack: abilityAttack('mow_active', 2) },
+            { memberId: 'x', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    expect(
+      r.teamBuffApplications.filter(
+        (a) => a.kind === 'trajannLegendaryCommander',
+      ),
+    ).toEqual([]);
+  });
+
+  it('Character active still arms the trigger even if a MoW also acts this turn', () => {
+    // Regression guard for the MoW gate: a MoW firing alongside a Character
+    // must not suppress the Character-active branch. Ordering: Trajann
+    // melees → MoW fires active (no effect on trigger) → Character fires
+    // active (arms trigger) → x melees → expect flat buff on x.
+    const mowSrc = plainChar({
+      id: 'mow_char',
+      traits: ['machine of war'],
+      abilities: [
+        {
+          id: 'mow_active',
+          name: 'MoW Active',
+          kind: 'active',
+          profiles: [{ label: 'MA', damageType: 'power', hits: 1, kind: 'ability' }],
+          cooldown: 2,
+        },
+      ],
+    });
+    const mTra = member('tra', trajannLike(1000, 0), 0);
+    const mMow = member('mw', mowSrc, 5);
+    const mCaster = member('c', allyWithActive('simple_active'), 1);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 2);
+
+    const rot: TeamRotation = {
+      members: [mTra, mMow, mCaster, mAttacker],
+      turns: [
+        {
+          actions: [
+            { memberId: 'tra', attack: meleeAttack() },
+            { memberId: 'mw', attack: abilityAttack('mow_active', 2) },
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'x', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const flatApp = r.teamBuffApplications.find(
+      (a) =>
+        a.kind === 'trajannLegendaryCommander' &&
+        a.appliedToMemberId === 'x' &&
+        /flat dmg/.test(a.effect),
+    );
+    expect(flatApp).toBeDefined();
+    expect(flatApp?.effect).toMatch(/\+1000 flat dmg/);
+  });
 });
 
 // ---------------------------------------------------------------------------
