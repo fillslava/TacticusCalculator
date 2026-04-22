@@ -786,10 +786,11 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     const mCaster = member('c', allyWithActive('simple_active'), 1);
     const mAttacker = member('x', plainChar({ id: 'x' }), 2);
 
-    // Trajann melees FIRST so he counts as "acted" (membersWhoActed), then the
-    // caster fires an active, then x melees and receives +flatDamage. The
-    // membersWhoActed gate is what prevents an absent Trajann from granting
-    // buffs (see "Trajann on team but not scheduled" regression test below).
+    // Trajann is scheduled in the rotation so his presence gate
+    // (membersInRotation) passes. Caster fires an active, then x melees and
+    // receives +flatDamage. The presence gate is what prevents an absent
+    // Trajann from granting buffs (see "Trajann on team but not scheduled"
+    // regression test below); ordering within the turn no longer matters.
     const rot: TeamRotation = {
       members: [mTra, mCaster, mAttacker],
       turns: [
@@ -819,7 +820,7 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     const mCaster = member('c', allyWithActive('simple_active'), 1);
     const mAttacker = member('x', plainChar({ id: 'x' }), 2);
 
-    // Trajann acts first (satisfies the membersWhoActed gate) but the active
+    // Trajann is in the rotation so the presence gate passes, but the active
     // hasn't fired yet when x attacks → no flat buff on x. Isolates the
     // "active must fire first" ordering from the Trajann-present gate.
     const rot: TeamRotation = {
@@ -865,8 +866,8 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
   // -------- Extra-hits component (first non-normal attack per member) --------
 
   it('extra hits apply on a member\'s FIRST ability attack after a friendly active', () => {
-    // Trajann melees to register as having acted (satisfies membersWhoActed
-    // gate), caster fires active (arming the trigger), then x fires an
+    // Trajann is in the rotation so the presence gate (membersInRotation)
+    // passes. Caster fires active (arming the trigger), then x fires an
     // ability — which should get +extraHits.
     const mTra = member('tra', trajannLike(0, 2), 0);
     const mCaster = member('c', allyWithActive('simple_active'), 1);
@@ -936,9 +937,9 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     const mCaster = member('c', allyWithActive('simple_active'), 1);
     const mAttacker = member('x', plainChar({ id: 'x' }), 2);
 
-    // Trajann acts (membersWhoActed gate), caster fires active (trigger
-    // armed), x melees. The +hits should NOT apply because the attack is
-    // a normal (melee), not an ability.
+    // Trajann is in the rotation (presence gate passes), caster fires
+    // active (trigger armed), x melees. The +hits should NOT apply because
+    // the attack is a normal (melee), not an ability.
     const rot: TeamRotation = {
       members: [mTra, mCaster, mAttacker],
       turns: [
@@ -986,7 +987,7 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     });
     const mAttacker = member('x', xSrc, 1);
 
-    // Trajann acts first (membersWhoActed gate). Then x fires its own active
+    // Trajann is in the rotation (presence gate). Then x fires its own active
     // (arms friendlyActiveFiredThisTurn AFTER resolving), then a second
     // ability. Per updateTurnStateAfterAction ordering, the trigger is set
     // AFTER the first action, so the second ability sees
@@ -1018,10 +1019,10 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
   });
 
   it('extra hits do NOT apply before any friendly active fires', () => {
-    // Trajann acts (membersWhoActed gate passes) but no friendly active has
-    // fired yet when x fires his ability → trigger not armed → no +hits.
-    // Isolates the "active must fire first" ordering from the Trajann-
-    // present gate.
+    // Trajann is in the rotation (presence gate passes) but no friendly
+    // active has fired yet when x fires his ability → trigger not armed →
+    // no +hits. Isolates the "active must fire first" ordering from the
+    // Trajann-present gate.
     const mTra = member('tra', trajannLike(0, 2), 0);
     const xSrc = plainChar({
       id: 'x',
@@ -1058,13 +1059,13 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     ).toEqual([]);
   });
 
-  // -------- membersWhoActed gate --------
+  // -------- membersInRotation gate (presence) --------
 
   it('Trajann on team but NOT scheduled → NO flat-damage buff even after friendly active', () => {
     // Regression for user feedback: "trajan is not selected (maybe we want to
     // imitate that he is already dead), but his buff still added. His buff
     // should be counted once he has been added to the turn." Trajann is on
-    // the roster but the rotation never schedules him → membersWhoActed
+    // the roster but the rotation never schedules him → membersInRotation
     // never includes 'tra' → no flat buff on x even though c fires an active.
     const mTra = member('tra', trajannLike(1000, 0), 0);
     const mCaster = member('c', allyWithActive('simple_active'), 1);
@@ -1089,8 +1090,8 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
   });
 
   it('Trajann on team but NOT scheduled → NO extra-hits buff on friendly ability', () => {
-    // Same gate, different buff component: extra hits on first ability also
-    // require Trajann to have acted.
+    // Same presence gate, different buff component: extra hits on first
+    // ability also require Trajann to be scheduled somewhere in the rotation.
     const mTra = member('tra', trajannLike(0, 2), 0);
     const mCaster = member('c', allyWithActive('simple_active'), 1);
     const xSrc = plainChar({
@@ -1125,12 +1126,13 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     ).toEqual([]);
   });
 
-  it('Trajann not scheduled on turn 0 but acts on turn 1 → buff only from turn 1 onward', () => {
-    // The membersWhoActed flag accumulates across turns. Trajann sits out
-    // turn 0 entirely, so no flat-damage buff on the friendly's turn-0
-    // attack. On turn 1 Trajann melees FIRST, then caster fires a
-    // (different) active, then x attacks → x gets the buff on turn 1.
-    // Two distinct actives avoid the caster's cooldown blocking turn 1.
+  it('Trajann sits out turn 0 but is scheduled for turn 1 → buff applies on BOTH turns', () => {
+    // Regression for user feedback: "When Trajann is selected in team
+    // rotation, doesnt matter in which order. He gives buff to characters."
+    // The presence gate (membersInRotation) is computed once from the whole
+    // rotation, so scheduling Trajann anywhere — even on a later turn —
+    // counts him as present on the battlefield for every turn. Two distinct
+    // actives avoid the caster's cooldown blocking turn 1.
     const casterSrc = plainChar({
       id: 'two_active_caster',
       abilities: [
@@ -1175,9 +1177,48 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     const apps = r.teamBuffApplications.filter(
       (a) => a.kind === 'trajannLegendaryCommander' && /flat dmg/.test(a.effect),
     );
-    // Only the turn-1 application survives; the turn-0 attempt is gated off.
-    expect(apps).toHaveLength(1);
-    expect(apps[0].turnIdx).toBe(1);
+    // Both turns see the flat buff: turn 0 fires once (x after c), turn 1
+    // fires once (x after c — Trajann melees first but is not a recipient
+    // of his own buff on a normal melee).
+    expect(apps).toHaveLength(2);
+    expect(apps.map((a) => a.turnIdx).sort()).toEqual([0, 1]);
+  });
+
+  it('Trajann scheduled LAST in the turn → earlier friends still get his buff (order-independent)', () => {
+    // Direct regression for the user's screenshot: with #1 MoW active, #2
+    // Kharn melee, #3 Kariyan ability, #4 Trajann melee, the earlier
+    // friends reported no Trajann buff because the old gate required
+    // Trajann to have acted BEFORE the attack being buffed. New semantics:
+    // Trajann merely being in the rotation is enough.
+    //
+    // Here: c fires an active first (arms trigger), then x melees (should
+    // receive +flat), then Trajann melees at the END. Old code: no buff
+    // (membersWhoActed lacks 'tra' when x attacks). New code: buff applies.
+    const mCaster = member('c', allyWithActive('simple_active'), 0);
+    const mAttacker = member('x', plainChar({ id: 'x' }), 1);
+    const mTra = member('tra', trajannLike(1000, 0), 2);
+    const rot: TeamRotation = {
+      members: [mCaster, mAttacker, mTra],
+      turns: [
+        {
+          actions: [
+            { memberId: 'c', attack: abilityAttack('simple_active', 2) },
+            { memberId: 'x', attack: meleeAttack() },
+            { memberId: 'tra', attack: meleeAttack() },
+          ],
+        },
+      ],
+    };
+    const r = resolveTeamRotation(rot, makeTarget());
+    const flatApp = r.teamBuffApplications.find(
+      (a) =>
+        a.sourceMemberId === 'tra' &&
+        a.kind === 'trajannLegendaryCommander' &&
+        a.appliedToMemberId === 'x' &&
+        /flat dmg/.test(a.effect),
+    );
+    expect(flatApp).toBeDefined();
+    expect(flatApp?.effect).toMatch(/\+1000 flat dmg/);
   });
 
   // -------- Character-only active gate --------
@@ -1469,9 +1510,10 @@ describe('trajannLegendaryCommander — conditional flat + per-member ability hi
     const mCaster = member('c', allyWithActive('simple_active'), 1);
     const mMow = member('mw', mowSrc, 5);
 
-    // Trajann melees (membersWhoActed), caster fires active (trigger armed),
-    // MoW fires its active. MoW should NOT get +Y hits, but SHOULD get the
-    // +X flat damage (the recipient gate only applies to the hits clause).
+    // Trajann is in the rotation (presence gate passes), caster fires active
+    // (trigger armed), MoW fires its active. MoW should NOT get +Y hits,
+    // but SHOULD get the +X flat damage (the recipient gate only applies to
+    // the hits clause).
     const rot: TeamRotation = {
       members: [mTra, mCaster, mMow],
       turns: [

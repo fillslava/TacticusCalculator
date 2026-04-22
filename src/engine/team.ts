@@ -41,11 +41,15 @@
  *    Per-member: each friendly Character gets the bonus exactly once, on
  *    their first non-normal attack after the trigger has fired. MoW allies
  *    do NOT receive the +Y hits (recipient gate on `isMachineOfWar`).
- *    Trajann himself must also have taken at least one action earlier in
- *    the battle (`membersWhoActed` gate) or no buff applies — this
- *    captures "Trajann is dead / not on the board". The per-level tables
- *    are indexed via the Trajann Legendary Commander passive's level
- *    (abilityLevels entry → xpLevel → 1 fallback).
+ *    Trajann himself must also be scheduled somewhere in the rotation
+ *    (`membersInRotation` gate — any turn, any action) or no buff applies;
+ *    that captures "Trajann is dead / not on the board". Crucially the
+ *    gate is NOT order-dependent within a turn: once Trajann is in the
+ *    rotation, his aura applies whenever the in-turn trigger fires,
+ *    regardless of whether his action comes before or after the attack
+ *    receiving the buff. The per-level tables are indexed via the Trajann
+ *    Legendary Commander passive's level (abilityLevels entry → xpLevel →
+ *    1 fallback).
  *
  *  - `biovoreMythicAcid`: once a Biovore-teamBuff carrier fires an ability
  *    that damages the target this turn, subsequent attacks that turn from
@@ -277,15 +281,18 @@ interface BattleState {
   /** Memberids of Vitruvius-teamBuff carriers whose mark is active. */
   vitruviusMarkedSources: Set<string>;
   /**
-   * Memberids of every team member who has scheduled at least one
-   * action so far in the battle (any turn, any action kind). Populated
-   * in `updateTurnStateAfterAction`. Gates team buffs whose carrier
-   * must be present/active for the buff to apply — e.g. Trajann's
-   * Legendary Commander stops granting +flat / +hits when Trajann has
-   * not yet taken a turn (stand-in for "Trajann is dead / not on the
-   * board yet").
+   * Memberids of every team member that the rotation schedules for at
+   * least one action anywhere (any turn, any action kind). Populated
+   * once at battle start from the rotation definition — NOT accumulated
+   * turn-by-turn. Gates team buffs whose carrier must be present on the
+   * battlefield for the buff to apply — e.g. Trajann's Legendary
+   * Commander stops granting +flat / +hits when Trajann is on the
+   * roster but never scheduled (stand-in for "Trajann is dead / not on
+   * the board yet"). Intentionally order-independent within a turn:
+   * Trajann's mere presence in the rotation is what matters, not
+   * whether his action resolved before the attack being buffed.
    */
-  membersWhoActed: Set<string>;
+  membersInRotation: Set<string>;
 }
 
 function initTurnState(): TurnState {
@@ -299,10 +306,21 @@ function initTurnState(): TurnState {
   };
 }
 
-function initBattleState(): BattleState {
+function initBattleState(rotation: TeamRotation): BattleState {
+  // `membersInRotation` captures every member that the rotation schedules
+  // for at least one action anywhere. Computed once up front (not
+  // turn-by-turn) so Trajann's buff does NOT depend on whether his action
+  // has resolved before the attack being buffed — only on whether he's
+  // scheduled somewhere in the rotation.
+  const membersInRotation = new Set<string>();
+  for (const turn of rotation.turns) {
+    for (const action of turn.actions) {
+      membersInRotation.add(action.memberId);
+    }
+  }
   return {
     vitruviusMarkedSources: new Set(),
-    membersWhoActed: new Set(),
+    membersInRotation,
   };
 }
 
@@ -393,15 +411,17 @@ function deriveTeamBuffs(
   //        to EVERY team member's attacks against the enemy (Characters and
   //        MoWs alike — the flat-damage clause is not restricted to
   //        Characters, only the trigger and the extra-hits clause are).
-  //        Additionally: Trajann must himself have been active in the
-  //        battle (`membersWhoActed` gate) — if he's on the team but the
+  //        Additionally: Trajann must be present on the battlefield,
+  //        modelled as "scheduled somewhere in the rotation"
+  //        (`membersInRotation` gate) — if he's on the roster but the
   //        rotation never schedules him, he doesn't grant the buff.
-  //        Mirrors how Biovore and Laviscus self-gate on having fired.
+  //        Crucially this gate is NOT order-sensitive within a turn:
+  //        Trajann scheduled LAST still buffs attacks from #1, #2, #3.
   if (turn.friendlyActiveFiredThisTurn) {
     for (const other of team) {
       const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
       if (!cmdr) continue;
-      if (!battle.membersWhoActed.has(other.id)) continue;
+      if (!battle.membersInRotation.has(other.id)) continue;
       const { flat, level } = trajannFlat(other, cmdr);
       buffs.push({
         id: `trajann-flat:${other.id}`,
@@ -420,7 +440,7 @@ function deriveTeamBuffs(
 
   // ------ 4) Trajann LegendaryCommander: extra hits on a friendly
   //        Character's FIRST non-normal attack this turn, once the flat-
-  //        damage trigger has fired AND Trajann has acted in the battle.
+  //        damage trigger has fired AND Trajann is present in the rotation.
   //        Gated on:
   //          - a friendly Character fired an active earlier this turn
   //            (arms `friendlyActiveFiredThisTurn`, MoW actives don't arm)
@@ -430,6 +450,8 @@ function deriveTeamBuffs(
   //            turn (per-member `memberNonNormalAttackHappened` ledger)
   //          - THIS MEMBER is itself a Character (MoWs don't receive the
   //            extra hits — wiki specifies "friendly Characters score Y")
+  //          - Trajann is scheduled somewhere in the rotation
+  //            (`membersInRotation` — order-independent within a turn)
   //        The ledger is updated right before passive triggers run (so
   //        passives re-deriving buffs don't double-dip), and also in
   //        `updateTurnStateAfterAction` as a belt-and-suspenders for the
@@ -443,7 +465,7 @@ function deriveTeamBuffs(
     for (const other of team) {
       const cmdr = teamBuffOf(other, 'trajannLegendaryCommander');
       if (!cmdr) continue;
-      if (!battle.membersWhoActed.has(other.id)) continue;
+      if (!battle.membersInRotation.has(other.id)) continue;
       const { hits, level } = trajannHits(other, cmdr);
       if (hits <= 0) continue;
       buffs.push({
@@ -552,10 +574,10 @@ function updateTurnStateAfterAction(
   turn: TurnState,
   battle: BattleState,
 ): void {
-  // Mark the actor as present in the battle. Any team member whose id
-  // never lands here is absent for buff purposes (the rotation never
-  // scheduled an action for them), which gates e.g. Trajann's auras.
-  battle.membersWhoActed.add(actor.id);
+  // Note: battle-level presence (`membersInRotation`) is populated once
+  // in `initBattleState` from the rotation's scheduled actions. It is
+  // intentionally not updated here — Trajann's aura must not depend on
+  // action ordering within a turn.
 
   // Laviscus outrage contributions: any friendly that ISN'T Laviscus,
   // whose attack is non-psychic, contributes their MAX per-hit value to
@@ -716,7 +738,7 @@ export function resolveTeamRotation(
   const teamBuffApplications: TeamBuffApplication[] = [];
   const teamCooldownSkips: { turnIdx: number; memberId: string; abilityId: string }[] = [];
   const cumulativeTeamExpected: number[] = [];
-  const battleState = initBattleState();
+  const battleState = initBattleState(rotation);
   let cumulative = 0;
   let remainingShield = target.currentShield ?? 0;
   let remainingHp = target.currentHp ?? resolveBaseHp(target);
