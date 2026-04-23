@@ -11,8 +11,10 @@ import { ActionPanel } from '../components/map/ActionPanel';
 import { HexGrid } from '../components/map/HexGrid';
 import { HighlightLayer } from '../components/map/HighlightLayer';
 import { HexEffectLayer } from '../components/map/HexEffectLayer';
+import { PredictSuggestions } from '../components/map/PredictSuggestions';
 import { UnitLayer } from '../components/map/UnitLayer';
 import { MapCalibrator } from './MapCalibrator';
+import type { Suggestion } from '../../map/ai/policy';
 
 /**
  * Parse `?calibrate=1` off the current URL. `typeof window` guard keeps
@@ -52,6 +54,9 @@ export function MapPage() {
   const clearQueuedActions = useApp((s) => s.clearQueuedActions);
   const lastTurnLog = useApp((s) => s.lastTurnLog);
   const endPlayerTurn = useApp((s) => s.endPlayerTurn);
+  const predictMode = useApp((s) => s.mapPredictMode);
+  const setPredictMode = useApp((s) => s.setMapPredictMode);
+  const exportCurrentMapTrace = useApp((s) => s.exportCurrentMapTrace);
 
   // Snapshot of the other store slices needed by the hydrator. Read as
   // selectors so unrelated store churn doesn't rerender us.
@@ -169,6 +174,36 @@ export function MapPage() {
     [activeUnit, battle, queueAction],
   );
 
+  const handlePickSuggestion = useCallback(
+    (s: Suggestion) => {
+      queueAction({
+        kind: 'attack',
+        attackerId: s.attackerId,
+        targetId: s.targetId,
+        attackKey: s.attackKey,
+      });
+    },
+    [queueAction],
+  );
+
+  const handleExportTrace = useCallback(() => {
+    if (!battle) return;
+    const jsonl = exportCurrentMapTrace();
+    if (!jsonl) return;
+    // Browser download. The trace is a few KB at most — inlining it in a
+    // blob URL avoids any dependency on a streaming download helper and
+    // works identically in every browser that runs Vite dev.
+    const blob = new Blob([jsonl], { type: 'application/jsonl' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `tacticus-${battle.map.id}-${Date.now()}.jsonl`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [battle, exportCurrentMapTrace]);
+
   if (calibrator) return <MapCalibrator />;
 
   if (!currentMap) {
@@ -195,6 +230,10 @@ export function MapPage() {
           }
           onStartBattle={handleStartBattle}
           onEndBattle={handleEndBattle}
+          predictMode={predictMode}
+          onTogglePredict={() => setPredictMode(!predictMode)}
+          canExportTrace={battle != null}
+          onExportTrace={handleExportTrace}
         />
         <MapCanvas
           map={currentMap}
@@ -205,15 +244,24 @@ export function MapPage() {
         />
       </div>
       {battle ? (
-        <ActionPanel
-          battle={battle}
-          active={activeUnit}
-          queuedActions={queuedActions}
-          lastTurnLog={lastTurnLog}
-          onPickAttack={handlePickAttack}
-          onClearQueue={clearQueuedActions}
-          onEndTurn={endPlayerTurn}
-        />
+        <div className="flex flex-col gap-3">
+          {predictMode ? (
+            <PredictSuggestions
+              battle={battle}
+              active={activeUnit}
+              onPick={handlePickSuggestion}
+            />
+          ) : null}
+          <ActionPanel
+            battle={battle}
+            active={activeUnit}
+            queuedActions={queuedActions}
+            lastTurnLog={lastTurnLog}
+            onPickAttack={handlePickAttack}
+            onClearQueue={clearQueuedActions}
+            onEndTurn={endPlayerTurn}
+          />
+        </div>
       ) : (
         <StaticSummary map={currentMap} />
       )}
@@ -245,6 +293,10 @@ function MapToolbar(props: {
   canStart: boolean;
   onStartBattle: () => void;
   onEndBattle: () => void;
+  predictMode: boolean;
+  onTogglePredict: () => void;
+  canExportTrace: boolean;
+  onExportTrace: () => void;
 }) {
   const t = useT();
   return (
@@ -272,6 +324,29 @@ function MapToolbar(props: {
         </span>
         {props.battleActive ? (
           <>
+            <button
+              type="button"
+              onClick={props.onTogglePredict}
+              aria-pressed={props.predictMode}
+              className={
+                'rounded border px-2 py-1 text-xs ' +
+                (props.predictMode
+                  ? 'border-accent bg-accent/10 text-accent'
+                  : 'border-bg-subtle bg-bg-base hover:border-accent hover:text-accent')
+              }
+              title="Toggle predict mode — show ranked action suggestions for the active unit."
+            >
+              Predict {props.predictMode ? 'on' : 'off'}
+            </button>
+            <button
+              type="button"
+              onClick={props.onExportTrace}
+              disabled={!props.canExportTrace}
+              className="rounded border border-bg-subtle bg-bg-base px-2 py-1 text-xs hover:border-accent hover:text-accent disabled:opacity-40"
+              title="Download the battle's JSONL trace for future ML training."
+            >
+              Export trace
+            </button>
             <span className="rounded bg-bg-subtle px-2 py-1 uppercase tracking-wide text-accent">
               {t('map.battleActive')}
             </span>

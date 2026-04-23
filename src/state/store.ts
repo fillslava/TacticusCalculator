@@ -29,6 +29,14 @@ import {
   type PlayerAction,
   type PlayerActionLog,
 } from '../map/battle/playerTurn';
+import { runEnemyTurn, type EnemyTurnResult } from '../map/ai/bossAi';
+import {
+  assembleTrace,
+  battleToJsonl,
+  traceTurnFromEnemyResult,
+  traceTurnFromPlayerResult,
+  type TraceTurn,
+} from '../map/battle/trace';
 
 export interface RelicEquipmentMemo {
   id: string;
@@ -255,6 +263,34 @@ export interface AppState {
    * history at this phase (trace export is a Phase 6 deliverable).
    */
   lastTurnLog: PlayerActionLog[];
+  /**
+   * Most recent enemy turn summary. Populated by `endPlayerTurn` after
+   * the queued player actions resolve — the same click drains both sides
+   * of a round. `null` means the battle has never advanced, or the last
+   * player turn produced no enemy response (e.g. all bosses dead).
+   * Mirrors `lastTurnLog`'s "just the last turn" contract.
+   */
+  lastEnemyTurn: EnemyTurnResult | null;
+  /**
+   * Accumulated per-turn snapshots for the current battle, used by the
+   * "Export trace" button. One entry per committed turn (player or
+   * enemy). Cleared on `setMap`.
+   */
+  mapTurnHistory: TraceTurn[];
+  /**
+   * Predict-mode toggle — when true, the Map UI shows a ranked list of
+   * suggested actions for the active unit (via `HEURISTIC_POLICY`). When
+   * false, the UI is in manual mode (Phase 4 behaviour). Not persisted:
+   * the toggle resets per session because predict mode only makes sense
+   * while a battle is live.
+   */
+  mapPredictMode: boolean;
+  setMapPredictMode: (on: boolean) => void;
+  /**
+   * Build a JSONL string of the current battle's trace. Returns an empty
+   * string when no battle is active. Pure read — does not mutate state.
+   */
+  exportCurrentMapTrace: () => string;
   /**
    * Process `queuedActions` against `map` and clear the queue. Requires
    * `map !== null` — no-op otherwise. Delegates to `resolvePlayerTurn`
@@ -613,6 +649,8 @@ export const useApp = create<AppState>()(
           activeUnitId: null,
           queuedActions: [],
           lastTurnLog: [],
+          lastEnemyTurn: null,
+          mapTurnHistory: [],
         }),
 
       activeUnitId: null,
@@ -624,17 +662,49 @@ export const useApp = create<AppState>()(
       clearQueuedActions: () => set({ queuedActions: [] }),
 
       lastTurnLog: [],
+      lastEnemyTurn: null,
+      mapTurnHistory: [],
+      mapPredictMode: false,
+      setMapPredictMode: (on) => set({ mapPredictMode: on }),
+      exportCurrentMapTrace: () => {
+        const s = useApp.getState();
+        if (!s.map) return '';
+        const trace = assembleTrace({
+          battle: s.map,
+          turns: s.mapTurnHistory,
+        });
+        return battleToJsonl(trace);
+      },
       endPlayerTurn: () =>
         set((s) => {
           if (!s.map) return {};
+          // Player side: snapshot PRE-action board, resolve queue, bind.
+          const playerSnapshot = traceTurnFromPlayerResult(s.map, []);
           const result = resolvePlayerTurn(s.map, s.queuedActions);
-          // Advance the map turn counter. Enemy turns (Phase 5) will
-          // bump it again at their end; for Phase 4 the counter ticks
-          // once per player turn so cooldown-window queries still work.
+          playerSnapshot.actions = { side: 'player', log: result.log };
           s.map.turnIdx += 1;
+
+          // Enemy side: snapshot POST-player / PRE-enemy state, then run
+          // the scripted turn against that state. `runEnemyTurn` no-ops
+          // when no scripted boss exists, producing an empty action list
+          // — the snapshot is still captured so the trace stays one
+          // entry per turn for the trainer.
+          const enemySnapshot = traceTurnFromEnemyResult(s.map, {
+            actions: [],
+          });
+          const enemyResult = runEnemyTurn(s.map);
+          enemySnapshot.actions = { side: 'enemy', result: enemyResult };
+          s.map.turnIdx += 1;
+
           return {
             queuedActions: [],
             lastTurnLog: result.log,
+            lastEnemyTurn: enemyResult,
+            mapTurnHistory: [
+              ...s.mapTurnHistory,
+              playerSnapshot,
+              enemySnapshot,
+            ],
             // Force a React re-render by handing a new reference to
             // consumers — `map` is a mutable object, so zustand's
             // shallow-ref equality would otherwise skip the update.
