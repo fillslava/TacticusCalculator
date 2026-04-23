@@ -185,6 +185,48 @@ export const BossScriptTurnSchema = z.discriminatedUnion('kind', [
 ]);
 export type BossScriptTurn = z.infer<typeof BossScriptTurnSchema>;
 
+/**
+ * Shape of the inline AttackProfile map carried by a BossScript. We
+ * redeclare the fields rather than importing `AttackProfileSchema` from
+ * `src/data/schema.ts` to avoid a circular-ish dep (map → data → map)
+ * and because the boss script only needs the narrow subset of profile
+ * fields the resolver actually reads for an incoming attack. Keep in sync
+ * with `AttackProfile` in `src/engine/types.ts`.
+ */
+export const BossAbilityProfileSchema = z.object({
+  label: z.string(),
+  damageType: DamageTypeSchema,
+  hits: z.number().int().positive(),
+  pierceOverride: z.number().optional(),
+  damageFactor: z.number().optional(),
+  preArmorAddFlat: z.number().optional(),
+  preArmorMultiplier: z.number().optional(),
+  capAt: z.enum(['base', 'preArmor', 'finalHit']).optional(),
+  cap: z.number().optional(),
+  kind: z.enum(['melee', 'ranged', 'ability']).optional(),
+  abilityId: z.string().optional(),
+  cooldown: z.number().int().optional(),
+  ignoresCrit: z.boolean().optional(),
+  bonusHitCount: z.number().int().optional(),
+  bonusHitCap: z.number().optional(),
+});
+export type BossAbilityProfile = z.infer<typeof BossAbilityProfileSchema>;
+
+/**
+ * Optional stat block the synthetic boss Unit absorbs at hydration time
+ * (`buildBossUnit`). Only fields that affect outgoing-damage math are
+ * listed — hp/armor/shield already come from the matching CatalogBoss
+ * stage, and defensive stats (block, etc.) follow from traits.
+ */
+export const BossScriptStatsSchema = z.object({
+  damage: z.number().nonnegative().default(0),
+  critChance: z.number().optional(),
+  critDamage: z.number().optional(),
+  meleeHits: z.number().int().positive().optional(),
+  rangedHits: z.number().int().positive().optional(),
+});
+export type BossScriptStats = z.infer<typeof BossScriptStatsSchema>;
+
 export const BossScriptSchema = z.object({
   id: z.string(),
   displayName: z.string().optional(),
@@ -192,6 +234,21 @@ export const BossScriptSchema = z.object({
   turns: z.array(BossScriptTurnSchema).min(1),
   /** Loop index to repeat back to after the last turn. Omit to stop. */
   repeatsFrom: z.number().int().nonnegative().optional(),
+  /**
+   * Stat block copied into the synthetic boss `CatalogCharacter.baseStats`
+   * at hydration time. Missing script → boss has no damage stat → attacks
+   * land for 0 (Phase 4 behaviour preserved for older calibration data).
+   */
+  stats: BossScriptStatsSchema.optional(),
+  /**
+   * Inline attack profiles keyed by the same `abilityId` used in
+   * `turns[i].abilityId`. Kept here (not in `bosses.json`) because:
+   *  (a) scripts are per-fight, so Avatar Wave 2 can override Wave 1's
+   *      damageFactor without touching the boss catalog.
+   *  (b) adding inline profiles to each CatalogBoss pollutes the
+   *      single-boss (Team mode) target editor with irrelevant fields.
+   */
+  abilities: z.record(z.string(), BossAbilityProfileSchema).optional(),
 });
 export type BossScript = z.infer<typeof BossScriptSchema>;
 

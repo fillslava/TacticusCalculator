@@ -18,7 +18,7 @@ import type {
 } from '../../state/store';
 import { loadMapCatalog, type MapCatalog } from '../core/catalog';
 import type { Hex } from '../core/hex';
-import type { MapDef } from '../core/mapSchema';
+import type { BossScript, MapDef } from '../core/mapSchema';
 import { initMapBattle, type MapBattleState, type Unit } from './mapBattleState';
 
 /**
@@ -68,7 +68,10 @@ export function buildMapBattleFromTeam(
   const playerUnits = buildPlayerUnits(inputs, playerSpawns);
   if (playerUnits.length === 0) return null;
 
-  const bossUnit = buildBossUnit(target, bossSpawns[0]);
+  const script = map.bossScriptId
+    ? catalog.bossScriptById[map.bossScriptId]
+    : undefined;
+  const bossUnit = buildBossUnit(target, bossSpawns[0], script);
   if (!bossUnit) return null;
 
   return initMapBattle({
@@ -163,7 +166,11 @@ function buildAttackerForSlot(
 // Enemy-side: synthetic boss Unit from TargetState
 // ────────────────────────────────────────────────────────────────────
 
-function buildBossUnit(target: TargetState, spawn: Hex): Unit | null {
+function buildBossUnit(
+  target: TargetState,
+  spawn: Hex,
+  script?: BossScript,
+): Unit | null {
   const boss = target.bossId ? getBoss(target.bossId) : null;
   const stageIdx = boss
     ? Math.min(target.stageIndex, Math.max(0, boss.stages.length - 1))
@@ -178,13 +185,27 @@ function buildBossUnit(target: TargetState, spawn: Hex): Unit | null {
   const shield = Math.max(0, stage?.shield ?? target.customShield ?? 0);
   const armor = Math.max(0, stage?.armor ?? target.customArmor ?? 0);
 
-  // Synthetic attacker. The boss doesn't attack in Phase 4 — `melee` is a
-  // placeholder so the CatalogCharacter schema is satisfied. Phase 5's
-  // `bossToAttacker` replaces this with a script-driven profile set.
+  // Script-provided stats flow straight into the synthetic
+  // CatalogCharacter's baseStats. Without a script the boss has 0 damage
+  // (Phase 4 behaviour, preserved so the stub map + generic target path
+  // doesn't start landing real hits). A script's `stats` block lets the
+  // hydration layer say "this fight's boss hits for 30k base" without
+  // every downstream system needing to know about map mode.
+  const scriptStats = script?.stats;
+  const damage = Math.max(0, scriptStats?.damage ?? 0);
+  const critChance = Math.max(0, scriptStats?.critChance ?? 0);
+  const critDamage = Math.max(0, scriptStats?.critDamage ?? 0);
+  const meleeHits = Math.max(1, scriptStats?.meleeHits ?? 1);
+  const rangedHits = Math.max(1, scriptStats?.rangedHits ?? 1);
+
+  // Synthetic attacker. `melee` is the generic normal attack — used when
+  // the script step is `{ kind: 'normal' }`. Ability profiles ride in the
+  // script itself (keyed by `abilityId`) and are resolved per-turn by
+  // `bossAi.ts`, so we don't have to mirror them here.
   const placeholderMelee: AttackProfile = {
     label: 'Strike',
     damageType: 'power',
-    hits: 1,
+    hits: meleeHits,
     kind: 'melee',
   };
   const char: CatalogCharacter = {
@@ -193,15 +214,15 @@ function buildBossUnit(target: TargetState, spawn: Hex): Unit | null {
     faction: 'Neutral',
     alliance: 'chaos',
     baseStats: {
-      damage: 0,
+      damage,
       armor,
       hp,
-      critChance: 0,
-      critDamage: 0,
+      critChance,
+      critDamage,
       blockChance: 0,
       blockDamage: 0,
-      meleeHits: 1,
-      rangedHits: 1,
+      meleeHits,
+      rangedHits,
     },
     melee: placeholderMelee,
     abilities: [],
@@ -224,6 +245,7 @@ function buildBossUnit(target: TargetState, spawn: Hex): Unit | null {
     currentHp: hp,
     currentShield: shield,
     statusEffects: [],
+    ...(script ? { scriptPointer: { scriptId: script.id, turnIdx: 0 } } : {}),
   };
 }
 

@@ -3,6 +3,40 @@
     "id": "avatar_khaine_default",
     "displayName": "Avatar of Khaine (scripted)",
     "targetPolicy": "preferSummonsThenWeakest",
+    "stats": {
+      "damage": 30000,
+      "critChance": 0.2,
+      "critDamage": 0.5,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "abilities": {
+      "wailing_doom_strikes": {
+        "label": "Wailing Doom: Strikes",
+        "damageType": "power",
+        "hits": 2,
+        "kind": "ability",
+        "abilityId": "wailing_doom_strikes",
+        "damageFactor": 1.2
+      },
+      "wailing_doom_sweeps": {
+        "label": "Wailing Doom: Sweeps",
+        "damageType": "power",
+        "hits": 3,
+        "kind": "ability",
+        "abilityId": "wailing_doom_sweeps",
+        "damageFactor": 0.9
+      },
+      "wrath_of_khaine_unleashed": {
+        "label": "Wrath of Khaine Unleashed",
+        "damageType": "flame",
+        "hits": 4,
+        "kind": "ability",
+        "abilityId": "wrath_of_khaine_unleashed",
+        "damageFactor": 1.5,
+        "preArmorMultiplier": 1.25
+      }
+    },
     "turns": [
       { "kind": "ability", "abilityId": "wailing_doom_strikes" },
       { "kind": "ability", "abilityId": "wailing_doom_sweeps" },
