@@ -10,6 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "scrape": "tsx scripts/scrape-wiki.ts",
+    "scrape:maps": "tsx scripts/scrape-maps.ts",
     "import:halmmar": "tsx scripts/import-halmmar.ts",
     "generate:mythic": "tsx scripts/generate-mythic-equipment.ts",
     "fetch:player": "tsx scripts/fetch-player.ts",
