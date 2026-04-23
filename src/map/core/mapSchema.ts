@@ -142,6 +142,25 @@ export type TerrainDef = z.infer<typeof TerrainDefSchema>;
 export const MapOrientationSchema = z.enum(['pointy', 'flat']);
 export type MapOrientation = z.infer<typeof MapOrientationSchema>;
 
+/**
+ * How `q,r` on each cell are encoded in the source JSON.
+ *
+ * - `'axial'` (default): the coords are already axial (Red-Blob Games
+ *   convention) — the renderer can use them directly. Rectangular
+ *   enumerations of axial coords render as a rhombus.
+ * - `'offsetOddR'`: the coords are odd-r offset — rows are 0..R,
+ *   columns are 0..C, with row `r` shifted half a hex right when
+ *   `r` is odd. This matches the "brick wall" rectangular layout
+ *   Tacticus ships. The catalog loader converts to axial on load so
+ *   downstream engine/renderer code keeps using axial throughout.
+ *
+ * Transform used for odd-r offset:
+ *   q_axial = q_offset - floor(r_offset / 2)
+ *   r_axial = r_offset
+ */
+export const MapCoordsSchema = z.enum(['axial', 'offsetOddR']);
+export type MapCoords = z.infer<typeof MapCoordsSchema>;
+
 export const HexCellSchema = z.object({
   q: z.number().int(),
   r: z.number().int(),
@@ -169,6 +188,16 @@ export const MapDefSchema = z.object({
   /** Outer radius of a hex in source-image pixels. */
   hexSizePx: z.number().positive(),
   orientation: MapOrientationSchema,
+  /**
+   * Coordinate system used in this file's `hexes[]`. Omit (or leave
+   * as the default `'axial'`) for back-compat with Phase 1-7 data —
+   * real maps use `'offsetOddR'` because the authors think in
+   * column/row rectangles, not axial parallelograms. The loader
+   * normalises everything to axial before downstream code sees it,
+   * so `hexToPixel`, `hexDistance`, `hexNeighbours` never have to
+   * branch on this field.
+   */
+  coordsIn: MapCoordsSchema.optional(),
   hexes: z.array(HexCellSchema),
   bossScriptId: z.string().optional(),
 });

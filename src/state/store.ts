@@ -131,6 +131,22 @@ export interface TeamState {
 }
 
 /**
+ * One pinned slot for the per-map team picker. `spawnHexKey` is the
+ * `hexKey` ("q,r") of a player-spawn hex on the map. `characterId` is
+ * either a specific owned CatalogCharacter id, or `null` which means
+ * "fall back to the Team-tab roster for this slot" — the
+ * `buildMapBattleFromTeam` hydrator reads nulls as "skip me" and
+ * resumes sequential-fill from `team.members`.
+ *
+ * Keyed by hex (not array index) so adding/removing player spawns on
+ * a map doesn't silently reassign the user's picks to different hexes.
+ */
+export interface MapTeamSlot {
+  spawnHexKey: string;
+  characterId: string | null;
+}
+
+/**
  * Per-slot "training simulator" overrides for the Team calculator.
  *
  * Motivation: the baseline {@link UnitBuildMemo} reflects what the player
@@ -236,6 +252,23 @@ export interface AppState {
    */
   map: MapBattleState | null;
   setMap: (m: MapBattleState | null) => void;
+
+  /**
+   * Per-map roster override, keyed by mapId. Each slot pins a specific
+   * owned character to a specific spawn hex (identified by `hexKey`).
+   * When absent or empty for a map, `buildMapBattleFromTeam` falls back
+   * to the Team-tab roster (legacy behaviour).
+   *
+   * Persisted so tuning a team and navigating away doesn't lose the
+   * selection.
+   */
+  mapTeams: Record<string, MapTeamSlot[]>;
+  setMapTeamSlot: (
+    mapId: string,
+    spawnHexKey: string,
+    characterId: string | null,
+  ) => void;
+  resetMapTeam: (mapId: string) => void;
 
   /**
    * Currently-selected unit on the map — the one whose movement /
@@ -653,6 +686,29 @@ export const useApp = create<AppState>()(
           mapTurnHistory: [],
         }),
 
+      mapTeams: {},
+      setMapTeamSlot: (mapId, spawnHexKey, characterId) =>
+        set((s) => {
+          const current = s.mapTeams[mapId] ?? [];
+          const idx = current.findIndex((e) => e.spawnHexKey === spawnHexKey);
+          let nextSlots: MapTeamSlot[];
+          if (idx >= 0) {
+            nextSlots = current.map((e, i) =>
+              i === idx ? { ...e, characterId } : e,
+            );
+          } else {
+            nextSlots = [...current, { spawnHexKey, characterId }];
+          }
+          return { mapTeams: { ...s.mapTeams, [mapId]: nextSlots } };
+        }),
+      resetMapTeam: (mapId) =>
+        set((s) => {
+          if (!s.mapTeams[mapId]) return {};
+          const next = { ...s.mapTeams };
+          delete next[mapId];
+          return { mapTeams: next };
+        }),
+
       activeUnitId: null,
       setActiveUnit: (id) => set({ activeUnitId: id }),
 
@@ -719,7 +775,7 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'tacticus-calc-state',
-      version: 16,
+      version: 17,
       partialize: (s) => ({
         credentials: s.credentials,
         build: s.build,
@@ -733,6 +789,7 @@ export const useApp = create<AppState>()(
         page: s.page,
         team: s.team,
         teamMemberOverrides: s.teamMemberOverrides,
+        mapTeams: s.mapTeams,
       }),
       migrate: (persisted, fromVersion) =>
         migratePersisted(persisted, fromVersion),
@@ -892,6 +949,16 @@ export function migratePersisted(persisted: any, fromVersion: number): any {
     // existing users automatically pick up the new defaults on first
     // load. The version bump exists so storeMigration tests can assert
     // that the migration function handled v15→v16 without throwing.
+  }
+  if (fromVersion < 17) {
+    // v17 adds the per-map team picker: `mapTeams` keyed by mapId.
+    // Default to an empty object — existing users see no behaviour
+    // change until they open the Map page and pick a roster, because
+    // `buildMapBattleFromTeam` falls back to `team.members` when the
+    // override is absent.
+    if (!persisted.mapTeams || typeof persisted.mapTeams !== 'object') {
+      persisted.mapTeams = {};
+    }
   }
   return persisted;
 }

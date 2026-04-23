@@ -42,7 +42,8 @@ export function loadMapCatalog(): MapCatalog {
   if (cached) return cached;
   const terrain = TerrainCatalogSchema.parse(terrainRaw);
   const hexEffects = HexEffectCatalogSchema.parse(hexEffectsRaw);
-  const maps = MapCatalogSchema.parse(mapsRaw);
+  const mapsParsed = MapCatalogSchema.parse(mapsRaw);
+  const maps = mapsParsed.map(normaliseMapCoords);
   const bossScripts = BossScriptCatalogSchema.parse(bossScriptsRaw);
   cached = {
     terrain,
@@ -61,4 +62,24 @@ function byId<T extends { id: string }>(xs: T[]): Record<string, T> {
   const out: Record<string, T> = {};
   for (const x of xs) out[x.id] = x;
   return out;
+}
+
+/**
+ * If the map declares `coordsIn: 'offsetOddR'`, rewrite every cell's
+ * `{q, r}` from odd-r offset into pure axial so the engine (distance,
+ * neighbours, BFS) and renderer (`hexToPixel`) can continue to treat
+ * coords as axial. Cells carry their `spawn` along unchanged — it lives
+ * on the same hex, so the single coord transform covers spawns too.
+ *
+ * The `coordsIn` flag is stripped from the returned MapDef so downstream
+ * code can't accidentally re-apply the transform.
+ */
+function normaliseMapCoords(map: MapDef): MapDef {
+  if ((map.coordsIn ?? 'axial') === 'axial') return map;
+  const hexes = map.hexes.map((c) => ({
+    ...c,
+    q: c.q - Math.floor(c.r / 2),
+    r: c.r,
+  }));
+  return { ...map, coordsIn: 'axial', hexes };
 }

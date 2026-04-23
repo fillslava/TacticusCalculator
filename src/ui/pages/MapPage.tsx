@@ -11,6 +11,7 @@ import { ActionPanel } from '../components/map/ActionPanel';
 import { HexGrid } from '../components/map/HexGrid';
 import { HighlightLayer } from '../components/map/HighlightLayer';
 import { HexEffectLayer } from '../components/map/HexEffectLayer';
+import { MapTeamPicker } from '../components/map/MapTeamPicker';
 import { PredictSuggestions } from '../components/map/PredictSuggestions';
 import { UnitLayer } from '../components/map/UnitLayer';
 import { MapCalibrator } from './MapCalibrator';
@@ -65,6 +66,9 @@ export function MapPage() {
   const teamMemberOverrides = useApp((s) => s.teamMemberOverrides);
   const fallbackBuild = useApp((s) => s.build);
   const target = useApp((s) => s.target);
+  const ownedCatalogIds = useApp((s) => s.ownedCatalogIds);
+  const mapTeams = useApp((s) => s.mapTeams);
+  const setMapTeamSlot = useApp((s) => s.setMapTeamSlot);
 
   const catalog = useMemo(() => loadMapCatalog(), []);
   const calibrator = useMemo(() => isCalibratorMode(), []);
@@ -80,6 +84,13 @@ export function MapPage() {
     return battle.units[activeUnitId] ?? null;
   }, [battle, activeUnitId]);
 
+  // Cheap memo so the picker dropdown isn't re-building the owned Set
+  // on every unrelated store update (queuedActions churn, etc.).
+  const ownedCatalogIdSet = useMemo(
+    () => new Set(ownedCatalogIds),
+    [ownedCatalogIds],
+  );
+
   const handleStartBattle = useCallback(() => {
     const map = catalog.mapById[mapId];
     if (!map) return;
@@ -90,6 +101,7 @@ export function MapPage() {
       teamMemberOverrides,
       fallback: fallbackBuild,
       target,
+      mapTeamOverride: mapTeams[mapId],
     });
     if (hydrated) setMap(hydrated);
   }, [
@@ -101,6 +113,7 @@ export function MapPage() {
     fallbackBuild,
     target,
     setMap,
+    mapTeams,
   ]);
 
   const handleEndBattle = useCallback(() => {
@@ -108,9 +121,11 @@ export function MapPage() {
   }, [setMap]);
 
   // Hex click: when a battle is live and a player unit owns the hex, set
-  // it as the active selection. (Enemy clicks route through
-  // HighlightLayer's `onAttackableClick` instead — HexGrid clicks are the
-  // "select/deselect" channel, not the "attack" channel.)
+  // it as the active selection. With `onPlayerClick` on UnitLayer the
+  // common case (clicking a unit circle) goes through the token hitbox
+  // directly; this handler is the fallback for clicks on the thin strip
+  // of hex still visible around the circle — kept so the grid can still
+  // pick up clicks just outside the token without surprising the user.
   const handleHexClick = useCallback(
     (coord: { q: number; r: number }) => {
       if (!battle) return;
@@ -127,6 +142,11 @@ export function MapPage() {
       // intercept reachable-hex clicks via their own onClick.
     },
     [battle, setActiveUnit],
+  );
+
+  const handlePlayerCircleClick = useCallback(
+    (unitId: string) => setActiveUnit(unitId),
+    [setActiveUnit],
   );
 
   const handleReachableClick = useCallback(
@@ -239,7 +259,8 @@ export function MapPage() {
           map={currentMap}
           onHexClick={battle ? handleHexClick : undefined}
           onReachableClick={handleReachableClick}
-          onAttackableClick={handleAttackableClick}
+          onPlayerClick={battle ? handlePlayerCircleClick : undefined}
+          onEnemyClick={battle ? handleAttackableClick : undefined}
           activeUnit={activeUnit}
         />
       </div>
@@ -263,7 +284,17 @@ export function MapPage() {
           />
         </div>
       ) : (
-        <StaticSummary map={currentMap} />
+        <div className="flex flex-col gap-3">
+          <MapTeamPicker
+            map={currentMap}
+            mapTeam={mapTeams[currentMap.id] ?? []}
+            ownedIds={ownedCatalogIdSet}
+            onSlotChange={(spawnHexKey, characterId) =>
+              setMapTeamSlot(currentMap.id, spawnHexKey, characterId)
+            }
+          />
+          <StaticSummary map={currentMap} />
+        </div>
       )}
     </div>
   );
@@ -377,7 +408,8 @@ function MapCanvas(props: {
   map: MapDef;
   onHexClick?: (coord: { q: number; r: number }) => void;
   onReachableClick: (coord: { q: number; r: number }) => void;
-  onAttackableClick: (unitId: string) => void;
+  onPlayerClick?: (unitId: string) => void;
+  onEnemyClick?: (unitId: string) => void;
   activeUnit: Unit | null;
 }) {
   const battle = useApp((s) => s.map);
@@ -418,12 +450,13 @@ function MapCanvas(props: {
             battle={battle}
             active={props.activeUnit}
             onReachableClick={props.onReachableClick}
-            onAttackableClick={props.onAttackableClick}
           />
         )}
         <UnitLayer
           map={props.map}
           units={battle ? Object.values(battle.units) : []}
+          onPlayerClick={props.onPlayerClick}
+          onEnemyClick={props.onEnemyClick}
         />
       </svg>
     </div>

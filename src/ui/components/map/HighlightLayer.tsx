@@ -15,11 +15,15 @@ import { attackRangeInfo } from '../../../map/battle/playerTurn';
  *     Range is permissive in MVP (any enemy on a different hex), with
  *     per-profile range / LoS gating deferred to Phase 5+.
  *
- * The layer is pointer-transparent on its own geometry; clicks route
- * through the underlying `HexGrid`'s polygons. Passing `onReachableClick`
- * / `onAttackableClick` here is deliberate — it keeps the glue code for
- * "which click means move vs attack" inside MapPage rather than the
- * grid primitive, so HexGrid stays reusable by the dev-only Calibrator.
+ * Clicks split across layers:
+ *   - Move clicks land on the green reachable polygons here.
+ *   - Attack clicks do NOT land on the dashed attack rings — the rings
+ *     are pure visual affordance (`pointerEvents: none`), and clicks on
+ *     the enemy unit route through `UnitLayer`'s `onEnemyClick` instead.
+ *     Two reasons: the enemy's token is bigger than the ring it sits on
+ *     (so the ring never got clicked in practice), and centralising
+ *     enemy-click handling in UnitLayer lets us treat the whole token
+ *     as the hitbox the user actually aims for.
  */
 interface Props {
   battle: MapBattleState;
@@ -27,15 +31,12 @@ interface Props {
   active: Unit | null;
   /** Click a reachable hex — MapPage turns this into a queued `move`. */
   onReachableClick?: (coord: { q: number; r: number }) => void;
-  /** Click an enemy — MapPage turns this into a queued `attack`. */
-  onAttackableClick?: (unitId: string) => void;
 }
 
 export function HighlightLayer({
   battle,
   active,
   onReachableClick,
-  onAttackableClick,
 }: Props) {
   const reachable = useMemo(() => {
     if (!active || active.side !== 'player' || active.currentHp <= 0) return [];
@@ -84,7 +85,9 @@ export function HighlightLayer({
       ))}
       {/* Attack range — a ring drawn around each hittable enemy. Larger
           radius than the UnitLayer token so the outline is clearly
-          separate from the token body. */}
+          separate from the token body. The ring itself is non-
+          interactive (`pointerEvents: none`) — clicks on the enemy are
+          handled by `UnitLayer`'s `onEnemyClick`. */}
       {attackable.map((a) => (
         <circle
           key={`atk:${a.id}`}
@@ -96,10 +99,7 @@ export function HighlightLayer({
           strokeOpacity={0.95}
           strokeWidth={3}
           strokeDasharray="4 3"
-          style={{ cursor: onAttackableClick ? 'pointer' : 'default' }}
-          onClick={
-            onAttackableClick ? () => onAttackableClick(a.id) : undefined
-          }
+          style={{ pointerEvents: 'none' }}
         />
       ))}
     </g>

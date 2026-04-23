@@ -11,13 +11,14 @@ import type {
 } from '../../engine/types';
 import type {
   BuildOverrides,
+  MapTeamSlot,
   TargetState,
   TeamMemberOverride,
   TeamMemberState,
   UnitBuildMemo,
 } from '../../state/store';
 import { loadMapCatalog, type MapCatalog } from '../core/catalog';
-import type { Hex } from '../core/hex';
+import { hexKey, type Hex } from '../core/hex';
 import type { BossScript, MapDef } from '../core/mapSchema';
 import { initMapBattle, type MapBattleState, type Unit } from './mapBattleState';
 
@@ -51,6 +52,17 @@ export interface HydrationInputs {
   teamMemberOverrides: Record<string, TeamMemberOverride>;
   fallback: BuildOverrides;
   target: TargetState;
+  /**
+   * Per-map roster override. When provided, each spawn hex is looked
+   * up by its `hexKey` and, if a `characterId` is pinned, that
+   * character is placed on that hex using the regular `unitBuilds`
+   * baseline. Hexes without an entry (or with `characterId: null`)
+   * fall back to sequential-fill from `teamMembers`.
+   *
+   * Omitting the override entirely preserves the Phase-4 default: a
+   * straight zip of `teamMembers` → `playerSpawns` in array order.
+   */
+  mapTeamOverride?: MapTeamSlot[];
 }
 
 export function buildMapBattleFromTeam(
@@ -91,26 +103,75 @@ function buildPlayerUnits(
   inputs: HydrationInputs,
   playerSpawns: Array<{ q: number; r: number }>,
 ): Unit[] {
-  const { teamMembers, unitBuilds, teamMemberOverrides, fallback } = inputs;
+  const {
+    teamMembers,
+    unitBuilds,
+    teamMemberOverrides,
+    fallback,
+    mapTeamOverride,
+  } = inputs;
+
+  // Map the override array → hexKey lookup for O(1) resolution per spawn.
+  // Entries with `characterId: null` explicitly fall through to the team-tab
+  // roster, so we only index non-null ones.
+  const pinnedByHex = new Map<string, string>();
+  if (mapTeamOverride) {
+    for (const slot of mapTeamOverride) {
+      if (slot.characterId) pinnedByHex.set(slot.spawnHexKey, slot.characterId);
+    }
+  }
+
+  // Characters that are "already placed" via an override shouldn't also get
+  // picked up by the sequential-fill walk — otherwise a user who pins a
+  // character to slot 3 would see them appear twice (once at slot 3, once
+  // at whatever slot 1's sequential fill lands on).
+  const pinnedIds = new Set(pinnedByHex.values());
+
+  // Index team members that aren't pinned — these feed the sequential
+  // fallback. Skip empty slots and any member whose character is already
+  // pinned somewhere on the board.
+  const fallbackQueue = teamMembers.filter(
+    (m) => m.characterId && !pinnedIds.has(m.characterId),
+  );
+  let fallbackIdx = 0;
+
   const out: Unit[] = [];
-  let spawnIdx = 0;
-  for (const member of teamMembers) {
-    if (!member.characterId) continue;
-    if (spawnIdx >= playerSpawns.length) break;
-    const char = getCharacter(member.characterId);
+  for (const spawn of playerSpawns) {
+    const pinnedId = pinnedByHex.get(hexKey({ q: spawn.q, r: spawn.r }));
+    let chosenCharId: string | null = null;
+    let chosenSlotId: string;
+    let chosenKind: TeamMemberState['kind'] = 'hero';
+
+    if (pinnedId) {
+      chosenCharId = pinnedId;
+      // Synthetic slotId so the Unit id is stable and unique per hex.
+      // The Team-tab overrides (teamMemberOverrides) don't apply to
+      // pinned characters — the picker intentionally carries only
+      // "which character", not their sim knobs.
+      chosenSlotId = `map:${hexKey({ q: spawn.q, r: spawn.r })}`;
+      chosenKind = 'hero';
+    } else {
+      // Sequential fallback: pull the next unpinned team member.
+      const member = fallbackQueue[fallbackIdx++];
+      if (!member || !member.characterId) continue;
+      chosenCharId = member.characterId;
+      chosenSlotId = member.slotId;
+      chosenKind = member.kind;
+    }
+
+    const char = getCharacter(chosenCharId);
     if (!char) continue;
     const attacker = buildAttackerForSlot(
       char,
-      unitBuilds[member.characterId],
-      teamMemberOverrides[member.slotId],
+      unitBuilds[chosenCharId],
+      teamMemberOverrides[chosenSlotId],
       fallback,
     );
-    const spawn = playerSpawns[spawnIdx++];
     const hp = Math.max(1, Math.round(char.baseStats.hp));
     out.push({
-      id: member.slotId,
+      id: chosenSlotId,
       side: 'player',
-      kind: member.kind === 'mow' ? 'mow' : 'hero',
+      kind: chosenKind === 'mow' ? 'mow' : 'hero',
       position: { q: spawn.q, r: spawn.r },
       attacker,
       maxHp: hp,

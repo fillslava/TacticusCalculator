@@ -216,6 +216,7 @@
     "origin": { "xPx": 165, "yPx": 205 },
     "hexSizePx": 62,
     "orientation": "pointy",
+    "coordsIn": "offsetOddR",
     "bossScriptId": "avatar_khaine_default",
     "hexes": [
       { "q": 0, "r": 0, "terrain": "normal" },
@@ -301,6 +302,7 @@
     "origin": { "xPx": 165, "yPx": 205 },
     "hexSizePx": 62,
     "orientation": "pointy",
+    "coordsIn": "offsetOddR",
     "bossScriptId": "belisarius_cawl_default",
     "hexes": [
       { "q": 0, "r": 0, "terrain": "normal" },
@@ -386,6 +388,7 @@
     "origin": { "xPx": 165, "yPx": 205 },
     "hexSizePx": 62,
     "orientation": "pointy",
+    "coordsIn": "offsetOddR",
     "bossScriptId": "szarekh_default",
     "hexes": [
       { "q": 0, "r": 0, "terrain": "normal" },
