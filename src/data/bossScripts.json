@@ -44,5 +44,88 @@
       { "kind": "normal" }
     ],
     "repeatsFrom": 0
+  },
+  {
+    "id": "belisarius_cawl_default",
+    "displayName": "Belisarius Cawl (scripted)",
+    "targetPolicy": "weakest",
+    "stats": {
+      "damage": 22000,
+      "critChance": 0.15,
+      "critDamage": 0.4,
+      "meleeHits": 1,
+      "rangedHits": 2
+    },
+    "abilities": {
+      "mechadendrite_barrage": {
+        "label": "Mechadendrite Barrage",
+        "damageType": "physical",
+        "hits": 3,
+        "kind": "ability",
+        "abilityId": "mechadendrite_barrage",
+        "damageFactor": 0.8
+      },
+      "solar_atomiser": {
+        "label": "Solar Atomiser",
+        "damageType": "energy",
+        "hits": 1,
+        "kind": "ability",
+        "abilityId": "solar_atomiser",
+        "damageFactor": 2.0,
+        "preArmorMultiplier": 1.15
+      }
+    },
+    "turns": [
+      { "kind": "ability", "abilityId": "mechadendrite_barrage" },
+      { "kind": "ability", "abilityId": "solar_atomiser" },
+      { "kind": "normal" }
+    ],
+    "repeatsFrom": 0
+  },
+  {
+    "id": "szarekh_default",
+    "displayName": "Szarekh the Silent King (scripted)",
+    "targetPolicy": "preferSummonsThenWeakest",
+    "stats": {
+      "damage": 28000,
+      "critChance": 0.2,
+      "critDamage": 0.5,
+      "meleeHits": 1,
+      "rangedHits": 1
+    },
+    "abilities": {
+      "gauss_entropy_cannon": {
+        "label": "Gauss Entropy Cannon",
+        "damageType": "energy",
+        "hits": 3,
+        "kind": "ability",
+        "abilityId": "gauss_entropy_cannon",
+        "damageFactor": 1.0
+      },
+      "transcendent_will": {
+        "label": "Transcendent Will",
+        "damageType": "psychic",
+        "hits": 1,
+        "kind": "ability",
+        "abilityId": "transcendent_will",
+        "damageFactor": 2.5,
+        "preArmorMultiplier": 1.3
+      },
+      "reality_warp": {
+        "label": "Reality Warp",
+        "damageType": "energy",
+        "hits": 4,
+        "kind": "ability",
+        "abilityId": "reality_warp",
+        "damageFactor": 1.2
+      }
+    },
+    "turns": [
+      { "kind": "ability", "abilityId": "gauss_entropy_cannon" },
+      { "kind": "ability", "abilityId": "transcendent_will" },
+      { "kind": "normal" },
+      { "kind": "ability", "abilityId": "reality_warp" }
+    ],
+    "repeatsFrom": 0
   }
 ]
