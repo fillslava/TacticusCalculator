@@ -39,12 +39,23 @@ export interface ReachableHex {
  * (origin first). When `budget` is omitted we fall back to
  * `DEFAULT_MOVEMENT`. Passing `budget: 0` yields only the origin — handy
  * for "do not move" flows without a branch at the call site.
+ *
+ * MoW units are a special case: in Tacticus the Machine of War sits off
+ * to the side of the board and never moves — it only fires its active
+ * ability from wherever it was placed, and contributes passive buffs to
+ * the rest of the team. Short-circuit MoWs to an empty reachable set so
+ * HighlightLayer never shows green "move here" hexes for them and
+ * `isMoveLegal` rejects every destination except the origin (handled by
+ * `hexEquals(unit.position, to)` in `isMoveLegal`).
  */
 export function reachableHexes(
   unit: Unit,
   battle: MapBattleState,
   budget?: number,
 ): ReachableHex[] {
+  if (unit.kind === 'mow') {
+    return [{ hex: unit.position, distance: 0 }];
+  }
   const steps = budget ?? DEFAULT_MOVEMENT;
   return hexBfs(unit.position, steps, (h) => blockedForUnit(h, unit, battle));
 }

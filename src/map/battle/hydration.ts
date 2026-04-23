@@ -19,7 +19,7 @@ import type {
 } from '../../state/store';
 import { loadMapCatalog, type MapCatalog } from '../core/catalog';
 import { hexKey, type Hex } from '../core/hex';
-import type { BossScript, MapDef } from '../core/mapSchema';
+import type { BossScript, HexCell, MapDef } from '../core/mapSchema';
 import { initMapBattle, type MapBattleState, type Unit } from './mapBattleState';
 
 /**
@@ -71,13 +71,18 @@ export function buildMapBattleFromTeam(
   const { map, target } = inputs;
   const catalog = loadMapCatalog();
 
-  const playerSpawns = map.hexes.filter((c) => c.spawn === 'player');
+  // Hero spawns sit on the rectangular board; MoW spawns are declared
+  // separately (maps put them off-board to mirror Tacticus' MoW tray).
+  // Hydration still treats both as "player side" — they differ only in
+  // Unit.kind, which the movement/AI layers branch on.
+  const heroSpawns = map.hexes.filter((c) => c.spawn === 'player');
+  const mowSpawns = map.hexes.filter((c) => c.spawn === 'mow');
   const bossSpawns = map.hexes
     .filter((c) => c.spawn === 'boss')
     .concat(map.hexes.filter((c) => c.spawn === 'enemy'));
-  if (playerSpawns.length === 0 || bossSpawns.length === 0) return null;
+  if (heroSpawns.length === 0 || bossSpawns.length === 0) return null;
 
-  const playerUnits = buildPlayerUnits(inputs, playerSpawns);
+  const playerUnits = buildPlayerUnits(inputs, heroSpawns, mowSpawns);
   if (playerUnits.length === 0) return null;
 
   const script = map.bossScriptId
@@ -101,7 +106,8 @@ export function buildMapBattleFromTeam(
 
 function buildPlayerUnits(
   inputs: HydrationInputs,
-  playerSpawns: Array<{ q: number; r: number }>,
+  heroSpawns: HexCell[],
+  mowSpawns: HexCell[],
 ): Unit[] {
   const {
     teamMembers,
@@ -127,20 +133,44 @@ function buildPlayerUnits(
   // at whatever slot 1's sequential fill lands on).
   const pinnedIds = new Set(pinnedByHex.values());
 
-  // Index team members that aren't pinned — these feed the sequential
-  // fallback. Skip empty slots and any member whose character is already
-  // pinned somewhere on the board.
-  const fallbackQueue = teamMembers.filter(
-    (m) => m.characterId && !pinnedIds.has(m.characterId),
+  // Split the fallback walk by slot kind so a MoW never lands on a hero hex
+  // (and vice versa). Each team member keeps the kind tag TeamComposer
+  // stamped — `'hero'` for the five hero slots, `'mow'` for the sixth.
+  const heroQueue = teamMembers.filter(
+    (m) => m.characterId && m.kind !== 'mow' && !pinnedIds.has(m.characterId),
   );
-  let fallbackIdx = 0;
+  const mowQueue = teamMembers.filter(
+    (m) => m.characterId && m.kind === 'mow' && !pinnedIds.has(m.characterId),
+  );
+  let heroIdx = 0;
+  let mowIdx = 0;
 
   const out: Unit[] = [];
-  for (const spawn of playerSpawns) {
+  for (const spawn of heroSpawns) {
+    const unit = placeOne(spawn, 'hero');
+    if (unit) out.push(unit);
+  }
+  for (const spawn of mowSpawns) {
+    const unit = placeOne(spawn, 'mow');
+    if (unit) out.push(unit);
+  }
+  return out;
+
+  /**
+   * Resolve a single spawn hex to a Unit, using the pin override when one
+   * exists and pulling from the appropriate fallback queue otherwise.
+   * `spawnKind` wins over the member's declared kind — a hero pinned to a
+   * MoW hex is placed as a MoW-tagged unit (can't move, ability-only). In
+   * practice MapTeamPicker filters the dropdown so this only bites if the
+   * team-tab roster is inconsistent with the map's slot shape.
+   */
+  function placeOne(
+    spawn: HexCell,
+    spawnKind: 'hero' | 'mow',
+  ): Unit | null {
     const pinnedId = pinnedByHex.get(hexKey({ q: spawn.q, r: spawn.r }));
-    let chosenCharId: string | null = null;
+    let chosenCharId: string;
     let chosenSlotId: string;
-    let chosenKind: TeamMemberState['kind'] = 'hero';
 
     if (pinnedId) {
       chosenCharId = pinnedId;
@@ -149,18 +179,16 @@ function buildPlayerUnits(
       // pinned characters — the picker intentionally carries only
       // "which character", not their sim knobs.
       chosenSlotId = `map:${hexKey({ q: spawn.q, r: spawn.r })}`;
-      chosenKind = 'hero';
     } else {
-      // Sequential fallback: pull the next unpinned team member.
-      const member = fallbackQueue[fallbackIdx++];
-      if (!member || !member.characterId) continue;
+      const member =
+        spawnKind === 'mow' ? mowQueue[mowIdx++] : heroQueue[heroIdx++];
+      if (!member || !member.characterId) return null;
       chosenCharId = member.characterId;
       chosenSlotId = member.slotId;
-      chosenKind = member.kind;
     }
 
     const char = getCharacter(chosenCharId);
-    if (!char) continue;
+    if (!char) return null;
     const attacker = buildAttackerForSlot(
       char,
       unitBuilds[chosenCharId],
@@ -168,10 +196,10 @@ function buildPlayerUnits(
       fallback,
     );
     const hp = Math.max(1, Math.round(char.baseStats.hp));
-    out.push({
+    return {
       id: chosenSlotId,
       side: 'player',
-      kind: chosenKind === 'mow' ? 'mow' : 'hero',
+      kind: spawnKind,
       position: { q: spawn.q, r: spawn.r },
       attacker,
       maxHp: hp,
@@ -179,9 +207,8 @@ function buildPlayerUnits(
       currentHp: hp,
       currentShield: 0,
       statusEffects: [],
-    });
+    };
   }
-  return out;
 }
 
 /**

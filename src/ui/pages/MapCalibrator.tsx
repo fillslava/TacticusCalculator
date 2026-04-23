@@ -41,13 +41,14 @@ const TERRAIN_CYCLE: TerrainId[] = [
 ];
 
 type SpawnKind = NonNullable<HexCell['spawn']>;
-// `undefined` means "no spawn"; we cycle through it so a fourth click
+// `undefined` means "no spawn"; we cycle through it so an Nth click
 // clears the spawn back to normal.
 const SPAWN_CYCLE: (SpawnKind | undefined)[] = [
   undefined,
   'player',
   'enemy',
   'boss',
+  'mow',
 ];
 
 export function MapCalibrator() {
@@ -307,7 +308,9 @@ function SpawnBadges({ map }: { map: MapDef }) {
             ? '#3b82f6'
             : c.spawn === 'enemy'
               ? '#ef4444'
-              : '#9333ea';
+              : c.spawn === 'mow'
+                ? '#f59e0b'
+                : '#9333ea';
         return { key: hexKey(c), cx: p.x, cy: p.y, fill };
       });
   }, [map]);

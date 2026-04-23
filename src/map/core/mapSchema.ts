@@ -167,8 +167,18 @@ export const HexCellSchema = z.object({
   terrain: TerrainIdSchema,
   elevation: z.number().int().optional(),
   blocksLoS: z.boolean().optional(),
-  /** Which side may spawn here at battle start. */
-  spawn: z.enum(['player', 'enemy', 'boss']).optional(),
+  /**
+   * Which side/slot may spawn here at battle start.
+   * - `player`  — one of the five hero slots.
+   * - `mow`     — the dedicated Machine-of-War slot. In Tacticus the MoW
+   *               sits off to the side of the actual board, doesn't move,
+   *               and only fires its active ability (plus any passives).
+   *               Placing the MoW spawn off-map mirrors that UX so the
+   *               hero row on the board still reads as five hexes wide.
+   * - `enemy`   — a non-boss enemy (trash / adds).
+   * - `boss`    — the primary target unit.
+   */
+  spawn: z.enum(['player', 'enemy', 'boss', 'mow']).optional(),
 });
 export type HexCell = z.infer<typeof HexCellSchema>;
 

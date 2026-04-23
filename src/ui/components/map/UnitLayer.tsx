@@ -40,6 +40,7 @@ interface Props {
 
 const SIDE_STYLE = {
   player: { fill: '#3b82f6', stroke: '#1e3a8a' }, // blue
+  mow: { fill: '#f59e0b', stroke: '#78350f' }, // amber — off-map MoW tray
   enemy: { fill: '#ef4444', stroke: '#7f1d1d' }, // red
   boss: { fill: '#9333ea', stroke: '#4c1d95' }, // purple
 } as const;
@@ -69,11 +70,21 @@ export function UnitLayer({
       return units.map((u) => {
         const c = hexToPixel(u.position, map);
         const side: TokenSide =
-          u.kind === 'boss' ? 'boss' : u.side === 'player' ? 'player' : 'enemy';
+          u.kind === 'boss'
+            ? 'boss'
+            : u.kind === 'mow'
+              ? 'mow'
+              : u.side === 'player'
+                ? 'player'
+                : 'enemy';
         const isAlive = u.currentHp > 0;
+        // MoWs use the player click handler — selecting them opens the
+        // ActionPanel the same way selecting a hero does. The panel's
+        // own "Move" affordance is a no-op because `reachableHexes`
+        // returns only the origin for MoW kind.
         const interactive =
           isAlive &&
-          ((side === 'player' && Boolean(onPlayerClick)) ||
+          (((side === 'player' || side === 'mow') && Boolean(onPlayerClick)) ||
             ((side === 'enemy' || side === 'boss') && Boolean(onEnemyClick)));
         return {
           key: u.id,
@@ -99,12 +110,22 @@ export function UnitLayer({
             ? 'boss'
             : cell.spawn === 'enemy'
               ? 'enemy'
-              : 'player';
+              : cell.spawn === 'mow'
+                ? 'mow'
+                : 'player';
+        const label =
+          cell.spawn === 'boss'
+            ? 'B'
+            : cell.spawn === 'enemy'
+              ? 'E'
+              : cell.spawn === 'mow'
+                ? 'M'
+                : 'P';
         return {
           key: `spawn:${cell.q},${cell.r}`,
           x: c.x,
           y: c.y,
-          label: cell.spawn === 'boss' ? 'B' : cell.spawn === 'enemy' ? 'E' : 'P',
+          label,
           fill: SIDE_STYLE[side].fill,
           stroke: SIDE_STYLE[side].stroke,
           side,
@@ -119,7 +140,7 @@ export function UnitLayer({
 
   const handleClick = (tok: Token) => {
     if (!tok.unitId) return;
-    if (tok.side === 'player') onPlayerClick?.(tok.unitId);
+    if (tok.side === 'player' || tok.side === 'mow') onPlayerClick?.(tok.unitId);
     else onEnemyClick?.(tok.unitId);
   };
 
